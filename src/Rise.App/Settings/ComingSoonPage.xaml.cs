@@ -11,7 +11,7 @@ namespace Rise.App.Settings
     {
         public ComingSoonPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

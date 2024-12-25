@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -20,21 +19,17 @@ namespace Rise.Common.Extensions
         public static JsonObject GetJson<Type>(this Type item)
             where Type : class, new()
         {
-            using (var stream = new MemoryStream())
-            {
-                var serializer = new DataContractJsonSerializer(item.GetType());
+            using MemoryStream stream = new();
+            DataContractJsonSerializer serializer = new(item.GetType());
 
-                serializer.WriteObject(stream, item);
-                stream.Seek(0, SeekOrigin.Begin);
+            serializer.WriteObject(stream, item);
+            _ = stream.Seek(0, SeekOrigin.Begin);
 
-                using (var reader = new StreamReader(stream))
-                {
-                    var objString = reader.ReadToEnd();
-                    var obj = JsonObject.Parse(objString);
+            using StreamReader reader = new(stream);
+            string objString = reader.ReadToEnd();
+            JsonObject obj = JsonObject.Parse(objString);
 
-                    return obj;
-                }
-            }
+            return obj;
         }
 
         /// <summary>
@@ -47,21 +42,17 @@ namespace Rise.Common.Extensions
         public static async Task<JsonObject> GetJsonAsync<Type>(this Type item)
             where Type : class, new()
         {
-            using (var stream = new MemoryStream())
-            {
-                var serializer = new DataContractJsonSerializer(item.GetType());
+            using MemoryStream stream = new();
+            DataContractJsonSerializer serializer = new(item.GetType());
 
-                serializer.WriteObject(stream, item);
-                stream.Seek(0, SeekOrigin.Begin);
+            serializer.WriteObject(stream, item);
+            _ = stream.Seek(0, SeekOrigin.Begin);
 
-                using (var reader = new StreamReader(stream))
-                {
-                    var objString = await reader.ReadToEndAsync();
-                    var obj = JsonObject.Parse(objString);
+            using StreamReader reader = new(stream);
+            string objString = await reader.ReadToEndAsync();
+            JsonObject obj = JsonObject.Parse(objString);
 
-                    return obj;
-                }
-            }
+            return obj;
         }
 
         /// <summary>
@@ -74,11 +65,9 @@ namespace Rise.Common.Extensions
         public static Type Deserialize<Type>(this JsonObject obj)
             where Type : class, new()
         {
-            var serializer = new DataContractJsonSerializer(typeof(Type));
-            using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(obj.ToString())))
-            {
-                return serializer.ReadObject(stream) as Type;
-            }
+            DataContractJsonSerializer serializer = new(typeof(Type));
+            using MemoryStream stream = new(Encoding.UTF8.GetBytes(obj.ToString()));
+            return serializer.ReadObject(stream) as Type;
         }
 
         /// <summary>
@@ -91,11 +80,9 @@ namespace Rise.Common.Extensions
         public static Type Deserialize<Type>(this string json)
             where Type : class, new()
         {
-            var serializer = new DataContractJsonSerializer(typeof(Type));
-            using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-            {
-                return serializer.ReadObject(stream) as Type;
-            }
+            DataContractJsonSerializer serializer = new(typeof(Type));
+            using MemoryStream stream = new(Encoding.UTF8.GetBytes(json));
+            return serializer.ReadObject(stream) as Type;
         }
     }
 }

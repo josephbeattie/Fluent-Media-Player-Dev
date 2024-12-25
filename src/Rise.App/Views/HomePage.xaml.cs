@@ -25,7 +25,9 @@ namespace Rise.App.Views
         }
 
         private async void SupportButton_Click(object sender, RoutedEventArgs e)
-            => await URLs.Support.LaunchAsync();
+        {
+            _ = await URLs.Support.LaunchAsync();
+        }
 
         private async void FoldersButton_Click(object sender, RoutedEventArgs e)
         {
@@ -60,15 +62,19 @@ namespace Rise.App.Views
         /// in addition to page state preserved during an earlier session.
         /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
-            => _navigationHelper.OnNavigatedTo(e);
+        {
+            _navigationHelper.OnNavigatedTo(e);
+        }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
-            => _navigationHelper.OnNavigatedFrom(e);
+        {
+            _navigationHelper.OnNavigatedFrom(e);
+        }
         #endregion
 
         private void BrowseMedia_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BrowsePage));
+            _ = Frame.Navigate(typeof(BrowsePage));
         }
     }
 }

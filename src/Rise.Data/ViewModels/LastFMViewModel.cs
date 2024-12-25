@@ -63,9 +63,9 @@ namespace Rise.Data.ViewModels
         /// false otherwise.</returns>
         public async Task<bool> TryAuthenticateAsync()
         {
-            var token = await GetTokenAsync();
+            string token = await GetTokenAsync();
 
-            var uriBuilder = new StringBuilder();
+            StringBuilder uriBuilder = new();
             _ = uriBuilder.Append("https://www.last.fm/api/auth?api_key=");
             _ = uriBuilder.Append(_key);
             _ = uriBuilder.Append("&token=");
@@ -73,7 +73,7 @@ namespace Rise.Data.ViewModels
             _ = uriBuilder.Append("&redirect_uri=");
             _ = uriBuilder.Append(Uri.EscapeDataString("https://www.google.com"));
 
-            var startUri = new Uri(uriBuilder.ToString());
+            Uri startUri = new(uriBuilder.ToString());
             Dictionary<string, string> args = new()
             {
                 { "method", "auth.getSession" },
@@ -81,7 +81,7 @@ namespace Rise.Data.ViewModels
                 { "token", token }
             };
 
-            var endUri = GetSignedUri(args);
+            Uri endUri = GetSignedUri(args);
 
             WebAuthenticationResult result;
             try
@@ -96,10 +96,12 @@ namespace Rise.Data.ViewModels
             }
 
             if (result.ResponseStatus == WebAuthenticationStatus.ErrorHttp)
+            {
                 return false;
+            }
 
             string response;
-            using (var client = new HttpClient())
+            using (HttpClient client = new())
             {
                 try
                 {
@@ -111,11 +113,11 @@ namespace Rise.Data.ViewModels
                 }
             }
 
-            var doc = new XmlDocument();
+            XmlDocument doc = new();
             doc.LoadXml(response);
 
-            this._sessionKey = GetNodeFromResponse(doc, "/lfm/session/key");
-            this.Username = GetNodeFromResponse(doc, "/lfm/session/name");
+            _sessionKey = GetNodeFromResponse(doc, "/lfm/session/key");
+            Username = GetNodeFromResponse(doc, "/lfm/session/name");
 
             Authenticated = true;
             return true;
@@ -126,7 +128,10 @@ namespace Rise.Data.ViewModels
         /// </summary>
         public void SaveCredentialsToVault(string resource)
         {
-            if (!_authenticated) return;
+            if (!_authenticated)
+            {
+                return;
+            }
 
             PasswordVault vault = new();
             vault.Add(new PasswordCredential(resource, Username, _sessionKey));
@@ -142,9 +147,9 @@ namespace Rise.Data.ViewModels
             try
             {
                 PasswordVault vault = new();
-                var credentials = vault.RetrieveAll().Where(p => p.Resource == resource);
+                IEnumerable<PasswordCredential> credentials = vault.RetrieveAll().Where(p => p.Resource == resource);
 
-                foreach (var credential in credentials)
+                foreach (PasswordCredential credential in credentials)
                 {
                     credential.RetrievePassword();
                     Username = credential.UserName;
@@ -167,14 +172,20 @@ namespace Rise.Data.ViewModels
         /// false otherwise.</returns>
         public async Task<bool> TryScrobbleItemAsync(MediaPlaybackItem item)
         {
-            if (!_authenticated) return false;
+            if (!_authenticated)
+            {
+                return false;
+            }
 
-            if (item == null) return false;
+            if (item == null)
+            {
+                return false;
+            }
 
-            var span = DateTime.UtcNow - new DateTime(1970, 1, 1);
-            var curr = ((int)span.TotalSeconds).ToString();
+            TimeSpan span = DateTime.UtcNow - new DateTime(1970, 1, 1);
+            string curr = ((int)span.TotalSeconds).ToString();
 
-            var props = item.GetDisplayProperties().MusicProperties;
+            Windows.Media.MusicDisplayProperties props = item.GetDisplayProperties().MusicProperties;
             string title = props.Title;
             string artist = props.Artist;
 
@@ -190,37 +201,35 @@ namespace Rise.Data.ViewModels
 
             string signature = GetSignature(parameters);
 
-            var comboBuilder = new StringBuilder();
-            comboBuilder.Append("https://ws.audioscrobbler.com/2.0/?method=track.scrobble&api_key=");
-            comboBuilder.Append(_key);
-            comboBuilder.Append("&artist[0]=");
-            comboBuilder.Append(artist);
-            comboBuilder.Append("&track[0]=");
-            comboBuilder.Append(title);
-            comboBuilder.Append("&sk=");
-            comboBuilder.Append(_sessionKey);
-            comboBuilder.Append("&timestamp[0]=");
-            comboBuilder.Append(curr);
-            comboBuilder.Append("&api_sig=");
-            comboBuilder.Append(signature);
+            StringBuilder comboBuilder = new();
+            _ = comboBuilder.Append("https://ws.audioscrobbler.com/2.0/?method=track.scrobble&api_key=");
+            _ = comboBuilder.Append(_key);
+            _ = comboBuilder.Append("&artist[0]=");
+            _ = comboBuilder.Append(artist);
+            _ = comboBuilder.Append("&track[0]=");
+            _ = comboBuilder.Append(title);
+            _ = comboBuilder.Append("&sk=");
+            _ = comboBuilder.Append(_sessionKey);
+            _ = comboBuilder.Append("&timestamp[0]=");
+            _ = comboBuilder.Append(curr);
+            _ = comboBuilder.Append("&api_sig=");
+            _ = comboBuilder.Append(signature);
 
-            var uri = new Uri(comboBuilder.ToString());
-            var content = new HttpStringContent("");
-            using (var client = new HttpClient())
+            Uri uri = new(comboBuilder.ToString());
+            HttpStringContent content = new("");
+            using HttpClient client = new();
+            try
             {
-                try
-                {
-                    _ = await client.PostAsync(uri, content);
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-                finally
-                {
-                    content.Dispose();
-                }
+                _ = await client.PostAsync(uri, content);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                content.Dispose();
             }
         }
 
@@ -245,7 +254,7 @@ namespace Rise.Data.ViewModels
             string m_strFilePath = URLs.LastFM + "auth.gettoken&api_key=" + _key;
 
             string response;
-            using (var client = new HttpClient())
+            using (HttpClient client = new())
             {
                 try
                 {
@@ -257,7 +266,7 @@ namespace Rise.Data.ViewModels
                 }
             }
 
-            var doc = new XmlDocument();
+            XmlDocument doc = new();
             doc.LoadXml(response);
             return GetNodeFromResponse(doc, "/lfm/token");
         }
@@ -267,8 +276,10 @@ namespace Rise.Data.ViewModels
             StringBuilder stringBuilder = new();
             _ = stringBuilder.Append("https://ws.audioscrobbler.com/2.0/?");
 
-            foreach (var kvp in args)
+            foreach (KeyValuePair<string, string> kvp in args)
+            {
                 _ = stringBuilder.AppendFormat("{0}={1}&", kvp.Key, kvp.Value);
+            }
 
             _ = stringBuilder.Append("api_sig=");
             _ = stringBuilder.Append(SignCall(args));
@@ -278,9 +289,9 @@ namespace Rise.Data.ViewModels
 
         private string GetSignature(Dictionary<string, string> parameters)
         {
-            var resultBuilder = new StringBuilder();
-            var data = parameters.OrderBy(x => x.Key);
-            foreach (var kvp in data)
+            StringBuilder resultBuilder = new();
+            IOrderedEnumerable<KeyValuePair<string, string>> data = parameters.OrderBy(x => x.Key);
+            foreach (KeyValuePair<string, string> kvp in data)
             {
                 _ = resultBuilder.Append(kvp.Key);
                 _ = resultBuilder.Append(kvp.Value);
@@ -292,7 +303,7 @@ namespace Rise.Data.ViewModels
 
         private string SignCall(Dictionary<string, string> args)
         {
-            var sortedArgs = args.OrderBy(arg => arg.Key);
+            IOrderedEnumerable<KeyValuePair<string, string>> sortedArgs = args.OrderBy(arg => arg.Key);
 
             string signature = sortedArgs.Select(pair => pair.Key + pair.Value).
                 Aggregate((first, second) => first + second);
@@ -303,7 +314,7 @@ namespace Rise.Data.ViewModels
 
         private string GetNodeFromResponse(XmlDocument doc, string node)
         {
-            var selected = doc.DocumentElement.SelectSingleNode(node);
+            XmlNode selected = doc.DocumentElement.SelectSingleNode(node);
             return selected.InnerText;
         }
     }

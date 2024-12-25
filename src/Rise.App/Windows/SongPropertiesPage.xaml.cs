@@ -20,7 +20,9 @@ namespace Rise.App.Views
         }
 
         public static Task<bool> TryShowAsync(SongPropertiesViewModel props)
-            => ViewHelpers.OpenViewAsync<SongPropertiesPage>(props, new(380, 500));
+        {
+            return ViewHelpers.OpenViewAsync<SongPropertiesPage>(props, new(380, 500));
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -31,7 +33,9 @@ namespace Rise.App.Views
         }
 
         private async void CancelButton_Click(object sender, RoutedEventArgs e)
-            => _ = await ApplicationView.GetForCurrentView().TryConsolidateAsync();
+        {
+            _ = await ApplicationView.GetForCurrentView().TryConsolidateAsync();
+        }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
@@ -48,7 +52,7 @@ namespace Rise.App.Views
 
         private void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            var selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
+            Microsoft.UI.Xaml.Controls.NavigationViewItem selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
             if (selectedItem != null)
             {
                 string selectedItemTag = selectedItem.Tag as string;

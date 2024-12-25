@@ -30,7 +30,10 @@ namespace Rise.NewRepository
         public static async Task InitializeDatabaseAsync()
         {
             if (_initialized)
+            {
                 return;
+            }
+
             _initialized = true;
 
             _ = await ApplicationData.Current.LocalFolder.CreateFileAsync("Lists.db", CreationCollisionOption.OpenIfExists);
@@ -40,7 +43,7 @@ namespace Rise.NewRepository
 
             await _asyncDb.EnableWriteAheadLoggingAsync();
 
-            await Task.WhenAll(
+            _ = await Task.WhenAll(
                 _asyncDb.CreateTableAsync<Song>(),
                 _asyncDb.CreateTableAsync<Artist>(),
                 _asyncDb.CreateTableAsync<Album>(),
@@ -60,7 +63,7 @@ namespace Rise.NewRepository
         public static List<T> GetItems<T>()
             where T : DbObject, new()
         {
-            var table = _db.Table<T>();
+            TableQuery<T> table = _db.Table<T>();
             return table.ToList();
         }
 
@@ -72,7 +75,7 @@ namespace Rise.NewRepository
         public static Task<List<T>> GetItemsAsync<T>()
             where T : DbObject, new()
         {
-            var table = _asyncDb.Table<T>();
+            AsyncTableQuery<T> table = _asyncDb.Table<T>();
             return table.ToListAsync();
         }
 
@@ -81,7 +84,9 @@ namespace Rise.NewRepository
         /// </summary>
         /// <returns>Amount of modified rows.</returns>
         public static int Upsert(DbObject item)
-            => _db.InsertOrReplace(item);
+        {
+            return _db.InsertOrReplace(item);
+        }
 
         /// <summary>
         /// Upserts an item to the database asynchronously.
@@ -89,12 +94,14 @@ namespace Rise.NewRepository
         /// <returns>A Task that represents the upsert operation,
         /// with the amount of modified rows.</returns>
         public static Task<int> UpsertAsync(DbObject item)
-            => _asyncDb.InsertOrReplaceAsync(item);
+        {
+            return _asyncDb.InsertOrReplaceAsync(item);
+        }
 
         /// <summary>
         /// Queues an item to the database for upserting.
         /// </summary>
-        /// <returns>A <see cref="System.Boolean" /> which provides the state of the operation.</returns>
+        /// <returns>A <see cref="bool" /> which provides the state of the operation.</returns>
         /// <param name="item">The DB object to queue.</param>
         public static bool QueueUpsert(DbObject item)
         {
@@ -110,7 +117,7 @@ namespace Rise.NewRepository
         /// <summary>
         /// Queues an item to the database for deleting.
         /// </summary>
-        /// <returns>A <see cref="System.Boolean" /> which provides the state of the operation.</returns>
+        /// <returns>A <see cref="bool" /> which provides the state of the operation.</returns>
         /// <param name="item">The DB object to queue.</param>
         public static bool QueueRemove(DbObject item)
         {
@@ -148,7 +155,9 @@ namespace Rise.NewRepository
         /// </summary>
         /// <returns>Amount of rows that were removed.</returns>
         public static int Delete(DbObject item)
-            => _db.Delete(item);
+        {
+            return _db.Delete(item);
+        }
 
         /// <summary>
         /// Removes an item from the database asynchronously.
@@ -156,7 +165,9 @@ namespace Rise.NewRepository
         /// <returns>A Task that represents the removal operation,
         /// with the amount of rows that were removed.</returns>
         public static Task<int> DeleteAsync(DbObject item)
-            => _asyncDb.DeleteAsync(item);
+        {
+            return _asyncDb.DeleteAsync(item);
+        }
 
         /// <summary>
         /// Gets the item with the specified Id.
@@ -166,7 +177,7 @@ namespace Rise.NewRepository
         public static T GetItem<T>(Guid id)
             where T : DbObject, new()
         {
-            var mapping = _db.GetMapping<T>();
+            TableMapping mapping = _db.GetMapping<T>();
             return _db.Query<T>(mapping.GetByPrimaryKeySql, new object[1] { id }).FirstOrDefault();
         }
 
@@ -178,7 +189,7 @@ namespace Rise.NewRepository
         public static async Task<T> GetItemAsync<T>(Guid id)
             where T : DbObject, new()
         {
-            var mapping = await _asyncDb.GetMappingAsync<T>().ConfigureAwait(false);
+            TableMapping mapping = await _asyncDb.GetMappingAsync<T>().ConfigureAwait(false);
             return _db.Query<T>(mapping.GetByPrimaryKeySql, new object[1] { id }).FirstOrDefault();
         }
     }

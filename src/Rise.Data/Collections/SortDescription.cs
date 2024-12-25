@@ -69,7 +69,9 @@ public sealed class SortDescription : IComparer, IComparer<object>
     /// Creates a sort description with the direction inverted.
     /// </summary>
     public SortDescription Invert()
-        => new(this);
+    {
+        return new(this);
+    }
 
     public int Compare(object x, object y)
     {
@@ -84,8 +86,8 @@ public sealed class SortDescription : IComparer, IComparer<object>
 
         public int Compare(object x, object y)
         {
-            var cx = x as IComparable;
-            var cy = y as IComparable;
+            IComparable cx = x as IComparable;
+            IComparable cy = y as IComparable;
 
             return cx == cy ? 0 : cx == null ? -1 : cy == null ? +1 : cx.CompareTo(cy);
         }

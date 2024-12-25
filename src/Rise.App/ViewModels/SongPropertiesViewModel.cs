@@ -121,7 +121,7 @@ namespace Rise.App.ViewModels
             if (songFile != null)
             {
                 // Get WinRT music properties
-                var musicProps = await songFile.Properties.GetMusicPropertiesAsync();
+                MusicProperties musicProps = await songFile.Properties.GetMusicPropertiesAsync();
 
                 musicProps.Title = Title;
                 musicProps.Artist = Artist;
@@ -131,8 +131,10 @@ namespace Rise.App.ViewModels
                 musicProps.Year = Year;
                 musicProps.Rating = Rating * 20;
 
-                foreach (var genre in Genres.Split("; "))
+                foreach (string genre in Genres.Split("; "))
+                {
                     _ = musicProps.Genre.AddIfNotExists(genre);
+                }
 
                 try
                 {
@@ -153,8 +155,8 @@ namespace Rise.App.ViewModels
                     await songFile.RenameAsync(Filename, NameCollisionOption.GenerateUniqueName);
                     Model.Location = songFile.Path;
 
-                    var ogSong = await Repository.GetItemAsync<Song>(Model.Model.Id);
-                    await Repository.DeleteAsync(ogSong);
+                    Song ogSong = await Repository.GetItemAsync<Song>(Model.Model.Id);
+                    _ = await Repository.DeleteAsync(ogSong);
 
                     await Model.SaveAsync();
                 }
@@ -167,11 +169,11 @@ namespace Rise.App.ViewModels
 
         private async Task EnsureObjectsExistAsync()
         {
-            List<Task> tasks = new();
+            List<Task> tasks = [];
 
             if (!App.MViewModel.Artists.Any(a => a.Name == Artist))
             {
-                var artist = new ArtistViewModel()
+                ArtistViewModel artist = new()
                 {
                     Name = Artist,
                     Picture = URIs.ArtistThumb
@@ -182,7 +184,7 @@ namespace Rise.App.ViewModels
 
             if (!App.MViewModel.Artists.Any(a => a.Name == Artist || a.Name == AlbumArtist))
             {
-                var artist = new ArtistViewModel()
+                ArtistViewModel artist = new()
                 {
                     Name = AlbumArtist,
                     Picture = URIs.ArtistThumb
@@ -193,7 +195,7 @@ namespace Rise.App.ViewModels
 
             if (!App.MViewModel.Albums.Any(a => a.Title == Album))
             {
-                var album = new AlbumViewModel()
+                AlbumViewModel album = new()
                 {
                     Title = Album,
                     Artist = AlbumArtist,

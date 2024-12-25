@@ -14,7 +14,7 @@ namespace Rise.App.Setup
 
         private async void OnIconLoaded(object sender, RoutedEventArgs e)
         {
-            var player = (AnimatedVisualPlayer)sender;
+            AnimatedVisualPlayer player = (AnimatedVisualPlayer)sender;
             await player.PlayAsync(0, 0.5, false);
         }
     }

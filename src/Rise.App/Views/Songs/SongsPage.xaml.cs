@@ -36,11 +36,15 @@ namespace Rise.App.Views
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var (del, direction, alphabetical) = GetSavedSortPreferences("Songs");
+            (string del, SortDirection direction, bool alphabetical) = GetSavedSortPreferences("Songs");
             if (!string.IsNullOrEmpty(del))
+            {
                 CreateViewModel(del, direction, alphabetical, App.MViewModel.Songs);
+            }
             else
+            {
                 CreateViewModel("GSongTitle|SongTitle", SortDirection.Ascending, true, App.MViewModel.Songs);
+            }
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -55,18 +59,24 @@ namespace Rise.App.Views
         private void MainList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((e.OriginalSource as FrameworkElement).DataContext is SongViewModel song)
+            {
                 MediaViewModel.PlayFromItemCommand.Execute(song);
+            }
         }
 
         private void MenuFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainList.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainList.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (SongViewModel)cont;
+            }
         }
 
         private void AskDiscy_Click(object sender, RoutedEventArgs e)
@@ -92,7 +102,7 @@ namespace Rise.App.Views
 
         private async void Remove_Click(object sender, RoutedEventArgs e)
         {
-            var svm = SelectedItem;
+            SongViewModel svm = SelectedItem;
             ContentDialog dialog = new()
             {
                 Title = ResourceHelper.GetString("DeleteSong"),
@@ -102,11 +112,15 @@ namespace Rise.App.Views
                 SecondaryButtonText = ResourceHelper.GetString("Close")
             };
 
-            var result = await dialog.ShowAsync();
+            ContentDialogResult result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
+            {
                 await MViewModel.RemoveSongAsync(svm, false);
+            }
             else
+            {
                 dialog.Hide();
+            }
         }
     }
 }

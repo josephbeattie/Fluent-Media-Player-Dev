@@ -22,46 +22,64 @@ namespace Rise.App.Settings
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter is string param)
+            {
                 _currTag = param;
+            }
 
-            VisualStateManager.GoToState(this, $"{_currTag}State", false);
+            _ = VisualStateManager.GoToState(this, $"{_currTag}State", false);
         }
 
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (_currTag == "Music")
+            {
                 _ = await MusicLibrary.RequestAddFolderAsync();
+            }
             else if (_currTag == "Videos")
+            {
                 _ = await VideoLibrary.RequestAddFolderAsync();
+            }
             else
+            {
                 AddFlyout.ShowAt(AddButton);
+            }
         }
 
         private async void AddMusicFolder_Click(object sender, RoutedEventArgs e)
-            => _ = await MusicLibrary.RequestAddFolderAsync();
+        {
+            _ = await MusicLibrary.RequestAddFolderAsync();
+        }
 
         private async void AddVideoFolder_Click(object sender, RoutedEventArgs e)
-            => _ = await VideoLibrary.RequestAddFolderAsync();
+        {
+            _ = await VideoLibrary.RequestAddFolderAsync();
+        }
 
         private async void RemoveMusicFolder_Click(object sender, RoutedEventArgs e)
         {
-            var elm = (FrameworkElement)sender;
+            FrameworkElement elm = (FrameworkElement)sender;
             if (elm.DataContext is StorageFolder folder)
+            {
                 _ = await MusicLibrary.RequestRemoveFolderAsync(folder);
+            }
         }
 
         private async void RemoveVideoFolder_Click(object sender, RoutedEventArgs e)
         {
-            var elm = (FrameworkElement)sender;
+            FrameworkElement elm = (FrameworkElement)sender;
             if (elm.DataContext is StorageFolder folder)
+            {
                 _ = await VideoLibrary.RequestRemoveFolderAsync(folder);
+            }
         }
 
         private async void OpenFolder_Click(object sender, RoutedEventArgs e)
         {
-            var elm = (FrameworkElement)sender;
+            FrameworkElement elm = (FrameworkElement)sender;
             if (elm.DataContext is StorageFolder folder)
+            {
                 _ = await Launcher.LaunchFolderAsync(folder);
+            }
         }
     }
 }

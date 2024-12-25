@@ -262,95 +262,95 @@ namespace Rise.App.UserControls
     // Dependency Properties
     public sealed partial class RiseMediaTransportControls : MediaTransportControls
     {
-        public readonly static DependencyProperty HorizontalControlsAlignmentProperty =
+        public static readonly DependencyProperty HorizontalControlsAlignmentProperty =
             DependencyProperty.Register(nameof(HorizontalControlsAlignment), typeof(HorizontalAlignment),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(HorizontalAlignment.Center));
 
-        public readonly static DependencyProperty TimelineDisplayModeProperty =
+        public static readonly DependencyProperty TimelineDisplayModeProperty =
             DependencyProperty.Register(nameof(TimelineDisplayMode), typeof(SliderDisplayModes),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(SliderDisplayModes.Full, OnTimelineDisplayModeChanged));
 
-        public readonly static DependencyProperty DisplayItemProperty =
+        public static readonly DependencyProperty DisplayItemProperty =
             DependencyProperty.Register(nameof(DisplayItem), typeof(object),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(null));
 
-        public readonly static DependencyProperty DisplayItemVisibilityProperty =
+        public static readonly DependencyProperty DisplayItemVisibilityProperty =
             DependencyProperty.Register(nameof(DisplayItemVisibility), typeof(Visibility),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(Visibility.Collapsed));
 
-        public readonly static DependencyProperty DisplayItemTemplateProperty =
+        public static readonly DependencyProperty DisplayItemTemplateProperty =
             DependencyProperty.Register(nameof(DisplayItemTemplate), typeof(DataTemplate),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(null));
 
-        public readonly static DependencyProperty DisplayItemTemplateSelectorProperty =
+        public static readonly DependencyProperty DisplayItemTemplateSelectorProperty =
             DependencyProperty.Register(nameof(DisplayItemTemplateSelector), typeof(DataTemplateSelector),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(null));
 
-        public readonly static DependencyProperty IsShuffleEnabledProperty =
+        public static readonly DependencyProperty IsShuffleEnabledProperty =
             DependencyProperty.Register(nameof(IsShuffleEnabled), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsShuffleButtonVisibleProperty =
+        public static readonly DependencyProperty IsShuffleButtonVisibleProperty =
             DependencyProperty.Register(nameof(IsShuffleButtonVisible), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsShuffleButtonCheckedProperty =
+        public static readonly DependencyProperty IsShuffleButtonCheckedProperty =
             DependencyProperty.Register(nameof(IsShuffleButtonChecked), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsLyricsEnabledProperty =
+        public static readonly DependencyProperty IsLyricsEnabledProperty =
             DependencyProperty.Register(nameof(IsLyricsEnabled), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsLyricsButtonVisibleProperty =
+        public static readonly DependencyProperty IsLyricsButtonVisibleProperty =
             DependencyProperty.Register(nameof(IsLyricsButtonVisible), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsLyricsButtonCheckedProperty =
+        public static readonly DependencyProperty IsLyricsButtonCheckedProperty =
             DependencyProperty.Register(nameof(IsLyricsButtonChecked), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty FullWindowCommandProperty =
+        public static readonly DependencyProperty FullWindowCommandProperty =
             DependencyProperty.Register(nameof(FullWindowCommand), typeof(ICommand),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(null));
 
-        public readonly static DependencyProperty OverlayCommandProperty =
+        public static readonly DependencyProperty OverlayCommandProperty =
             DependencyProperty.Register(nameof(OverlayCommand), typeof(ICommand),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(null));
 
-        public readonly static DependencyProperty AddToPlaylistCommandProperty =
+        public static readonly DependencyProperty AddToPlaylistCommandProperty =
             DependencyProperty.Register(nameof(AddToPlaylistCommand), typeof(ICommand),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(null));
 
-        public readonly static DependencyProperty IsAddToMenuVisibleProperty =
+        public static readonly DependencyProperty IsAddToMenuVisibleProperty =
             DependencyProperty.Register(nameof(IsAddToMenuVisible), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(true));
 
-        public readonly static DependencyProperty IsPropertiesEnabledProperty =
+        public static readonly DependencyProperty IsPropertiesEnabledProperty =
             DependencyProperty.Register(nameof(IsPropertiesEnabled), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsPropertiesButtonVisibleProperty =
+        public static readonly DependencyProperty IsPropertiesButtonVisibleProperty =
             DependencyProperty.Register(nameof(IsPropertiesButtonVisible), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsQueueButtonEnabledProperty =
+        public static readonly DependencyProperty IsQueueButtonEnabledProperty =
             DependencyProperty.Register(nameof(IsQueueButtonEnabled), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsQueueButtonVisibleProperty =
+        public static readonly DependencyProperty IsQueueButtonVisibleProperty =
             DependencyProperty.Register(nameof(IsQueueButtonVisible), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsQueueButtonCheckedProperty =
+        public static readonly DependencyProperty IsQueueButtonCheckedProperty =
             DependencyProperty.Register(nameof(IsQueueButtonChecked), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsEqualizerButtonEnabledProperty =
+        public static readonly DependencyProperty IsEqualizerButtonEnabledProperty =
             DependencyProperty.Register(nameof(IsEqualizerButtonEnabled), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
 
-        public readonly static DependencyProperty IsEqualizerButtonVisibleProperty =
+        public static readonly DependencyProperty IsEqualizerButtonVisibleProperty =
             DependencyProperty.Register(nameof(IsEqualizerButtonVisible), typeof(bool),
                 typeof(RiseMediaTransportControls), new PropertyMetadata(false));
     }
@@ -368,25 +368,35 @@ namespace Rise.App.UserControls
             base.OnApplyTemplate();
 
             if (GetTemplateChild("OverlayButton") is ButtonBase overlayButton)
+            {
                 overlayButton.CommandParameter = ApplicationViewMode.Default;
+            }
 
             if (GetTemplateChild("MiniViewButton") is ButtonBase miniButton)
+            {
                 miniButton.CommandParameter = ApplicationViewMode.CompactOverlay;
+            }
 
             if (GetTemplateChild("InfoPropertiesButton") is ButtonBase propertiesButton)
+            {
                 propertiesButton.Click += PropertiesButtonClick;
+            }
 
             if (GetTemplateChild("EqualizerButton") is ButtonBase equalizerButton)
+            {
                 equalizerButton.Click += EqualizerButtonClick;
+            }
 
             if (GetTemplateChild("CastToButton") is ButtonBase castButton)
+            {
                 castButton.Click += CastButtonClick;
+            }
 
             if (GetTemplateChild("PlaybackSpeedFlyout") is MenuFlyout speedFlyout)
             {
                 for (double i = 0.25; i <= 2; i += 0.25)
                 {
-                    var itm = new RadioMenuFlyoutItem
+                    RadioMenuFlyoutItem itm = new()
                     {
                         Text = $"{i}x",
                         Command = UpdatePlaybackSpeedCommand,
@@ -399,7 +409,7 @@ namespace Rise.App.UserControls
 
             if (GetTemplateChild("AddToPlaylistFlyout") is MenuFlyout addToPlaylistFlyout)
             {
-                var helper = new AddToPlaylistHelper(App.MViewModel.Playlists);
+                AddToPlaylistHelper helper = new(App.MViewModel.Playlists);
                 helper.AddPlaylistsToFlyout(addToPlaylistFlyout, AddToPlaylistCommand);
             }
 
@@ -411,7 +421,9 @@ namespace Rise.App.UserControls
     public sealed partial class RiseMediaTransportControls : MediaTransportControls
     {
         private static void OnTimelineDisplayModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-            => UpdateTimelineDisplayMode((RiseMediaTransportControls)d, (SliderDisplayModes)e.NewValue);
+        {
+            UpdateTimelineDisplayMode((RiseMediaTransportControls)d, (SliderDisplayModes)e.NewValue);
+        }
 
         private static void UpdateTimelineDisplayMode(RiseMediaTransportControls transportControls, SliderDisplayModes displayMode)
         {
@@ -428,18 +440,20 @@ namespace Rise.App.UserControls
 
         private async void PropertiesButtonClick(object sender, RoutedEventArgs e)
         {
-            var currProps = MPViewModel.PlayingItemProperties;
+            Models.NowPlayingDisplayProperties currProps = MPViewModel.PlayingItemProperties;
             if (currProps == null || currProps.ItemType != MediaPlaybackType.Music)
+            {
                 return;
+            }
 
             string loc = currProps.Location;
             try
             {
-                var song = MViewModel.Songs.FirstOrDefault(s => s.Location == loc);
+                SongViewModel song = MViewModel.Songs.FirstOrDefault(s => s.Location == loc);
                 if (song != null)
                 {
-                    var file = await StorageFile.GetFileFromPathAsync(loc);
-                    var props = new SongPropertiesViewModel(song, file.DateCreated)
+                    StorageFile file = await StorageFile.GetFileFromPathAsync(loc);
+                    SongPropertiesViewModel props = new(song, file.DateCreated)
                     {
                         FileProps = await file.GetBasicPropertiesAsync()
                     };
@@ -451,7 +465,9 @@ namespace Rise.App.UserControls
         }
 
         private void EqualizerButtonClick(object sender, RoutedEventArgs e)
-            => _ = new EqualizerDialog().ShowAsync();
+        {
+            _ = new EqualizerDialog().ShowAsync();
+        }
 
         private void CastButtonClick(object sender, RoutedEventArgs e)
         {
@@ -459,21 +475,21 @@ namespace Rise.App.UserControls
             {
                 // The picker is created every time to avoid a memory leak
                 // TODO: Create our own flyout to avoid this issue
-                var picker = new CastingDevicePicker();
+                CastingDevicePicker picker = new();
                 picker.Filter.SupportsAudio = true;
                 picker.Filter.SupportsVideo = MPViewModel.PlayingItemType == MediaPlaybackType.Video;
 
                 picker.CastingDeviceSelected += OnCastingDeviceSelected;
                 picker.CastingDevicePickerDismissed += OnCastingDevicePickerDismissed;
 
-                var btn = sender as ButtonBase;
+                ButtonBase btn = sender as ButtonBase;
 
                 // Retrieve the location of the casting button
-                var transform = btn.TransformToVisual(Window.Current.Content);
-                var pt = transform.TransformPoint(new Point(0, 0));
+                Windows.UI.Xaml.Media.GeneralTransform transform = btn.TransformToVisual(Window.Current.Content);
+                Point pt = transform.TransformPoint(new Point(0, 0));
 
                 // Show the picker above the button
-                var area = new Rect(pt.X, pt.Y, btn.ActualWidth, btn.ActualHeight);
+                Rect area = new(pt.X, pt.Y, btn.ActualWidth, btn.ActualHeight);
                 picker.Show(area, Placement.Above);
             }
         }
@@ -482,8 +498,8 @@ namespace Rise.App.UserControls
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                var connection = args.SelectedCastingDevice.CreateCastingConnection();
-                await connection.RequestStartCastingAsync(MPViewModel.Player.GetAsCastingSource());
+                CastingConnection connection = args.SelectedCastingDevice.CreateCastingConnection();
+                _ = await connection.RequestStartCastingAsync(MPViewModel.Player.GetAsCastingSource());
 
                 sender.CastingDeviceSelected -= OnCastingDeviceSelected;
                 sender.CastingDevicePickerDismissed -= OnCastingDevicePickerDismissed;
@@ -498,6 +514,8 @@ namespace Rise.App.UserControls
 
         [RelayCommand]
         private void UpdatePlaybackSpeed(double speed)
-            => MPViewModel.Player.PlaybackSession.PlaybackRate = speed;
+        {
+            MPViewModel.Player.PlaybackSession.PlaybackRate = speed;
+        }
     }
 }

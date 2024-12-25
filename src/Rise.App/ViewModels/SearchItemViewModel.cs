@@ -7,14 +7,7 @@ namespace Rise.App.ViewModels
     {
         public SearchItemViewModel(SearchItem model = null)
         {
-            if (model != null)
-            {
-                Model = model;
-            }
-            else
-            {
-                Model = new SearchItem();
-            }
+            Model = model ?? new SearchItem();
         }
 
         public string Title

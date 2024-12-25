@@ -49,17 +49,7 @@ namespace Rise.Models
 
         public MatchLevel Matches(Album other)
         {
-            if (Title.Equals(other.Title))
-            {
-                return MatchLevel.Full;
-            }
-
-            if (Title.Contains(other.Title))
-            {
-                return MatchLevel.Partial;
-            }
-
-            return MatchLevel.None;
+            return Title.Equals(other.Title) ? MatchLevel.Full : Title.Contains(other.Title) ? MatchLevel.Partial : MatchLevel.None;
         }
     }
 }

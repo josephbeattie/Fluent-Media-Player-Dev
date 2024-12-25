@@ -38,12 +38,16 @@ namespace Rise.App.Helpers
         /// </summary>
         public void AddPlaylistsToSubItem(MenuFlyoutSubItem subItem, ICommand addCommand)
         {
-            var itms = subItem.Items;
+            IList<MenuFlyoutItemBase> itms = subItem.Items;
             if (_addSeparator)
+            {
                 itms.Add(new MenuFlyoutSeparator());
+            }
 
-            foreach (var itm in _items)
+            foreach (PlaylistViewModel itm in _items)
+            {
                 itms.Add(CreatePlaylistFlyoutItem(itm, addCommand));
+            }
         }
 
         /// <summary>
@@ -52,12 +56,16 @@ namespace Rise.App.Helpers
         /// </summary>
         public void AddPlaylistsToFlyout(MenuFlyout flyout, ICommand addCommand)
         {
-            var itms = flyout.Items;
+            IList<MenuFlyoutItemBase> itms = flyout.Items;
             if (_addSeparator)
+            {
                 itms.Add(new MenuFlyoutSeparator());
+            }
 
-            foreach (var itm in _items)
+            foreach (PlaylistViewModel itm in _items)
+            {
                 itms.Add(CreatePlaylistFlyoutItem(itm, addCommand));
+            }
         }
 
         private MenuFlyoutItem CreatePlaylistFlyoutItem(PlaylistViewModel playlist, ICommand addCommand)

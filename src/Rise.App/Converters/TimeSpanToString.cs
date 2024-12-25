@@ -9,14 +9,11 @@ namespace Rise.App.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var span = value is TimeSpan time ?
+            TimeSpan span = value is TimeSpan time ?
                 time : TimeSpan.Zero;
 
             string param = parameter?.ToString();
-            if (string.IsNullOrEmpty(param))
-                return GetShortFormat(span);
-
-            return GetLongFormat(ref span, param);
+            return string.IsNullOrEmpty(param) ? GetShortFormat(span) : (object)GetLongFormat(ref span, param);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -29,23 +26,32 @@ namespace Rise.App.Converters
     public sealed partial class TimeSpanToString
     {
         public static string GetLongFormat(TimeSpan value, string format)
-            => GetLongFormat(ref value, format);
+        {
+            return GetLongFormat(ref value, format);
+        }
 
         public static string GetShortFormat(TimeSpan span)
-            => GetShortFormat(ref span);
+        {
+            return GetShortFormat(ref span);
+        }
 
         private static string GetLongFormat(ref TimeSpan value, string format)
         {
-            var timeBuilder = new StringBuilder();
+            StringBuilder timeBuilder = new();
             void AppendToBuilder(string resource, int count, bool addComma)
             {
-                if (count <= 0) return;
+                if (count <= 0)
+                {
+                    return;
+                }
 
                 string txt = ResourceHelper.GetLocalizedCount(resource, count);
-                timeBuilder.Append(txt);
+                _ = timeBuilder.Append(txt);
 
                 if (addComma)
-                    timeBuilder.Append(", ");
+                {
+                    _ = timeBuilder.Append(", ");
+                }
             }
 
             switch (format[0])
@@ -53,19 +59,31 @@ namespace Rise.App.Converters
                 case 'D':
                     AppendToBuilder("Day", value.Days, true);
 
-                    if (format[2] != 'D') goto case 'H';
+                    if (format[2] != 'D')
+                    {
+                        goto case 'H';
+                    }
+
                     break;
 
                 case 'H':
                     AppendToBuilder("Hour", value.Hours, true);
 
-                    if (format[2] != 'H') goto case 'M';
+                    if (format[2] != 'H')
+                    {
+                        goto case 'M';
+                    }
+
                     break;
 
                 case 'M':
                     AppendToBuilder("Minute", value.Minutes, true);
 
-                    if (format[2] != 'M') goto case 'S';
+                    if (format[2] != 'M')
+                    {
+                        goto case 'S';
+                    }
+
                     break;
 
                 case 'S':
@@ -79,15 +97,15 @@ namespace Rise.App.Converters
         private static string GetShortFormat(ref TimeSpan span)
         {
             if (span.Days >= 1)
+            {
                 return span.ToString("d.\\hh\\:mm\\:ss");
-            else if (span.Hours >= 1 && span.Hours <= 9)
-                return span.ToString("h\\:mm\\:ss");
-            else if (span.Hours >= 10)
-                return span.ToString("hh\\:mm\\:ss");
-            else if (span.Minutes >= 10)
-                return span.ToString("mm\\:ss");
+            }
             else
-                return span.ToString("m\\:ss");
+            {
+                return span.Hours is >= 1 and <= 9
+                    ? span.ToString("h\\:mm\\:ss")
+                    : span.Hours >= 10 ? span.ToString("hh\\:mm\\:ss") : span.Minutes >= 10 ? span.ToString("mm\\:ss") : span.ToString("m\\:ss");
+            }
         }
     }
 }

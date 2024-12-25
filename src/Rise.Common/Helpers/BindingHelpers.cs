@@ -11,10 +11,7 @@ namespace Rise.Common.Helpers
         /// </summary>
         public static Visibility BooleansToVisibility(bool first, bool second)
         {
-            if (first && second)
-                return Visibility.Visible;
-            else
-                return Visibility.Collapsed;
+            return first && second ? Visibility.Visible : Visibility.Collapsed;
         }
 
         /// <summary>
@@ -24,10 +21,7 @@ namespace Rise.Common.Helpers
         /// </summary>
         public static Visibility InverseBooleansToVisibility(bool first, bool second)
         {
-            if (first && second)
-                return Visibility.Collapsed;
-            else
-                return Visibility.Visible;
+            return first && second ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public static bool IsNotNull(object obj)
@@ -41,13 +35,19 @@ namespace Rise.Common.Helpers
         }
 
         public static Visibility BoolToVis(bool boolean)
-            => boolean ? Visibility.Visible : Visibility.Collapsed;
+        {
+            return boolean ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         public static Visibility InverseBoolToVis(bool boolean)
-            => !boolean ? Visibility.Visible : Visibility.Collapsed;
+        {
+            return !boolean ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         public static Visibility IsNotNullVis(object obj)
-            => BoolToVis(obj != null);
+        {
+            return BoolToVis(obj != null);
+        }
 
         public static bool IsNull(object obj)
         {

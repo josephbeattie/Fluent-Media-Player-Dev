@@ -31,7 +31,9 @@ namespace Rise.App.Views
         }
 
         public static Task<bool> TryShowAsync(PlaylistViewModel playlist)
-            => ViewHelpers.OpenViewAsync<PlaylistPropertiesPage>(playlist, new(380, 500));
+        {
+            return ViewHelpers.OpenViewAsync<PlaylistPropertiesPage>(playlist, new(380, 500));
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -43,7 +45,7 @@ namespace Rise.App.Views
             if (e.Action == NotifyCollectionChangedAction.Reset)
             {
                 Controller.Items.CollectionChanged -= OnPlaylistCollectionChanged;
-                await View.TryConsolidateAsync();
+                _ = await View.TryConsolidateAsync();
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
@@ -51,30 +53,34 @@ namespace Rise.App.Views
                 if (hasRemoved)
                 {
                     Controller.Items.CollectionChanged -= OnPlaylistCollectionChanged;
-                    await View.TryConsolidateAsync();
+                    _ = await View.TryConsolidateAsync();
                 }
             }
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
-            => await FinishEditsAsync(true);
+        {
+            await FinishEditsAsync(true);
+        }
 
         private async void CancelButton_Click(object sender, RoutedEventArgs e)
-            => await FinishEditsAsync(false);
+        {
+            await FinishEditsAsync(false);
+        }
 
         private async Task FinishEditsAsync(bool save)
         {
             Controller.Items.CollectionChanged -= OnPlaylistCollectionChanged;
             if (!save)
             {
-                var items = await Controller.GetStoredItemsAsync();
-                var item = items.FirstOrDefault(i => i.Id == Playlist.Id);
+                System.Collections.Generic.IEnumerable<PlaylistViewModel> items = await Controller.GetStoredItemsAsync();
+                PlaylistViewModel item = items.FirstOrDefault(i => i.Id == Playlist.Id);
 
-                Controller.Items.Remove(Playlist);
+                _ = Controller.Items.Remove(Playlist);
                 Controller.Items.Add(item);
             }
 
-            await View.TryConsolidateAsync();
+            _ = await View.TryConsolidateAsync();
             await Controller.SaveAsync();
         }
 
@@ -82,12 +88,14 @@ namespace Rise.App.Views
         {
             View.Consolidated -= OnViewConsolidated;
             if (args.IsUserInitiated)
+            {
                 await Controller.SaveAsync();
+            }
         }
 
         private void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            var selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
+            Microsoft.UI.Xaml.Controls.NavigationViewItem selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
             if (selectedItem != null)
             {
                 string selectedItemTag = selectedItem.Tag as string;

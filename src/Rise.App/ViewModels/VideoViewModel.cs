@@ -166,11 +166,11 @@ namespace Rise.App.ViewModels
 
             if (queue)
             {
-                NewRepository.Repository.QueueUpsert(Model);
+                _ = NewRepository.Repository.QueueUpsert(Model);
             }
             else
             {
-                await NewRepository.Repository.UpsertAsync(Model);
+                _ = await NewRepository.Repository.UpsertAsync(Model);
             }
         }
 
@@ -181,12 +181,16 @@ namespace Rise.App.ViewModels
         {
             if (App.MViewModel.Videos.Contains(this))
             {
-                App.MViewModel.Videos.Remove(this);
+                _ = App.MViewModel.Videos.Remove(this);
 
                 if (queue)
-                    NewRepository.Repository.QueueRemove(Model);
+                {
+                    _ = NewRepository.Repository.QueueRemove(Model);
+                }
                 else
-                    await NewRepository.Repository.DeleteAsync(Model);
+                {
+                    _ = await NewRepository.Repository.DeleteAsync(Model);
+                }
             }
         }
         #endregion
@@ -208,10 +212,10 @@ namespace Rise.App.ViewModels
         /// <returns>A <see cref="MediaPlaybackItem"/> based on the video.</returns>
         public async Task<MediaPlaybackItem> AsPlaybackItemAsync()
         {
-            var uri = new Uri(Location);
+            Uri uri = new(Location);
             if (uri.IsFile)
             {
-                var file = await StorageFile.GetFileFromPathAsync(Location);
+                StorageFile file = await StorageFile.GetFileFromPathAsync(Location);
                 return await file.GetVideoAsync();
             }
 
@@ -224,9 +228,9 @@ namespace Rise.App.ViewModels
     {
         public static Task<VideoViewModel> AsVideoAsync(this MediaPlaybackItem item)
         {
-            var displayProps = item.GetDisplayProperties();
+            MediaItemDisplayProperties displayProps = item.GetDisplayProperties();
 
-            var video = new VideoViewModel
+            VideoViewModel video = new()
             {
                 Title = displayProps.VideoProperties.Title,
                 Directors = item.Source.CustomProperties["Artists"] as string,

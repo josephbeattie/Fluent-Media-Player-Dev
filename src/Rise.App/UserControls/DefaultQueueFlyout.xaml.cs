@@ -37,13 +37,17 @@ namespace Rise.App.UserControls
     {
         private void MenuFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainList.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainList.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (MediaPlaybackItem)cont;
+            }
         }
 
         private void PlayItem_Click(object sender, RoutedEventArgs e)
@@ -55,7 +59,7 @@ namespace Rise.App.UserControls
             else
             {
                 int index = MainList.SelectedIndex;
-                PlaybackList.MoveTo((uint)index);
+                _ = PlaybackList.MoveTo((uint)index);
             }
         }
 
@@ -63,10 +67,14 @@ namespace Rise.App.UserControls
         {
             int index = PlaybackList.Items.IndexOf(SelectedItem);
             if (PlaybackList.CurrentItem == SelectedItem)
-                PlaybackList.MoveNext();
+            {
+                _ = PlaybackList.MoveNext();
+            }
 
             if (index >= 0)
+            {
                 PlaybackList.Items.RemoveAt(index);
+            }
         }
 
         private void MoveItemUp_Click(object sender, RoutedEventArgs e)
@@ -92,11 +100,13 @@ namespace Rise.App.UserControls
 
         private void MainList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            var itm = (e.OriginalSource as FrameworkElement).DataContext as MediaPlaybackItem;
+            MediaPlaybackItem itm = (e.OriginalSource as FrameworkElement).DataContext as MediaPlaybackItem;
 
             int index = PlaybackList.Items.IndexOf(itm);
             if (index >= 0)
-                PlaybackList.MoveTo((uint)index);
+            {
+                _ = PlaybackList.MoveTo((uint)index);
+            }
         }
     }
 }

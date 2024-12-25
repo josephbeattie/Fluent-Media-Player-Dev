@@ -55,7 +55,7 @@ namespace Rise.App.Views
 
         private void OnMainListLoaded(object sender, RoutedEventArgs e)
         {
-            var surface = LoadedImageSurface.StartLoadFromUri(new(SelectedAlbum.Thumbnail));
+            LoadedImageSurface surface = LoadedImageSurface.StartLoadFromUri(new(SelectedAlbum.Thumbnail));
             (_propSet, _backgroundVisual) = MainList.CreateParallaxGradientVisual(surface, BackgroundHost);
         }
 
@@ -65,7 +65,9 @@ namespace Rise.App.Views
 
             // Load more albums by artist only when necessary
             if (AlbumsByArtist.Count > 0)
+            {
                 _ = FindName("MoreAlbumsByArtist");
+            }
         }
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
@@ -82,19 +84,21 @@ namespace Rise.App.Views
 
             // Main collection
             bool IsPartOfAlbum(object s)
-                => ((SongViewModel)s).Album == SelectedAlbum.Title;
+            {
+                return ((SongViewModel)s).Album == SelectedAlbum.Title;
+            }
 
             CreateViewModel("SongDisc|SongTrack", SortDirection.Ascending, false, IsPartOfAlbum, App.MViewModel.Songs);
 
             // More from this artist
-            var yearSort = CollectionViewDelegates.GetDelegate("AlbumYear");
+            Func<object, object> yearSort = CollectionViewDelegates.GetDelegate("AlbumYear");
             bool IsFromSameArtist(object a)
             {
-                var album = (AlbumViewModel)a;
+                AlbumViewModel album = (AlbumViewModel)a;
                 return album.Title != SelectedAlbum.Title && album.Artist == SelectedAlbum.Artist;
             };
 
-            var (items, defer) = GroupedCollectionView.CreateDeferred();
+            (GroupedCollectionView items, Windows.Foundation.Deferral defer) = GroupedCollectionView.CreateDeferred();
             items.Source = App.MViewModel.Albums;
             items.Filter = IsFromSameArtist;
 
@@ -115,7 +119,7 @@ namespace Rise.App.Views
     {
         private async void LikeAlbum_Checked(object sender, RoutedEventArgs e)
         {
-            var playlist = PBackend.Items.FirstOrDefault(p => p.Title == "Liked");
+            PlaylistViewModel playlist = PBackend.Items.FirstOrDefault(p => p.Title == "Liked");
             if (playlist == null)
             {
                 playlist = new()
@@ -127,20 +131,26 @@ namespace Rise.App.Views
                 PBackend.Items.Add(playlist);
             }
 
-            foreach (var song in MediaViewModel.Items)
+            foreach (object song in MediaViewModel.Items)
+            {
                 playlist.Songs.Add((SongViewModel)song);
+            }
 
             await PBackend.SaveAsync();
         }
 
         private async void LikeAlbum_Unchecked(object sender, RoutedEventArgs e)
         {
-            var playlist = PBackend.Items.FirstOrDefault(p => p.Title == "Liked");
+            PlaylistViewModel playlist = PBackend.Items.FirstOrDefault(p => p.Title == "Liked");
             if (playlist == null)
+            {
                 return;
+            }
 
-            foreach (var song in MediaViewModel.Items)
+            foreach (object song in MediaViewModel.Items)
+            {
                 _ = playlist.Songs.Remove((SongViewModel)song);
+            }
 
             await PBackend.SaveAsync();
         }
@@ -152,24 +162,32 @@ namespace Rise.App.Views
         private void MainList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((e.OriginalSource as FrameworkElement).DataContext is SongViewModel song)
+            {
                 MediaViewModel.PlayFromItemCommand.Execute(song);
+            }
         }
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is AlbumViewModel album)
+            {
                 _ = Frame.Navigate(typeof(AlbumSongsPage), album.Model.Id);
+            }
         }
 
         private void MenuFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainList.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainList.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (SongViewModel)cont;
+            }
         }
 
         private void AskDiscy_Click(object sender, RoutedEventArgs e)
@@ -179,17 +197,20 @@ namespace Rise.App.Views
 
         private void UpDown_Click(object sender, RoutedEventArgs e)
         {
-            if (MoreAlbumsExpanded)
-                VisualStateManager.GoToState(this, "Collapsed", true);
-            else
-                VisualStateManager.GoToState(this, "Expanded", true);
+            _ = MoreAlbumsExpanded
+                ? VisualStateManager.GoToState(this, "Collapsed", true)
+                : VisualStateManager.GoToState(this, "Expanded", true);
 
             MoreAlbumsExpanded = !MoreAlbumsExpanded;
         }
 
         private void BackgroundHost_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_backgroundVisual == null) return;
+            if (_backgroundVisual == null)
+            {
+                return;
+            }
+
             _backgroundVisual.Size = new Vector2((float)e.NewSize.Width, (float)BackgroundHost.Height);
         }
     }

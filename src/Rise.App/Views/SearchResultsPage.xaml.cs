@@ -38,7 +38,7 @@ namespace Rise.App.Views
             string forFormat = ResourceHelper.GetString("ForX");
             ResultsFor.Text = string.Format(forFormat, search);
 
-            var suitableItems = new List<object>();
+            List<object> suitableItems = [];
             foreach (ArtistViewModel artist in App.MViewModel.Artists)
             {
                 bool suitable = splitText.All((key) =>
@@ -47,7 +47,9 @@ namespace Rise.App.Views
                 });
 
                 if (suitable)
+                {
                     suitableItems.Add(artist);
+                }
             }
 
             MediaViewModel.Items.Filter = e => splitText.All((key) =>
@@ -64,7 +66,9 @@ namespace Rise.App.Views
                 });
 
                 if (suitable)
+                {
                     suitableItems.Add(album);
+                }
             }
 
             GroupedItems = suitableItems.GroupBy(e => ResourceNames[e.GetType()]);
@@ -77,11 +81,17 @@ namespace Rise.App.Views
         private void MainGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is SongViewModel song)
+            {
                 MediaViewModel.PlayFromItemCommand.Execute(song);
+            }
             else if (e.ClickedItem is AlbumViewModel album)
+            {
                 _ = Frame.Navigate(typeof(AlbumSongsPage), album.Model.Id);
+            }
             else if (e.ClickedItem is ArtistViewModel artist)
+            {
                 _ = Frame.Navigate(typeof(ArtistSongsPage), artist.Model.Id);
+            }
         }
     }
 
@@ -94,9 +104,13 @@ namespace Rise.App.Views
         protected override DataTemplate SelectTemplateCore(object item)
         {
             if (item is AlbumViewModel)
+            {
                 return AlbumTemplate;
+            }
             else if (item is ArtistViewModel)
+            {
                 return ArtistTemplate;
+            }
 
             return SongTemplate;
         }

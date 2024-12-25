@@ -57,16 +57,18 @@ namespace Rise.App.Dialogs
 
         private async void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            var icon = await ApplicationData.Current.
+            IStorageItem icon = await ApplicationData.Current.
                 LocalFolder.TryGetItemAsync($@"playlist-{NewPlaylist.Id}.png");
 
             if (icon != null)
+            {
                 await icon.DeleteAsync(StorageDeleteOption.PermanentDelete);
+            }
         }
 
         private async void UseCustomImageButton_Click(object sender, RoutedEventArgs e)
         {
-            var picker = new FileOpenPicker
+            FileOpenPicker picker = new()
             {
                 ViewMode = PickerViewMode.Thumbnail,
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary
@@ -76,15 +78,17 @@ namespace Rise.App.Dialogs
             picker.FileTypeFilter.Add(".jpeg");
             picker.FileTypeFilter.Add(".png");
 
-            var file = await picker.PickSingleFileAsync();
+            StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {
                 // If this throws, there's no image to work with
                 try
                 {
-                    var img = await file.GetBitmapAsync();
+                    Windows.Graphics.Imaging.SoftwareBitmap img = await file.GetBitmapAsync();
                     if (img == null)
+                    {
                         return;
+                    }
 
                     img.Dispose();
                 }

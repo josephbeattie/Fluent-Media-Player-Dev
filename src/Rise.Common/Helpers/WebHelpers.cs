@@ -30,11 +30,11 @@ namespace Rise.Common.Helpers
         /// </summary>
         public static async Task<MediaPlaybackItem> GetSongFromUriAsync(Uri uri)
         {
-            var source = MediaSource.CreateFromUri(uri);
+            MediaSource source = MediaSource.CreateFromUri(uri);
             await source.OpenAsync();
 
-            var media = new MediaPlaybackItem(source);
-            var props = media.GetDisplayProperties();
+            MediaPlaybackItem media = new(source);
+            MediaItemDisplayProperties props = media.GetDisplayProperties();
 
             props.Type = MediaPlaybackType.Music;
             props.MusicProperties.Title = props.MusicProperties.Title.ReplaceIfNullOrWhiteSpace("Online song");
@@ -59,8 +59,8 @@ namespace Rise.Common.Helpers
             string actualTitle = title.ReplaceIfNullOrWhiteSpace("Online song");
             string actualSubtitle = subtitle.ReplaceIfNullOrWhiteSpace("UnknownArtistResource");
 
-            var media = GetMediaFromUri(uri, actualTitle, actualSubtitle);
-            var props = media.GetDisplayProperties();
+            MediaPlaybackItem media = GetMediaFromUri(uri, actualTitle, actualSubtitle);
+            MediaItemDisplayProperties props = media.GetDisplayProperties();
 
             props.Type = MediaPlaybackType.Music;
             props.MusicProperties.Title = actualTitle;
@@ -78,11 +78,11 @@ namespace Rise.Common.Helpers
         /// </summary>
         public static async Task<MediaPlaybackItem> GetVideoFromUriAsync(Uri uri)
         {
-            var source = MediaSource.CreateFromUri(uri);
+            MediaSource source = MediaSource.CreateFromUri(uri);
             await source.OpenAsync();
 
-            var media = new MediaPlaybackItem(source);
-            var props = media.GetDisplayProperties();
+            MediaPlaybackItem media = new(source);
+            MediaItemDisplayProperties props = media.GetDisplayProperties();
 
             props.Type = MediaPlaybackType.Video;
             props.VideoProperties.Title = props.VideoProperties.Title.ReplaceIfNullOrWhiteSpace("Online video");
@@ -107,8 +107,8 @@ namespace Rise.Common.Helpers
             string actualTitle = title.ReplaceIfNullOrWhiteSpace("Online video");
             string actualSubtitle = subtitle.ReplaceIfNullOrWhiteSpace("UnknownArtistResource");
 
-            var media = GetMediaFromUri(uri, actualTitle, actualSubtitle);
-            var props = media.GetDisplayProperties();
+            MediaPlaybackItem media = GetMediaFromUri(uri, actualTitle, actualSubtitle);
+            MediaItemDisplayProperties props = media.GetDisplayProperties();
 
             props.Type = MediaPlaybackType.Video;
             props.VideoProperties.Title = actualTitle;
@@ -123,14 +123,14 @@ namespace Rise.Common.Helpers
 
         private static MediaPlaybackItem GetMediaFromUri(Uri uri, string title, string subtitle)
         {
-            var source = MediaSource.CreateFromUri(uri);
+            MediaSource source = MediaSource.CreateFromUri(uri);
 
             source.CustomProperties["Title"] = title;
             source.CustomProperties["Artists"] = subtitle;
             source.CustomProperties["Length"] = source.Duration;
             source.CustomProperties["Year"] = 0u;
 
-            var media = new MediaPlaybackItem(source);
+            MediaPlaybackItem media = new(source);
             return media;
         }
     }

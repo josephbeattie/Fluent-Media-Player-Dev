@@ -59,7 +59,7 @@ namespace Rise.Models
         {
             // Put the value into memory to make sure that the system
             // really fetches the properties
-            var videoProperties = await file.Properties.GetVideoPropertiesAsync();
+            VideoProperties videoProperties = await file.Properties.GetVideoPropertiesAsync();
 
             string title = videoProperties.Title.ReplaceIfNullOrWhiteSpace(file.DisplayName);
 
@@ -71,9 +71,11 @@ namespace Rise.Models
 
             if (await ThumbnailFolder.TryGetItemAsync($@"{filename}.png") == null)
             {
-                using var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView, 238);
+                using StorageItemThumbnail thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView, 238);
                 if (await thumbnail.SaveToFileAsync($@"{filename}.png", ThumbnailFolder))
+                {
                     thumb = $@"ms-appdata:///local/{filename}.png";
+                }
             }
 
             return new Video
@@ -109,17 +111,7 @@ namespace Rise.Models
     {
         public MatchLevel Matches(Video other)
         {
-            if (Title.Equals(other.Title))
-            {
-                return MatchLevel.Full;
-            }
-
-            if (Title.Contains(other.Title))
-            {
-                return MatchLevel.Partial;
-            }
-
-            return MatchLevel.None;
+            return Title.Equals(other.Title) ? MatchLevel.Full : Title.Contains(other.Title) ? MatchLevel.Partial : MatchLevel.None;
         }
     }
 }

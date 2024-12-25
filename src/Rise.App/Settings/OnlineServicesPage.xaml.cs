@@ -25,7 +25,9 @@ namespace Rise.App.Settings
         private async void LastFmFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             if (!WebHelpers.IsInternetAccessAvailable())
+            {
                 return;
+            }
 
             try
             {
@@ -33,7 +35,9 @@ namespace Rise.App.Settings
                 LastFMStatus.IsEnabled = !result;
 
                 if (result)
+                {
                     ViewModel.SaveCredentialsToVault(LastFM.VaultResource);
+                }
             }
             catch (Exception ex)
             {

@@ -49,7 +49,7 @@ namespace Rise.Common.Extensions
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
 
-                if (child != null && child is ChildItem item)
+                if (child is not null and ChildItem item)
                 {
                     return item;
                 }
@@ -85,13 +85,13 @@ namespace Rise.Common.Extensions
                     // Retrieve child visual at specified index value.
                     DependencyObject child = VisualTreeHelper.GetChild(parent, i);
 
-                    if (child != null && child is ChildItem item)
+                    if (child is not null and ChildItem item)
                     {
                         yield return item;
 
                         if (recurse)
                         {
-                            foreach (var grandChild in child.GetChildren<ChildItem>(true))
+                            foreach (ChildItem grandChild in child.GetChildren<ChildItem>(true))
                             {
                                 yield return grandChild;
                             }
@@ -111,18 +111,7 @@ namespace Rise.Common.Extensions
             where ParentItem : DependencyObject
         {
             DependencyObject parent = VisualTreeHelper.GetParent(obj);
-            if (parent == null)
-            {
-                return null;
-            }
-            else if (parent is ParentItem)
-            {
-                return parent as ParentItem;
-            }
-            else
-            {
-                return parent.FindVisualParent<ParentItem>();
-            }
+            return parent == null ? null : parent is ParentItem ? parent as ParentItem : parent.FindVisualParent<ParentItem>();
         }
     }
 }

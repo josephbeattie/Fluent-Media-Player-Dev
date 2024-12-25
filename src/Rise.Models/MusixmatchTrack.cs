@@ -214,12 +214,15 @@ namespace Rise.Models
 
     public sealed partial class MusixmatchTrack
     {
-        public static MusixmatchTrack FromJson(string json) => JsonConvert.DeserializeObject<MusixmatchTrack>(json, TrackConverter.Settings);
+        public static MusixmatchTrack FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<MusixmatchTrack>(json, TrackConverter.Settings);
+        }
     }
 
     internal static class TrackConverter
     {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings Settings = new()
         {
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,

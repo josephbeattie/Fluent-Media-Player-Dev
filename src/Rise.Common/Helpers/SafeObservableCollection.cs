@@ -46,7 +46,7 @@ namespace Rise.Common.Helpers
             int startIndex = Count;
             foreach (T item in items)
             {
-                this.Items.Add(item);
+                Items.Add(item);
             }
 
             OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
@@ -67,7 +67,7 @@ namespace Rise.Common.Helpers
             bool raiseEvents = false;
             foreach (T item in items)
             {
-                if (this.Items.Remove(item))
+                if (Items.Remove(item))
                 {
                     raiseEvents = true;
                 }
@@ -88,33 +88,21 @@ namespace Rise.Common.Helpers
     {
         // Property change events
         private readonly Dictionary<NotifyCollectionChangedEventHandler, SynchronizationContext> CollectionChangedEvents =
-            new Dictionary<NotifyCollectionChangedEventHandler, SynchronizationContext>();
+            [];
 
         private readonly Dictionary<PropertyChangedEventHandler, SynchronizationContext> PropertyChangedEvents =
-            new Dictionary<PropertyChangedEventHandler, SynchronizationContext>();
+            [];
 
         public override event NotifyCollectionChangedEventHandler CollectionChanged
         {
-            add
-            {
-                CollectionChangedEvents.Add(value, SynchronizationContext.Current);
-            }
-            remove
-            {
-                CollectionChangedEvents.Remove(value);
-            }
+            add => CollectionChangedEvents.Add(value, SynchronizationContext.Current);
+            remove => CollectionChangedEvents.Remove(value);
         }
 
         protected override event PropertyChangedEventHandler PropertyChanged
         {
-            add
-            {
-                PropertyChangedEvents.Add(value, SynchronizationContext.Current);
-            }
-            remove
-            {
-                PropertyChangedEvents.Remove(value);
-            }
+            add => PropertyChangedEvents.Add(value, SynchronizationContext.Current);
+            remove => PropertyChangedEvents.Remove(value);
         }
 
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)

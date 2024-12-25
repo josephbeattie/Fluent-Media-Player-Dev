@@ -21,7 +21,7 @@ namespace Rise.App.Dialogs
 
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            var deferral = args.GetDeferral();
+            ContentDialogButtonClickDeferral deferral = args.GetDeferral();
 
             string url = StreamingTextBox.Text;
             if (!Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri))
@@ -36,14 +36,14 @@ namespace Rise.App.Dialogs
             bool isYoutubeLink = url.Contains("youtube.com/watch");
             if (isYoutubeLink)
             {
-                var youtubeClient = new YoutubeClient();
-                var youtubeVideo = await youtubeClient.Videos.GetAsync(url.Replace("music.youtube.com", "www.youtube.com"));
+                YoutubeClient youtubeClient = new();
+                YoutubeExplode.Videos.Video youtubeVideo = await youtubeClient.Videos.GetAsync(url.Replace("music.youtube.com", "www.youtube.com"));
 
                 string title = youtubeVideo.Title;
                 string subtitle = youtubeVideo.Author.ChannelTitle;
                 string thumbnailUrl = youtubeVideo.Thumbnails.GetWithHighestResolution().Url;
 
-                var streams = await youtubeClient.Videos.Streams.GetManifestAsync(url);
+                StreamManifest streams = await youtubeClient.Videos.Streams.GetManifestAsync(url);
 
                 uri = new(streams.GetAudioStreams().GetWithHighestBitrate().Url);
                 song = await WebHelpers.GetSongFromUriAsync(uri, title, subtitle, thumbnailUrl);

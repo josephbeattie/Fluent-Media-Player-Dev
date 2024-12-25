@@ -12,7 +12,7 @@ namespace Rise.App.Dialogs
     {
         public WidgetsDialogContent()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
             {
                 WidgetsImage.Visibility = Visibility.Collapsed;

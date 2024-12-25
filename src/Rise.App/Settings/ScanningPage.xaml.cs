@@ -18,10 +18,10 @@ namespace Rise.App.Settings
         private SettingsViewModel ViewModel => App.SViewModel;
 
         private readonly uint[] MinuteIntervals = new uint[] { 1, 5, 10, 30, 60 };
-        private readonly List<string> Intervals = new()
-        {
+        private readonly List<string> Intervals =
+        [
             ResourceHelper.GetString("OneMinute")
-        };
+        ];
 
         public ScanningPage()
         {
@@ -36,7 +36,9 @@ namespace Rise.App.Settings
             Intervals.Add(ResourceHelper.GetString("OneHour"));
 
             string FormatMinutes(string min)
-                => string.Format(format, min);
+            {
+                return string.Format(format, min);
+            }
         }
 
         private void PeriodicScan_SelectionChanged(object sender, SelectionChangedEventArgs e)

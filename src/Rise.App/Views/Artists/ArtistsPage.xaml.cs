@@ -45,12 +45,16 @@ namespace Rise.App.Views
         [RelayCommand]
         private Task AddToPlaylistAsync(PlaylistViewModel playlist)
         {
-            var name = SelectedItem.Name;
-            var items = new List<SongViewModel>();
+            string name = SelectedItem.Name;
+            List<SongViewModel> items = [];
 
-            foreach (var itm in MViewModel.Songs)
+            foreach (SongViewModel itm in MViewModel.Songs)
+            {
                 if (itm.Artist == name)
+                {
                     items.Add(itm);
+                }
+            }
 
             if (playlist == null)
             {
@@ -77,13 +81,17 @@ namespace Rise.App.Views
 
         private void MenuFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainGrid.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainGrid.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (ArtistViewModel)cont;
+            }
         }
 
         private void AskDiscy_Click(object sender, RoutedEventArgs e)
@@ -93,7 +101,7 @@ namespace Rise.App.Views
 
         private async void ChngArtImg_Click(object sender, RoutedEventArgs e)
         {
-            var picker = new FileOpenPicker
+            FileOpenPicker picker = new()
             {
                 ViewMode = PickerViewMode.Thumbnail,
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary
@@ -103,21 +111,23 @@ namespace Rise.App.Views
             picker.FileTypeFilter.Add(".jpeg");
             picker.FileTypeFilter.Add(".png");
 
-            var file = await picker.PickSingleFileAsync();
+            StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {
                 // If this throws, there's no image to work with
                 try
                 {
-                    var img = await file.GetBitmapAsync();
+                    Windows.Graphics.Imaging.SoftwareBitmap img = await file.GetBitmapAsync();
                     if (img == null)
+                    {
                         return;
+                    }
 
                     img.Dispose();
                 }
                 catch { return; }
 
-                var artist = SelectedItem;
+                ArtistViewModel artist = SelectedItem;
                 artist.Picture = URIs.ArtistThumb;
 
                 string filename = $@"artist-{artist.Model.Id}{file.FileType}";

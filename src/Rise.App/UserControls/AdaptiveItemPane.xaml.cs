@@ -65,7 +65,9 @@ namespace Rise.App.UserControls
         private static void OnPanesUpdated(DependencyObject d, DependencyProperty dp)
         {
             if (d is AdaptiveItemPane pane)
+            {
                 UpdateBreakpoint(pane);
+            }
         }
 
         private static void UpdateBreakpoint(AdaptiveItemPane pane)
@@ -74,14 +76,15 @@ namespace Rise.App.UserControls
         }
 
         private void Pane_SizeChanged(object sender, SizeChangedEventArgs e)
-            => PerformResize(e.NewSize.Width);
+        {
+            PerformResize(e.NewSize.Width);
+        }
 
         private void PerformResize(double width)
         {
-            if (width - 12 < Breakpoint)
-                VisualStateManager.GoToState(this, "Stacked", false);
-            else
-                VisualStateManager.GoToState(this, "SideBySide", false);
+            _ = width - 12 < Breakpoint
+                ? VisualStateManager.GoToState(this, "Stacked", false)
+                : VisualStateManager.GoToState(this, "SideBySide", false);
         }
     }
 }

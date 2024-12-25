@@ -25,10 +25,10 @@ namespace Rise.Common.Helpers
         public static T GetLocal<T>(T defaultValue, string container, string setting)
         {
             // Get the container values, always create it if it doesn't exist
-            var values = LocalSettings.CreateContainer(container, ApplicationDataCreateDisposition.Always).Values;
+            Windows.Foundation.Collections.IPropertySet values = LocalSettings.CreateContainer(container, ApplicationDataCreateDisposition.Always).Values;
 
             values[setting] ??= defaultValue;
-            var value = (T)values[setting];
+            T value = (T)values[setting];
 
             return value;
         }
@@ -45,11 +45,11 @@ namespace Rise.Common.Helpers
         public static void SetLocal<T>(T newValue, string container, string setting)
         {
             // Get the container, always create it if it doesn't exist
-            var values = LocalSettings.CreateContainer(container, ApplicationDataCreateDisposition.Always).Values;
+            Windows.Foundation.Collections.IPropertySet values = LocalSettings.CreateContainer(container, ApplicationDataCreateDisposition.Always).Values;
 
             // Check whether type matches
             object value = values[setting];
-            if (value is not T && value != null)
+            if (value is not T and not null)
             {
                 string message = $"Type mismatch for \"{setting}\" in \"{container}\" container. Current type is {value.GetType()}";
                 throw new ArgumentException(message, nameof(setting));

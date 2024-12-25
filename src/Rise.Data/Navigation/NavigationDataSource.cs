@@ -32,10 +32,12 @@ namespace Rise.Data.Navigation
         {
             // No need to populate groups more than once
             if (_populated)
+            {
                 return;
+            }
 
-            var localFolder = ApplicationData.Current.LocalFolder;
-            var file = localFolder.CreateFileAsync(_fileName, CreationCollisionOption.OpenIfExists).Get();
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFile file = localFolder.CreateFileAsync(_fileName, CreationCollisionOption.OpenIfExists).Get();
 
             string jsonText = FileIO.ReadTextAsync(file).Get();
 
@@ -46,26 +48,24 @@ namespace Rise.Data.Navigation
                 return;
             }
 
-            var saved = JsonSerializer.Deserialize(jsonText,
+            System.Collections.Generic.IEnumerable<NavigationItemBase> saved = JsonSerializer.Deserialize(jsonText,
                 NavigationItemCollectionContext.Default.IEnumerableNavigationItemBase);
-            var items = saved.ToList();
+            System.Collections.Generic.List<NavigationItemBase> items = saved.ToList();
 
             // Remove items that shouldn't be there
-            items.RemoveAll(i => !_defaultItems.Contains(i));
+            _ = items.RemoveAll(i => !_defaultItems.Contains(i));
 
             // Add new items
             for (int i = 0; i < _defaultItems.Length; i++)
             {
-                var item = _defaultItems[i];
+                NavigationItemBase item = _defaultItems[i];
                 if (!items.Contains(item))
                 {
                     bool isHeader = item.ItemType == NavigationItemType.Header;
 
-                    int index;
-                    if (isHeader)
-                        index = items.FindIndex(i => i.Group == item.Group && i.IsFooter == item.IsFooter);
-                    else
-                        index = items.FindLastIndex(i => i.Group == item.Group && i.IsFooter == item.IsFooter);
+                    int index = isHeader
+                        ? items.FindIndex(i => i.Group == item.Group && i.IsFooter == item.IsFooter)
+                        : items.FindLastIndex(i => i.Group == item.Group && i.IsFooter == item.IsFooter);
 
                     // If there's no group yet, add the item at
                     // the end of the previous group
@@ -76,9 +76,13 @@ namespace Rise.Data.Navigation
                     }
 
                     if (isHeader)
+                    {
                         items.Insert(index, item);
+                    }
                     else
+                    {
                         items.Insert(index + 1, item);
+                    }
                 }
             }
 
@@ -108,7 +112,9 @@ namespace Rise.Data.Navigation
         /// </summary>
         [RelayCommand]
         public void ToggleItemVisibility(NavigationItemBase item)
-            => ChangeItemVisibility(item, !item.IsVisible);
+        {
+            ChangeItemVisibility(item, !item.IsVisible);
+        }
 
         /// <summary>
         /// Changes the visibility of the provided item and updates the
@@ -121,9 +127,13 @@ namespace Rise.Data.Navigation
             if (GetItem(item.Group) is NavigationItemHeader header)
             {
                 if (vis)
+                {
                     header.IsGroupVisible = true;
+                }
                 else if (item.ItemType != NavigationItemType.Header)
+                {
                     HideIfNeeded(header);
+                }
             }
 
             SerializeGroupsAsync().Get();
@@ -159,7 +169,9 @@ namespace Rise.Data.Navigation
                 {
                     item.IsVisible = true;
                     if (item is NavigationItemHeader header)
+                    {
                         header.IsGroupVisible = true;
+                    }
                 }
             }
 
@@ -179,7 +191,9 @@ namespace Rise.Data.Navigation
                 {
                     item.IsVisible = false;
                     if (item is NavigationItemHeader header)
+                    {
                         header.IsGroupVisible = false;
+                    }
                 }
             }
 
@@ -195,10 +209,12 @@ namespace Rise.Data.Navigation
         /// false otherwise.</returns>
         public bool IsGroupShown(string groupName)
         {
-            foreach (var item in AllItems)
+            foreach (NavigationItemBase item in AllItems)
             {
                 if (item.Group == groupName && item.IsVisible)
+                {
                     return true;
+                }
             }
 
             return false;
@@ -217,9 +233,11 @@ namespace Rise.Data.Navigation
         {
             int index = AllItems.IndexOf(item);
             if (index == 0)
+            {
                 return false;
+            }
 
-            var elm = AllItems.ElementAt(index - 1);
+            NavigationItemBase elm = AllItems.ElementAt(index - 1);
             bool sameGroup = elm.Group == item.Group;
             bool directlyBelowHeader = sameGroup && elm.ItemType == NavigationItemType.Header;
 
@@ -235,9 +253,11 @@ namespace Rise.Data.Navigation
         {
             int index = AllItems.IndexOf(item) + 1;
             if (index == AllItems.Count)
+            {
                 return false;
+            }
 
-            var elm = AllItems.ElementAt(index);
+            NavigationItemBase elm = AllItems.ElementAt(index);
             return elm.Group == item.Group;
         }
 
@@ -246,14 +266,18 @@ namespace Rise.Data.Navigation
         /// </summary>
         [RelayCommand]
         public void MoveUp(NavigationItemBase item)
-            => MoveItem(item, -1);
+        {
+            MoveItem(item, -1);
+        }
 
         /// <summary>
         /// Moves the provided item down.
         /// </summary>
         [RelayCommand]
         public void MoveDown(NavigationItemBase item)
-            => MoveItem(item, 1);
+        {
+            MoveItem(item, 1);
+        }
 
         /// <summary>
         /// Moves the provided item to the top of its group.
@@ -261,8 +285,8 @@ namespace Rise.Data.Navigation
         [RelayCommand]
         public void MoveToTop(NavigationItemBase item)
         {
-            var header = GetItem(item.Group);
-            var items = AllItems.GetView(item.IsFooter);
+            NavigationItemBase header = GetItem(item.Group);
+            System.Collections.ObjectModel.ReadOnlyObservableCollection<NavigationItemBase> items = AllItems.GetView(item.IsFooter);
 
             // If the header is null, the index will be -1, but thanks to the
             // addition, the item will get inserted at the beginning
@@ -277,8 +301,8 @@ namespace Rise.Data.Navigation
         [RelayCommand]
         public void MoveToBottom(NavigationItemBase item)
         {
-            var items = AllItems.GetView(item.IsFooter);
-            var lastInGroup = items.LastOrDefault(i => i.Group == item.Group);
+            System.Collections.ObjectModel.ReadOnlyObservableCollection<NavigationItemBase> items = AllItems.GetView(item.IsFooter);
+            NavigationItemBase lastInGroup = items.LastOrDefault(i => i.Group == item.Group);
 
             AllItems.Move(item, items.IndexOf(lastInGroup));
 
@@ -302,6 +326,8 @@ namespace Rise.Data.Navigation
         /// </summary>
         /// <param name="id">ID of the item.</param>
         public NavigationItemBase GetItem(string id)
-            => AllItems.FirstOrDefault(i => i.Id.Equals(id));
+        {
+            return AllItems.FirstOrDefault(i => i.Id.Equals(id));
+        }
     }
 }

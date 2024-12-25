@@ -56,7 +56,9 @@ namespace Rise.Models
         /// Returns the song title.
         /// </summary>
         public override string ToString()
-            => Title;
+        {
+            return Title;
+        }
     }
 
     // Constructors/Factory methods
@@ -77,18 +79,22 @@ namespace Rise.Models
         {
             // Put the value into memory to make sure that the system
             // really fetches the properties
-            var musicProperties = await file.Properties.GetMusicPropertiesAsync();
+            MusicProperties musicProperties = await file.Properties.GetMusicPropertiesAsync();
 
             int cd = 1;
-            var extraProps = await file.Properties.
+            System.Collections.Generic.IDictionary<string, object> extraProps = await file.Properties.
                 RetrievePropertiesAsync(SongProperties.DiscProperties);
 
             // Check if disc number is valid
             string disc, prop = string.Empty;
             if (extraProps.ContainsKey(SystemMusic.DiscNumber))
+            {
                 prop = SystemMusic.DiscNumber;
+            }
             else if (extraProps.ContainsKey(SystemMusic.PartOfSet))
+            {
                 prop = SystemMusic.PartOfSet;
+            }
 
             if (!string.IsNullOrEmpty(prop))
             {
@@ -103,7 +109,9 @@ namespace Rise.Models
                     // disc number, using the {Disc}/{Number of discs in album}
                     // format - main reason why this second check exists
                     if (int.TryParse(setPart, out int part))
+                    {
                         cd = part;
+                    }
                 }
                 else
                 {
@@ -117,7 +125,7 @@ namespace Rise.Models
             if (saveThumbnail)
             {
                 string filename = albumTitle.AsValidFileName();
-                var (_, path) = await TrySaveThumbnailAsync(file, filename);
+                (bool _, string path) = await TrySaveThumbnailAsync(file, filename);
                 thumb = path;
             }
 
@@ -152,9 +160,11 @@ namespace Rise.Models
         {
             if (await ThumbnailFolder.TryGetItemAsync($@"{filename}.png") == null)
             {
-                using var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.MusicView, 134);
+                using StorageItemThumbnail thumbnail = await file.GetThumbnailAsync(ThumbnailMode.MusicView, 134);
                 if (!await thumbnail.SaveToFileAsync($@"{filename}.png", ThumbnailFolder))
+                {
                     return (false, URIs.MusicThumb);
+                }
             }
 
             return (true, $@"ms-appdata:///local/{filename}.png");
@@ -189,17 +199,7 @@ namespace Rise.Models
     {
         public MatchLevel Matches(Song other)
         {
-            if (Title.Equals(other.Title))
-            {
-                return MatchLevel.Full;
-            }
-
-            if (Title.Contains(other.Title))
-            {
-                return MatchLevel.Partial;
-            }
-
-            return MatchLevel.None;
+            return Title.Equals(other.Title) ? MatchLevel.Full : Title.Contains(other.Title) ? MatchLevel.Partial : MatchLevel.None;
         }
     }
 }

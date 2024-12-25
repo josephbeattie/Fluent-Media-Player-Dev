@@ -97,7 +97,9 @@ public sealed class AlternatingListViewBehavior : Behavior<ListViewBase>
         AssociatedObject.ContainerContentChanging += OnContainerContentChanging;
 
         if (AssociatedObject.Items != null)
+        {
             AssociatedObject.Items.VectorChanged += ItemsOnVectorChanged;
+        }
     }
 
     protected override void OnDetaching()
@@ -108,16 +110,24 @@ public sealed class AlternatingListViewBehavior : Behavior<ListViewBase>
         AssociatedObject.ContainerContentChanging -= OnContainerContentChanging;
 
         if (AssociatedObject.Items != null)
+        {
             AssociatedObject.Items.VectorChanged -= ItemsOnVectorChanged;
+        }
     }
 
     private void OnActualThemeChanged(FrameworkElement sender, object args)
     {
-        if (AssociatedObject.Items == null) return;
+        if (AssociatedObject.Items == null)
+        {
+            return;
+        }
+
         for (uint i = 0; i < AssociatedObject.Items.Count; i++)
         {
             if (AssociatedObject.ContainerFromIndex((int)i) is not SelectorItem itemContainer)
+            {
                 continue;
+            }
 
             UpdateAlternateLayout(itemContainer, i);
         }
@@ -127,7 +137,9 @@ public sealed class AlternatingListViewBehavior : Behavior<ListViewBase>
     {
         // If the index is at the end we can ignore
         if (args.Index == (sender.Count - 1))
+        {
             return;
+        }
 
         // Only need to handle Inserted and Removed because we'll handle everything else in the
         // OnContainerContentChanging method
@@ -136,7 +148,9 @@ public sealed class AlternatingListViewBehavior : Behavior<ListViewBase>
             for (uint i = args.Index; i < sender.Count; i++)
             {
                 if (AssociatedObject.ContainerFromIndex((int)i) is not SelectorItem itemContainer)
+                {
                     continue;
+                }
 
                 UpdateAlternateLayout(itemContainer, i);
             }
@@ -145,22 +159,30 @@ public sealed class AlternatingListViewBehavior : Behavior<ListViewBase>
 
     private void OnContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
     {
-        if (args.Phase > 0 || args.InRecycleQueue || args.ItemIndex < 0) return;
+        if (args.Phase > 0 || args.InRecycleQueue || args.ItemIndex < 0)
+        {
+            return;
+        }
+
         UpdateAlternateLayout(args.ItemContainer, (uint)args.ItemIndex);
     }
 
     private void UpdateAlternateLayout(SelectorItem itemContainer, uint itemIndex)
     {
         if (HasContract14)
+        {
             UpdateAlternateLayoutContract14(itemContainer, itemIndex);
+        }
         else
+        {
             UpdateAlternateLayoutNoContract14(itemContainer, itemIndex);
+        }
     }
 
     // For Windows 11 onwards
     private void UpdateAlternateLayoutContract14(SelectorItem itemContainer, uint itemIndex)
     {
-        var border = itemContainer.FindDescendant<Border>();
+        Border? border = itemContainer.FindDescendant<Border>();
         if (itemIndex % 2 == 0)
         {
             itemContainer.Background = AlternateBackground;

@@ -24,6 +24,8 @@ public sealed partial class GroupedCollectionView
     {
         _deferCounter--;
         if (_deferCounter == 0)
+        {
             OnSourceChanged();
+        }
     }
 }

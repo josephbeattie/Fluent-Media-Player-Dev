@@ -27,15 +27,17 @@ namespace Rise.Common
 
         public StorageLibraryChangeResult(StorageLibraryChangeStatus status)
         {
-            AddedItems = new List<StorageFile>();
-            RemovedItems = new List<string>();
+            AddedItems = [];
+            RemovedItems = [];
             Status = status;
         }
 
         public async ValueTask DisposeAsync()
         {
             if (changeReader != null)
+            {
                 await changeReader.AcceptChangesAsync();
+            }
         }
     }
 }

@@ -34,17 +34,7 @@ namespace Rise.Models
 
         public MatchLevel Matches(Genre other)
         {
-            if (Name.Equals(other.Name))
-            {
-                return MatchLevel.Full;
-            }
-
-            if (Name.Contains(other.Name))
-            {
-                return MatchLevel.Partial;
-            }
-
-            return MatchLevel.None;
+            return Name.Equals(other.Name) ? MatchLevel.Full : Name.Contains(other.Name) ? MatchLevel.Partial : MatchLevel.None;
         }
     }
 }

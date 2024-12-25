@@ -14,15 +14,12 @@ namespace Rise.App.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            IRandomAccessStream strm;
-            if (value is IRandomAccessStream rand)
-                strm = rand.CloneStream();
-            else if (value is IRandomAccessStreamReference randRef)
-                strm = randRef.OpenReadAsync().Get();
-            else
-                throw new ArgumentException($"The provided value must be of type {typeof(IRandomAccessStream)}.", nameof(value));
-
-            var img = new BitmapImage();
+            IRandomAccessStream strm = value is IRandomAccessStream rand
+                ? rand.CloneStream()
+                : value is IRandomAccessStreamReference randRef
+                ? (IRandomAccessStream)randRef.OpenReadAsync().Get()
+                : throw new ArgumentException($"The provided value must be of type {typeof(IRandomAccessStream)}.", nameof(value));
+            BitmapImage img = new();
             void OnImageOpened(object sender, RoutedEventArgs e)
             {
                 strm.Dispose();
@@ -36,6 +33,8 @@ namespace Rise.App.Converters
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
-            => throw new NotImplementedException();
+        {
+            throw new NotImplementedException();
+        }
     }
 }

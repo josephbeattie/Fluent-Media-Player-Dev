@@ -19,8 +19,8 @@ namespace Rise.Common.Helpers
     /// </summary>
     public sealed class SuspensionManager
     {
-        private static Dictionary<string, object> _sessionState = new();
-        private static readonly List<Type> _knownTypes = new();
+        private static Dictionary<string, object> _sessionState = [];
+        private static readonly List<Type> _knownTypes = [];
         private const string sessionStateFilename = "_sessionState.xml";
 
         /// <summary>
@@ -30,20 +30,14 @@ namespace Rise.Common.Helpers
         /// <see cref="DataContractSerializer"/> and should be as compact as possible.  Strings
         /// and other self-contained data types are strongly recommended.
         /// </summary>
-        public static Dictionary<string, object> SessionState
-        {
-            get { return _sessionState; }
-        }
+        public static Dictionary<string, object> SessionState => _sessionState;
 
         /// <summary>
         /// List of custom types provided to the <see cref="DataContractSerializer"/> when
         /// reading and writing session state.  Initially empty, additional types may be
         /// added to customize the serialization process.
         /// </summary>
-        public static List<Type> KnownTypes
-        {
-            get { return _knownTypes; }
-        }
+        public static List<Type> KnownTypes => _knownTypes;
 
         /// <summary>
         /// Save the current <see cref="SessionState"/>.  Any <see cref="Frame"/> instances
@@ -55,7 +49,7 @@ namespace Rise.Common.Helpers
         public static async Task SaveAsync()
         {
             // Save the navigation state for all registered frames
-            foreach (var weakFrameReference in _registeredFrames)
+            foreach (WeakReference<Frame> weakFrameReference in _registeredFrames)
             {
                 if (weakFrameReference.TryGetTarget(out Frame frame))
                 {
@@ -72,7 +66,7 @@ namespace Rise.Common.Helpers
             // Get an output stream for the SessionState file and write the state asynchronously
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(sessionStateFilename, CreationCollisionOption.ReplaceExisting);
             using Stream fileStream = await file.OpenStreamForWriteAsync();
-            sessionData.Seek(0, SeekOrigin.Begin);
+            _ = sessionData.Seek(0, SeekOrigin.Begin);
             await sessionData.CopyToAsync(fileStream);
         }
 
@@ -89,7 +83,7 @@ namespace Rise.Common.Helpers
         /// completes.</returns>
         public static async Task RestoreAsync(string sessionBaseKey = null)
         {
-            _sessionState = new Dictionary<string, object>();
+            _sessionState = [];
 
             // Get the input stream for the SessionState file
             StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(sessionStateFilename);
@@ -101,7 +95,7 @@ namespace Rise.Common.Helpers
             }
 
             // Restore any registered frames to their saved state
-            foreach (var weakFrameReference in _registeredFrames)
+            foreach (WeakReference<Frame> weakFrameReference in _registeredFrames)
             {
                 if (weakFrameReference.TryGetTarget(out Frame frame) && (string)frame.GetValue(FrameSessionBaseKeyProperty) == sessionBaseKey)
                 {
@@ -117,7 +111,7 @@ namespace Rise.Common.Helpers
             DependencyProperty.RegisterAttached("_FrameSessionBaseKeyParams", typeof(string), typeof(SuspensionManager), null);
         private static readonly DependencyProperty FrameSessionStateProperty =
             DependencyProperty.RegisterAttached("_FrameSessionState", typeof(Dictionary<string, object>), typeof(SuspensionManager), null);
-        private static readonly List<WeakReference<Frame>> _registeredFrames = new();
+        private static readonly List<WeakReference<Frame>> _registeredFrames = [];
 
         /// <summary>
         /// Registers a <see cref="Frame"/> instance to allow its navigation history to be saved to
@@ -171,8 +165,8 @@ namespace Rise.Common.Helpers
         {
             // Remove session state and remove the frame from the list of frames whose navigation
             // state will be saved (along with any weak references that are no longer reachable)
-            SessionState.Remove((string)frame.GetValue(FrameSessionStateKeyProperty));
-            _registeredFrames.RemoveAll((weakFrameReference) =>
+            _ = SessionState.Remove((string)frame.GetValue(FrameSessionStateKeyProperty));
+            _ = _registeredFrames.RemoveAll((weakFrameReference) =>
             {
                 return !weakFrameReference.TryGetTarget(out Frame testFrame) || testFrame == frame;
             });
@@ -193,11 +187,11 @@ namespace Rise.Common.Helpers
         /// <see cref="SessionState"/>.</returns>
         public static Dictionary<string, object> SessionStateForFrame(Frame frame)
         {
-            var frameState = (Dictionary<string, object>)frame.GetValue(FrameSessionStateProperty);
+            Dictionary<string, object> frameState = (Dictionary<string, object>)frame.GetValue(FrameSessionStateProperty);
 
             if (frameState == null)
             {
-                var frameSessionKey = (string)frame.GetValue(FrameSessionStateKeyProperty);
+                string frameSessionKey = (string)frame.GetValue(FrameSessionStateKeyProperty);
                 if (frameSessionKey != null)
                 {
                     // Registered frames reflect the corresponding session state
@@ -210,7 +204,7 @@ namespace Rise.Common.Helpers
                 else
                 {
                     // Frames that aren't registered have transient state
-                    frameState = new Dictionary<string, object>();
+                    frameState = [];
                 }
                 frame.SetValue(FrameSessionStateProperty, frameState);
             }
@@ -219,7 +213,7 @@ namespace Rise.Common.Helpers
 
         private static void RestoreFrameNavigationState(Frame frame)
         {
-            var frameState = SessionStateForFrame(frame);
+            Dictionary<string, object> frameState = SessionStateForFrame(frame);
             if (frameState.ContainsKey("Navigation"))
             {
                 frame.SetNavigationState((string)frameState["Navigation"]);
@@ -228,7 +222,7 @@ namespace Rise.Common.Helpers
 
         private static void SaveFrameNavigationState(Frame frame)
         {
-            var frameState = SessionStateForFrame(frame);
+            Dictionary<string, object> frameState = SessionStateForFrame(frame);
             frameState["Navigation"] = frame.GetNavigationState();
         }
     }

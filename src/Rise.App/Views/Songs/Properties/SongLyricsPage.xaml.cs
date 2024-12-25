@@ -20,7 +20,9 @@ namespace Rise.App.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter is SongPropertiesViewModel props)
+            {
                 Props = props;
+            }
 
             base.OnNavigatedTo(e);
         }
@@ -28,10 +30,7 @@ namespace Rise.App.Views
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             string lyrics = await Props.Model.GetLyricsAsync();
-            if (!string.IsNullOrWhiteSpace(lyrics))
-                Lyrics.Text = lyrics;
-            else
-                Lyrics.Text = ResourceHelper.GetString("NoLyricsFound");
+            Lyrics.Text = !string.IsNullOrWhiteSpace(lyrics) ? lyrics : ResourceHelper.GetString("NoLyricsFound");
 
             LoadingRing.IsActive = false;
             LoadingRing.Visibility = Visibility.Collapsed;

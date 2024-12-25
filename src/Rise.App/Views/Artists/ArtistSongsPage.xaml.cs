@@ -73,14 +73,14 @@ namespace Rise.App.Views
             CreateViewModel("GSongAlbum|SongDisc|SongTrack", SortDirection.Ascending, false, IsFromArtist, App.MViewModel.Songs);
             bool IsFromArtist(object s)
             {
-                var song = (SongViewModel)s;
+                SongViewModel song = (SongViewModel)s;
                 return song.Artist == SelectedArtist.Name || song.AlbumArtist == SelectedArtist.Name;
             }
         }
 
         private void OnMainListLoaded(object sender, RoutedEventArgs e)
         {
-            var surface = LoadedImageSurface.StartLoadFromUri(new(SelectedArtist.Picture));
+            LoadedImageSurface surface = LoadedImageSurface.StartLoadFromUri(new(SelectedArtist.Picture));
             (_propSet, _backgroundVisual) = MainList.CreateParallaxGradientVisual(surface, BackgroundHost);
         }
 
@@ -93,7 +93,7 @@ namespace Rise.App.Views
                 !WebHelpers.IsInternetAccessAvailable() ||
                 name == ResourceHelper.GetString("UnknownArtistResource"))
             {
-                VisualStateManager.GoToState(this, "LastFMUnavailableState", true);
+                _ = VisualStateManager.GoToState(this, "LastFMUnavailableState", true);
             }
             else
             {
@@ -107,7 +107,9 @@ namespace Rise.App.Views
                 AboutArtist.Text = ShortBio;
 
                 if (string.IsNullOrWhiteSpace(ShortBio))
-                    VisualStateManager.GoToState(this, "ArtistBioUnavailableState", true);
+                {
+                    _ = VisualStateManager.GoToState(this, "ArtistBioUnavailableState", true);
+                }
             }
         }
     }
@@ -118,18 +120,24 @@ namespace Rise.App.Views
         private void MainList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((e.OriginalSource as FrameworkElement).DataContext is SongViewModel song)
+            {
                 MediaViewModel.PlayFromItemCommand.Execute(song);
+            }
         }
 
         private void SongFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainList.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainList.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (SongViewModel)cont;
+            }
         }
 
         private void AskDiscy_Click(object sender, RoutedEventArgs e)
@@ -142,7 +150,9 @@ namespace Rise.App.Views
             if (ShowingSummarized)
             {
                 if (string.IsNullOrEmpty(LongBio))
+                {
                     LongBio = await GetArtistBioAsync(SelectedArtist.Name, false);
+                }
 
                 AboutArtist.Text = LongBio;
                 ReadMoreAbout.Content = ResourceHelper.GetString("ReadLess");
@@ -159,7 +169,11 @@ namespace Rise.App.Views
 
         private void BackgroundHost_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_backgroundVisual == null) return;
+            if (_backgroundVisual == null)
+            {
+                return;
+            }
+
             _backgroundVisual.Size = new Vector2((float)e.NewSize.Width, (float)BackgroundHost.Height);
         }
 
@@ -168,18 +182,16 @@ namespace Rise.App.Views
             try
             {
                 string lfmUrl = URLs.LastFM + "artist.gettoptracks&artist=" + artist + "&api_key=" + LastFM.Key + "&limit=8";
-                using (var client = new HttpClient())
+                using HttpClient client = new();
+                HttpGetStringResult result = await client.TryGetStringAsync(new(lfmUrl));
+                if (result.Succeeded)
                 {
-                    var result = await client.TryGetStringAsync(new(lfmUrl));
-                    if (result.Succeeded)
-                    {
-                        StringReader strReader = new(result.Value);
-                        XmlSerializer serializer = new(typeof(LFM));
-                        XmlTextReader xmlReader = new(strReader);
+                    StringReader strReader = new(result.Value);
+                    XmlSerializer serializer = new(typeof(LFM));
+                    XmlTextReader xmlReader = new(strReader);
 
-                        var lfm = (LFM)serializer.Deserialize(xmlReader);
-                        return lfm.Toptracks.Track;
-                    }
+                    LFM lfm = (LFM)serializer.Deserialize(xmlReader);
+                    return lfm.Toptracks.Track;
                 }
             }
             catch { }
@@ -191,20 +203,20 @@ namespace Rise.App.Views
         {
             try
             {
-                var textInfo = new CultureInfo(ApplicationLanguages.PrimaryLanguageOverride).TextInfo;
+                TextInfo textInfo = new CultureInfo(ApplicationLanguages.PrimaryLanguageOverride).TextInfo;
                 string lfmUrl = URLs.LastFM + "artist.getinfo&artist=" + artist + "&api_key=" + LastFM.Key;
 
-                using (var client = new HttpClient())
+                using HttpClient client = new();
+                HttpGetStringResult res = await client.TryGetStringAsync(new(lfmUrl));
+                if (res.Succeeded)
                 {
-                    var res = await client.TryGetStringAsync(new(lfmUrl));
-                    if (res.Succeeded)
-                    {
-                        var doc = new XmlDocument();
-                        doc.LoadXml(res.Value);
+                    XmlDocument doc = new();
+                    doc.LoadXml(res.Value);
 
-                        var node = doc.DocumentElement.SelectSingleNode("/lfm/artist/tags/tag/name");
-                        if (node != null)
-                            return textInfo.ToTitleCase(node.InnerText);
+                    XmlNode node = doc.DocumentElement.SelectSingleNode("/lfm/artist/tags/tag/name");
+                    if (node != null)
+                    {
+                        return textInfo.ToTitleCase(node.InnerText);
                     }
                 }
             }
@@ -217,34 +229,28 @@ namespace Rise.App.Views
         {
             try
             {
-                var textInfo = new CultureInfo(ApplicationLanguages.PrimaryLanguageOverride).TextInfo;
+                TextInfo textInfo = new CultureInfo(ApplicationLanguages.PrimaryLanguageOverride).TextInfo;
                 string lfmUrl = URLs.LastFM + "artist.getinfo&artist=" + artist + "&api_key=" + LastFM.Key + "&autocorrect=1";
 
-                using (var client = new HttpClient())
+                using HttpClient client = new();
+                HttpGetStringResult res = await client.TryGetStringAsync(new(lfmUrl));
+                if (res.Succeeded)
                 {
-                    var res = await client.TryGetStringAsync(new(lfmUrl));
-                    if (res.Succeeded)
+                    XmlDocument doc = new();
+                    doc.LoadXml(res.Value);
+
+                    XmlNode node = summarized
+                        ? doc.DocumentElement.SelectSingleNode("/lfm/artist/bio/summary")
+                        : doc.DocumentElement.SelectSingleNode("/lfm/artist/bio/content");
+                    if (node != null)
                     {
-                        var doc = new XmlDocument();
-                        doc.LoadXml(res.Value);
+                        XmlNode url = doc.DocumentElement.SelectSingleNode("/lfm/artist/url");
+                        string noUrl = node.InnerText.
+                            Replace("<a href=\"" + url.InnerText + "\">Read more on Last.fm</a>", string.Empty);
 
-                        XmlNode node;
-                        if (summarized)
-                            node = doc.DocumentElement.SelectSingleNode("/lfm/artist/bio/summary");
-                        else
-                            node = doc.DocumentElement.SelectSingleNode("/lfm/artist/bio/content");
-
-                        if (node != null)
-                        {
-                            var url = doc.DocumentElement.SelectSingleNode("/lfm/artist/url");
-                            var noUrl = node.InnerText.
-                                Replace("<a href=\"" + url.InnerText + "\">Read more on Last.fm</a>", string.Empty);
-
-                            if (summarized)
-                                return noUrl;
-
-                            return noUrl.Replace(". User-contributed text is available under the Creative Commons By-SA License; additional terms may apply.", string.Empty);
-                        }
+                        return summarized
+                            ? noUrl
+                            : noUrl.Replace(". User-contributed text is available under the Creative Commons By-SA License; additional terms may apply.", string.Empty);
                     }
                 }
             }
@@ -257,20 +263,20 @@ namespace Rise.App.Views
         {
             try
             {
-                var textInfo = new CultureInfo(ApplicationLanguages.PrimaryLanguageOverride).TextInfo;
+                TextInfo textInfo = new CultureInfo(ApplicationLanguages.PrimaryLanguageOverride).TextInfo;
                 string lfmUrl = URLs.LastFM + "artist.getinfo&artist=" + artist + "&api_key=" + LastFM.Key;
 
-                using (var client = new HttpClient())
+                using HttpClient client = new();
+                HttpGetStringResult res = await client.TryGetStringAsync(new(lfmUrl));
+                if (res.Succeeded)
                 {
-                    var res = await client.TryGetStringAsync(new(lfmUrl));
-                    if (res.Succeeded)
-                    {
-                        var doc = new XmlDocument();
-                        doc.LoadXml(res.Value);
+                    XmlDocument doc = new();
+                    doc.LoadXml(res.Value);
 
-                        var node = doc.DocumentElement.SelectSingleNode("/lfm/artist/stats/listeners");
-                        if (node != null && long.TryParse(node.InnerText, out long num))
-                            return string.Format(ResourceHelper.GetString("NListeners"), FormatNumber.Format(num));
+                    XmlNode node = doc.DocumentElement.SelectSingleNode("/lfm/artist/stats/listeners");
+                    if (node != null && long.TryParse(node.InnerText, out long num))
+                    {
+                        return string.Format(ResourceHelper.GetString("NListeners"), FormatNumber.Format(num));
                     }
                 }
             }

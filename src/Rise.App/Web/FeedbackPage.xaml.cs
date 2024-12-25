@@ -15,9 +15,13 @@ namespace Rise.App.Web
         }
 
         public static Task<bool> TryShowAsync()
-            => ViewHelpers.OpenViewAsync<FeedbackPage>(minSize: new(380, 500));
+        {
+            return ViewHelpers.OpenViewAsync<FeedbackPage>(minSize: new(380, 500));
+        }
 
         private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
-            => _ = await URLs.NewIssue.LaunchAsync();
+        {
+            _ = await URLs.NewIssue.LaunchAsync();
+        }
     }
 }

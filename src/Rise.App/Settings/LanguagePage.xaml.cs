@@ -17,14 +17,18 @@ namespace Rise.App.Settings
             InitializeComponent();
 
             string topUserLanguage = GlobalizationPreferences.Languages[0];
-            Language sys = new Language(topUserLanguage);
+            Language sys = new(topUserLanguage);
             SysLang.Text = sys.DisplayName;
         }
 
         private async void TranslateButton_Click(object sender, RoutedEventArgs e)
-            => _ = await URLs.Translations.LaunchAsync();
+        {
+            _ = await URLs.Translations.LaunchAsync();
+        }
 
         private async void ReportButton_Click(object sender, RoutedEventArgs e)
-            => _ = await URLs.TranslationReports.LaunchAsync();
+        {
+            _ = await URLs.TranslationReports.LaunchAsync();
+        }
     }
 }

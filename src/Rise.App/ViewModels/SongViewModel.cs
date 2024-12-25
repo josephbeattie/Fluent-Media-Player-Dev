@@ -51,12 +51,7 @@ namespace Rise.App.ViewModels
         /// </summary>
         public string Artist
         {
-            get
-            {
-                if (Model.Artist == "UnknownArtistResource")
-                    return ResourceHelper.GetString("UnknownArtistResource");
-                return Model.Artist;
-            }
+            get => Model.Artist == "UnknownArtistResource" ? ResourceHelper.GetString("UnknownArtistResource") : Model.Artist;
             set
             {
                 if (value != Model.Artist)
@@ -109,12 +104,7 @@ namespace Rise.App.ViewModels
         /// </summary>
         public string Album
         {
-            get
-            {
-                if (Model.Album == "UnknownAlbumResource")
-                    return ResourceHelper.GetString("UnknownAlbumResource");
-                return Model.Album;
-            }
+            get => Model.Album == "UnknownAlbumResource" ? ResourceHelper.GetString("UnknownAlbumResource") : Model.Album;
             set
             {
                 if (value != Model.Album)
@@ -130,12 +120,7 @@ namespace Rise.App.ViewModels
         /// </summary>
         public string AlbumArtist
         {
-            get
-            {
-                if (Model.AlbumArtist == "UnknownArtistResource")
-                    return ResourceHelper.GetString("UnknownArtistResource");
-                return Model.AlbumArtist;
-            }
+            get => Model.AlbumArtist == "UnknownArtistResource" ? ResourceHelper.GetString("UnknownArtistResource") : Model.AlbumArtist;
             set
             {
                 if (value != Model.AlbumArtist)
@@ -151,12 +136,7 @@ namespace Rise.App.ViewModels
         /// </summary>
         public string Genres
         {
-            get
-            {
-                if (Model.Genres == "UnknownGenreResource")
-                    return ResourceHelper.GetString("UnknownGenreResource");
-                return Model.Genres;
-            }
+            get => Model.Genres == "UnknownGenreResource" ? ResourceHelper.GetString("UnknownGenreResource") : Model.Genres;
             set
             {
                 if (value != Model.Genres)
@@ -284,17 +264,19 @@ namespace Rise.App.ViewModels
             {
                 try
                 {
-                    var lyrics = await MusixmatchHelper.GetLyricsAsync(Title, Artist);
+                    MusixmatchLyrics lyrics = await MusixmatchHelper.GetLyricsAsync(Title, Artist);
 
                     if (lyrics == null)
+                    {
                         return string.Empty;
+                    }
 
-                    var builder = new StringBuilder(lyrics.Message.Body.Lyrics.LyricsBody);
+                    StringBuilder builder = new(lyrics.Message.Body.Lyrics.LyricsBody);
                     _ = builder.Append("\n\n");
                     _ = builder.Append(lyrics.Message.Body.Lyrics.LyricsCopyright);
                     _ = builder.Append("\n");
 
-                    var crForm = ResourceHelper.GetString("PoweredBy");
+                    string crForm = ResourceHelper.GetString("PoweredBy");
                     _ = builder.Append(string.Format(crForm, "Musixmatch"));
 
                     return builder.ToString();
@@ -309,8 +291,8 @@ namespace Rise.App.ViewModels
             {
                 try
                 {
-                    var file = await StorageFile.GetFileFromPathAsync(Location);
-                    var taglibFile = await Task.Run(() => TagLib.File.Create(new UwpStorageFileAbstraction(file)));
+                    StorageFile file = await StorageFile.GetFileFromPathAsync(Location);
+                    TagLib.File taglibFile = await Task.Run(() => TagLib.File.Create(new UwpStorageFileAbstraction(file)));
 
                     return (await Task.Run(() => taglibFile.Tag)).Lyrics;
                 }
@@ -336,11 +318,11 @@ namespace Rise.App.ViewModels
 
             if (queue)
             {
-                NewRepository.Repository.QueueUpsert(Model);
+                _ = NewRepository.Repository.QueueUpsert(Model);
             }
             else
             {
-                await NewRepository.Repository.UpsertAsync(Model);
+                _ = await NewRepository.Repository.UpsertAsync(Model);
             }
         }
         #endregion
@@ -363,13 +345,13 @@ namespace Rise.App.ViewModels
         {
             try
             {
-                var file = await StorageFile.GetFileFromPathAsync(Location);
-                var taglibFile = await Task.Run(() => TagLib.File.Create(new UwpStorageFileAbstraction(file)));
+                StorageFile file = await StorageFile.GetFileFromPathAsync(Location);
+                TagLib.File taglibFile = await Task.Run(() => TagLib.File.Create(new UwpStorageFileAbstraction(file)));
 
-                var tag = await Task.Run(() => taglibFile.Tag);
+                TagLib.Tag tag = await Task.Run(() => taglibFile.Tag);
 
                 tag.Lyrics = lyrics;
-                await Task.Run(() => taglibFile.Save());
+                await Task.Run(taglibFile.Save);
 
                 return true;
             }
@@ -389,10 +371,10 @@ namespace Rise.App.ViewModels
         /// <returns>A <see cref="MediaPlaybackItem"/> based on the song.</returns>
         public async Task<MediaPlaybackItem> AsPlaybackItemAsync()
         {
-            var uri = new Uri(Location);
+            Uri uri = new(Location);
             if (uri.IsFile)
             {
-                var file = await StorageFile.GetFileFromPathAsync(Location);
+                StorageFile file = await StorageFile.GetFileFromPathAsync(Location);
                 return await file.GetSongAsync();
             }
 
@@ -405,9 +387,9 @@ namespace Rise.App.ViewModels
     {
         public static Task<SongViewModel> AsSongAsync(this MediaPlaybackItem item)
         {
-            var displayProps = item.GetDisplayProperties();
+            MediaItemDisplayProperties displayProps = item.GetDisplayProperties();
 
-            var song = new SongViewModel
+            SongViewModel song = new()
             {
                 Title = displayProps.MusicProperties.Title,
                 Artist = displayProps.MusicProperties.Artist,

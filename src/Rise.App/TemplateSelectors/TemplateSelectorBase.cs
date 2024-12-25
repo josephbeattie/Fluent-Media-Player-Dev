@@ -11,13 +11,19 @@ namespace Rise.App.TemplateSelectors
     internal abstract class TemplateSelectorBase<TItem> : DataTemplateSelector
     {
         protected sealed override DataTemplate SelectTemplateCore(object item)
-            => SelectTemplateCore((TItem)item);
+        {
+            return SelectTemplateCore((TItem)item);
+        }
 
         protected sealed override DataTemplate SelectTemplateCore(object item, DependencyObject container)
-            => SelectTemplateCore((TItem)item, container);
+        {
+            return SelectTemplateCore((TItem)item, container);
+        }
 
         protected virtual DataTemplate SelectTemplateCore(TItem item)
-            => base.SelectTemplateCore(item);
+        {
+            return base.SelectTemplateCore(item);
+        }
     }
 
     /// <summary>
@@ -29,15 +35,23 @@ namespace Rise.App.TemplateSelectors
         where TContainer : DependencyObject
     {
         protected sealed override DataTemplate SelectTemplateCore(object item)
-            => SelectTemplateCore((TItem)item);
+        {
+            return SelectTemplateCore((TItem)item);
+        }
 
         protected sealed override DataTemplate SelectTemplateCore(object item, DependencyObject container)
-            => SelectTemplateCore((TItem)item, (TContainer)container);
+        {
+            return SelectTemplateCore((TItem)item, (TContainer)container);
+        }
 
         protected virtual DataTemplate SelectTemplateCore(TItem item)
-            => base.SelectTemplateCore(item);
+        {
+            return base.SelectTemplateCore(item);
+        }
 
         protected virtual DataTemplate SelectTemplateCore(TItem item, TContainer container)
-            => base.SelectTemplateCore(item, container);
+        {
+            return base.SelectTemplateCore(item, container);
+        }
     }
 }

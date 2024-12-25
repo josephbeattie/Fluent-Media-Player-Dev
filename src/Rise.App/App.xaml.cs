@@ -44,19 +44,19 @@ namespace Rise.App
         public static NavigationDataSource NavDataSource { get; } = new();
 
         // Lazy init
-        private readonly static Lazy<MediaPlaybackViewModel> _mpViewModel
+        private static readonly Lazy<MediaPlaybackViewModel> _mpViewModel
             = new(OnMPViewModelRequested);
         public static MediaPlaybackViewModel MPViewModel => _mpViewModel.Value;
 
-        private readonly static Lazy<LastFMViewModel> _lmViewModel
+        private static readonly Lazy<LastFMViewModel> _lmViewModel
             = new(OnLFMRequested);
         public static LastFMViewModel LMViewModel => _lmViewModel.Value;
 
-        private readonly static Lazy<StorageLibrary> _musicLibrary
+        private static readonly Lazy<StorageLibrary> _musicLibrary
             = new(OnStorageLibraryRequested(KnownLibraryId.Music));
         public static StorageLibrary MusicLibrary => _musicLibrary.Value;
 
-        private readonly static Lazy<StorageLibrary> _videoLibrary
+        private static readonly Lazy<StorageLibrary> _videoLibrary
             = new(OnStorageLibraryRequested(KnownLibraryId.Videos));
         public static StorageLibrary VideoLibrary => _videoLibrary.Value;
 
@@ -68,13 +68,19 @@ namespace Rise.App
         {
             int theme = SViewModel.Theme;
             if (theme == 0)
+            {
                 RequestedTheme = ApplicationTheme.Light;
+            }
             else if (theme == 1)
+            {
                 RequestedTheme = ApplicationTheme.Dark;
+            }
 
             // Reset the glaze color before startup if necessary
             if (SViewModel.SelectedGlaze == GlazeTypes.MediaThumbnail)
+            {
                 SViewModel.GlazeColors = Colors.Transparent;
+            }
 
             InitializeComponent();
 
@@ -106,7 +112,7 @@ namespace Rise.App
                         if (e is ToastNotificationActivatedEventArgs toastActivationArgs)
                         {
                             await ActivateAsync(e.PreviousExecutionState, false);
-                            var args = QueryString.Parse(toastActivationArgs.Argument);
+                            QueryString args = QueryString.Parse(toastActivationArgs.Argument);
 
                             // If the exception name equals to null,
                             // then the toast likely isn't popping up
@@ -126,16 +132,18 @@ namespace Rise.App
         {
             await ActivateAsync(args.PreviousExecutionState, false);
 
-            var files = args.Files.OfType<StorageFile>();
+            System.Collections.Generic.IEnumerable<StorageFile> files = args.Files.OfType<StorageFile>();
             await MPViewModel.PlayFilesAsync(files);
         }
 
         private async void OnDrop(object sender, DragEventArgs e)
         {
             if (!e.DataView.Contains(StandardDataFormats.StorageItems))
+            {
                 return;
+            }
 
-            var files = (await e.DataView.GetStorageItemsAsync()).OfType<StorageFile>();
+            System.Collections.Generic.IEnumerable<StorageFile> files = (await e.DataView.GetStorageItemsAsync()).OfType<StorageFile>();
             await MPViewModel.PlayFilesAsync(files);
         }
 
@@ -143,7 +151,7 @@ namespace Rise.App
         {
             e.AcceptedOperation = DataPackageOperation.Link;
 
-            var dragOverride = e.DragUIOverride;
+            DragUIOverride dragOverride = e.DragUIOverride;
             if (dragOverride != null)
             {
                 dragOverride.Caption = ResourceHelper.GetString("PlayMedia");
@@ -159,7 +167,7 @@ namespace Rise.App
         /// <param name="prelaunched">Whether the app was prelaunched.</param>
         private async Task ActivateAsync(ApplicationExecutionState previousState, bool prelaunched)
         {
-            var window = Window.Current;
+            Window window = Window.Current;
             if (window.Content is not Frame rootFrame)
             {
                 rootFrame = new Frame();
@@ -216,7 +224,7 @@ namespace Rise.App
         /// <param name="e">Details about the suspend request.</param>
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
+            SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
             try
             {
                 await SuspensionManager.SaveAsync();
@@ -237,18 +245,18 @@ namespace Rise.App
     {
         private static LastFMViewModel OnLFMRequested()
         {
-            var lfm = new LastFMViewModel(LastFM.Key, LastFM.Secret);
-            lfm.TryLoadCredentials(LastFM.VaultResource);
+            LastFMViewModel lfm = new(LastFM.Key, LastFM.Secret);
+            _ = lfm.TryLoadCredentials(LastFM.VaultResource);
             return lfm;
         }
 
         private static MediaPlaybackViewModel OnMPViewModelRequested()
         {
-            var mpvm = new MediaPlaybackViewModel();
+            MediaPlaybackViewModel mpvm = new();
 
             if (!EqualizerEffect.Initialized)
             {
-                var eq = EqualizerEffect.Current;
+                EqualizerEffect eq = EqualizerEffect.Current;
                 eq.InitializeBands(SViewModel.EqualizerGain);
                 eq.IsEnabled = SViewModel.EqualizerEnabled;
             }
@@ -259,7 +267,7 @@ namespace Rise.App
 
         private static StorageLibrary OnStorageLibraryRequested(KnownLibraryId id)
         {
-            var library = StorageLibrary.GetLibraryAsync(id).Get();
+            StorageLibrary library = StorageLibrary.GetLibraryAsync(id).Get();
             library.ChangeTracker.Enable();
             return library;
         }
@@ -274,12 +282,12 @@ namespace Rise.App
             if (SViewModel.IndexingFileTrackingEnabled)
             {
                 _ = await MusicLibrary.TrackBackgroundAsync($"{nameof(MusicLibrary)} background tracker");
-                var result = await VideoLibrary.TrackBackgroundAsync($"{nameof(VideoLibrary)} background tracker");
+                BackgroundTaskRegistrationStatus result = await VideoLibrary.TrackBackgroundAsync($"{nameof(VideoLibrary)} background tracker");
 
                 // If the trackers were registered successfully, we also have to
                 // track definition changes
-                if (result == BackgroundTaskRegistrationStatus.Successful ||
-                    result == BackgroundTaskRegistrationStatus.AlreadyExists)
+                if (result is BackgroundTaskRegistrationStatus.Successful or
+                    BackgroundTaskRegistrationStatus.AlreadyExists)
                 {
                     MusicLibrary.DefinitionChanged += OnLibraryDefinitionChanged;
                     VideoLibrary.DefinitionChanged += OnLibraryDefinitionChanged;
@@ -299,8 +307,8 @@ namespace Rise.App
 
         protected override async void OnBackgroundActivated(BackgroundActivatedEventArgs args)
         {
-            var instance = args.TaskInstance;
-            var deferral = instance.GetDeferral();
+            Windows.ApplicationModel.Background.IBackgroundTaskInstance instance = args.TaskInstance;
+            Windows.ApplicationModel.Background.BackgroundTaskDeferral deferral = instance.GetDeferral();
 
             await Repository.InitializeDatabaseAsync();
 
@@ -322,12 +330,16 @@ namespace Rise.App
         public static void RestartIndexingTimer()
         {
             if (IndexingTimer != null && IndexingTimer.Enabled)
+            {
                 IndexingTimer.Stop();
+            }
 
             if (!SViewModel.IndexingTimerEnabled)
+            {
                 return;
+            }
 
-            var span = TimeSpan.FromMinutes(SViewModel.IndexingTimerInterval);
+            TimeSpan span = TimeSpan.FromMinutes(SViewModel.IndexingTimerInterval);
             IndexingTimer = new(span.TotalMilliseconds)
             {
                 AutoReset = true
@@ -371,29 +383,29 @@ namespace Rise.App
             ToastNotification notification = new(content.GetXml());
             ToastNotificationManager.CreateToastNotifier().Show(notification);
 
-            var builder = new StringBuilder();
+            StringBuilder builder = new();
 
-            builder.Append(ResourceHelper.GetString("CrashDetails"));
-            builder.Append("\n\n");
-            builder.AppendLine("-----");
-            builder.Append("Exception type: ");
-            builder.AppendLine(e.GetType().ToString());
+            _ = builder.Append(ResourceHelper.GetString("CrashDetails"));
+            _ = builder.Append("\n\n");
+            _ = builder.AppendLine("-----");
+            _ = builder.Append("Exception type: ");
+            _ = builder.AppendLine(e.GetType().ToString());
 
-            builder.Append("HRESULT: ");
-            builder.AppendLine(e.HResult.ToString());
-            builder.Append("Source: ");
-            builder.AppendLine(e.Source);
+            _ = builder.Append("HRESULT: ");
+            _ = builder.AppendLine(e.HResult.ToString());
+            _ = builder.Append("Source: ");
+            _ = builder.AppendLine(e.Source);
 
-            builder.AppendLine();
+            _ = builder.AppendLine();
 
-            builder.AppendLine("Message:");
-            builder.AppendLine(e.Message);
-            builder.AppendLine();
-            builder.AppendLine("Stack trace:");
-            builder.AppendLine(e.StackTrace);
-            builder.AppendLine("-----");
+            _ = builder.AppendLine("Message:");
+            _ = builder.AppendLine(e.Message);
+            _ = builder.AppendLine();
+            _ = builder.AppendLine("Stack trace:");
+            _ = builder.AppendLine(e.StackTrace);
+            _ = builder.AppendLine("-----");
 
-            var notif = new BasicNotification(notifTitle, builder.ToString(), "\uE8BB");
+            BasicNotification notif = new(notifTitle, builder.ToString(), "\uE8BB");
 
             MViewModel.NBackend.Items.Add(notif);
             MViewModel.NBackend.Save();

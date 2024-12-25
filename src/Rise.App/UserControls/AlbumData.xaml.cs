@@ -148,7 +148,7 @@ namespace Rise.App.UserControls
         {
             if (d is AlbumData ctrl)
             {
-                var mode = (AlbumViewMode)e.NewValue;
+                AlbumViewMode mode = (AlbumViewMode)e.NewValue;
                 _ = VisualStateManager.GoToState(ctrl, mode.ToString(), true);
             }
         }

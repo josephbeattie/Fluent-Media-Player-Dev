@@ -20,17 +20,19 @@ namespace Rise.Data.Navigation
             get
             {
                 int menuCount = _menuItems.Count;
-                if (index >= menuCount)
-                    return _footerItems[index - menuCount];
-                return _menuItems[index];
+                return index >= menuCount ? _footerItems[index - menuCount] : _menuItems[index];
             }
             set
             {
                 int menuCount = _menuItems.Count;
                 if (index >= menuCount)
+                {
                     _footerItems[index - menuCount] = value;
+                }
                 else
+                {
                     _menuItems[index] = value;
+                }
             }
         }
 
@@ -51,8 +53,8 @@ namespace Rise.Data.Navigation
 
         public NavigationItemCollection()
         {
-            _menuItems = new();
-            _footerItems = new();
+            _menuItems = [];
+            _footerItems = [];
 
             MenuItems = new(_menuItems);
             FooterItems = new(_footerItems);
@@ -73,41 +75,49 @@ namespace Rise.Data.Navigation
         /// </summary>
         public ReadOnlyObservableCollection<NavigationItemBase> GetView(bool getFooter)
         {
-            if (getFooter)
-                return FooterItems;
-            return MenuItems;
+            return getFooter ? FooterItems : MenuItems;
         }
 
         public int IndexOf(NavigationItemBase item)
         {
-            if (item.IsFooter)
-                return _footerItems.IndexOf(item) + _menuItems.Count;
-            return _menuItems.IndexOf(item);
+            return item.IsFooter ? _footerItems.IndexOf(item) + _menuItems.Count : _menuItems.IndexOf(item);
         }
 
         public void Insert(int index, NavigationItemBase item)
         {
             if (item.IsFooter)
+            {
                 _footerItems.Insert(index - _menuItems.Count, item);
+            }
             else
+            {
                 _menuItems.Insert(index, item);
+            }
         }
 
         public void RemoveAt(int index)
         {
             int menuCount = _menuItems.Count;
             if (index >= menuCount)
+            {
                 _footerItems.RemoveAt(index - menuCount);
+            }
             else
+            {
                 _menuItems.RemoveAt(index);
+            }
         }
 
         public void Add(NavigationItemBase item)
         {
             if (item.IsFooter)
+            {
                 _footerItems.Add(item);
+            }
             else
+            {
                 _menuItems.Add(item);
+            }
         }
 
         public void Clear()
@@ -118,9 +128,7 @@ namespace Rise.Data.Navigation
 
         public bool Contains(NavigationItemBase item)
         {
-            if (item.IsFooter)
-                return _footerItems.Contains(item);
-            return _menuItems.Contains(item);
+            return item.IsFooter ? _footerItems.Contains(item) : _menuItems.Contains(item);
         }
 
         public void CopyTo(NavigationItemBase[] array, int arrayIndex)
@@ -131,16 +139,18 @@ namespace Rise.Data.Navigation
 
         public bool Remove(NavigationItemBase item)
         {
-            if (item.IsFooter)
-                return _footerItems.Remove(item);
-            return _menuItems.Remove(item);
+            return item.IsFooter ? _footerItems.Remove(item) : _menuItems.Remove(item);
         }
 
         public IEnumerator<NavigationItemBase> GetEnumerator()
-            => _menuItems.Concat(_footerItems).GetEnumerator();
+        {
+            return _menuItems.Concat(_footerItems).GetEnumerator();
+        }
 
         IEnumerator IEnumerable.GetEnumerator()
-            => _menuItems.Concat(_footerItems).GetEnumerator();
+        {
+            return _menuItems.Concat(_footerItems).GetEnumerator();
+        }
     }
 
     [JsonSerializable(typeof(IEnumerable<NavigationItemBase>))]

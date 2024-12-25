@@ -36,26 +36,20 @@ namespace Rise.Effects
             }
         }
 
-        public string HzText
+        public string HzText => Index switch
         {
-            get
-            {
-                return Index switch
-                {
-                    0 => "30",
-                    1 => "75",
-                    2 => "150",
-                    3 => "300",
-                    4 => "300",
-                    5 => "1.2k",
-                    6 => "2.5k",
-                    7 => "5k",
-                    8 => "10k",
-                    9 => "20k",
-                    _ => string.Empty,
-                };
-            }
-        }
+            0 => "30",
+            1 => "75",
+            2 => "150",
+            3 => "300",
+            4 => "300",
+            5 => "1.2k",
+            6 => "2.5k",
+            7 => "5k",
+            8 => "10k",
+            9 => "20k",
+            _ => string.Empty,
+        };
 
         public string FormattedHz => $"{HzText}Hz";
 

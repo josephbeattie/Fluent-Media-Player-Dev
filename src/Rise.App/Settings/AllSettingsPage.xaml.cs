@@ -132,9 +132,13 @@ namespace Rise.App.Settings
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
+            {
                 Frame.GoBack();
+            }
             else
+            {
                 _ = Frame.Navigate(typeof(MainPage));
+            }
         }
     }
 }

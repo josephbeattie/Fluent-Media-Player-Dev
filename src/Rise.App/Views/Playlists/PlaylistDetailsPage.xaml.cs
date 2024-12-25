@@ -82,20 +82,19 @@ namespace Rise.App.Views
 
         private void OnMainListLoaded(object sender, RoutedEventArgs e)
         {
-            var surface = LoadedImageSurface.StartLoadFromUri(new(SelectedPlaylist.Icon));
+            LoadedImageSurface surface = LoadedImageSurface.StartLoadFromUri(new(SelectedPlaylist.Icon));
             (_propSet, _backgroundVisual) = MainList.CreateParallaxGradientVisual(surface, BackgroundHost);
         }
 
         private async void OnPageLoaded(object sender, RoutedEventArgs e)
         {
-            if (MediaViewModel.Items.Any() && VideosViewModel.Items.Any())
-                PlaylistDuration.Text = await Task.Run(() => TimeSpanToString.GetShortFormat(TimeSpan.FromSeconds(MediaViewModel.Items.Cast<SongViewModel>().Select(s => s.Length).Aggregate((t, t1) => t + t1).TotalSeconds) + TimeSpan.FromSeconds(VideosViewModel.Items.Cast<VideoViewModel>().Select(v => v.Length).Aggregate((t, t1) => t + t1).TotalSeconds)));
-            else if (!MediaViewModel.Items.Any() && VideosViewModel.Items.Any())
-                PlaylistDuration.Text = await Task.Run(() => TimeSpanToString.GetShortFormat(TimeSpan.FromSeconds(VideosViewModel.Items.Cast<VideoViewModel>().Select(v => v.Length).Aggregate((t, t1) => t + t1).TotalSeconds)));
-            else if (MediaViewModel.Items.Any() && !VideosViewModel.Items.Any())
-                PlaylistDuration.Text = await Task.Run(() => TimeSpanToString.GetShortFormat(TimeSpan.FromSeconds(MediaViewModel.Items.Cast<SongViewModel>().Select(s => s.Length).Aggregate((t, t1) => t + t1).TotalSeconds)));
-            else
-                PlaylistDuration.Text = TimeSpan.Zero.ToString();
+            PlaylistDuration.Text = MediaViewModel.Items.Any() && VideosViewModel.Items.Any()
+                ? await Task.Run(() => TimeSpanToString.GetShortFormat(TimeSpan.FromSeconds(MediaViewModel.Items.Cast<SongViewModel>().Select(s => s.Length).Aggregate((t, t1) => t + t1).TotalSeconds) + TimeSpan.FromSeconds(VideosViewModel.Items.Cast<VideoViewModel>().Select(v => v.Length).Aggregate((t, t1) => t + t1).TotalSeconds)))
+                : !MediaViewModel.Items.Any() && VideosViewModel.Items.Any()
+                    ? await Task.Run(() => TimeSpanToString.GetShortFormat(TimeSpan.FromSeconds(VideosViewModel.Items.Cast<VideoViewModel>().Select(v => v.Length).Aggregate((t, t1) => t + t1).TotalSeconds)))
+                    : MediaViewModel.Items.Any() && !VideosViewModel.Items.Any()
+                                ? await Task.Run(() => TimeSpanToString.GetShortFormat(TimeSpan.FromSeconds(MediaViewModel.Items.Cast<SongViewModel>().Select(s => s.Length).Aggregate((t, t1) => t + t1).TotalSeconds)))
+                                : TimeSpan.Zero.ToString();
         }
     }
 
@@ -106,7 +105,9 @@ namespace Rise.App.Views
         private Task AddVideoToPlaylistAsync(PlaylistViewModel playlist)
         {
             if (playlist == null)
+            {
                 return PlaylistHelper.CreateNewPlaylistAsync(SelectedVideo);
+            }
 
             playlist.AddItem(SelectedVideo);
             return PBackend.SaveAsync();
@@ -119,29 +120,39 @@ namespace Rise.App.Views
         private void MainList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((e.OriginalSource as FrameworkElement).DataContext is SongViewModel song)
+            {
                 MediaViewModel.PlayFromItemCommand.Execute(song);
+            }
         }
 
         private void SongFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainList.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainList.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (SongViewModel)cont;
+            }
         }
 
         private void VideoFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainGrid.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainGrid.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedVideo = (VideoViewModel)cont;
+            }
         }
 
         [RelayCommand]
@@ -157,7 +168,9 @@ namespace Rise.App.Views
             {
                 await MPViewModel.PlaySingleItemAsync(video);
                 if (Window.Current.Content is Frame rootFrame)
-                    rootFrame.Navigate(typeof(NowPlayingPage));
+                {
+                    _ = rootFrame.Navigate(typeof(NowPlayingPage));
+                }
             }
         }
 
@@ -165,13 +178,15 @@ namespace Rise.App.Views
         {
             await MPViewModel.PlaySingleItemAsync(SelectedVideo);
             if (Window.Current.Content is Frame rootFrame)
+            {
                 _ = rootFrame.Navigate(typeof(NowPlayingPage));
+            }
         }
 
         private void RemoveSong_Click(object sender, RoutedEventArgs e)
         {
             SongViewModel song = (sender as Button).Tag as SongViewModel;
-            SelectedPlaylist.Songs.Remove(song);
+            _ = SelectedPlaylist.Songs.Remove(song);
         }
 
         private void MoveBottom_Click(object sender, RoutedEventArgs e)
@@ -180,9 +195,9 @@ namespace Rise.App.Views
 
             if ((SelectedPlaylist.Songs.IndexOf(song) + 1) < SelectedPlaylist.Songs.Count)
             {
-                var index = SelectedPlaylist.Songs.IndexOf(song);
+                int index = SelectedPlaylist.Songs.IndexOf(song);
 
-                SelectedPlaylist.Songs.Remove(song);
+                _ = SelectedPlaylist.Songs.Remove(song);
                 SelectedPlaylist.Songs.Insert(index + 1, song);
             }
         }
@@ -193,16 +208,20 @@ namespace Rise.App.Views
 
             if ((SelectedPlaylist.Songs.IndexOf(song) - 1) >= 0)
             {
-                var index = SelectedPlaylist.Songs.IndexOf(song);
+                int index = SelectedPlaylist.Songs.IndexOf(song);
 
-                SelectedPlaylist.Songs.Remove(song);
+                _ = SelectedPlaylist.Songs.Remove(song);
                 SelectedPlaylist.Songs.Insert(index - 1, song);
             }
         }
 
         private void BackgroundHost_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_backgroundVisual == null) return;
+            if (_backgroundVisual == null)
+            {
+                return;
+            }
+
             _backgroundVisual.Size = new Vector2((float)e.NewSize.Width, (float)BackgroundHost.Height);
         }
     }

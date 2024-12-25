@@ -34,11 +34,15 @@ namespace Rise.App.Views
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var (del, direction, alphabetical) = GetSavedSortPreferences("Videos");
+            (string del, SortDirection direction, bool alphabetical) = GetSavedSortPreferences("Videos");
             if (!string.IsNullOrEmpty(del))
+            {
                 CreateViewModel(del, direction, alphabetical, App.MViewModel.Videos);
+            }
             else
+            {
                 CreateViewModel("VideoTitle", SortDirection.Ascending, false, App.MViewModel.Videos);
+            }
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -56,19 +60,25 @@ namespace Rise.App.Views
             {
                 await MPViewModel.PlaySingleItemAsync(video);
                 if (Window.Current.Content is Frame rootFrame)
-                    rootFrame.Navigate(typeof(NowPlayingPage));
+                {
+                    _ = rootFrame.Navigate(typeof(NowPlayingPage));
+                }
             }
         }
 
         private void MenuFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainGrid.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainGrid.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (VideoViewModel)cont;
+            }
         }
 
         private void AskDiscy_Click(object sender, RoutedEventArgs e)

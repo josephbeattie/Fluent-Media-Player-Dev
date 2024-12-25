@@ -18,9 +18,14 @@ namespace Rise.Common.Attached
                 typeof(GridHelper), new PropertyMetadata(string.Empty, RowHeightsChanged));
 
         public static string GetRowHeights(Grid target)
-            => (string)target.GetValue(RowHeightsProperty);
+        {
+            return (string)target.GetValue(RowHeightsProperty);
+        }
+
         public static void SetRowHeights(Grid target, string value)
-            => target.SetValue(RowHeightsProperty, value);
+        {
+            target.SetValue(RowHeightsProperty, value);
+        }
 
         /// <summary>
         /// A property that contains a string based representation
@@ -31,42 +36,59 @@ namespace Rise.Common.Attached
                 typeof(GridHelper), new PropertyMetadata(string.Empty, ColumnWidthsChanged));
 
         public static string GetColumnWidths(Grid target)
-            => (string)target.GetValue(ColumnWidthsProperty);
+        {
+            return (string)target.GetValue(ColumnWidthsProperty);
+        }
+
         public static void SetColumnWidths(Grid target, string value)
-            => target.SetValue(ColumnWidthsProperty, value);
+        {
+            target.SetValue(ColumnWidthsProperty, value);
+        }
 
         private static void RowHeightsChanged(DependencyObject d,
             DependencyPropertyChangedEventArgs args)
         {
             if (d is not Grid grid)
+            {
                 return;
+            }
 
             grid.RowDefinitions.Clear();
 
-            var definitions = args.NewValue.ToString();
+            string definitions = args.NewValue.ToString();
             if (string.IsNullOrEmpty(definitions))
+            {
                 return;
+            }
 
-            var heights = definitions.Split(',');
-            foreach (var height in heights)
+            string[] heights = definitions.Split(',');
+            foreach (string height in heights)
+            {
                 AddDefinition(grid, height, true);
+            }
         }
 
         private static void ColumnWidthsChanged(DependencyObject d,
             DependencyPropertyChangedEventArgs args)
         {
             if (d is not Grid grid)
+            {
                 return;
+            }
 
             grid.ColumnDefinitions.Clear();
 
-            var definitions = args.NewValue.ToString();
+            string definitions = args.NewValue.ToString();
             if (string.IsNullOrEmpty(definitions))
+            {
                 return;
+            }
 
-            var widths = definitions.Split(',');
-            foreach (var width in widths)
+            string[] widths = definitions.Split(',');
+            foreach (string width in widths)
+            {
                 AddDefinition(grid, width, false);
+            }
         }
 
         public static void AddDefinition(Grid grid, string definition, bool isRow)
@@ -78,27 +100,29 @@ namespace Rise.Common.Attached
             }
             else if (definition.EndsWith("*"))
             {
-                var val = definition.Replace("*", "");
+                string val = definition.Replace("*", "");
                 if (string.IsNullOrEmpty(val))
+                {
                     val = "1";
+                }
 
-                var size = double.Parse(val);
+                double size = double.Parse(val);
                 length = new GridLength(size, GridUnitType.Star);
             }
             else
             {
-                var size = double.Parse(definition);
+                double size = double.Parse(definition);
                 length = new GridLength(size, GridUnitType.Pixel);
             }
 
             if (isRow)
             {
-                var def = new RowDefinition { Height = length };
+                RowDefinition def = new() { Height = length };
                 grid.RowDefinitions.Add(def);
             }
             else
             {
-                var def = new ColumnDefinition { Width = length };
+                ColumnDefinition def = new() { Width = length };
                 grid.ColumnDefinitions.Add(def);
             }
         }

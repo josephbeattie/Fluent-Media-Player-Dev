@@ -19,7 +19,7 @@ namespace Rise.Data.Collections;
 public sealed partial class GroupedCollectionView : ICollectionView, ISupportIncrementalLoading,
     INotifyPropertyChanged, IComparer<object>, IDisposable
 {
-    private readonly List<object> _view = new();
+    private readonly List<object> _view = [];
 
     private SortDescription _groupDescription;
     /// <summary>
@@ -35,10 +35,14 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
                 _groupDescription = value;
 
                 if (_groupDescription != null)
+                {
                     _collectionGroupComparer = new CollectionGroupComparer(value);
+                }
 
                 if (_deferCounter == 0)
+                {
                     OnSortDescriptionsChanged(CurrentItem);
+                }
 
                 OnPropertyChanged();
             }
@@ -52,7 +56,7 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
 
     private IComparer<object> _collectionGroupComparer;
 
-    private readonly ObservableVector<object> _collectionGroups = new();
+    private readonly ObservableVector<object> _collectionGroups = [];
     public IObservableVector<object> CollectionGroups => _collectionGroups;
 
     private readonly ObservableCollection<SortDescription> _sortDescriptions;
@@ -74,7 +78,9 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
             {
                 _filter = value;
                 if (_deferCounter == 0)
+                {
                     OnFilterChanged();
+                }
 
                 OnPropertyChanged();
             }
@@ -91,17 +97,25 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
         set
         {
             if (_source == value)
+            {
                 return;
+            }
 
             if (_source is INotifyCollectionChanged oldNcc)
+            {
                 oldNcc.CollectionChanged -= OnSourceCollectionChanged;
+            }
 
             _source = value;
             if (_source is INotifyCollectionChanged ncc)
+            {
                 ncc.CollectionChanged += OnSourceCollectionChanged;
+            }
 
             if (_deferCounter == 0)
+            {
                 OnSourceChanged();
+            }
 
             OnPropertyChanged();
         }
@@ -113,7 +127,7 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
     /// </summary>
     public GroupedCollectionView()
     {
-        _sortDescriptions = new();
+        _sortDescriptions = [];
         _sortDescriptions.CollectionChanged += OnSortDescriptionsChanged;
 
         _source = new List<object>();
@@ -125,7 +139,7 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
     /// </summary>
     public GroupedCollectionView(IList source)
     {
-        _sortDescriptions = new();
+        _sortDescriptions = [];
         _sortDescriptions.CollectionChanged += OnSortDescriptionsChanged;
 
         Source = source;
@@ -138,8 +152,8 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
     /// <returns>A tuple with the collection and the deferral.</returns>
     public static (GroupedCollectionView, Deferral) CreateDeferred()
     {
-        var collection = new GroupedCollectionView();
-        var deferral = collection.DeferRefresh();
+        GroupedCollectionView collection = [];
+        Deferral deferral = collection.DeferRefresh();
 
         return (collection, deferral);
     }
@@ -147,7 +161,9 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
     private void OnSortDescriptionsChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
         if (_deferCounter != 0)
+        {
             return;
+        }
 
         OnSortDescriptionsChanged(CurrentItem);
     }
@@ -155,29 +171,41 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
     private void OnSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
         if (_deferCounter != 0)
+        {
             return;
+        }
 
         switch (e.Action)
         {
             case NotifyCollectionChangedAction.Add:
                 if (e.NewItems?.Count == 1)
-                    OnItemAdded(e.NewStartingIndex, e.NewItems[0]);
+                {
+                    _ = OnItemAdded(e.NewStartingIndex, e.NewItems[0]);
+                }
                 else
+                {
                     OnSourceChanged();
+                }
+
                 break;
 
             case NotifyCollectionChangedAction.Remove:
                 if (e.OldItems?.Count == 1)
+                {
                     OnItemRemoved(e.OldStartingIndex, e.OldItems[0]);
+                }
                 else
+                {
                     OnSourceChanged();
+                }
+
                 break;
 
             case NotifyCollectionChangedAction.Replace:
                 if (e.OldItems?.Count == 1)
                 {
                     OnItemRemoved(e.OldStartingIndex, e.OldItems[0]);
-                    OnItemAdded(e.OldStartingIndex, e.NewItems[0]);
+                    _ = OnItemAdded(e.OldStartingIndex, e.NewItems[0]);
                 }
                 else
                 {
@@ -189,9 +217,9 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
                 if (e.OldItems?.Count == 1)
                 {
                     OnItemRemoved(e.OldStartingIndex, e.OldItems[0]);
-                    OnItemAdded(e.NewStartingIndex, e.OldItems[0]);
+                    _ = OnItemAdded(e.NewStartingIndex, e.OldItems[0]);
 
-                    MoveCurrentToIndex(e.NewStartingIndex);
+                    _ = MoveCurrentToIndex(e.NewStartingIndex);
                 }
                 else
                 {
@@ -209,13 +237,15 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
     {
         _incrementalSource = _source as ISupportIncrementalLoading;
 
-        var current = CurrentItem;
+        object current = CurrentItem;
         _view.Clear();
 
-        foreach (var item in _source)
+        foreach (object item in _source)
         {
             if (_filter != null && !_filter(item))
+            {
                 continue;
+            }
 
             _view.Add(item);
         }
@@ -232,10 +262,10 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
         {
             // The view is already sorted, so we just have to add
             // these groups to the collection
-            var grouped = _view.GroupBy(_groupDescription.ValueDelegate);
-            foreach (var group in grouped)
+            IEnumerable<IGrouping<object, object>> grouped = _view.GroupBy(_groupDescription.ValueDelegate);
+            foreach (IGrouping<object, object> group in grouped)
             {
-                var cvw = new CollectionViewGroup(group);
+                CollectionViewGroup cvw = new(group);
                 _collectionGroups.Add(cvw);
             }
         }
@@ -252,20 +282,23 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
         {
             for (int index = 0; index < _view.Count; index++)
             {
-                var item = _view.ElementAt(index);
-                if (_filter(item)) continue;
+                object item = _view.ElementAt(index);
+                if (_filter(item))
+                {
+                    continue;
+                }
 
                 RemoveFromView(index);
                 index--;
             }
         }
 
-        var viewHash = new HashSet<object>(_view);
+        HashSet<object> viewHash = new(_view);
 
         int viewIndex = 0;
         for (int index = 0; index < _source.Count; index++)
         {
-            var item = _source[index];
+            object item = _source[index];
             if (viewHash.Contains(item))
             {
                 viewIndex++;
@@ -273,7 +306,9 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
             }
 
             if (OnItemAdded(index, item, viewIndex))
+            {
                 viewIndex++;
+            }
         }
     }
 
@@ -283,14 +318,18 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
         {
             int result = _groupDescription.Compare(x, y);
             if (result != 0)
+            {
                 return result;
+            }
         }
 
-        foreach (var desc in _sortDescriptions)
+        foreach (SortDescription desc in _sortDescriptions)
         {
             int result = desc.Compare(x, y);
             if (result != 0)
+            {
                 return result;
+            }
         }
 
         return 0;
@@ -302,6 +341,8 @@ public sealed partial class GroupedCollectionView : ICollectionView, ISupportInc
 
         _sortDescriptions.CollectionChanged -= OnSortDescriptionsChanged;
         if (_source is INotifyCollectionChanged ncc)
+        {
             ncc.CollectionChanged -= OnSourceCollectionChanged;
+        }
     }
 }

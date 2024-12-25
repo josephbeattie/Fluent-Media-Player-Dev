@@ -26,9 +26,9 @@ namespace Rise.Data.ViewModels
         /// List of media items that are currently queued for playback.
         /// </summary>
         public ObservableCollection<MediaPlaybackItem> QueuedItems { get; private set; }
-            = new();
+            = [];
 
-        private readonly List<MediaPlayerEffect> _effects = new();
+        private readonly List<MediaPlayerEffect> _effects = [];
         /// <summary>
         /// Gets the added types of effects.
         /// </summary>
@@ -43,7 +43,7 @@ namespace Rise.Data.ViewModels
             get => _playingItem;
             private set
             {
-                Set(ref _playingItem, value);
+                _ = Set(ref _playingItem, value);
                 PlayingItemChanged?.Invoke(this, _playingItem);
             }
         }
@@ -57,7 +57,7 @@ namespace Rise.Data.ViewModels
             get => _playingItemProperties;
             private set
             {
-                Set(ref _playingItemProperties, value);
+                _ = Set(ref _playingItemProperties, value);
                 OnPropertyChanged(nameof(PlayingItemType));
             }
         }
@@ -81,8 +81,10 @@ namespace Rise.Data.ViewModels
                 if (_player == null)
                 {
                     _player = CreatePlayerInstance();
-                    foreach (var eff in _effects)
+                    foreach (MediaPlayerEffect eff in _effects)
+                    {
                         AddEffectInternal(eff);
+                    }
                 }
                 return _player;
             }
@@ -159,9 +161,13 @@ namespace Rise.Data.ViewModels
             if (_player != null)
             {
                 if (effect.IsAudioEffect)
+                {
                     _player.AddAudioEffect(effect.EffectClassType.FullName, effect.IsOptional, effect.Configuration);
+                }
                 else
+                {
                     _player.AddVideoEffect(effect.EffectClassType.FullName, effect.IsOptional, effect.Configuration);
+                }
             }
         }
 
@@ -171,7 +177,9 @@ namespace Rise.Data.ViewModels
         public void ClearEffects()
         {
             if (_playerCreated)
+            {
                 _player.RemoveAllEffects();
+            }
 
             _effects.Clear();
         }
@@ -251,11 +259,11 @@ namespace Rise.Data.ViewModels
             ResetPlayback();
 
             int i = 0;
-            foreach (var item in items)
+            foreach (IMediaItem item in items)
             {
                 token.ThrowIfCancellationRequested();
 
-                var playItem = await item.AsPlaybackItemAsync();
+                MediaPlaybackItem playItem = await item.AsPlaybackItemAsync();
                 PlaybackList.Items.Add(playItem);
 
                 // Start playback right after adding the first item...
@@ -273,16 +281,20 @@ namespace Rise.Data.ViewModels
         private async Task PlayFilesImpl(IEnumerable<StorageFile> files, CancellationToken token)
         {
             int i = 0;
-            foreach (var file in files)
+            foreach (StorageFile file in files)
             {
                 token.ThrowIfCancellationRequested();
                 string extension = file.FileType;
 
                 MediaPlaybackItem itm = null;
                 if (SupportedFileTypes.MusicFiles.Contains(extension))
+                {
                     itm = await file.GetSongAsync();
+                }
                 else if (SupportedFileTypes.VideoFiles.Contains(extension))
+                {
                     itm = await file.GetVideoAsync();
+                }
 
                 token.ThrowIfCancellationRequested();
                 if (itm != null)
@@ -317,8 +329,10 @@ namespace Rise.Data.ViewModels
         /// </summary>
         public void AddItemsToQueue(IEnumerable<MediaPlaybackItem> items)
         {
-            foreach (var itm in items)
+            foreach (MediaPlaybackItem itm in items)
+            {
                 PlaybackList.Items.Add(itm);
+            }
         }
 
         /// <summary>
@@ -361,7 +375,7 @@ namespace Rise.Data.ViewModels
                 return;
             }
 
-            var itm = args.NewItem;
+            MediaPlaybackItem itm = args.NewItem;
             if (itm != null)
             {
                 PlayingItemProperties = NowPlayingDisplayProperties.GetFromPlaybackItem(itm);
@@ -375,7 +389,7 @@ namespace Rise.Data.ViewModels
             switch (args.CollectionChange)
             {
                 case CollectionChange.ItemInserted:
-                    var itm = sender[index];
+                    MediaPlaybackItem itm = sender[index];
                     QueuedItems.Insert(index, itm);
                     break;
 
@@ -410,8 +424,10 @@ namespace Rise.Data.ViewModels
         /// </summary>
         private MediaPlayer CreatePlayerInstance()
         {
-            var player = new MediaPlayer();
-            player.Source = PlaybackList;
+            MediaPlayer player = new()
+            {
+                Source = PlaybackList
+            };
 
             PlayerCreated = true;
             MediaPlayerRecreated?.Invoke(this, player);

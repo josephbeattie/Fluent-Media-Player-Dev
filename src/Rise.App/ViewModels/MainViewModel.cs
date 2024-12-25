@@ -70,11 +70,8 @@ namespace Rise.App.ViewModels
         private static SafeObservableCollection<TOutput> CreateCollection<TEntity, TOutput>(Converter<TEntity, TOutput> converter)
             where TEntity : DbObject, new()
         {
-            var items = Repository.GetItems<TEntity>();
-            if (!items.Any())
-                return new();
-
-            return new(items.ConvertAll(converter));
+            List<TEntity> items = Repository.GetItems<TEntity>();
+            return !items.Any() ? ([]) : new(items.ConvertAll(converter));
         }
     }
 
@@ -165,25 +162,29 @@ namespace Rise.App.ViewModels
 
         private async Task IndexLibrariesAsync(CancellationToken token)
         {
-            var songsTask = Task.Run(async () =>
+            Task songsTask = Task.Run(async () =>
             {
-                await foreach (var song in KnownFolders.MusicLibrary.IndexWithPrefetchAsync(QueryPresets.SongQueryOptions,
+                await foreach (StorageFile song in KnownFolders.MusicLibrary.IndexWithPrefetchAsync(QueryPresets.SongQueryOptions,
                     PropertyPrefetchOptions.MusicProperties, SongProperties.DiscProperties))
                 {
                     if (await SaveMusicModelsAsync(song, true).ConfigureAwait(false))
-                        this._indexedSongs++;
+                    {
+                        _indexedSongs++;
+                    }
 
                     IndexedMedia++;
                 }
             }, token);
 
-            var videosTask = Task.Run(async () =>
+            Task videosTask = Task.Run(async () =>
             {
-                await foreach (var video in KnownFolders.VideosLibrary.IndexWithPrefetchAsync(QueryPresets.VideoQueryOptions,
+                await foreach (StorageFile video in KnownFolders.VideosLibrary.IndexWithPrefetchAsync(QueryPresets.VideoQueryOptions,
                     PropertyPrefetchOptions.VideoProperties))
                 {
                     if (await SaveVideoModelAsync(video, true).ConfigureAwait(false))
-                        this._indexedVideos++;
+                    {
+                        _indexedVideos++;
+                    }
 
                     IndexedMedia++;
                 }
@@ -198,32 +199,42 @@ namespace Rise.App.ViewModels
     {
         public async Task FetchArtistsArtAsync(CancellationToken token = default)
         {
-            using var wc = new HttpClient(new HttpClientHandler()
+            using HttpClient wc = new(new HttpClientHandler()
             {
                 Proxy = null,
                 UseProxy = false
             });
 
             if (!WebHelpers.IsInternetAccessAvailable())
+            {
                 return;
+            }
 
-            foreach (var artist in Artists)
+            foreach (ArtistViewModel artist in Artists)
             {
                 if (token != null && token.IsCancellationRequested)
+                {
                     return;
+                }
 
                 // The ms-appx prefix is used for files within the app
                 // bundle, and if it isn't present, it means a custom
                 // image has already been applied
                 if (!artist.Picture.StartsWith("ms-appx"))
+                {
                     return;
+                }
 
                 if (!WebHelpers.IsInternetAccessAvailable())
+                {
                     return;
+                }
 
                 string pic = await GetArtistImageAsync(artist.Name, wc).ConfigureAwait(false);
                 if (!string.IsNullOrEmpty(pic))
+                {
                     artist.Picture = pic;
+                }
             }
         }
 
@@ -249,12 +260,14 @@ namespace Rise.App.ViewModels
 
                     string xmlStr = await wc.GetStringAsync(m_strFilePath);
 
-                    var xmlDoc = new XmlDocument();
+                    XmlDocument xmlDoc = new();
                     xmlDoc.LoadXml(xmlStr);
 
-                    var node = xmlDoc.DocumentElement.SelectSingleNode("/root/data/artist/picture_medium");
+                    XmlNode node = xmlDoc.DocumentElement.SelectSingleNode("/root/data/artist/picture_medium");
                     if (node != null)
+                    {
                         return node.InnerText.Replace("<![CDATA[ ", string.Empty).Replace(" ]]>", string.Empty);
+                    }
                 }
                 catch { }
             }
@@ -274,13 +287,13 @@ namespace Rise.App.ViewModels
         /// otherwise false.</returns>
         public async Task<bool> SaveMusicModelsAsync(StorageFile file, bool queue = false)
         {
-            var song = await Song.GetFromFileAsync(file, false);
+            Song song = await Song.GetFromFileAsync(file, false);
 
             // Check if song exists.
             bool songExists = Songs.Any(s => s.Model.Equals(song));
 
             // Check if album exists.
-            var album = Albums.FirstOrDefault(a => a.Model.Title == song.Album);
+            AlbumViewModel album = Albums.FirstOrDefault(a => a.Model.Title == song.Album);
 
             // Check if artist exists.
             bool artistExists = Artists.Any(a => a.Model.Name == song.Artist);
@@ -290,7 +303,7 @@ namespace Rise.App.ViewModels
 
             string albumArtist = song.AlbumArtist.ReplaceIfNullOrWhiteSpace(song.Artist);
 
-            List<Task> tasks = new();
+            List<Task> tasks = [];
 
             // If album isn't there already, add it to the database.
             if (album == null)
@@ -305,11 +318,13 @@ namespace Rise.App.ViewModels
                 };
 
                 string filename = album.Model.Id.ToString();
-                var (saved, path) = await Song.TrySaveThumbnailAsync(file, filename);
+                (bool saved, string path) = await Song.TrySaveThumbnailAsync(file, filename);
 
                 song.Thumbnail = path;
                 if (saved)
+                {
                     album.Thumbnail = path;
+                }
 
                 tasks.Add(album.SaveAsync(queue));
             }
@@ -338,7 +353,7 @@ namespace Rise.App.ViewModels
                 else
                 {
                     string filename = album.Model.Id.ToString();
-                    var (saved, path) = await Song.TrySaveThumbnailAsync(file, filename);
+                    (bool saved, string path) = await Song.TrySaveThumbnailAsync(file, filename);
 
                     song.Thumbnail = path;
                     if (saved)
@@ -349,7 +364,9 @@ namespace Rise.App.ViewModels
                 }
 
                 if (save)
+                {
                     tasks.Add(album.SaveAsync(queue));
+                }
             }
 
             // If artist isn't there already, add it to the database.
@@ -414,7 +431,7 @@ namespace Rise.App.ViewModels
         /// otherwise false.</returns>
         public async Task<bool> SaveVideoModelAsync(StorageFile file, bool queue = false)
         {
-            var video = await Video.GetFromFileAsync(file);
+            Video video = await Video.GetFromFileAsync(file);
             bool videoExists = Videos.
                 Any(v => v.Model.Equals(video));
 
@@ -442,19 +459,23 @@ namespace Rise.App.ViewModels
         {
             _ = Songs.Remove(song);
             if (queue)
+            {
                 _ = Repository.QueueRemove(song.Model);
+            }
             else
+            {
                 _ = await Repository.DeleteAsync(song.Model);
+            }
 
-            var artist = Artists.FirstOrDefault(a => a.Model.Name == song.Model.Artist);
+            ArtistViewModel artist = Artists.FirstOrDefault(a => a.Model.Name == song.Model.Artist);
             _ = await TryRemoveArtistAsync(artist, queue);
 
-            var album = Albums.FirstOrDefault(a => a.Model.Title == song.Model.Album);
+            AlbumViewModel album = Albums.FirstOrDefault(a => a.Model.Title == song.Model.Album);
             bool removedAlbum = await TryRemoveAlbumAsync(album, queue);
 
             if (removedAlbum)
             {
-                var albumArtist = Artists.FirstOrDefault(a => a.Model.Name == song.Model.AlbumArtist);
+                ArtistViewModel albumArtist = Artists.FirstOrDefault(a => a.Model.Name == song.Model.AlbumArtist);
                 _ = await TryRemoveArtistAsync(albumArtist, queue);
             }
         }
@@ -474,9 +495,13 @@ namespace Rise.App.ViewModels
             {
                 _ = Albums.Remove(album);
                 if (queue)
+                {
                     _ = Repository.QueueRemove(album.Model);
+                }
                 else
+                {
                     _ = await Repository.DeleteAsync(album.Model);
+                }
             }
 
             return hasNoTracks;
@@ -492,17 +517,21 @@ namespace Rise.App.ViewModels
         /// <returns>true if the artist was removed, false otherwise.</returns>
         public async Task<bool> TryRemoveArtistAsync(ArtistViewModel artist, bool queue)
         {
-            var songCount = Songs.Count(s => s.Artist == artist.Model.Name);
-            var albumCount = Albums.Count(a => a.Artist == artist.Model.Name);
+            int songCount = Songs.Count(s => s.Artist == artist.Model.Name);
+            int albumCount = Albums.Count(a => a.Artist == artist.Model.Name);
 
             bool hasNoMedia = songCount == 0 && albumCount == 0;
             if (hasNoMedia)
             {
                 _ = Artists.Remove(artist);
                 if (queue)
+                {
                     _ = Repository.QueueRemove(artist.Model);
+                }
                 else
+                {
                     _ = await Repository.DeleteAsync(artist.Model);
+                }
             }
 
             return hasNoMedia;
@@ -535,48 +564,60 @@ namespace Rise.App.ViewModels
 
         private async Task HandleMusicLibraryChangesAsync(bool queue = false)
         {
-            await using var changes = await App.MusicLibrary.GetLibraryChangesAsync();
+            await using StorageLibraryChangeResult changes = await App.MusicLibrary.GetLibraryChangesAsync();
 
             if (changes.Status != StorageLibraryChangeStatus.HasChange)
+            {
                 return;
+            }
 
-            foreach (var addedItem in changes.AddedItems)
+            foreach (StorageFile addedItem in changes.AddedItems)
             {
                 _ = await SaveMusicModelsAsync(addedItem, queue);
             }
 
-            foreach (var removedItemPath in changes.RemovedItems)
+            foreach (string removedItemPath in changes.RemovedItems)
             {
                 if (string.IsNullOrEmpty(removedItemPath))
+                {
                     continue;
+                }
 
-                var song = Songs.FirstOrDefault(s => s.Location.Equals(removedItemPath, StringComparison.OrdinalIgnoreCase));
+                SongViewModel song = Songs.FirstOrDefault(s => s.Location.Equals(removedItemPath, StringComparison.OrdinalIgnoreCase));
                 if (song != null)
+                {
                     await RemoveSongAsync(song, queue);
+                }
             }
         }
 
         private async Task HandleVideoLibraryChangesAsync(bool queue = false)
         {
-            await using var changes = await App.VideoLibrary.GetLibraryChangesAsync();
+            await using StorageLibraryChangeResult changes = await App.VideoLibrary.GetLibraryChangesAsync();
 
             if (changes.Status != StorageLibraryChangeStatus.HasChange)
+            {
                 return;
+            }
 
-            foreach (var addedItem in changes.AddedItems)
+            foreach (StorageFile addedItem in changes.AddedItems)
             {
                 _ = await SaveVideoModelAsync(addedItem, queue);
             }
 
-            foreach (var removedItemPath in changes.RemovedItems)
+            foreach (string removedItemPath in changes.RemovedItems)
             {
                 if (string.IsNullOrEmpty(removedItemPath))
+                {
                     continue;
+                }
 
-                var video = App.MViewModel.Videos.FirstOrDefault(v => v.Location.Equals(removedItemPath, StringComparison.OrdinalIgnoreCase));
+                VideoViewModel video = App.MViewModel.Videos.FirstOrDefault(v => v.Location.Equals(removedItemPath, StringComparison.OrdinalIgnoreCase));
 
                 if (video == null)
+                {
                     continue;
+                }
 
                 await video.DeleteAsync(queue);
             }
@@ -587,10 +628,10 @@ namespace Rise.App.ViewModels
         /// </summary>
         public async Task CheckMusicLibraryDuplicatesAsync()
         {
-            List<SongViewModel> songDuplicates = new();
-            List<ArtistViewModel> artistDuplicates = new();
-            List<AlbumViewModel> albumDuplicates = new();
-            List<GenreViewModel> genreDuplicates = new();
+            List<SongViewModel> songDuplicates = [];
+            List<ArtistViewModel> artistDuplicates = [];
+            List<AlbumViewModel> albumDuplicates = [];
+            List<GenreViewModel> genreDuplicates = [];
 
             // Check for duplicates and remove if any duplicate is found.
             for (int i = 0; i < Songs.Count; i++)
@@ -598,7 +639,9 @@ namespace Rise.App.ViewModels
                 for (int j = i + 1; j < Songs.Count; j++)
                 {
                     if (Songs[i].Location == Songs[j].Location)
+                    {
                         songDuplicates.Add(Songs[j]);
+                    }
                 }
             }
 
@@ -607,7 +650,9 @@ namespace Rise.App.ViewModels
                 for (int j = i + 1; j < Artists.Count; j++)
                 {
                     if (Artists[i].Name.Equals(Artists[j].Name))
+                    {
                         artistDuplicates.Add(Artists[j]);
+                    }
                 }
             }
 
@@ -616,7 +661,9 @@ namespace Rise.App.ViewModels
                 for (int j = i + 1; j < Albums.Count; j++)
                 {
                     if (Albums[i].Title.Equals(Albums[j].Title))
+                    {
                         albumDuplicates.Add(Albums[j]);
+                    }
                 }
             }
 
@@ -625,26 +672,30 @@ namespace Rise.App.ViewModels
                 for (int j = i + 1; j < Genres.Count; j++)
                 {
                     if (Genres[i].Name.Equals(Genres[j].Name))
+                    {
                         genreDuplicates.Add(Genres[j]);
+                    }
                 }
             }
 
-            foreach (var song in songDuplicates)
+            foreach (SongViewModel song in songDuplicates)
+            {
                 await RemoveSongAsync(song, true);
+            }
 
-            foreach (var artist in artistDuplicates)
+            foreach (ArtistViewModel artist in artistDuplicates)
             {
                 _ = Artists.Remove(artist);
                 _ = Repository.QueueRemove(artist.Model);
             }
 
-            foreach (var album in albumDuplicates)
+            foreach (AlbumViewModel album in albumDuplicates)
             {
                 _ = Albums.Remove(album);
                 _ = Repository.QueueRemove(album.Model);
             }
 
-            foreach (var genre in genreDuplicates)
+            foreach (GenreViewModel genre in genreDuplicates)
             {
                 _ = Genres.Remove(genre);
                 _ = Repository.QueueRemove(genre.Model);
@@ -657,20 +708,26 @@ namespace Rise.App.ViewModels
         public async Task CheckVideoLibraryDuplicatesAsync(CancellationToken token = default)
         {
             if (token.IsCancellationRequested)
+            {
                 return;
+            }
 
-            List<VideoViewModel> duplicates = new();
+            List<VideoViewModel> duplicates = [];
 
             // Check for duplicates and remove if any duplicate is found.
             for (int i = 0; i < Videos.Count; i++)
             {
                 if (token.IsCancellationRequested)
+                {
                     return;
+                }
 
                 for (int j = i + 1; j < Videos.Count; j++)
                 {
                     if (token.IsCancellationRequested)
+                    {
                         return;
+                    }
 
                     if (Videos[i].Location == Videos[j].Location)
                     {
@@ -682,7 +739,9 @@ namespace Rise.App.ViewModels
             foreach (VideoViewModel video in duplicates)
             {
                 if (token.IsCancellationRequested)
+                {
                     return;
+                }
 
                 await video.DeleteAsync(true);
             }

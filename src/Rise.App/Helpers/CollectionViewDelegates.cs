@@ -11,7 +11,7 @@ namespace Rise.App.Helpers
     /// </summary>
     public static partial class CollectionViewDelegates
     {
-        private readonly static Dictionary<string, Func<object, object>> _delegates = new()
+        private static readonly Dictionary<string, Func<object, object>> _delegates = new()
         {
             { "SongDisc", s => ((SongViewModel)s).Disc },
             { "SongTrack", s => ((SongViewModel)s).Track },
@@ -49,10 +49,14 @@ namespace Rise.App.Helpers
         };
 
         public static Func<object, object> GetDelegate(string key)
-            => _delegates[key];
+        {
+            return _delegates[key];
+        }
 
         public static bool TryGetDelegate(string key, out Func<object, object> del)
-            => _delegates.TryGetValue(key, out del);
+        {
+            return _delegates.TryGetValue(key, out del);
+        }
     }
 
     // Grouping delegates
@@ -61,29 +65,32 @@ namespace Rise.App.Helpers
         /// <summary>
         /// Character groupings for the current language.
         /// </summary>
-        public readonly static CharacterGroupings CharacterGroupings = new();
+        public static readonly CharacterGroupings CharacterGroupings = new();
 
         /// <summary>
         /// Gets all labels for the character groupings.
         /// </summary>
-        public readonly static IEnumerable<string> GroupingLabels = CharacterGroupings.Select(g => g.Label);
+        public static readonly IEnumerable<string> GroupingLabels = CharacterGroupings.Select(g => g.Label);
 
         private static object GSongTitle(object s)
-            => ToGroupHeader(((SongViewModel)s).Title);
+        {
+            return ToGroupHeader(((SongViewModel)s).Title);
+        }
 
         private static object GAlbumTitle(object a)
-            => ToGroupHeader(((AlbumViewModel)a).Title);
+        {
+            return ToGroupHeader(((AlbumViewModel)a).Title);
+        }
 
         private static object GArtistName(object a)
-            => ToGroupHeader(((ArtistViewModel)a).Name);
+        {
+            return ToGroupHeader(((ArtistViewModel)a).Name);
+        }
 
         private static string ToGroupHeader(string text)
         {
             string key = CharacterGroupings.Lookup(text);
-            if (!GroupingLabels.Contains(key))
-                return string.Empty;
-
-            return key;
+            return !GroupingLabels.Contains(key) ? string.Empty : key;
         }
     }
 }

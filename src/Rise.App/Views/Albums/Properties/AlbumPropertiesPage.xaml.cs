@@ -23,7 +23,9 @@ namespace Rise.App.Views.Albums.Properties
         }
 
         public static Task<bool> TryShowAsync(AlbumViewModel album)
-            => ViewHelpers.OpenViewAsync<AlbumPropertiesPage>(album, new(380, 500));
+        {
+            return ViewHelpers.OpenViewAsync<AlbumPropertiesPage>(album, new(380, 500));
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -38,11 +40,11 @@ namespace Rise.App.Views.Albums.Properties
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            var originalAlbum = await Repository.GetItemAsync<Album>(Album.Model.Id);
+            Album originalAlbum = await Repository.GetItemAsync<Album>(Album.Model.Id);
 
             await Album.SaveAsync();
 
-            foreach (var song in App.MViewModel.Songs.Where(s => s.Album == originalAlbum.Title))
+            foreach (SongViewModel song in App.MViewModel.Songs.Where(s => s.Album == originalAlbum.Title))
             {
                 song.AlbumArtist = Album.Artist;
                 song.Genres = Album.Genres;
@@ -58,7 +60,7 @@ namespace Rise.App.Views.Albums.Properties
 
         private void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            var selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
+            Microsoft.UI.Xaml.Controls.NavigationViewItem selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
             if (selectedItem != null)
             {
                 string selectedItemTag = selectedItem.Tag as string;

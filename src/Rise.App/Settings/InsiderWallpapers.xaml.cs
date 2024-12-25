@@ -1,7 +1,6 @@
 ﻿using Rise.Common.Extensions.Markup;
 using Rise.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -12,7 +11,7 @@ namespace Rise.App.Settings
 {
     public sealed partial class InsiderWallpapers : Page
     {
-        private readonly ObservableCollection<Wallpaper> Walls = new();
+        private readonly ObservableCollection<Wallpaper> Walls = [];
 
         public InsiderWallpapers()
         {
@@ -67,7 +66,7 @@ namespace Rise.App.Settings
                 string format = ResourceHelper.GetString("XofY");
                 SelectedWall.Text = string.Format(format, index + 1, Walls.Count);
 
-                var selected = Walls[index];
+                Wallpaper selected = Walls[index];
                 WallName.Text = selected.Name;
                 WallShortDesc.Text = selected.ShortDescription;
                 WallDesc.Text = selected.Description;
@@ -76,22 +75,24 @@ namespace Rise.App.Settings
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var item = WallsView.SelectedItem as Wallpaper;
-            var picFile = await StorageFile.
+            Wallpaper item = WallsView.SelectedItem as Wallpaper;
+            StorageFile picFile = await StorageFile.
                 GetFileFromApplicationUriAsync(new(item.Source));
 
-            var savePicker = new FileSavePicker
+            FileSavePicker savePicker = new()
             {
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary,
                 SuggestedFileName = item.Name
             };
 
             string fileFormat = ResourceHelper.GetString("Image");
-            savePicker.FileTypeChoices[fileFormat] = new List<string>() { ".png" };
+            savePicker.FileTypeChoices[fileFormat] = [".png"];
 
-            var file = await savePicker.PickSaveFileAsync();
+            StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
+            {
                 await picFile.CopyAndReplaceAsync(file);
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Rise.App.Dialogs
         {
             if (!EqualizerEffect.Initialized)
             {
-                var eq = EqualizerEffect.Current;
+                EqualizerEffect eq = EqualizerEffect.Current;
                 eq.InitializeBands(SViewModel.EqualizerGain);
                 eq.IsEnabled = SViewModel.EqualizerEnabled;
             }
@@ -37,9 +37,11 @@ namespace Rise.App.Dialogs
         {
             SViewModel.EqualizerEnabled = Effect.IsEnabled;
 
-            var gains = new float[10];
+            float[] gains = new float[10];
             for (int i = 0; i < 10; i++)
+            {
                 gains[i] = Effect.Bands[i].Gain;
+            }
 
             SViewModel.EqualizerGain = gains;
             Effect.UpdateAllBands();
@@ -53,14 +55,18 @@ namespace Rise.App.Dialogs
             SViewModel.SelectedEqualizerPreset = _initialPreset;
 
             for (int i = 0; i < 10; i++)
+            {
                 Effect.Bands[i].Gain = SViewModel.EqualizerGain[i];
+            }
         }
 
         private void OnPresetChanged(object sender, SelectionChangedEventArgs e)
         {
             int newPreset = (sender as ComboBox).SelectedIndex;
             if (_currPreset == newPreset)
+            {
                 return;
+            }
 
             _currPreset = newPreset;
 
@@ -90,14 +96,18 @@ namespace Rise.App.Dialogs
             }
 
             for (int i = 0; i < 10; i++)
+            {
                 Effect.Bands[i].Gain = gains[i];
+            }
         }
 
         private void OnBandGainChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            var elm = sender as FrameworkElement;
+            FrameworkElement elm = sender as FrameworkElement;
             if (elm?.DataContext is EqualizerBand band)
+            {
                 Effect.UpdateBand(band.Index);
+            }
         }
     }
 }

@@ -54,12 +54,14 @@ namespace Rise.App.Views
 
             CreateViewModel("SongTitle", SortDirection.Ascending, false, IsGenre, MViewModel.Songs);
             bool IsGenre(object s)
-                => ((SongViewModel)s).Genres == SelectedGenre.Name;
+            {
+                return ((SongViewModel)s).Genres == SelectedGenre.Name;
+            }
         }
 
         private void OnMainListLoaded(object sender, RoutedEventArgs e)
         {
-            var surface = LoadedImageSurface.StartLoadFromUri(new("ms-appx:///Assets/BlankGenre.png"));
+            LoadedImageSurface surface = LoadedImageSurface.StartLoadFromUri(new("ms-appx:///Assets/BlankGenre.png"));
             (_propSet, _backgroundVisual) = MainList.CreateParallaxGradientVisual(surface, BackgroundHost);
         }
     }
@@ -70,23 +72,33 @@ namespace Rise.App.Views
         private void MainList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((e.OriginalSource as FrameworkElement).DataContext is SongViewModel song)
+            {
                 MediaViewModel.PlayFromItemCommand.Execute(song);
+            }
         }
 
         private void MenuFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainList.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainList.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (SongViewModel)cont;
+            }
         }
 
         private void BackgroundHost_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_backgroundVisual == null) return;
+            if (_backgroundVisual == null)
+            {
+                return;
+            }
+
             _backgroundVisual.Size = new Vector2((float)e.NewSize.Width, (float)BackgroundHost.Height);
         }
     }

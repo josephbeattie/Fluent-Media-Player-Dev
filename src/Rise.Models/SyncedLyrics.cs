@@ -102,7 +102,9 @@ namespace Rise.Models
         }
 
         public override string ToString()
-            => $"{Text} - {TimeSpan}";
+        {
+            return $"{Text} - {TimeSpan}";
+        }
     }
 
     public sealed class SyncedLyricTime
@@ -121,10 +123,7 @@ namespace Rise.Models
 
         public TimeSpan ToTimeSpan()
         {
-            if (TimeSpan.TryParse($"00:{Minutes}:{Seconds}", out var timeSpan))
-                return timeSpan;
-
-            return TimeSpan.Zero;
+            return TimeSpan.TryParse($"00:{Minutes}:{Seconds}", out TimeSpan timeSpan) ? timeSpan : TimeSpan.Zero;
         }
     }
 
@@ -143,7 +142,9 @@ namespace Rise.Models
     public sealed partial class SyncedLyrics
     {
         public static SyncedLyrics FromJson(string json)
-            => JsonConvert.DeserializeObject<SyncedLyrics>(json, SyncedConverter.Settings);
+        {
+            return JsonConvert.DeserializeObject<SyncedLyrics>(json, SyncedConverter.Settings);
+        }
     }
 
     internal static class SyncedConverter

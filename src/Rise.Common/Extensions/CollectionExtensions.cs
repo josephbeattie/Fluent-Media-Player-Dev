@@ -32,7 +32,7 @@ namespace Rise.Common.Extensions
         /// <param name="items">Items to move.</param>
         public static void MoveItemsToEnd<T>(this IList<T> list, T[] items)
         {
-            foreach (var item in items)
+            foreach (T item in items)
             {
                 int moveFrom = list.IndexOf(item);
                 list.Move(moveFrom, list.Count - 1);
@@ -47,10 +47,14 @@ namespace Rise.Common.Extensions
             int startIndex, int endIndex)
         {
             if (startIndex < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(startIndex));
+            }
 
             if (endIndex > list.Count - 1)
+            {
                 throw new ArgumentOutOfRangeException(nameof(endIndex));
+            }
 
             for (int i = startIndex; i <= endIndex; i++)
             {
@@ -99,7 +103,9 @@ namespace Rise.Common.Extensions
         public static int BinarySearch<T>(this IList<T> list, T value, IComparer<T> comparer = null)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException(nameof(list));
+            }
 
             comparer ??= Comparer<T>.Default;
 
@@ -112,11 +118,17 @@ namespace Rise.Common.Extensions
                 int comparisonResult = comparer.Compare(list[middle], value);
 
                 if (comparisonResult == 0)
+                {
                     return middle;
+                }
                 else if (comparisonResult < 0)
+                {
                     lower = middle + 1;
+                }
                 else
+                {
                     upper = middle - 1;
+                }
             }
 
             return ~lower;

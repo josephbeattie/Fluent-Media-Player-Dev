@@ -23,7 +23,7 @@ namespace Rise.App.Views
         private void RemoveSong_Click(object sender, RoutedEventArgs e)
         {
             VideoViewModel video = (sender as Button).Tag as VideoViewModel;
-            Playlist.Videos.Remove(video);
+            _ = Playlist.Videos.Remove(video);
         }
 
         private void MoveBottom_Click(object sender, RoutedEventArgs e)
@@ -32,9 +32,9 @@ namespace Rise.App.Views
 
             if ((Playlist.Videos.IndexOf(video) + 1) < Playlist.Songs.Count)
             {
-                var index = Playlist.Videos.IndexOf(video);
+                int index = Playlist.Videos.IndexOf(video);
 
-                Playlist.Videos.Remove(video);
+                _ = Playlist.Videos.Remove(video);
                 Playlist.Videos.Insert(index + 1, video);
             }
         }
@@ -45,9 +45,9 @@ namespace Rise.App.Views
 
             if ((Playlist.Videos.IndexOf(video) - 1) >= 0)
             {
-                var index = Playlist.Videos.IndexOf(video);
+                int index = Playlist.Videos.IndexOf(video);
 
-                Playlist.Videos.Remove(video);
+                _ = Playlist.Videos.Remove(video);
                 Playlist.Videos.Insert(index - 1, video);
             }
         }

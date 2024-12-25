@@ -10,11 +10,11 @@ namespace Rise.App.Settings
     {
         private SettingsViewModel ViewModel => App.SViewModel;
 
-        private readonly List<string> Deletion = new()
-        {
+        private readonly List<string> Deletion =
+        [
             ResourceHelper.GetString("RemoveFromApp"),
             ResourceHelper.GetString("RemoveFromDevice")
-        };
+        ];
 
         public MediaLibraryPage()
         {
@@ -25,7 +25,7 @@ namespace Rise.App.Settings
         {
             AllSettingsPage.Current.MainSettingsHeader.Text = ResourceHelper.GetString("/Settings/MediaLibraryManageFoldersTitle");
             AllSettingsPage.Current.MainSettingsHeaderIcon.Glyph = "\uE838";
-            AllSettingsPage.Current.SettingsMainFrame.Navigate(typeof(MediaSourcesPage));
+            _ = AllSettingsPage.Current.SettingsMainFrame.Navigate(typeof(MediaSourcesPage));
         }
     }
 }

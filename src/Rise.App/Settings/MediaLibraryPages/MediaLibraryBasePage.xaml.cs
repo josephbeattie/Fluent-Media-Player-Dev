@@ -12,14 +12,14 @@ namespace Rise.App.Settings
     {
         public MediaLibraryBasePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             _ = MediaFrame.Navigate(typeof(MediaLibraryPage));
         }
 
         private void MediaNav_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
-            var selectedItem = args.InvokedItemContainer;
+            Microsoft.UI.Xaml.Controls.NavigationViewItemBase selectedItem = args.InvokedItemContainer;
             string selectedItemTag = selectedItem.Tag as string;
 
             Type page = selectedItemTag switch
@@ -31,7 +31,9 @@ namespace Rise.App.Settings
             };
 
             if (MediaFrame.CurrentSourcePageType != page)
+            {
                 _ = MediaFrame.Navigate(page, null, args.RecommendedNavigationTransitionInfo);
+            }
         }
     }
 }

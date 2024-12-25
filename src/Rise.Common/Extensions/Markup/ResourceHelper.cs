@@ -41,7 +41,9 @@ namespace Rise.Common.Extensions.Markup
         public static string GetLocalizedCount(string formatResource, int count)
         {
             if (count == 1)
+            {
                 return GetString($"One{formatResource}");
+            }
 
             string format = GetString($"N{formatResource}s");
             return string.Format(format, count);

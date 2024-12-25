@@ -27,9 +27,13 @@ namespace Rise.App.Views
             }
 
             if (Props.Model.Model.IsLocal)
+            {
                 LocalExpander.Visibility = Visibility.Visible;
+            }
             else
+            {
                 OnlineExpander.Visibility = Visibility.Visible;
+            }
 
             base.OnNavigatedTo(e);
         }
@@ -51,18 +55,20 @@ namespace Rise.App.Views
             picker.FileTypeFilter.Add(".jpeg");
             picker.FileTypeFilter.Add(".png");
 
-            var file = await picker.PickSingleFileAsync();
+            StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {
-                var (saved, path) = await Song.TrySaveThumbnailAsync(file, Props.Album.AsValidFileName());
+                (bool saved, string path) = await Song.TrySaveThumbnailAsync(file, Props.Album.AsValidFileName());
                 if (saved)
+                {
                     Props.Thumbnail = path;
+                }
             }
         }
 
         private async void ExportAlbumArt_Click(object sender, RoutedEventArgs e)
         {
-            var picFile = await StorageFile.GetFileFromApplicationUriAsync(new(Props.Thumbnail));
+            StorageFile picFile = await StorageFile.GetFileFromApplicationUriAsync(new(Props.Thumbnail));
             FileSavePicker savePicker = new()
             {
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary
@@ -71,9 +77,11 @@ namespace Rise.App.Views
             savePicker.FileTypeChoices.Add("PNG Image", new string[] { ".png" });
             savePicker.FileTypeChoices.Add("JPEG Image", new string[] { ".jpg" });
 
-            var file = await savePicker.PickSaveFileAsync();
+            StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
+            {
                 await picFile.CopyAndReplaceAsync(file);
+            }
         }
 
         private void OnlineButton_Click(object sender, RoutedEventArgs e)

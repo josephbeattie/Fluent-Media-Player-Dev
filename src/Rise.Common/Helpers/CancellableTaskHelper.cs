@@ -38,9 +38,9 @@ namespace Rise.Common.Helpers
         public async Task CompletePendingAsync(CancellationToken token)
         {
             // Generate a new linked token
-            var previousCts = this._tokenSource;
-            var newCts = CancellationTokenSource.CreateLinkedTokenSource(token);
-            this._tokenSource = newCts;
+            CancellationTokenSource previousCts = _tokenSource;
+            CancellationTokenSource newCts = CancellationTokenSource.CreateLinkedTokenSource(token);
+            _tokenSource = newCts;
 
             if (previousCts != null)
             {
@@ -48,7 +48,9 @@ namespace Rise.Common.Helpers
                 previousCts.Cancel();
 
                 if (_pendingTask != null)
-                    try { await this._pendingTask; } catch { }
+                {
+                    try { await _pendingTask; } catch { }
+                }
             }
 
             // We need to check if we've been canceled
@@ -68,7 +70,7 @@ namespace Rise.Common.Helpers
         /// <see cref="Token"/> to your task for the cancellation token.</remarks>
         public Task RunAsync(Task task)
         {
-            this._pendingTask = task;
+            _pendingTask = task;
             return task;
         }
 
@@ -86,7 +88,7 @@ namespace Rise.Common.Helpers
         /// <see cref="Token"/> to your task for the cancellation token.</remarks>
         public Task<T> RunAsync<T>(Task<T> task)
         {
-            this._pendingTask = task;
+            _pendingTask = task;
             return task;
         }
     }

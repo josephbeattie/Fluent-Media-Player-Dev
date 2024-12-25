@@ -10,7 +10,7 @@ namespace Rise.App.UserControls
             InitializeComponent();
         }
 
-        private readonly static DependencyProperty BackgroundUriProperty =
+        private static readonly DependencyProperty BackgroundUriProperty =
             DependencyProperty.Register("BackgroundUri", typeof(string), typeof(TiledImage), null);
 
         public string BackgroundUri
@@ -19,7 +19,7 @@ namespace Rise.App.UserControls
             set => SetValue(BackgroundUriProperty, value);
         }
 
-        private readonly static DependencyProperty IconUriProperty =
+        private static readonly DependencyProperty IconUriProperty =
             DependencyProperty.Register("IconUri", typeof(string), typeof(TiledImage), null);
 
         public string IconUri
@@ -28,7 +28,7 @@ namespace Rise.App.UserControls
             set => SetValue(IconUriProperty, value);
         }
 
-        private readonly static DependencyProperty LabelProperty =
+        private static readonly DependencyProperty LabelProperty =
             DependencyProperty.Register("Label", typeof(string), typeof(TiledImage), null);
 
         public string Label

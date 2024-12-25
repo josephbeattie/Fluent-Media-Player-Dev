@@ -21,18 +21,18 @@ namespace Rise.Common.Extensions
         /// <returns>The created <see cref="CompositionMaskBrush"/>.</returns>
         public static CompositionMaskBrush CreateImageGradientMask(this Compositor compositor, LoadedImageSurface imageSurface, float opacity)
         {
-            var imageBrush = compositor.CreateSurfaceBrush(imageSurface);
+            CompositionSurfaceBrush imageBrush = compositor.CreateSurfaceBrush(imageSurface);
             imageBrush.HorizontalAlignmentRatio = 0.5f;
             imageBrush.VerticalAlignmentRatio = 0.5f;
             imageBrush.Stretch = CompositionStretch.UniformToFill;
 
-            var gradient = compositor.CreateLinearGradientBrush();
+            CompositionLinearGradientBrush gradient = compositor.CreateLinearGradientBrush();
             gradient.EndPoint = new Vector2(0, 1);
             gradient.MappingMode = CompositionMappingMode.Relative;
             gradient.ColorStops.Add(compositor.CreateColorGradientStop(opacity, Colors.White));
             gradient.ColorStops.Add(compositor.CreateColorGradientStop(1, Colors.Transparent));
 
-            var maskBrush = compositor.CreateMaskBrush();
+            CompositionMaskBrush maskBrush = compositor.CreateMaskBrush();
             maskBrush.Source = imageBrush;
             maskBrush.Mask = gradient;
 
@@ -47,7 +47,9 @@ namespace Rise.Common.Extensions
         /// <returns>A tuple containing the <see cref="ScrollViewer"/>'s manipulation property set and
         /// a <see cref="SpriteVisual"/> with a parallax animation.</returns>
         public static (CompositionPropertySet, SpriteVisual) CreateParallaxGradientVisual(this ListViewBase scrollViewer, LoadedImageSurface surface, FrameworkElement visualHost)
-            => CreateParallaxGradientVisual(scrollViewer.FindVisualChild<ScrollViewer>(), surface, visualHost);
+        {
+            return CreateParallaxGradientVisual(scrollViewer.FindVisualChild<ScrollViewer>(), surface, visualHost);
+        }
 
         /// <summary>
         /// Creates an image gradient with parallax for the provided <see cref="ScrollViewer"/>.
@@ -58,8 +60,8 @@ namespace Rise.Common.Extensions
         /// a <see cref="SpriteVisual"/> with a parallax animation.</returns>
         public static (CompositionPropertySet, SpriteVisual) CreateParallaxGradientVisual(this ScrollViewer scrollViewer, LoadedImageSurface surface, FrameworkElement visualHost)
         {
-            var propSet = ElementCompositionPreview.GetScrollViewerManipulationPropertySet(scrollViewer);
-            var visual = CreateParallaxGradientVisual(propSet.Compositor, surface, visualHost, propSet);
+            CompositionPropertySet propSet = ElementCompositionPreview.GetScrollViewerManipulationPropertySet(scrollViewer);
+            SpriteVisual visual = CreateParallaxGradientVisual(propSet.Compositor, surface, visualHost, propSet);
 
             return (propSet, visual);
         }
@@ -74,15 +76,15 @@ namespace Rise.Common.Extensions
         /// <returns>A <see cref="SpriteVisual"/> with a parallax animation.</returns>
         public static SpriteVisual CreateParallaxGradientVisual(this Compositor compositor, LoadedImageSurface surface, FrameworkElement visualHost, CompositionPropertySet scrollPropertySet)
         {
-            var maskBrush = CreateImageGradientMask(compositor, surface, 0.6f);
+            CompositionMaskBrush maskBrush = CreateImageGradientMask(compositor, surface, 0.6f);
 
-            var spriteVisual = compositor.CreateSpriteVisual();
+            SpriteVisual spriteVisual = compositor.CreateSpriteVisual();
             spriteVisual.Size = new Vector2((float)visualHost.ActualWidth, (float)visualHost.ActualHeight);
             spriteVisual.Opacity = 0.15f;
             spriteVisual.Brush = maskBrush;
 
-            var parallax = CreateTranslationParallaxAnimation(compositor, 0.8f, scrollPropertySet);
-            var translation = CreateTranslationAnimation(compositor, scrollPropertySet);
+            ExpressionAnimation parallax = CreateTranslationParallaxAnimation(compositor, 0.8f, scrollPropertySet);
+            ExpressionAnimation translation = CreateTranslationAnimation(compositor, scrollPropertySet);
 
             maskBrush.Source.StartAnimation("Offset.Y", parallax);
             spriteVisual.StartAnimation("Offset.Y", translation);
@@ -97,7 +99,7 @@ namespace Rise.Common.Extensions
         /// <returns>A <see cref="ExpressionAnimation"/> that changes during translation.</returns>
         public static ExpressionAnimation CreateTranslationAnimation(this Compositor compositor, CompositionPropertySet propertySet)
         {
-            var expression = compositor.CreateExpressionAnimation();
+            ExpressionAnimation expression = compositor.CreateExpressionAnimation();
             expression.SetReferenceParameter("ScrollManipulation", propertySet);
             expression.Expression = "ScrollManipulation.Translation.Y";
 
@@ -111,7 +113,7 @@ namespace Rise.Common.Extensions
         /// <returns>A <see cref="ExpressionAnimation"/> with parallax during translation.</returns>
         public static ExpressionAnimation CreateTranslationParallaxAnimation(this Compositor compositor, float parallax, CompositionPropertySet propertySet)
         {
-            var expression = compositor.CreateExpressionAnimation();
+            ExpressionAnimation expression = compositor.CreateExpressionAnimation();
             expression.SetScalarParameter("ParallaxValue", parallax);
 
             expression.SetReferenceParameter("ScrollManipulation", propertySet);

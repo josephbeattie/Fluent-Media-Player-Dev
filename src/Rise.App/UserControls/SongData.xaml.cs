@@ -216,12 +216,12 @@ namespace Rise.App.UserControls
     {
         private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            VisualStateManager.GoToState(this, "PointerOver", true);
+            _ = VisualStateManager.GoToState(this, "PointerOver", true);
         }
 
         private void OnPointerExited(object sender, PointerRoutedEventArgs e)
         {
-            VisualStateManager.GoToState(this, "Normal", true);
+            _ = VisualStateManager.GoToState(this, "Normal", true);
         }
     }
 }

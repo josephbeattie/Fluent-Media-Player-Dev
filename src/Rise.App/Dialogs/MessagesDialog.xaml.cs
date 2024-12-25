@@ -31,20 +31,24 @@ namespace Rise.App.Dialogs
     {
         private void MenuFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = NotificationsList.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = NotificationsList.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedNotification = (BasicNotification)cont;
+            }
         }
 
         private async void DeleteMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedNotification != null)
             {
-                NBackend.Items.Remove(SelectedNotification);
+                _ = NBackend.Items.Remove(SelectedNotification);
                 await NBackend.SaveAsync();
             }
         }

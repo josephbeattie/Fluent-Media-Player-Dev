@@ -34,7 +34,7 @@ namespace Rise.Common.Extensions
             // Index library.
             foreach (StorageFolder folder in library.Folders)
             {
-                await foreach (var file in folder.IndexAsync(queryOptions).ConfigureAwait(false))
+                await foreach (StorageFile file in folder.IndexAsync(queryOptions).ConfigureAwait(false))
                 {
                     yield return file;
                 }
@@ -114,16 +114,16 @@ namespace Rise.Common.Extensions
         #region Tracking
         public static async Task<StorageLibraryChangeResult> GetLibraryChangesAsync(this StorageLibrary library)
         {
-            var changeTracker = library.ChangeTracker;
+            StorageLibraryChangeTracker changeTracker = library.ChangeTracker;
 
             // Ensure that the change tracker is always enabled.
             changeTracker.Enable();
 
-            var changeReader = changeTracker.GetChangeReader();
-            var changes = await changeReader.ReadBatchAsync();
+            StorageLibraryChangeReader changeReader = changeTracker.GetChangeReader();
+            IReadOnlyList<StorageLibraryChange> changes = await changeReader.ReadBatchAsync();
 
-            var addedItems = new List<StorageFile>();
-            var removedItems = new List<string>();
+            List<StorageFile> addedItems = [];
+            List<string> removedItems = [];
 
             if (ApiInformation.IsMethodPresent(typeof(StorageLibraryChangeReader).FullName, "GetLastChangeId"))
             {
@@ -148,12 +148,14 @@ namespace Rise.Common.Extensions
                     case StorageLibraryChangeType.MovedIntoLibrary:
                     case StorageLibraryChangeType.Created:
                         {
-                            var item = await change.GetStorageItemAsync();
+                            IStorageItem item = await change.GetStorageItemAsync();
                             if (item.IsOfType(StorageItemTypes.File))
                             {
-                                var file = (StorageFile)item;
+                                StorageFile file = (StorageFile)item;
                                 if (!SupportedFileTypes.MediaFiles.Contains(file.FileType.ToLowerInvariant()))
+                                {
                                     continue;
+                                }
 
                                 addedItems.Add(file);
                             }
@@ -171,12 +173,14 @@ namespace Rise.Common.Extensions
                     case StorageLibraryChangeType.ContentsChanged:
                     case StorageLibraryChangeType.ContentsReplaced:
                         {
-                            var item = await change.GetStorageItemAsync();
+                            IStorageItem item = await change.GetStorageItemAsync();
                             if (item.IsOfType(StorageItemTypes.File))
                             {
-                                var file = (StorageFile)item;
+                                StorageFile file = (StorageFile)item;
                                 if (!SupportedFileTypes.MediaFiles.Contains(file.FileType.ToLowerInvariant()))
+                                {
                                     continue;
+                                }
 
                                 string changePath = change.PreviousPath.ReplaceIfNullOrWhiteSpace(file.Path);
 
@@ -211,28 +215,34 @@ namespace Rise.Common.Extensions
             string taskName, string entryPoint = null)
         {
             // Check if there's access to the background.
-            var requestStatus = await BackgroundExecutionManager.RequestAccessAsync();
-            if (!(requestStatus == BackgroundAccessStatus.AllowedSubjectToSystemPolicy ||
-                requestStatus == BackgroundAccessStatus.AlwaysAllowed))
+            BackgroundAccessStatus requestStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (requestStatus is not (BackgroundAccessStatus.AllowedSubjectToSystemPolicy or
+                BackgroundAccessStatus.AlwaysAllowed))
             {
                 return BackgroundTaskRegistrationStatus.NotAllowed;
             }
 
             library.ChangeTracker.Enable();
-            foreach (var task in BackgroundTaskRegistration.AllTasks)
+            foreach (KeyValuePair<Guid, IBackgroundTaskRegistration> task in BackgroundTaskRegistration.AllTasks)
             {
                 if (task.Value.Name == taskName)
+                {
                     return BackgroundTaskRegistrationStatus.AlreadyExists;
+                }
             }
 
             // Build up the trigger to fire when something changes in the library.
-            var builder = new BackgroundTaskBuilder();
-            builder.Name = taskName;
+            BackgroundTaskBuilder builder = new()
+            {
+                Name = taskName
+            };
 
             if (entryPoint != null)
+            {
                 builder.TaskEntryPoint = entryPoint;
+            }
 
-            var libraryTrigger = StorageLibraryContentChangedTrigger.Create(library);
+            StorageLibraryContentChangedTrigger libraryTrigger = StorageLibraryContentChangedTrigger.Create(library);
 
             builder.SetTrigger(libraryTrigger);
             _ = builder.Register();

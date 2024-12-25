@@ -9,8 +9,8 @@ namespace Rise.App.Settings
 
         public MediaSourcesPage()
         {
-            this.InitializeComponent();
-            this._navigationHelper = new NavigationHelper(this);
+            InitializeComponent();
+            _navigationHelper = new NavigationHelper(this);
 
             _ = ContentFrame.Navigate(typeof(MediaSourcesListsPage), "AllMedia");
         }

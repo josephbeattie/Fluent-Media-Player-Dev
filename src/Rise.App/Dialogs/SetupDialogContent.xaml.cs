@@ -99,8 +99,8 @@ namespace Rise.App.Dialogs
             string res = GetSecondaryButtonResource(progress);
             SecondaryButton.Content = ResourceHelper.GetString(res);
 
-            var nextPage = GetCurrentPage(progress);
-            var transition = new SlideNavigationTransitionInfo() { Effect = effect };
+            Type nextPage = GetCurrentPage(progress);
+            SlideNavigationTransitionInfo transition = new() { Effect = effect };
             _ = SetupFrame.Navigate(nextPage, null, transition);
         }
 
@@ -117,15 +117,15 @@ namespace Rise.App.Dialogs
             {
                 HideDialog();
 
-                var rootFrame = Window.Current.Content as Frame;
+                Frame rootFrame = Window.Current.Content as Frame;
                 _ = rootFrame.Navigate(typeof(MainPage));
             }
         }
 
         private void HideDialog()
         {
-            var popups = VisualTreeHelper.GetOpenPopups(Window.Current);
-            foreach (var popup in popups)
+            System.Collections.Generic.IReadOnlyList<Windows.UI.Xaml.Controls.Primitives.Popup> popups = VisualTreeHelper.GetOpenPopups(Window.Current);
+            foreach (Windows.UI.Xaml.Controls.Primitives.Popup popup in popups)
             {
                 if (popup.Child is ContentDialog dialog)
                 {
@@ -135,24 +135,30 @@ namespace Rise.App.Dialogs
             }
         }
 
-        private Type GetCurrentPage(int progress) => progress switch
+        private Type GetCurrentPage(int progress)
         {
-            1 => typeof(ConnectPage),
-            2 => typeof(LocalPage),
-            3 => typeof(PrivacyPage),
-            4 => typeof(AppearancePage),
-            5 => typeof(FinishPage),
-            _ => typeof(TermsPage)
-        };
+            return progress switch
+            {
+                1 => typeof(ConnectPage),
+                2 => typeof(LocalPage),
+                3 => typeof(PrivacyPage),
+                4 => typeof(AppearancePage),
+                5 => typeof(FinishPage),
+                _ => typeof(TermsPage)
+            };
+        }
 
-        private string GetSecondaryButtonResource(int progress) => progress switch
+        private string GetSecondaryButtonResource(int progress)
         {
-            1 => "OnlyLocal",
-            2 => "OnlyStreaming",
-            3 => "DecideForMe",
-            4 => "DecideForMe",
-            5 => "NotNow",
-            _ => "Decline"
-        };
+            return progress switch
+            {
+                1 => "OnlyLocal",
+                2 => "OnlyStreaming",
+                3 => "DecideForMe",
+                4 => "DecideForMe",
+                5 => "NotNow",
+                _ => "Decline"
+            };
+        }
     }
 }

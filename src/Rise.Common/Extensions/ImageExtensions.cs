@@ -27,7 +27,7 @@ namespace Rise.Common.Extensions
                     BitmapAlphaMode.Premultiplied);
             }
 
-            var source = new SoftwareBitmapSource();
+            SoftwareBitmapSource source = new();
             await source.SetBitmapAsync(bitmap);
 
             return source;
@@ -38,7 +38,7 @@ namespace Rise.Common.Extensions
         /// </summary>
         public static Task<SoftwareBitmapSource> GetSourceAsync(this WriteableBitmap bitmap)
         {
-            var bmp = SoftwareBitmap.CreateCopyFromBuffer(
+            SoftwareBitmap bmp = SoftwareBitmap.CreateCopyFromBuffer(
                 bitmap.PixelBuffer,
                 BitmapPixelFormat.Bgra8,
                 bitmap.PixelWidth,
@@ -61,7 +61,7 @@ namespace Rise.Common.Extensions
         public static async Task<SoftwareBitmap> GetBitmapAsync
             (this StorageFile file)
         {
-            using var fileStream = await file.OpenReadAsync();
+            using IRandomAccessStreamWithContentType fileStream = await file.OpenReadAsync();
             return await fileStream.GetBitmapAsync();
         }
 
@@ -72,7 +72,7 @@ namespace Rise.Common.Extensions
         public static async Task<WriteableBitmap> GetBitmapAsync
             (this StorageFile file, int width, int height)
         {
-            using var fileStream = await file.OpenReadAsync();
+            using IRandomAccessStreamWithContentType fileStream = await file.OpenReadAsync();
             return await fileStream.GetBitmapAsync(width, height);
         }
 
@@ -82,7 +82,7 @@ namespace Rise.Common.Extensions
         public static async Task<SoftwareBitmap> GetBitmapAsync
             (this IRandomAccessStream stream)
         {
-            var decoder = await BitmapDecoder.CreateAsync(stream);
+            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
             return await decoder.GetSoftwareBitmapAsync();
         }
 
@@ -93,24 +93,24 @@ namespace Rise.Common.Extensions
         public static async Task<WriteableBitmap> GetBitmapAsync
             (this IRandomAccessStream stream, int width, int height)
         {
-            using var memoryStream = new InMemoryRandomAccessStream();
+            using InMemoryRandomAccessStream memoryStream = new();
 
-            var decoder = await BitmapDecoder.CreateAsync(stream);
-            var transform = new BitmapTransform
+            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+            BitmapTransform transform = new()
             {
                 ScaledWidth = (uint)width,
                 ScaledHeight = (uint)height,
                 InterpolationMode = BitmapInterpolationMode.Cubic
             };
 
-            var pixelData = await decoder.GetPixelDataAsync(
+            PixelDataProvider pixelData = await decoder.GetPixelDataAsync(
                 BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight, transform,
                 ExifOrientationMode.RespectExifOrientation,
                 ColorManagementMode.ColorManageToSRgb);
 
-            var pixels = pixelData.DetachPixelData();
+            byte[] pixels = pixelData.DetachPixelData();
 
-            var encoder = await BitmapEncoder.CreateAsync(
+            BitmapEncoder encoder = await BitmapEncoder.CreateAsync(
                 BitmapEncoder.PngEncoderId, memoryStream);
 
             encoder.SetPixelData(
@@ -120,7 +120,7 @@ namespace Rise.Common.Extensions
             await encoder.FlushAsync();
             memoryStream.Seek(0);
 
-            var bitmap = new WriteableBitmap(width, height);
+            WriteableBitmap bitmap = new(width, height);
             await bitmap.SetSourceAsync(memoryStream);
 
             return bitmap;
@@ -139,7 +139,7 @@ namespace Rise.Common.Extensions
         /// <returns>Whether or not the operation was successful.</returns>
         public static Task<bool> SaveToFileAsync(this WriteableBitmap bitmap, StorageFile outputFile)
         {
-            var bmp = SoftwareBitmap.CreateCopyFromBuffer(bitmap.PixelBuffer,
+            SoftwareBitmap bmp = SoftwareBitmap.CreateCopyFromBuffer(bitmap.PixelBuffer,
                 BitmapPixelFormat.Bgra8,
                 bitmap.PixelWidth,
                 bitmap.PixelHeight);
@@ -207,7 +207,7 @@ namespace Rise.Common.Extensions
             {
                 try
                 {
-                    var destinationFile = await destination.CreateFileAsync(filename, collisionOption);
+                    StorageFile destinationFile = await destination.CreateFileAsync(filename, collisionOption);
 
                     Buffer buffer = new(Convert.ToUInt32(thumbnail.Size));
                     IBuffer iBuf = await thumbnail.ReadAsync(buffer,

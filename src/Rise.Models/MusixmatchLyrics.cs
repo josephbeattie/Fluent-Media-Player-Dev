@@ -124,17 +124,23 @@ namespace Rise.Models
 
     public sealed partial class MusixmatchLyrics
     {
-        public static MusixmatchLyrics FromJson(string json) => JsonConvert.DeserializeObject<MusixmatchLyrics>(json, Converter.Settings);
+        public static MusixmatchLyrics FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<MusixmatchLyrics>(json, Converter.Settings);
+        }
     }
 
     public static class Serialize
     {
-        public static string ToJson(this MusixmatchLyrics self) => JsonConvert.SerializeObject(self, Converter.Settings);
+        public static string ToJson(this MusixmatchLyrics self)
+        {
+            return JsonConvert.SerializeObject(self, Converter.Settings);
+        }
     }
 
     internal static class Converter
     {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings Settings = new()
         {
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,

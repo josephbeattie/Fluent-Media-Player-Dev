@@ -18,7 +18,7 @@ namespace Rise.App.Views
 
         private async void SetupButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new ContentDialog
+            ContentDialog dialog = new()
             {
                 Content = new SetupDialogContent(),
                 FullSizeDesired = true,

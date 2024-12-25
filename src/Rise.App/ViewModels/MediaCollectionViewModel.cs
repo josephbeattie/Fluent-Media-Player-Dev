@@ -57,20 +57,18 @@ namespace Rise.App.ViewModels
             _groupingAlphabetically = groupAlphabetically;
             if (string.IsNullOrEmpty(delegateKey))
             {
-                var (items, defer) = GroupedCollectionView.CreateDeferred();
+                (GroupedCollectionView items, Windows.Foundation.Deferral defer) = GroupedCollectionView.CreateDeferred();
                 items.Source = itemSource;
                 items.Filter = filter;
                 defer.Complete();
 
                 Items = items;
             }
-            else if (groupAlphabetically)
-            {
-                Items = CreateGroupedAlphabetically(delegateKey, direction, filter, itemSource);
-            }
             else
             {
-                Items = CreateSorted(delegateKey, direction, filter, itemSource);
+                Items = groupAlphabetically
+                    ? CreateGroupedAlphabetically(delegateKey, direction, filter, itemSource)
+                    : CreateSorted(delegateKey, direction, filter, itemSource);
             }
         }
 
@@ -79,7 +77,7 @@ namespace Rise.App.ViewModels
             Predicate<object> filter,
             IList itemSource)
         {
-            var items = CreateSorted(delegateKey, direction, filter, itemSource);
+            GroupedCollectionView items = CreateSorted(delegateKey, direction, filter, itemSource);
             _ = items.AddCollectionGroups(CollectionViewDelegates.GroupingLabels);
 
             return items;
@@ -90,7 +88,7 @@ namespace Rise.App.ViewModels
             Predicate<object> filter,
             IList itemSource)
         {
-            var (items, defer) = GroupedCollectionView.CreateDeferred();
+            (GroupedCollectionView items, Windows.Foundation.Deferral defer) = GroupedCollectionView.CreateDeferred();
             items.Source = itemSource;
             items.Filter = filter;
 
@@ -101,7 +99,9 @@ namespace Rise.App.ViewModels
         }
 
         public void Dispose()
-            => Items.Dispose();
+        {
+            Items.Dispose();
+        }
     }
 
     // Sorting
@@ -151,7 +151,9 @@ namespace Rise.App.ViewModels
         {
             Sort(Items, _currentDelegate, direction);
             if (_groupingAlphabetically)
+            {
                 _ = Items.AddCollectionGroups(CollectionViewDelegates.GroupingLabels);
+            }
         }
 
         private void Sort(GroupedCollectionView items, string delegateKey, SortDirection direction)
@@ -159,7 +161,7 @@ namespace Rise.App.ViewModels
             _currentDelegate = delegateKey;
             _currentDirection = direction;
 
-            var defer = items.DeferRefresh();
+            Windows.Foundation.Deferral defer = items.DeferRefresh();
 
             items.GroupDescription = null;
             items.SortDescriptions.Clear();
@@ -170,15 +172,12 @@ namespace Rise.App.ViewModels
             for (int i = 0; i < keys.Length; i++)
             {
                 string key = keys[i];
-                var sortDel = CollectionViewDelegates.GetDelegate(key);
+                Func<object, object> sortDel = CollectionViewDelegates.GetDelegate(key);
 
                 if (!grouped && key[0] == 'G')
                 {
                     grouped = true;
-                    if (_groupingAlphabetically)
-                        items.GroupDescription = new(direction, sortDel, GroupingLabelComparer.Default);
-                    else
-                        items.GroupDescription = new(direction, sortDel);
+                    items.GroupDescription = _groupingAlphabetically ? new(direction, sortDel, GroupingLabelComparer.Default) : new(direction, sortDel);
                 }
                 else
                 {
@@ -243,13 +242,21 @@ namespace Rise.App.ViewModels
         private Task GetPlaySingleTask(object parameter)
         {
             if (parameter is AlbumViewModel album)
+            {
                 return PlaySingleAlbumAsync(album, PlaybackCancelHelper.Token);
+            }
             else if (parameter is ArtistViewModel artist)
+            {
                 return PlaySingleArtistAsync(artist, PlaybackCancelHelper.Token);
+            }
             else if (parameter is GenreViewModel genre)
+            {
                 return PlaySingleGenreAsync(genre, PlaybackCancelHelper.Token);
+            }
             else if (parameter is PlaylistViewModel playlist)
+            {
                 return PlaySinglePlaylistAsync(playlist, PlaybackCancelHelper.Token);
+            }
 
             return PlaySingleItemAsync((IMediaItem)parameter, PlaybackCancelHelper.Token);
         }
@@ -257,30 +264,48 @@ namespace Rise.App.ViewModels
         private Task GetPlayFromTask(object parameter)
         {
             if (parameter is IMediaItem item)
+            {
                 return PlayFromItemAsync(item, PlaybackCancelHelper.Token);
+            }
             else if (parameter is AlbumViewModel album)
+            {
                 return PlayFromAlbumAsync(album, PlaybackCancelHelper.Token);
+            }
             else if (parameter is ArtistViewModel artist)
+            {
                 return PlayFromArtistAsync(artist, PlaybackCancelHelper.Token);
+            }
             else if (parameter is GenreViewModel genre)
+            {
                 return PlayFromGenreAsync(genre, PlaybackCancelHelper.Token);
+            }
             else if (parameter is PlaylistViewModel playlist)
+            {
                 return PlayFromPlaylistAsync(playlist, PlaybackCancelHelper.Token);
+            }
 
             return GetDefaultPlayFromTask();
         }
 
         private Task GetDefaultPlayFromTask()
         {
-            var type = Items.First().GetType();
+            Type type = Items.First().GetType();
             if (type == typeof(AlbumViewModel))
+            {
                 return PlayFromAlbumAsync(null, PlaybackCancelHelper.Token);
+            }
             else if (type == typeof(ArtistViewModel))
+            {
                 return PlayFromArtistAsync(null, PlaybackCancelHelper.Token);
+            }
             else if (type == typeof(GenreViewModel))
+            {
                 return PlayFromGenreAsync(null, PlaybackCancelHelper.Token);
+            }
             else if (type == typeof(PlaylistViewModel))
+            {
                 return PlayFromPlaylistAsync(null, PlaybackCancelHelper.Token);
+            }
 
             return PlayFromItemAsync(null, PlaybackCancelHelper.Token);
         }
@@ -296,10 +321,10 @@ namespace Rise.App.ViewModels
 
         public Task PlaySingleAlbumAsync(AlbumViewModel album, CancellationToken token)
         {
-            var filtered = _songs.Where(s => s.Album == album.Title);
+            IEnumerable<SongViewModel> filtered = _songs.Where(s => s.Album == album.Title);
             token.ThrowIfCancellationRequested();
 
-            var toPlay = filtered.OrderBy(s => s.Disc).ThenBy(s => s.Track);
+            IOrderedEnumerable<SongViewModel> toPlay = filtered.OrderBy(s => s.Disc).ThenBy(s => s.Track);
             token.ThrowIfCancellationRequested();
 
             return _player.PlayItemsAsync(toPlay, token);
@@ -308,10 +333,10 @@ namespace Rise.App.ViewModels
         public Task PlaySingleArtistAsync(ArtistViewModel artist, CancellationToken token)
         {
             string name = artist.Name;
-            var filtered = _songs.Where(s => s.Artist == name || s.AlbumArtist == name);
+            IEnumerable<SongViewModel> filtered = _songs.Where(s => s.Artist == name || s.AlbumArtist == name);
             token.ThrowIfCancellationRequested();
 
-            var toPlay = filtered.OrderBy(s => s.Title);
+            IOrderedEnumerable<SongViewModel> toPlay = filtered.OrderBy(s => s.Title);
             token.ThrowIfCancellationRequested();
 
             return _player.PlayItemsAsync(toPlay, token);
@@ -319,10 +344,10 @@ namespace Rise.App.ViewModels
 
         public Task PlaySingleGenreAsync(GenreViewModel genre, CancellationToken token)
         {
-            var filtered = _songs.Where(s => s.Genres == genre.Name);
+            IEnumerable<SongViewModel> filtered = _songs.Where(s => s.Genres == genre.Name);
             token.ThrowIfCancellationRequested();
 
-            var toPlay = filtered.OrderBy(s => s.Disc).ThenBy(s => s.Track);
+            IOrderedEnumerable<SongViewModel> toPlay = filtered.OrderBy(s => s.Disc).ThenBy(s => s.Track);
             token.ThrowIfCancellationRequested();
 
             return _player.PlayItemsAsync(toPlay, token);
@@ -330,7 +355,7 @@ namespace Rise.App.ViewModels
 
         public Task PlaySinglePlaylistAsync(PlaylistViewModel playlist, CancellationToken token)
         {
-            var toPlay = playlist.Songs.ToList<IMediaItem>();
+            List<IMediaItem> toPlay = playlist.Songs.ToList<IMediaItem>();
             token.ThrowIfCancellationRequested();
 
             toPlay.AddRange(playlist.Videos);
@@ -345,7 +370,7 @@ namespace Rise.App.ViewModels
     {
         public Task PlayFromItemAsync(IMediaItem item, CancellationToken token)
         {
-            var items = Items.CloneList<object, IMediaItem>();
+            IList<IMediaItem> items = Items.CloneList<object, IMediaItem>();
             token.ThrowIfCancellationRequested();
 
             if (item != null)
@@ -362,13 +387,13 @@ namespace Rise.App.ViewModels
 
         public Task PlayFromAlbumAsync(AlbumViewModel album, CancellationToken token)
         {
-            var items = Items.CloneList<object, AlbumViewModel>();
-            var songs = _songs.CloneList<object, SongViewModel>().
+            IList<AlbumViewModel> items = Items.CloneList<object, AlbumViewModel>();
+            IOrderedEnumerable<SongViewModel> songs = _songs.CloneList<object, SongViewModel>().
                 OrderBy(s => s.Disc).ThenBy(s => s.Track);
 
             token.ThrowIfCancellationRequested();
 
-            var toPlay = new List<SongViewModel>();
+            List<SongViewModel> toPlay = [];
             token.ThrowIfCancellationRequested();
 
             if (album != null)
@@ -380,7 +405,7 @@ namespace Rise.App.ViewModels
                 token.ThrowIfCancellationRequested();
             }
 
-            foreach (var itm in items)
+            foreach (AlbumViewModel itm in items)
             {
                 toPlay.AddRange(songs.Where(s => s.Album == itm.Title));
                 token.ThrowIfCancellationRequested();
@@ -391,12 +416,12 @@ namespace Rise.App.ViewModels
 
         public Task PlayFromArtistAsync(ArtistViewModel artist, CancellationToken token)
         {
-            var items = Items.CloneList<object, ArtistViewModel>();
-            var songs = _songs.CloneList<object, SongViewModel>().OrderBy(s => s.Title);
+            IList<ArtistViewModel> items = Items.CloneList<object, ArtistViewModel>();
+            IOrderedEnumerable<SongViewModel> songs = _songs.CloneList<object, SongViewModel>().OrderBy(s => s.Title);
 
             token.ThrowIfCancellationRequested();
 
-            var toPlay = new List<SongViewModel>();
+            List<SongViewModel> toPlay = [];
             token.ThrowIfCancellationRequested();
 
             if (artist != null)
@@ -408,7 +433,7 @@ namespace Rise.App.ViewModels
                 token.ThrowIfCancellationRequested();
             }
 
-            foreach (var itm in items)
+            foreach (ArtistViewModel itm in items)
             {
                 toPlay.AddRange(songs.Where(s => s.Artist == itm.Name || s.AlbumArtist == itm.Name));
                 token.ThrowIfCancellationRequested();
@@ -419,12 +444,12 @@ namespace Rise.App.ViewModels
 
         public Task PlayFromGenreAsync(GenreViewModel genre, CancellationToken token)
         {
-            var items = Items.CloneList<object, GenreViewModel>();
-            var songs = _songs.CloneList<object, SongViewModel>().OrderBy(s => s.Title);
+            IList<GenreViewModel> items = Items.CloneList<object, GenreViewModel>();
+            IOrderedEnumerable<SongViewModel> songs = _songs.CloneList<object, SongViewModel>().OrderBy(s => s.Title);
 
             token.ThrowIfCancellationRequested();
 
-            var toPlay = new List<SongViewModel>();
+            List<SongViewModel> toPlay = [];
             token.ThrowIfCancellationRequested();
 
             if (genre != null)
@@ -436,7 +461,7 @@ namespace Rise.App.ViewModels
                 token.ThrowIfCancellationRequested();
             }
 
-            foreach (var itm in items)
+            foreach (GenreViewModel itm in items)
             {
                 toPlay.AddRange(songs.Where(s => s.Genres == itm.Name));
                 token.ThrowIfCancellationRequested();
@@ -447,10 +472,10 @@ namespace Rise.App.ViewModels
 
         public Task PlayFromPlaylistAsync(PlaylistViewModel playlist, CancellationToken token)
         {
-            var items = Items.CloneList<object, PlaylistViewModel>();
+            IList<PlaylistViewModel> items = Items.CloneList<object, PlaylistViewModel>();
             token.ThrowIfCancellationRequested();
 
-            var toPlay = new List<IMediaItem>();
+            List<IMediaItem> toPlay = [];
             token.ThrowIfCancellationRequested();
 
             if (playlist != null)
@@ -462,7 +487,7 @@ namespace Rise.App.ViewModels
                 token.ThrowIfCancellationRequested();
             }
 
-            foreach (var itm in items)
+            foreach (PlaylistViewModel itm in items)
             {
                 toPlay.AddRange(itm.Songs.OrderBy(s => s.Title));
                 token.ThrowIfCancellationRequested();

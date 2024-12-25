@@ -28,7 +28,7 @@ namespace Rise.Common.Helpers
         /// </summary>
         public ObservableVector()
         {
-            _base = new();
+            _base = [];
         }
 
         /// <summary>
@@ -60,7 +60,9 @@ namespace Rise.Common.Helpers
 
         public event VectorChangedEventHandler<T> VectorChanged;
         public int IndexOf(T item)
-            => _base.IndexOf(item);
+        {
+            return _base.IndexOf(item);
+        }
 
         public void Add(T item)
         {
@@ -100,13 +102,24 @@ namespace Rise.Common.Helpers
         }
 
         public bool Contains(T item)
-            => _base.Contains(item);
+        {
+            return _base.Contains(item);
+        }
 
         public void CopyTo(T[] array, int arrayIndex)
-            => _base.CopyTo(array, arrayIndex);
+        {
+            _base.CopyTo(array, arrayIndex);
+        }
 
-        public IEnumerator<T> GetEnumerator() => _base.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => _base.GetEnumerator();
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _base.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _base.GetEnumerator();
+        }
     }
 
     /// <summary>

@@ -85,8 +85,8 @@ namespace Rise.App.ViewModels
     // Item management
     public sealed partial class PlaylistViewModel
     {
-        public SafeObservableCollection<SongViewModel> Songs { get; init; } = new();
-        public SafeObservableCollection<VideoViewModel> Videos { get; init; } = new();
+        public SafeObservableCollection<SongViewModel> Songs { get; init; } = [];
+        public SafeObservableCollection<VideoViewModel> Videos { get; init; } = [];
 
         /// <summary>
         /// Adds a <see cref="IMediaItem" /> to the playlist.
@@ -94,9 +94,13 @@ namespace Rise.App.ViewModels
         public void AddItem(IMediaItem item)
         {
             if (item is SongViewModel song)
+            {
                 Songs.Add(song);
+            }
             else if (item is VideoViewModel video)
+            {
                 Videos.Add(video);
+            }
         }
 
         /// <summary>
@@ -105,9 +109,13 @@ namespace Rise.App.ViewModels
         public void RemoveItem(IMediaItem item)
         {
             if (item is SongViewModel song)
+            {
                 _ = Songs.Remove(song);
+            }
             else if (item is VideoViewModel video)
+            {
                 _ = Videos.Remove(video);
+            }
         }
 
         /// <summary>
@@ -118,9 +126,13 @@ namespace Rise.App.ViewModels
             foreach (IMediaItem item in items)
             {
                 if (item is SongViewModel song)
+                {
                     Songs.Add(song);
+                }
                 else if (item is VideoViewModel video)
+                {
                     Videos.Add(video);
+                }
             }
         }
 
@@ -132,9 +144,13 @@ namespace Rise.App.ViewModels
             foreach (IMediaItem item in items)
             {
                 if (item is SongViewModel song)
+                {
                     _ = Songs.Remove(song);
+                }
                 else if (item is VideoViewModel video)
+                {
                     _ = Videos.Remove(video);
+                }
             }
         }
     }
@@ -159,7 +175,7 @@ namespace Rise.App.ViewModels
                         return await ParseWMPPlaylistAsync(file);
                     case ".m3u":
                     case ".m3u8":
-                        var lines = await FileIO.ReadLinesAsync(file, UnicodeEncoding.Utf8);
+                        IList<string> lines = await FileIO.ReadLinesAsync(file, UnicodeEncoding.Utf8);
                         return await ParseM3UAsync(lines, file.Path);
                 }
             }
@@ -180,14 +196,18 @@ namespace Rise.App.ViewModels
                 Icon = URIs.PlaylistThumb
             };
 
-            var songs = await folder.CreateFileQueryWithOptions(QueryPresets.SongQueryOptions).GetFilesAsync();
-            var videos = await folder.CreateFileQueryWithOptions(QueryPresets.VideoQueryOptions).GetFilesAsync();
+            IReadOnlyList<StorageFile> songs = await folder.CreateFileQueryWithOptions(QueryPresets.SongQueryOptions).GetFilesAsync();
+            IReadOnlyList<StorageFile> videos = await folder.CreateFileQueryWithOptions(QueryPresets.VideoQueryOptions).GetFilesAsync();
 
-            foreach (var item in songs)
+            foreach (StorageFile item in songs)
+            {
                 playlist.AddItem(new SongViewModel(await Song.GetFromFileAsync(item)));
+            }
 
-            foreach (var item in videos)
+            foreach (StorageFile item in videos)
+            {
                 playlist.AddItem(new VideoViewModel(await Video.GetFromFileAsync(item)));
+            }
 
             return playlist;
         }
@@ -202,12 +222,12 @@ namespace Rise.App.ViewModels
             };
 
             WindowsPlaylist winrtPlaylist = await WindowsPlaylist.LoadAsync(file);
-            var text = await FileIO.ReadTextAsync(file, UnicodeEncoding.Utf8);
+            string text = await FileIO.ReadTextAsync(file, UnicodeEncoding.Utf8);
 
             XmlDocument document = new();
             document.LoadXml(text);
 
-            var head = document.SelectSingleNode("/smil/head");
+            XmlNode head = document.SelectSingleNode("/smil/head");
 
             // Nodes must not be null to fetch info.
             if (head != null)
@@ -215,9 +235,13 @@ namespace Rise.App.ViewModels
                 foreach (XmlNode node in head.ChildNodes)
                 {
                     if (node.Name == "meta" && node.Attributes["name"].Value == "Subtitle")
+                    {
                         playlist.Description = node.Attributes["content"].InnerText;
+                    }
                     else if (node.Name == "title")
+                    {
                         playlist.Title = node.InnerText;
+                    }
                 }
             }
             else
@@ -225,14 +249,18 @@ namespace Rise.App.ViewModels
                 // TODO: error or something.
             }
 
-            foreach (var playlistFile in winrtPlaylist.Files)
+            foreach (StorageFile playlistFile in winrtPlaylist.Files)
             {
                 IMediaItem item = default;
 
                 if (SupportedFileTypes.MusicFiles.Contains(playlistFile.FileType))
+                {
                     item = new SongViewModel(await Song.GetFromFileAsync(playlistFile));
+                }
                 else if (SupportedFileTypes.VideoFiles.Contains(playlistFile.FileType))
+                {
                     item = new VideoViewModel(await Video.GetFromFileAsync(playlistFile));
+                }
 
                 playlist.AddItem(item);
             }
@@ -249,10 +277,10 @@ namespace Rise.App.ViewModels
                 Icon = URIs.PlaylistThumb
             };
 
-            var trimmedLines = lines.Select(l => l.Trim()).ToList();
+            List<string> trimmedLines = lines.Select(l => l.Trim()).ToList();
 
             // Check if linked to directory
-            if (trimmedLines.Count == 1 && Uri.TryCreate(trimmedLines[0], UriKind.RelativeOrAbsolute, out var refUri))
+            if (trimmedLines.Count == 1 && Uri.TryCreate(trimmedLines[0], UriKind.RelativeOrAbsolute, out Uri refUri))
             {
                 Uri baseUri = new(Path.GetDirectoryName(baseFilePath));
 
@@ -283,7 +311,7 @@ namespace Rise.App.ViewModels
                     return await GetFromFileAsync(linkedPlaylistFile);
                 }
 
-                foreach (var format in QueryPresets.SongQueryOptions.FileTypeFilter)
+                foreach (string format in QueryPresets.SongQueryOptions.FileTypeFilter)
                 {
                     if (dirPath.EndsWith(format))
                     {
@@ -296,7 +324,7 @@ namespace Rise.App.ViewModels
                     }
                 }
 
-                foreach (var songPath in Directory.EnumerateFiles(dirPath))
+                foreach (string songPath in Directory.EnumerateFiles(dirPath))
                 {
                     playlist.Songs.Add(new SongViewModel()
                     {
@@ -310,10 +338,12 @@ namespace Rise.App.ViewModels
             string title = null, artist = null, icon = null;
             for (int i = 0; i < trimmedLines.Count; i++)
             {
-                var line = trimmedLines[i];
+                string line = trimmedLines[i];
 
                 if (string.IsNullOrWhiteSpace(line))
+                {
                     continue;
+                }
 
                 if (line.StartsWith("#"))
                 {
@@ -322,8 +352,8 @@ namespace Rise.App.ViewModels
                     string value = null;
                     if (splitIdx >= 0)
                     {
-                        prop = line.Substring(0, splitIdx).Trim();
-                        value = line.Substring(splitIdx + 1).Trim();
+                        prop = line[..splitIdx].Trim();
+                        value = line[(splitIdx + 1)..].Trim();
                     }
                     else
                     {
@@ -336,7 +366,7 @@ namespace Rise.App.ViewModels
                         artist = inf[1].Trim();
                         title = inf[2].Trim();
                     }
-                    else if (prop == "#EXTDESC" || prop == "#DESCRIPTION")
+                    else if (prop is "#EXTDESC" or "#DESCRIPTION")
                     {
                         playlist.Description = value;
                     }
@@ -360,10 +390,9 @@ namespace Rise.App.ViewModels
                     {
                         StorageFile songFile = await StorageFile.GetFileFromPathAsync(line);
 
-                        if (songFile != null)
-                            song = new(await Song.GetFromFileAsync(songFile));
-                        else
-                            song = new()
+                        song = songFile != null
+                            ? new(await Song.GetFromFileAsync(songFile))
+                            : new()
                             {
                                 Title = "Title",
                                 Track = 0,

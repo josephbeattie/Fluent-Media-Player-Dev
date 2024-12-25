@@ -11,7 +11,7 @@ namespace Rise.App.Views
     /// </summary>
     public sealed partial class ConnectedDevicesPage : Page
     {
-        private Collection<DeviceViewModel> _devices = new();
+        private readonly Collection<DeviceViewModel> _devices = [];
 
         public ConnectedDevicesPage()
         {

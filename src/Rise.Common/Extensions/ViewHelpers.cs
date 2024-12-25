@@ -19,14 +19,16 @@ namespace Rise.Common.Extensions
         public static async Task<bool> OpenViewAsync<TPage>(object parameter = null, Size minSize = default, bool useMinSize = true)
             where TPage : Page
         {
-            var view = await CreateViewAsync<TPage>(parameter);
+            ApplicationView view = await CreateViewAsync<TPage>(parameter);
             bool shown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(view.Id);
 
             if (shown)
             {
                 view.SetPreferredMinSize(minSize);
                 if (useMinSize)
+                {
                     _ = view.TryResizeView(minSize);
+                }
             }
 
             return shown;
@@ -40,15 +42,15 @@ namespace Rise.Common.Extensions
         public static Task<ApplicationView> CreateViewAsync<TPage>(object parameter = null)
             where TPage : Page
         {
-            var window = CoreApplication.CreateNewView();
-            var tcs = new TaskCompletionSource<ApplicationView>();
+            CoreApplicationView window = CoreApplication.CreateNewView();
+            TaskCompletionSource<ApplicationView> tcs = new();
 
             _ = window.DispatcherQueue.TryEnqueue(() =>
             {
-                var frame = new Frame();
+                Frame frame = new();
                 _ = frame.Navigate(typeof(TPage), parameter);
 
-                var curr = Window.Current;
+                Window curr = Window.Current;
                 curr.Content = frame;
                 curr.Activate();
 

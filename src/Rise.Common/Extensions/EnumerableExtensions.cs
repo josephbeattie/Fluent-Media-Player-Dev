@@ -13,12 +13,7 @@ namespace Rise.Common.Extensions
 
         public static IList<T> CloneList<T>(this IEnumerable<T> source)
         {
-            IList<T> list = new List<T>();
-
-            foreach (var item in source)
-            {
-                list.Add(item);
-            }
+            IList<T> list = [.. source];
 
             return list;
         }
@@ -26,11 +21,11 @@ namespace Rise.Common.Extensions
         public static IList<T2> CloneList<T1, T2>(this IEnumerable<T1> source, Func<T1, T2> convert = null)
             where T2 : class
         {
-            IList<T2> list = new List<T2>();
+            IList<T2> list = [];
 
             convert ??= (t1) => t1 as T2;
 
-            foreach (var item in source)
+            foreach (T1 item in source)
             {
                 list.Add(convert(item));
             }
@@ -40,10 +35,9 @@ namespace Rise.Common.Extensions
 
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rnd)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (rnd == null) throw new ArgumentNullException(nameof(rnd));
-
-            return ShuffleIterator<T>(source, rnd);
+            return source == null
+                ? throw new ArgumentNullException(nameof(source))
+                : rnd == null ? throw new ArgumentNullException(nameof(rnd)) : ShuffleIterator<T>(source, rnd);
         }
 
         private static IEnumerable<T> ShuffleIterator<T>(IEnumerable<T> source, Random rnd)

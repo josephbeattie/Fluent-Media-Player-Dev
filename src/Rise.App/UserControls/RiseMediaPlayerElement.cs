@@ -26,7 +26,7 @@ namespace Rise.App.UserControls
     // Dependency Properties
     public sealed partial class RiseMediaPlayerElement : MediaPlayerElement
     {
-        public readonly static DependencyProperty MediaPlayerVisibilityProperty =
+        public static readonly DependencyProperty MediaPlayerVisibilityProperty =
             DependencyProperty.Register(nameof(MediaPlayerVisibility), typeof(Visibility),
                 typeof(RiseMediaPlayerElement), new PropertyMetadata(Visibility.Visible));
     }
@@ -37,20 +37,26 @@ namespace Rise.App.UserControls
         private async void OnVolumeChanged(MediaPlayer sender, object args)
         {
             if (!sender.IsMuted)
+            {
                 await HandleVolumeChangedAsync(sender.Volume);
+            }
         }
 
         private async void OnIsMutedChanged(MediaPlayer sender, object args)
         {
             if (!sender.IsMuted)
+            {
                 await HandleVolumeChangedAsync(sender.Volume);
+            }
             else
+            {
                 await HandleMutedAsync();
+            }
         }
 
         private IAsyncAction HandleVolumeChangedAsync(double newVolume)
         {
-            var state = newVolume switch
+            string state = newVolume switch
             {
                 0 => "NoVolumeState",
                 < 0.33 => "LowVolumeState",

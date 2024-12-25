@@ -101,14 +101,16 @@ namespace Rise.App.Views
 
             AppTitleBar.SetTitleBarForCurrentView();
 
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             UpdateTitleBarLayout(coreTitleBar);
 
             coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
 
-            var date = DateTime.Now;
+            DateTime date = DateTime.Now;
             if (date != null && date.Month == 4 && date.Day == 1)
+            {
                 RiseSpan.Text = "Rice";
+            }
 
             SetupNavigation();
         }
@@ -117,7 +119,7 @@ namespace Rise.App.Views
         {
             NavDataSource.PopulateGroups();
 
-            var playlists = (NavigationItemDestination)NavDataSource.GetItem("PlaylistsPage");
+            NavigationItemDestination playlists = (NavigationItemDestination)NavDataSource.GetItem("PlaylistsPage");
             playlists.Children = PBackend.Items;
         }
 
@@ -132,7 +134,9 @@ namespace Rise.App.Views
 
                 // Startup setting
                 if (ContentFrame.Content == null)
-                    ContentFrame.Navigate(Destinations[SViewModel.Open]);
+                {
+                    _ = ContentFrame.Navigate(Destinations[SViewModel.Open]);
+                }
 
                 // Change tracking
                 await App.InitializeChangeTrackingAsync();
@@ -168,12 +172,14 @@ namespace Rise.App.Views
             }
 
             if (MViewModel.IsScanning)
+            {
                 _ = VisualStateManager.GoToState(this, "ScanningState", false);
+            }
         }
 
         private void OnPageUnloaded(object sender, RoutedEventArgs e)
         {
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.LayoutMetricsChanged -= CoreTitleBar_LayoutMetricsChanged;
 
             MViewModel.IndexingStarted -= MViewModel_IndexingStarted;
@@ -195,12 +201,18 @@ namespace Rise.App.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             if (!string.IsNullOrEmpty(_navState))
+            {
                 ContentFrame.SetNavigationState(_navState);
+            }
 
             if (MPViewModel.PlayerCreated)
+            {
                 InitializePlayerElement(MPViewModel.Player);
+            }
             else
+            {
                 MPViewModel.MediaPlayerRecreated += OnMediaPlayerRecreated;
+            }
 
             await HandleViewModelColorSettingAsync();
         }
@@ -218,23 +230,19 @@ namespace Rise.App.Views
             });
 
             if (MPViewModel.PlayingItemType == MediaPlaybackType.Music)
+            {
                 _ = await LMViewModel.TryScrobbleItemAsync(e);
+            }
         }
 
         private void OnContentFrameSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            switch (e.NewSize.Width)
+            _ = e.NewSize.Width switch
             {
-                case >= 725:
-                    VisualStateManager.GoToState(this, "WideContentAreaLayout", true);
-                    break;
-                case >= 550:
-                    VisualStateManager.GoToState(this, "MediumContentAreaLayout", true);
-                    break;
-                default:
-                    VisualStateManager.GoToState(this, "NarrowContentAreaLayout", true);
-                    break;
-            }
+                >= 725 => VisualStateManager.GoToState(this, "WideContentAreaLayout", true),
+                >= 550 => VisualStateManager.GoToState(this, "MediumContentAreaLayout", true),
+                _ => VisualStateManager.GoToState(this, "NarrowContentAreaLayout", true),
+            };
         }
 
         private async void OnMediaPlayerRecreated(object sender, MediaPlayer e)
@@ -255,48 +263,65 @@ namespace Rise.App.Views
         {
             if (newValue)
             {
-                var queueButton = MainPlayer.FindDescendant<AppBarToggleButton>(a => a.Name == "QueueButton");
+                AppBarToggleButton queueButton = MainPlayer.FindDescendant<AppBarToggleButton>(a => a.Name == "QueueButton");
                 if (queueButton != null)
+                {
                     QueueFlyout.ShowAt(queueButton);
+                }
             }
         }
 
         private void QueueFlyout_Closed(object sender, object e)
-            => PlayerControls.IsQueueButtonChecked = false;
+        {
+            PlayerControls.IsQueueButtonChecked = false;
+        }
 
         [RelayCommand]
         private void EnterFullScreen()
         {
-            if (MPViewModel.PlayingItem == null) return;
+            if (MPViewModel.PlayingItem == null)
+            {
+                return;
+            }
 
-            var view = ApplicationView.GetForCurrentView();
+            ApplicationView view = ApplicationView.GetForCurrentView();
             if (view.IsFullScreenMode || view.TryEnterFullScreenMode())
-                Frame.Navigate(typeof(NowPlayingPage), true);
+            {
+                _ = Frame.Navigate(typeof(NowPlayingPage), true);
+            }
         }
 
         [RelayCommand]
         private async Task AddToPlaylistAsync(PlaylistViewModel playlist)
         {
-            var playlistHelper = new AddToPlaylistHelper(App.MViewModel.Playlists);
+            AddToPlaylistHelper playlistHelper = new(App.MViewModel.Playlists);
 
             IMediaItem mediaItem = null;
 
             if (MPViewModel.PlayingItemType == MediaPlaybackType.Music)
+            {
                 mediaItem = MViewModel.Songs.FirstOrDefault(s => s.Location == MPViewModel.PlayingItemProperties.Location);
+            }
             else if (MPViewModel.PlayingItemType == MediaPlaybackType.Video)
+            {
                 mediaItem = MViewModel.Videos.FirstOrDefault(v => v.Location == MPViewModel.PlayingItemProperties.Location);
+            }
 
             if (mediaItem == null)
             {
                 if (MPViewModel.PlayingItemType == MediaPlaybackType.Music)
+                {
                     mediaItem = await MPViewModel.PlayingItem.AsSongAsync();
+                }
                 else if (MPViewModel.PlayingItemType == MediaPlaybackType.Video)
+                {
                     mediaItem = await MPViewModel.PlayingItem.AsVideoAsync();
+                }
             }
 
             if (playlist == null)
             {
-                await playlistHelper.CreateNewPlaylistAsync(mediaItem);
+                _ = await playlistHelper.CreateNewPlaylistAsync(mediaItem);
             }
             else
             {
@@ -311,24 +336,38 @@ namespace Rise.App.Views
             if (MPViewModel.PlayingItem != null)
             {
                 if (newMode == ApplicationViewMode.CompactOverlay)
+                {
                     return CompactNowPlayingPage.NavigateAsync(Frame);
+                }
                 else
+                {
                     _ = Frame.Navigate(typeof(NowPlayingPage), null, new DrillInNavigationTransitionInfo());
+                }
             }
 
             return Task.CompletedTask;
         }
 
         private async void OnDisplayItemClick(object sender, RoutedEventArgs e)
-            => await GoToNowPlayingAsync(ApplicationViewMode.Default);
+        {
+            await GoToNowPlayingAsync(ApplicationViewMode.Default);
+        }
 
         private void OnDisplayItemRightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            if (MPViewModel.PlayingItem == null) return;
+            if (MPViewModel.PlayingItem == null)
+            {
+                return;
+            }
+
             if (MPViewModel.PlayingItemType == MediaPlaybackType.Video)
+            {
                 PlayingItemVideoFlyout.ShowAt(MainPlayer);
+            }
             else
+            {
                 PlayingItemMusicFlyout.ShowAt(MainPlayer);
+            }
         }
 
         private async void MViewModel_IndexingStarted(object sender, EventArgs e)
@@ -361,10 +400,14 @@ namespace Rise.App.Views
         }
 
         private void NavigationViewControl_DisplayModeChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewDisplayModeChangedEventArgs args)
-            => UpdateTitleBarItems(sender);
+        {
+            UpdateTitleBarItems(sender);
+        }
 
         private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
-            => UpdateTitleBarLayout(sender);
+        {
+            UpdateTitleBarLayout(sender);
+        }
 
         /// <summary>
         /// Update the TitleBar layout.
@@ -372,7 +415,7 @@ namespace Rise.App.Views
         private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
         {
             // Ensure the custom title bar does not overlap window caption controls
-            var currMargin = AppTitleBar.Margin;
+            Thickness currMargin = AppTitleBar.Margin;
             AppTitleBar.Margin = new Thickness(currMargin.Left, currMargin.Top, coreTitleBar.SystemOverlayRightInset, currMargin.Bottom);
 
             currMargin = ControlsPanel.Margin;
@@ -384,7 +427,7 @@ namespace Rise.App.Views
         /// </summary>
         private void UpdateTitleBarItems(Microsoft.UI.Xaml.Controls.NavigationView navView)
         {
-            var currMargin = AppTitleBar.Margin;
+            Thickness currMargin = AppTitleBar.Margin;
 
             // Set the TitleBar margin dependent on NavigationView display mode
             if (navView.DisplayMode == Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode.Minimal)
@@ -408,20 +451,26 @@ namespace Rise.App.Views
         private void OnNavigated(object sender, NavigationEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.New)
+            {
                 return;
+            }
 
-            var type = ContentFrame.CurrentSourcePageType;
+            Type type = ContentFrame.CurrentSourcePageType;
             bool hasKey = Destinations.TryGetKey(type, out string key);
 
             // We need to handle unlisted destinations
             if (!hasKey)
+            {
                 hasKey = UnlistedDestinations.TryGetKey(type, out key);
+            }
 
             if (hasKey)
             {
-                var item = NavDataSource.GetItem(key);
+                NavigationItemBase item = NavDataSource.GetItem(key);
                 if (item != null)
+                {
                     NavView.SelectedItem = item;
+                }
             }
         }
 
@@ -442,19 +491,19 @@ namespace Rise.App.Views
         /// <param name="args">Details about the item invocation.</param>
         private void NavigationView_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
-            var invoked = args.InvokedItemContainer?.Tag;
+            object invoked = args.InvokedItemContainer?.Tag;
             if (invoked is NavigationItemBase item)
             {
                 string id = item.Id;
                 if (ContentFrame.SourcePageType != Destinations[id])
                 {
-                    ContentFrame.Navigate(Destinations[id],
+                    _ = ContentFrame.Navigate(Destinations[id],
                         null, args.RecommendedNavigationTransitionInfo);
                 }
             }
             else if (invoked is PlaylistViewModel playlist)
             {
-                ContentFrame.Navigate(typeof(PlaylistDetailsPage),
+                _ = ContentFrame.Navigate(typeof(PlaylistDetailsPage),
                     playlist.Id, args.RecommendedNavigationTransitionInfo);
             }
         }
@@ -467,14 +516,16 @@ namespace Rise.App.Views
         /// <param name="args">Details about the key invocation.</param>
         private void NavigationViewItem_AccessKeyInvoked(UIElement sender, AccessKeyInvokedEventArgs args)
         {
-            var elm = sender as FrameworkElement;
+            FrameworkElement elm = sender as FrameworkElement;
             if (elm?.Tag is NavigationItemBase item)
             {
                 string id = item.Id;
-                var pageType = Destinations[id];
+                Type pageType = Destinations[id];
 
                 if (ContentFrame.SourcePageType != pageType)
-                    ContentFrame.Navigate(pageType);
+                {
+                    _ = ContentFrame.Navigate(pageType);
+                }
             }
         }
 
@@ -495,13 +546,13 @@ namespace Rise.App.Views
             {
                 if (MPViewModel.PlayingItem != null)
                 {
-                    using var stream = await MPViewModel.
+                    using Windows.Storage.Streams.IRandomAccessStreamWithContentType stream = await MPViewModel.
                         PlayingItemProperties.Thumbnail.OpenReadAsync();
 
-                    var decoder = await BitmapDecoder.CreateAsync(stream);
-                    var colorThief = new ColorThiefDotNet.ColorThief();
+                    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+                    ColorThiefDotNet.ColorThief colorThief = new();
 
-                    var stolen = (await colorThief.GetColor(decoder)).Color;
+                    ColorThiefDotNet.Color stolen = (await colorThief.GetColor(decoder)).Color;
                     SViewModel.GlazeColors = Color.FromArgb(25, stolen.R, stolen.G, stolen.B);
                 }
                 else
@@ -524,13 +575,13 @@ namespace Rise.App.Views
 
         private void OpenSettings_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AllSettingsPage));
+            _ = Frame.Navigate(typeof(AllSettingsPage));
         }
 
         private void NavigationViewItem_ContextRequested(UIElement sender, ContextRequestedEventArgs args)
         {
-            var elm = sender as FrameworkElement;
-            var item = elm?.Tag as NavigationItemDestination;
+            FrameworkElement elm = sender as FrameworkElement;
+            NavigationItemDestination item = elm?.Tag as NavigationItemDestination;
 
             string flyoutId = item?.FlyoutId;
             if (!string.IsNullOrEmpty(flyoutId))
@@ -547,11 +598,15 @@ namespace Rise.App.Views
                     BottomOption.IsEnabled = down;
                 }
 
-                var flyout = Resources[flyoutId] as MenuFlyout;
-                if (args.TryGetPosition(sender, out var point))
+                MenuFlyout flyout = Resources[flyoutId] as MenuFlyout;
+                if (args.TryGetPosition(sender, out Windows.Foundation.Point point))
+                {
                     flyout.ShowAt(sender, point);
+                }
                 else
+                {
                     flyout.ShowAt(elm);
+                }
             }
 
             args.Handled = true;
@@ -571,7 +626,9 @@ namespace Rise.App.Views
         }
 
         private async void Support_Click(object sender, RoutedEventArgs e)
-            => await URLs.Support.LaunchAsync();
+        {
+            _ = await URLs.Support.LaunchAsync();
+        }
 
         private async void Account_Click(object sender, RoutedEventArgs e)
         {
@@ -582,7 +639,7 @@ namespace Rise.App.Views
             }
             else
             {
-                Frame.Navigate(typeof(AllSettingsPage));
+                _ = Frame.Navigate(typeof(AllSettingsPage));
             }
         }
 
@@ -611,7 +668,7 @@ namespace Rise.App.Views
 
                 case "Artist":
                     ArtistViewModel artist = App.MViewModel.Artists.FirstOrDefault(a => a.Name.Equals(searchItem.Title));
-                    ContentFrame.Navigate(typeof(ArtistSongsPage), artist.Model.Id);
+                    _ = ContentFrame.Navigate(typeof(ArtistSongsPage), artist.Model.Id);
                     break;
             }
         }
@@ -620,10 +677,10 @@ namespace Rise.App.Views
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                List<SearchItemViewModel> suitableItems = new();
-                List<ArtistViewModel> suitableArtists = new();
-                List<SongViewModel> suitableSongs = new();
-                List<AlbumViewModel> suitableAlbums = new();
+                List<SearchItemViewModel> suitableItems = [];
+                List<ArtistViewModel> suitableArtists = [];
+                List<SongViewModel> suitableSongs = [];
+                List<AlbumViewModel> suitableAlbums = [];
 
                 int maxCount = 4;
 
@@ -694,14 +751,7 @@ namespace Rise.App.Views
 
         public static Visibility IsStringEmpty(string str)
         {
-            if (string.IsNullOrWhiteSpace(str))
-            {
-                return Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
+            return string.IsNullOrWhiteSpace(str) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void AddedTip_ActionButtonClick(Microsoft.UI.Xaml.Controls.TeachingTip sender, object args)
@@ -712,11 +762,15 @@ namespace Rise.App.Views
         private void OnAlbumButtonClick(object sender, RoutedEventArgs e)
         {
             if (MPViewModel.PlayingItemType != MediaPlaybackType.Music)
+            {
                 return;
+            }
 
-            var album = MViewModel.Albums.FirstOrDefault(a => a.Model.Title == MPViewModel.PlayingItemProperties.Album);
+            AlbumViewModel album = MViewModel.Albums.FirstOrDefault(a => a.Model.Title == MPViewModel.PlayingItemProperties.Album);
             if (album != null)
-                ContentFrame.Navigate(typeof(AlbumSongsPage), album.Model.Id);
+            {
+                _ = ContentFrame.Navigate(typeof(AlbumSongsPage), album.Model.Id);
+            }
 
             PlayingItemMusicFlyout.Hide();
         }
@@ -724,20 +778,27 @@ namespace Rise.App.Views
         private void OnArtistButtonClick(object sender, RoutedEventArgs e)
         {
             if (MPViewModel.PlayingItemType != MediaPlaybackType.Music)
+            {
                 return;
+            }
 
-            var artist = MViewModel.Artists.FirstOrDefault(a => a.Model.Name == MPViewModel.PlayingItemProperties.Artist);
+            ArtistViewModel artist = MViewModel.Artists.FirstOrDefault(a => a.Model.Name == MPViewModel.PlayingItemProperties.Artist);
             if (artist != null)
-                ContentFrame.Navigate(typeof(ArtistSongsPage), artist.Model.Id);
+            {
+                _ = ContentFrame.Navigate(typeof(ArtistSongsPage), artist.Model.Id);
+            }
 
             PlayingItemMusicFlyout.Hide();
         }
 
         private void GoToScanningSettings_Click(object sender, RoutedEventArgs e)
-            => _ = Frame.Navigate(typeof(AllSettingsPage));
-
+        {
+            _ = Frame.Navigate(typeof(AllSettingsPage));
+        }
 
         private void DismissButton_Click(object sender, RoutedEventArgs e)
-            => _ = VisualStateManager.GoToState(this, "NotScanningState", false);
+        {
+            _ = VisualStateManager.GoToState(this, "NotScanningState", false);
+        }
     }
 }

@@ -29,13 +29,19 @@ public sealed partial class GroupedCollectionView
     public bool IsReadOnly => _source.IsReadOnly;
 
     public int IndexOf(object item)
-        => _view.IndexOf(item);
+    {
+        return _view.IndexOf(item);
+    }
 
     public void Add(object item)
-        => _source.Add(item);
+    {
+        _ = _source.Add(item);
+    }
 
     public void Insert(int index, object item)
-        => _source.Insert(index, item);
+    {
+        _source.Insert(index, item);
+    }
 
     public bool Remove(object item)
     {
@@ -50,30 +56,47 @@ public sealed partial class GroupedCollectionView
     }
 
     public void RemoveAt(int index)
-        => Remove(_view[index]);
+    {
+        _ = Remove(_view[index]);
+    }
 
     public void Clear()
-        => _source.Clear();
+    {
+        _source.Clear();
+    }
 
     public bool Contains(object item)
-        => _view.Contains(item);
+    {
+        return _view.Contains(item);
+    }
 
     public void CopyTo(object[] array, int arrayIndex)
-        => _view.CopyTo(array, arrayIndex);
+    {
+        _view.CopyTo(array, arrayIndex);
+    }
 
-    public IEnumerator<object> GetEnumerator() => _view.GetEnumerator();
-    IEnumerator IEnumerable.GetEnumerator() => _view.GetEnumerator();
+    public IEnumerator<object> GetEnumerator()
+    {
+        return _view.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return _view.GetEnumerator();
+    }
 
     // View handling
     private void RemoveFromView(int itemIndex)
     {
-        var item = _view[itemIndex];
+        object item = _view[itemIndex];
 
         _view.RemoveAt(itemIndex);
         RemoveItemFromGroup(item);
 
         if (itemIndex <= CurrentPosition)
+        {
             CurrentPosition--;
+        }
 
         OnVectorChanged(CollectionChange.ItemRemoved, (uint)itemIndex);
     }
@@ -81,23 +104,33 @@ public sealed partial class GroupedCollectionView
     private bool OnItemAdded(int newStartingIndex, object newItem, int? viewIndex = null)
     {
         if (_filter != null && !_filter(newItem))
+        {
             return false;
+        }
 
         int newIndex = _view.Count;
         if (_sortDescriptions.Any())
         {
             newIndex = _view.BinarySearch(newItem, this);
             if (newIndex < 0)
+            {
                 newIndex = ~newIndex;
+            }
         }
         else if (_filter != null)
         {
             if (newStartingIndex == 0 || _view.Count == 0)
+            {
                 newIndex = 0;
+            }
             else if (newStartingIndex == _source.Count - 1)
+            {
                 newIndex = _view.Count - 1;
+            }
             else if (viewIndex.HasValue)
+            {
                 newIndex = viewIndex.Value;
+            }
             else
             {
                 for (int i = 0, j = 0; i < _source.Count; i++)
@@ -109,7 +142,9 @@ public sealed partial class GroupedCollectionView
                     }
 
                     if (_view[j] == _source[i])
+                    {
                         j++;
+                    }
                 }
             }
         }
@@ -118,7 +153,9 @@ public sealed partial class GroupedCollectionView
         AddItemToGroup(newItem);
 
         if (newIndex <= CurrentPosition)
+        {
             CurrentPosition++;
+        }
 
         OnVectorChanged(CollectionChange.ItemInserted, (uint)newIndex);
         return true;
@@ -127,20 +164,28 @@ public sealed partial class GroupedCollectionView
     private void OnItemRemoved(int oldStartingIndex, object oldItem)
     {
         if (_filter != null && !_filter(oldItem))
+        {
             return;
+        }
 
         if (oldStartingIndex < 0 || oldStartingIndex >= _view.Count || !Equals(_view[oldStartingIndex], oldItem))
+        {
             oldStartingIndex = _view.IndexOf(oldItem);
+        }
 
         if (oldStartingIndex < 0)
+        {
             return;
+        }
 
         RemoveFromView(oldStartingIndex);
     }
 
     // Group handling
     private object GetItemGroup(object item)
-        => _groupDescription.ValueDelegate(item);
+    {
+        return _groupDescription.ValueDelegate(item);
+    }
 
     /// <summary>
     /// Adds a new group to <see cref="CollectionGroups"/> with the
@@ -150,14 +195,16 @@ public sealed partial class GroupedCollectionView
     /// <returns>The new collection group.</returns>
     public ICollectionViewGroup AddCollectionGroup(object key)
     {
-        var group = (ICollectionViewGroup)_collectionGroups.FirstOrDefault(g => Equals(((ICollectionViewGroup)g).Group, key));
+        ICollectionViewGroup group = (ICollectionViewGroup)_collectionGroups.FirstOrDefault(g => Equals(((ICollectionViewGroup)g).Group, key));
         if (group == null)
         {
             group = new CollectionViewGroup(key);
 
             int groupIndex = _collectionGroups.BinarySearch(group, _collectionGroupComparer);
             if (groupIndex < 0)
+            {
                 groupIndex = ~groupIndex;
+            }
 
             _collectionGroups.Insert(groupIndex, group);
         }
@@ -173,12 +220,14 @@ public sealed partial class GroupedCollectionView
     /// <returns>The new collection groups.</returns>
     public IEnumerable<ICollectionViewGroup> AddCollectionGroups(IEnumerable<object> keys)
     {
-        var added = new List<ICollectionViewGroup>();
+        List<ICollectionViewGroup> added = [];
 
         // If we use yield here, the groups won't be added until
         // the return value is enumerated, which is not ideal
-        foreach (var key in keys)
+        foreach (object key in keys)
+        {
             added.Add(AddCollectionGroup(key));
+        }
 
         return added;
     }
@@ -186,19 +235,23 @@ public sealed partial class GroupedCollectionView
     private void AddItemToGroup(object item)
     {
         if (_groupDescription == null)
+        {
             return;
+        }
 
         object key = GetItemGroup(item);
-        var group = AddCollectionGroup(key);
+        ICollectionViewGroup group = AddCollectionGroup(key);
 
-        var items = group.GroupItems;
+        IObservableVector<object> items = group.GroupItems;
         int index = items.Count;
 
         if (_sortDescriptions.Any())
         {
             index = items.BinarySearch(item, this);
             if (index < 0)
+            {
                 index = ~index;
+            }
         }
 
         items.Insert(index, item);
@@ -207,11 +260,13 @@ public sealed partial class GroupedCollectionView
     private void RemoveItemFromGroup(object item)
     {
         if (_groupDescription == null)
+        {
             return;
+        }
 
         object key = GetItemGroup(item);
 
-        var group = (ICollectionViewGroup)_collectionGroups.FirstOrDefault(g => ((ICollectionViewGroup)g).Group == key);
+        ICollectionViewGroup group = (ICollectionViewGroup)_collectionGroups.FirstOrDefault(g => ((ICollectionViewGroup)g).Group == key);
         _ = group?.GroupItems.Remove(item);
     }
 
@@ -220,7 +275,9 @@ public sealed partial class GroupedCollectionView
 
     public bool HasMoreItems => _incrementalSource?.HasMoreItems ?? false;
     public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
-        => _incrementalSource?.LoadMoreItemsAsync(count);
+    {
+        return _incrementalSource?.LoadMoreItemsAsync(count);
+    }
 
     private sealed class CollectionGroupComparer : IComparer, IComparer<object>, IComparer<ICollectionViewGroup>
     {
@@ -240,6 +297,8 @@ public sealed partial class GroupedCollectionView
         }
 
         public int Compare(object x, object y)
-            => Compare((ICollectionViewGroup)x, (ICollectionViewGroup)y);
+        {
+            return Compare((ICollectionViewGroup)x, (ICollectionViewGroup)y);
+        }
     }
 }

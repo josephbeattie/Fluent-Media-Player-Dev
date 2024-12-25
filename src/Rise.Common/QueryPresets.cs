@@ -12,15 +12,15 @@ namespace Rise.Common
     /// </summary>
     public static class QueryPresets
     {
-        private readonly static Lazy<QueryOptions> _songOptions
+        private static readonly Lazy<QueryOptions> _songOptions
             = new(() => CreateQueryOptions(SupportedFileTypes.MusicFiles, ThumbnailMode.MusicView, 134));
         public static QueryOptions SongQueryOptions => _songOptions.Value;
 
-        private readonly static Lazy<QueryOptions> _videoOptions
+        private static readonly Lazy<QueryOptions> _videoOptions
             = new(() => CreateQueryOptions(SupportedFileTypes.VideoFiles, ThumbnailMode.VideosView, 238));
         public static QueryOptions VideoQueryOptions => _videoOptions.Value;
 
-        private readonly static Lazy<QueryOptions> _playlistOptions
+        private static readonly Lazy<QueryOptions> _playlistOptions
             = new(() => CreateQueryOptions(SupportedFileTypes.PlaylistFiles));
         public static QueryOptions PlaylistQueryOptions => _playlistOptions.Value;
 
@@ -37,7 +37,7 @@ namespace Rise.Common
             ThumbnailMode prefetchMode,
             uint prefetchSize)
         {
-            var options = CreateQueryOptions(fileTypeFilter);
+            QueryOptions options = CreateQueryOptions(fileTypeFilter);
             options.SetThumbnailPrefetch(prefetchMode, prefetchSize, ThumbnailOptions.None);
             return options;
         }

@@ -16,7 +16,7 @@ namespace Rise.Data.Json
     /// <typeparam name="T">Type of items to store.</typeparam>
     public sealed partial class JsonBackendController<T>
     {
-        private static readonly Dictionary<string, object> _controllers = new();
+        private static readonly Dictionary<string, object> _controllers = [];
 
         private static StorageFolder _dataFolder;
         private static readonly StorageFolder dataFolder
@@ -41,16 +41,16 @@ namespace Rise.Data.Json
         {
             if (_controllers.ContainsKey(filename))
             {
-                var cached = _controllers[filename];
-                if (cached is JsonBackendController<T> ctrl)
-                    return ctrl;
-                throw new InvalidOperationException("The cached instance of this controller uses a different type.");
+                object cached = _controllers[filename];
+                return cached is JsonBackendController<T> ctrl
+                    ? ctrl
+                    : throw new InvalidOperationException("The cached instance of this controller uses a different type.");
             }
 
-            var file = dataFolder.CreateFileAsync($"{filename}.json", CreationCollisionOption.OpenIfExists).Get();
-            var controller = new JsonBackendController<T>(file);
+            StorageFile file = dataFolder.CreateFileAsync($"{filename}.json", CreationCollisionOption.OpenIfExists).Get();
+            JsonBackendController<T> controller = new(file);
 
-            var items = controller.GetStoredItems();
+            IEnumerable<T> items = controller.GetStoredItems();
             controller.Items = new(items);
 
             _controllers[filename] = controller;
@@ -68,16 +68,16 @@ namespace Rise.Data.Json
         {
             if (_controllers.ContainsKey(filename))
             {
-                var cached = _controllers[filename];
-                if (cached is JsonBackendController<T> ctrl)
-                    return ctrl;
-                throw new InvalidOperationException("The cached instance of this controller uses a different type.");
+                object cached = _controllers[filename];
+                return cached is JsonBackendController<T> ctrl
+                    ? ctrl
+                    : throw new InvalidOperationException("The cached instance of this controller uses a different type.");
             }
 
-            var file = await dataFolder.CreateFileAsync($"{filename}.json", CreationCollisionOption.OpenIfExists);
-            var controller = new JsonBackendController<T>(file);
+            StorageFile file = await dataFolder.CreateFileAsync($"{filename}.json", CreationCollisionOption.OpenIfExists);
+            JsonBackendController<T> controller = new(file);
 
-            var items = await controller.GetStoredItemsAsync();
+            IEnumerable<T> items = await controller.GetStoredItemsAsync();
             controller.Items = new(items);
 
             _controllers[filename] = controller;
@@ -98,11 +98,8 @@ namespace Rise.Data.Json
         /// </summary>
         public IEnumerable<T> GetStoredItems()
         {
-            var text = FileIO.ReadTextAsync(BackingFile).Get();
-            if (!string.IsNullOrWhiteSpace(text))
-                return JsonConvert.DeserializeObject<IEnumerable<T>>(text);
-
-            return Enumerable.Empty<T>();
+            string text = FileIO.ReadTextAsync(BackingFile).Get();
+            return !string.IsNullOrWhiteSpace(text) ? JsonConvert.DeserializeObject<IEnumerable<T>>(text) : Enumerable.Empty<T>();
         }
 
         /// <summary>
@@ -110,11 +107,8 @@ namespace Rise.Data.Json
         /// </summary>
         public async Task<IEnumerable<T>> GetStoredItemsAsync()
         {
-            var text = await FileIO.ReadTextAsync(BackingFile);
-            if (!string.IsNullOrWhiteSpace(text))
-                return JsonConvert.DeserializeObject<IEnumerable<T>>(text);
-
-            return Enumerable.Empty<T>();
+            string text = await FileIO.ReadTextAsync(BackingFile);
+            return !string.IsNullOrWhiteSpace(text) ? JsonConvert.DeserializeObject<IEnumerable<T>>(text) : Enumerable.Empty<T>();
         }
 
         /// <summary>

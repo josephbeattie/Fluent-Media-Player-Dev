@@ -12,7 +12,7 @@ namespace Rise.App.Converters
             {
                 if (param == "Reverse")
                 {
-                    return !(value is string val) || val.Length == 0;
+                    return value is not string val || val.Length == 0;
                 }
             }
 

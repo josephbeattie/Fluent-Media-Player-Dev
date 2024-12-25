@@ -35,6 +35,13 @@ public sealed class CollectionViewGroup : ICollectionViewGroup, IGrouping<object
         GroupItems = new ObservableVector<object>(items);
     }
 
-    public IEnumerator<object> GetEnumerator() => GroupItems.GetEnumerator();
-    IEnumerator IEnumerable.GetEnumerator() => GroupItems.GetEnumerator();
+    public IEnumerator<object> GetEnumerator()
+    {
+        return GroupItems.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GroupItems.GetEnumerator();
+    }
 }

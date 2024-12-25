@@ -4,15 +4,7 @@ namespace Rise.Data.Collections;
 
 public sealed partial class GroupedCollectionView
 {
-    public object CurrentItem
-    {
-        get
-        {
-            if (CurrentPosition > -1 && CurrentPosition < _view.Count)
-                return _view[CurrentPosition];
-            return null;
-        }
-    }
+    public object CurrentItem => CurrentPosition > -1 && CurrentPosition < _view.Count ? _view[CurrentPosition] : null;
     public int CurrentPosition { get; private set; }
 
     public bool IsCurrentBeforeFirst => CurrentPosition < 0;
@@ -20,36 +12,48 @@ public sealed partial class GroupedCollectionView
 
     public bool MoveCurrentTo(object item)
     {
-        if (item == CurrentItem)
-            return true;
-        return MoveCurrentToIndex(_view.IndexOf(item));
+        return item == CurrentItem || MoveCurrentToIndex(_view.IndexOf(item));
     }
 
     public bool MoveCurrentToPosition(int index)
-        => MoveCurrentToIndex(index);
+    {
+        return MoveCurrentToIndex(index);
+    }
 
     public bool MoveCurrentToFirst()
-        => MoveCurrentToIndex(0);
+    {
+        return MoveCurrentToIndex(0);
+    }
 
     public bool MoveCurrentToLast()
-        => MoveCurrentToIndex(_view.Count - 1);
+    {
+        return MoveCurrentToIndex(_view.Count - 1);
+    }
 
     public bool MoveCurrentToNext()
-        => MoveCurrentToIndex(CurrentPosition + 1);
+    {
+        return MoveCurrentToIndex(CurrentPosition + 1);
+    }
 
     public bool MoveCurrentToPrevious()
-        => MoveCurrentToIndex(CurrentPosition - 1);
+    {
+        return MoveCurrentToIndex(CurrentPosition - 1);
+    }
 
     private bool MoveCurrentToIndex(int index)
     {
         if (index < -1 || index >= _view.Count)
+        {
             return false;
+        }
 
-        var args = new CurrentChangingEventArgs();
+        CurrentChangingEventArgs args = new();
         OnCurrentChanging(args);
 
         if (args.Cancel)
+        {
             return false;
+        }
 
         CurrentPosition = index;
         OnCurrentChanged();

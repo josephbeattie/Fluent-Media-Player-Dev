@@ -12,19 +12,25 @@ namespace Rise.Common.Threading
     /// </summary>
     public struct ThreadPoolAwaiter : INotifyCompletion
     {
-        public ThreadPoolAwaiter GetAwaiter() => this;
+        public ThreadPoolAwaiter GetAwaiter()
+        {
+            return this;
+        }
+
         public bool IsCompleted => SynchronizationContext.Current == null;
 
         public void GetResult() { }
         public void OnCompleted(Action continuation)
-            => _ = ThreadPool.RunAsync(_ => continuation());
+        {
+            _ = ThreadPool.RunAsync(_ => continuation());
+        }
     }
 
     /// <summary>
     /// A custom awaiter for the Windows thread pool, adding its continuation
     /// as a work item with the provided priority and options.
     /// </summary>
-    public struct ConfiguredThreadPoolAwaiter : INotifyCompletion
+    public readonly struct ConfiguredThreadPoolAwaiter : INotifyCompletion
     {
         private readonly WorkItemPriority priority;
         private readonly WorkItemOptions options;
@@ -35,11 +41,17 @@ namespace Rise.Common.Threading
             this.options = options;
         }
 
-        public ConfiguredThreadPoolAwaiter GetAwaiter() => this;
+        public ConfiguredThreadPoolAwaiter GetAwaiter()
+        {
+            return this;
+        }
+
         public bool IsCompleted => SynchronizationContext.Current == null;
 
         public void GetResult() { }
         public void OnCompleted(Action continuation)
-            => _ = ThreadPool.RunAsync(_ => continuation(), priority, options);
+        {
+            _ = ThreadPool.RunAsync(_ => continuation(), priority, options);
+        }
     }
 }

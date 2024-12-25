@@ -124,12 +124,15 @@ namespace Rise.Models
 
     public sealed partial class UserToken
     {
-        public static UserToken FromJson(string json) => JsonConvert.DeserializeObject<UserToken>(json, TokenConverter.Settings);
+        public static UserToken FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<UserToken>(json, TokenConverter.Settings);
+        }
     }
 
     internal static class TokenConverter
     {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings Settings = new()
         {
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,

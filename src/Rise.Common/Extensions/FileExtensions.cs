@@ -23,10 +23,7 @@ namespace Rise.Common.Extensions
         /// <returns>Whether or not the launch was successful.</returns>
         public static Task<bool> LaunchAsync(this string str)
         {
-            if (str.IsValidUri())
-                return Launcher.LaunchUriAsync(new Uri(str)).AsTask();
-
-            return Task.FromResult(false);
+            return str.IsValidUri() ? Launcher.LaunchUriAsync(new Uri(str)).AsTask() : Task.FromResult(false);
         }
 
         /// <summary>
@@ -35,7 +32,9 @@ namespace Rise.Common.Extensions
         /// <param name="uri">The <see cref="Uri"/> to launch.</param>
         /// <returns>Whether or not the launch was successful.</returns>
         public static Task<bool> LaunchAsync(this Uri uri)
-            => Launcher.LaunchUriAsync(uri).AsTask();
+        {
+            return Launcher.LaunchUriAsync(uri).AsTask();
+        }
 
         /// <summary>
         /// Checks whether or not the provided <see cref="string"/> is
@@ -48,7 +47,9 @@ namespace Rise.Common.Extensions
         /// a valid <see cref="Uri"/>.</returns>
         public static bool IsValidUri(this string str,
             UriKind kind = UriKind.RelativeOrAbsolute)
-            => Uri.IsWellFormedUriString(str, kind);
+        {
+            return Uri.IsWellFormedUriString(str, kind);
+        }
 
         /// <summary>
         /// Uses the provided <paramref name="baseUri"/> to make <paramref name="relativeUri"/>
@@ -69,8 +70,8 @@ namespace Rise.Common.Extensions
         /// <param name="file">The file to get the playback item from.</param>
         public static async Task<MediaPlaybackItem> GetSongAsync(this StorageFile file)
         {
-            var source = MediaSource.CreateFromStorageFile(file);
-            var mediaProps = await file.Properties.GetMusicPropertiesAsync();
+            MediaSource source = MediaSource.CreateFromStorageFile(file);
+            MusicProperties mediaProps = await file.Properties.GetMusicPropertiesAsync();
 
             string title = mediaProps.Title.ReplaceIfNullOrWhiteSpace(file.DisplayName);
             string artist = mediaProps.Artist.ReplaceIfNullOrWhiteSpace("UnknownArtistResource");
@@ -81,8 +82,8 @@ namespace Rise.Common.Extensions
             source.CustomProperties["Location"] = file.Path;
             source.CustomProperties["Year"] = mediaProps.Year;
 
-            var media = new MediaPlaybackItem(source);
-            var props = media.GetDisplayProperties();
+            MediaPlaybackItem media = new(source);
+            MediaItemDisplayProperties props = media.GetDisplayProperties();
 
             props.Type = MediaPlaybackType.Music;
             props.MusicProperties.Title = title;
@@ -91,11 +92,10 @@ namespace Rise.Common.Extensions
             props.MusicProperties.AlbumArtist = mediaProps.AlbumArtist.ReplaceIfNullOrWhiteSpace("UnknownArtistResource");
             props.MusicProperties.TrackNumber = mediaProps.TrackNumber;
 
-            var thumb = await file.GetThumbnailAsync(ThumbnailMode.MusicView, 500);
-            if (thumb?.Type == ThumbnailType.Image)
-                props.Thumbnail = RandomAccessStreamReference.CreateFromStream(thumb);
-            else
-                props.Thumbnail = RandomAccessStreamReference.CreateFromUri(new(URIs.MusicThumb));
+            StorageItemThumbnail thumb = await file.GetThumbnailAsync(ThumbnailMode.MusicView, 500);
+            props.Thumbnail = thumb?.Type == ThumbnailType.Image
+                ? RandomAccessStreamReference.CreateFromStream(thumb)
+                : RandomAccessStreamReference.CreateFromUri(new(URIs.MusicThumb));
 
             media.ApplyDisplayProperties(props);
             return media;
@@ -108,8 +108,8 @@ namespace Rise.Common.Extensions
         /// <param name="file">The file to get the playback item from.</param>
         public static async Task<MediaPlaybackItem> GetVideoAsync(this StorageFile file)
         {
-            var source = MediaSource.CreateFromStorageFile(file);
-            var mediaProps = await file.Properties.GetVideoPropertiesAsync();
+            MediaSource source = MediaSource.CreateFromStorageFile(file);
+            VideoProperties mediaProps = await file.Properties.GetVideoPropertiesAsync();
 
             string title = mediaProps.Title.ReplaceIfNullOrWhiteSpace(file.DisplayName);
             string directors = mediaProps.Directors.Count > 0
@@ -121,18 +121,17 @@ namespace Rise.Common.Extensions
             source.CustomProperties["Location"] = file.Path;
             source.CustomProperties["Year"] = mediaProps.Year;
 
-            var media = new MediaPlaybackItem(source);
-            var props = media.GetDisplayProperties();
+            MediaPlaybackItem media = new(source);
+            MediaItemDisplayProperties props = media.GetDisplayProperties();
 
             props.Type = MediaPlaybackType.Video;
             props.VideoProperties.Title = title;
             props.VideoProperties.Subtitle = directors;
 
-            var thumb = await file.GetThumbnailAsync(ThumbnailMode.VideosView, 500);
-            if (thumb?.Type == ThumbnailType.Image)
-                props.Thumbnail = RandomAccessStreamReference.CreateFromStream(thumb);
-            else
-                props.Thumbnail = RandomAccessStreamReference.CreateFromUri(new(URIs.VideoThumb));
+            StorageItemThumbnail thumb = await file.GetThumbnailAsync(ThumbnailMode.VideosView, 500);
+            props.Thumbnail = thumb?.Type == ThumbnailType.Image
+                ? RandomAccessStreamReference.CreateFromStream(thumb)
+                : RandomAccessStreamReference.CreateFromUri(new(URIs.VideoThumb));
 
             media.ApplyDisplayProperties(props);
             return media;

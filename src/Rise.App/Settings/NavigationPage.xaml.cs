@@ -13,28 +13,28 @@ namespace Rise.App.Settings
         private NavigationDataSource NavDataSource => App.NavDataSource;
         private SettingsViewModel ViewModel => App.SViewModel;
 
-        private readonly List<IconPack> IconPacks = new()
-        {
+        private readonly List<IconPack> IconPacks =
+        [
             new(string.Empty, ResourceHelper.GetString("Default")),
             new("Colorful", ResourceHelper.GetString("Colorful"))
-        };
+        ];
 
-        private readonly List<string> Show = new()
-        {
+        private readonly List<string> Show =
+        [
             ResourceHelper.GetString("NoIcons"),
             ResourceHelper.GetString("OnlyIcons"),
             ResourceHelper.GetString("Everything")
-        };
+        ];
 
-        private readonly List<string> Startup = new()
-        {
+        private readonly List<string> Startup =
+        [
             ResourceHelper.GetString("Home"),
             ResourceHelper.GetString("Playlists"),
             ResourceHelper.GetString("Songs"),
             ResourceHelper.GetString("Artists"),
             ResourceHelper.GetString("Albums"),
             ResourceHelper.GetString("LocalVideos"),
-        };
+        ];
 
         public NavigationPage()
         {
@@ -45,16 +45,20 @@ namespace Rise.App.Settings
 
         private void IconPackComboBox_Loaded(object sender, RoutedEventArgs e)
         {
-            var selected = IconPacks.FirstOrDefault(p => p.Id == ViewModel.IconPack);
+            IconPack selected = IconPacks.FirstOrDefault(p => p.Id == ViewModel.IconPack);
             if (selected == null)
+            {
                 IconPackComboBox.SelectedIndex = 0;
+            }
             else
+            {
                 IconPackComboBox.SelectedItem = selected;
+            }
         }
 
         private void InitializeNavigationExpanders()
         {
-            var items = NavDataSource.AllItems;
+            NavigationItemCollection items = NavDataSource.AllItems;
 
             GeneralItemsExpander.ItemsSource = items.Where(i => i.Group == "GeneralGroup");
             MusicItemsExpander.ItemsSource = items.Where(i => i.Group == "MusicGroup");
@@ -63,7 +67,7 @@ namespace Rise.App.Settings
 
         private void GroupToggleSwitch_Loaded(object sender, RoutedEventArgs e)
         {
-            var toggle = (ToggleSwitch)sender;
+            ToggleSwitch toggle = (ToggleSwitch)sender;
 
             toggle.IsOn = NavDataSource.IsGroupShown((string)toggle.Tag);
             toggle.Toggled += GroupToggleSwitch_Toggled;
@@ -71,7 +75,7 @@ namespace Rise.App.Settings
 
         private void ItemToggleSwitch_Loaded(object sender, RoutedEventArgs e)
         {
-            var toggle = (ToggleSwitch)sender;
+            ToggleSwitch toggle = (ToggleSwitch)sender;
             toggle.Toggled += ItemToggleSwitch_Toggled;
         }
     }
@@ -81,26 +85,32 @@ namespace Rise.App.Settings
     {
         private void IconPackComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = (IconPack)IconPackComboBox.SelectedItem;
+            IconPack selected = (IconPack)IconPackComboBox.SelectedItem;
             ViewModel.IconPack = selected.Id;
         }
 
         private void GroupToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            var toggle = (ToggleSwitch)sender;
+            ToggleSwitch toggle = (ToggleSwitch)sender;
             string group = (string)toggle.Tag;
 
             if (toggle.IsOn)
+            {
                 NavDataSource.ShowGroup(group);
+            }
             else
+            {
                 NavDataSource.HideGroup(group);
+            }
         }
 
         private void ItemToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            var toggle = (ToggleSwitch)sender;
+            ToggleSwitch toggle = (ToggleSwitch)sender;
             if (toggle.Tag is NavigationItemBase item)
+            {
                 NavDataSource.ChangeItemVisibility(item, toggle.IsOn);
+            }
         }
     }
 }

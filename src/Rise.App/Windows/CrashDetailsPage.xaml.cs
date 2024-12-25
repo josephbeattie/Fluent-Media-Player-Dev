@@ -22,7 +22,9 @@ namespace Rise.App.Views
         }
 
         public static Task<bool> TryShowAsync(string crashDetails)
-            => ViewHelpers.OpenViewAsync<CrashDetailsPage>(crashDetails, new(500, 500));
+        {
+            return ViewHelpers.OpenViewAsync<CrashDetailsPage>(crashDetails, new(500, 500));
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -35,6 +37,8 @@ namespace Rise.App.Views
     public sealed partial class CrashDetailsPage
     {
         private void SubmitIssueButton_Click(object sender, RoutedEventArgs e)
-            => _ = URLs.Feedback.LaunchAsync();
+        {
+            _ = URLs.Feedback.LaunchAsync();
+        }
     }
 }

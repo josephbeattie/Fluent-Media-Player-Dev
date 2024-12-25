@@ -34,10 +34,14 @@ namespace Rise.Data.ViewModels
         }
 
         public bool Equals(Type other)
-            => other.Equals(_model);
+        {
+            return other.Equals(_model);
+        }
 
         public bool Equals(ViewModel<Type> other)
-            => _model.Equals(other._model);
+        {
+            return _model.Equals(other._model);
+        }
     }
 
     /// <summary>
@@ -47,7 +51,7 @@ namespace Rise.Data.ViewModels
     public abstract class ViewModel : INotifyPropertyChanged
     {
         private readonly Dictionary<PropertyChangedEventHandler, SynchronizationContext> PropertyChangedEvents =
-            new Dictionary<PropertyChangedEventHandler, SynchronizationContext>();
+            [];
 
         /// <summary>
         /// Whether or not to send property change notifications.
@@ -59,14 +63,8 @@ namespace Rise.Data.ViewModels
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged
         {
-            add
-            {
-                PropertyChangedEvents.Add(value, SynchronizationContext.Current);
-            }
-            remove
-            {
-                PropertyChangedEvents.Remove(value);
-            }
+            add => PropertyChangedEvents.Add(value, SynchronizationContext.Current);
+            remove => PropertyChangedEvents.Remove(value);
         }
 
         /// <summary>
@@ -82,7 +80,7 @@ namespace Rise.Data.ViewModels
                 return;
             }
 
-            PropertyChangedEventArgs args = new PropertyChangedEventArgs(propertyName);
+            PropertyChangedEventArgs args = new(propertyName);
             foreach (KeyValuePair<PropertyChangedEventHandler, SynchronizationContext> @event in PropertyChangedEvents)
             {
                 if (@event.Value == null)

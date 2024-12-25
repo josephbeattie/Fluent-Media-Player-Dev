@@ -22,7 +22,9 @@ namespace Rise.App.Settings
         }
 
         private async void ExpanderControl_Click(object sender, RoutedEventArgs e)
-            => _ = await URLs.License.LaunchAsync();
+        {
+            _ = await URLs.License.LaunchAsync();
+        }
 
         private void CommandBarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -42,9 +44,13 @@ namespace Rise.App.Settings
         }
 
         private void VTip_CloseButtonClick(Microsoft.UI.Xaml.Controls.TeachingTip sender, object args)
-            => Clipboard.SetContent(VersionData);
+        {
+            Clipboard.SetContent(VersionData);
+        }
 
         private async void VTip_ActionButtonClick(Microsoft.UI.Xaml.Controls.TeachingTip sender, object args)
-            => await URLs.Releases.LaunchAsync();
+        {
+            _ = await URLs.Releases.LaunchAsync();
+        }
     }
 }

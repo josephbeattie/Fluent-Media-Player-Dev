@@ -10,16 +10,16 @@ namespace Rise.App.Settings
     public sealed partial class PlaybackPage : Page
     {
         private SettingsViewModel ViewModel => App.SViewModel;
-        private readonly List<string> Crossfade = new()
-        {
+        private readonly List<string> Crossfade =
+        [
             ResourceHelper.GetString("NoCrossfade")
-        };
+        ];
 
-        private readonly List<string> VideoScale = new()
-        {
+        private readonly List<string> VideoScale =
+        [
             ResourceHelper.GetString("ScaleToWindow"),
             ResourceHelper.GetString("MatchResolution")
-        };
+        ];
 
         public PlaybackPage()
         {
@@ -32,12 +32,14 @@ namespace Rise.App.Settings
             Crossfade.Add(FormatSeconds("10"));
 
             string FormatSeconds(string sec)
-                => string.Format(format, sec);
+            {
+                return string.Format(format, sec);
+            }
         }
 
         private async void OnEqualizerExpanderClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await new EqualizerDialog().ShowAsync();
+            _ = await new EqualizerDialog().ShowAsync();
         }
     }
 }

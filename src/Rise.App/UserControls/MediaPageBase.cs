@@ -120,14 +120,13 @@ namespace Rise.App.UserControls
         [RelayCommand]
         private Task EditItemAsync(object parameter)
         {
-            if (parameter is SongViewModel song)
-                return EditSongAsync(song);
-            else if (parameter is AlbumViewModel album)
-                return EditAlbumAsync(album);
-            else if (parameter is PlaylistViewModel playlist)
-                return EditPlaylistAsync(playlist);
-            else
-                throw new NotImplementedException("No other item type is supported at the moment.");
+            return parameter is SongViewModel song
+                ? EditSongAsync(song)
+                : parameter is AlbumViewModel album
+                    ? EditAlbumAsync(album)
+                    : parameter is PlaylistViewModel playlist
+                                ? (Task)EditPlaylistAsync(playlist)
+                                : throw new NotImplementedException("No other item type is supported at the moment.");
         }
 
         /// <summary>
@@ -158,13 +157,17 @@ namespace Rise.App.UserControls
         /// Opens the properties page for the provided album.
         /// </summary>
         public Task<bool> EditAlbumAsync(AlbumViewModel album)
-            => AlbumPropertiesPage.TryShowAsync(album);
+        {
+            return AlbumPropertiesPage.TryShowAsync(album);
+        }
 
         /// <summary>
         /// Opens the properties page for the provided playlist.
         /// </summary>
         public Task<bool> EditPlaylistAsync(PlaylistViewModel playlist)
-            => PlaylistPropertiesPage.TryShowAsync(playlist);
+        {
+            return PlaylistPropertiesPage.TryShowAsync(playlist);
+        }
     }
 
     // Navigation
@@ -175,29 +178,34 @@ namespace Rise.App.UserControls
         /// </summary>
         [RelayCommand]
         protected void GoToAlbum(string name)
-            => _ = Frame.Navigate(typeof(AlbumSongsPage), name);
+        {
+            _ = Frame.Navigate(typeof(AlbumSongsPage), name);
+        }
 
         /// <summary>
         /// Navigates to the artist with the specified name.
         /// </summary>
         [RelayCommand]
         protected void GoToArtist(string name)
-            => _ = Frame.Navigate(typeof(ArtistSongsPage), name);
+        {
+            _ = Frame.Navigate(typeof(ArtistSongsPage), name);
+        }
 
         /// <summary>
         /// Navigates to the genre with the specified name.
         /// </summary>
         [RelayCommand]
         protected void GoToGenre(string name)
-            => _ = Frame.Navigate(typeof(GenreSongsPage), name);
+        {
+            _ = Frame.Navigate(typeof(GenreSongsPage), name);
+        }
 
         [RelayCommand]
         private Task OpenInExplorerAsync(object parameter)
         {
-            if (parameter is IMediaItem item)
-                return OpenItemInExplorerAsync(item);
-            else
-                throw new NotImplementedException("No other item type is supported at the moment.");
+            return parameter is IMediaItem item
+                ? OpenItemInExplorerAsync(item)
+                : throw new NotImplementedException("No other item type is supported at the moment.");
         }
 
         /// <summary>
@@ -212,12 +220,14 @@ namespace Rise.App.UserControls
 
             try
             {
-                var folder = await StorageFolder.GetFolderFromPathAsync(path);
-                var options = new FolderLauncherOptions();
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(path);
+                FolderLauncherOptions options = new();
 
-                var stItem = await folder.TryGetItemAsync(filename);
-                if (stItem != null && stItem is StorageFile file)
+                IStorageItem stItem = await folder.TryGetItemAsync(filename);
+                if (stItem is not null and StorageFile file)
+                {
                     options.ItemsToSelect.Add(file);
+                }
 
                 _ = await Launcher.LaunchFolderAsync(folder, options);
             }
@@ -234,7 +244,7 @@ namespace Rise.App.UserControls
         [RelayCommand]
         private Task AddSelectedItemToPlaylistAsync(PlaylistViewModel playlist)
         {
-            var itm = GetValue(SelectedItemProperty);
+            object itm = GetValue(SelectedItemProperty);
             if (itm is IMediaItem media)
             {
                 if (playlist != null)
@@ -252,16 +262,18 @@ namespace Rise.App.UserControls
         [RelayCommand]
         private async Task AddSelectedItemToQueueAsync()
         {
-            var itm = GetValue(SelectedItemProperty);
+            object itm = GetValue(SelectedItemProperty);
 
             if (itm is IMediaItem media)
+            {
                 App.MPViewModel.AddSingleItemToQueue(await media.AsPlaybackItemAsync());
+            }
         }
 
         [RelayCommand]
         private Task AddMediaItemsToPlaylistAsync(PlaylistViewModel playlist)
         {
-            var first = MediaViewModel.Items.FirstOrDefault();
+            object first = MediaViewModel.Items.FirstOrDefault();
             if (playlist != null)
             {
                 playlist.AddItems(MediaViewModel.Items.Cast<IMediaItem>());
@@ -269,7 +281,7 @@ namespace Rise.App.UserControls
             }
             else if (first is IMediaItem)
             {
-                var items = MediaViewModel.Items.Cast<IMediaItem>();
+                IEnumerable<IMediaItem> items = MediaViewModel.Items.Cast<IMediaItem>();
                 return PlaylistHelper.CreateNewPlaylistAsync(items);
             }
 
@@ -291,9 +303,11 @@ namespace Rise.App.UserControls
         {
             string delegateKey = SettingsHelpers.GetLocal(string.Empty, "Sorting", $"{pageKey}Sort");
             if (string.IsNullOrEmpty(delegateKey))
+            {
                 return (string.Empty, SortDirection.Ascending, false);
+            }
 
-            var direction = SettingsHelpers.GetLocal<SortDirection>(0, "Sorting", $"{pageKey}Direction");
+            SortDirection direction = SettingsHelpers.GetLocal<SortDirection>(0, "Sorting", $"{pageKey}Direction");
             bool alphabetical = SettingsHelpers.GetLocal(false, "Sorting", $"{pageKey}Alphabetical");
 
             return (delegateKey, direction, alphabetical);
@@ -317,9 +331,13 @@ namespace Rise.App.UserControls
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-            => NavigationHelper.OnNavigatedTo(e);
+        {
+            NavigationHelper.OnNavigatedTo(e);
+        }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
-            => NavigationHelper.OnNavigatedFrom(e);
+        {
+            NavigationHelper.OnNavigatedFrom(e);
+        }
     }
 }

@@ -7,14 +7,14 @@ namespace Rise.Common.Constants
         /// <summary>
         /// List of properties that may contain disc numbers.
         /// </summary>
-        public static readonly List<string> DiscProperties = new()
-        {
+        public static readonly List<string> DiscProperties =
+        [
             SystemMusic.DiscNumber,
             SystemMusic.PartOfSet,
-        };
+        ];
 
-        public static readonly List<string> ViewModelProperties = new()
-        {
+        public static readonly List<string> ViewModelProperties =
+        [
             "System.Title",
             SystemMusic.Artist,
             SystemMusic.TrackNumber,
@@ -24,6 +24,6 @@ namespace Rise.Common.Constants
             SystemMusic.Genre,
             "System.Media.Year",
             "System.Rating"
-        };
+        ];
     }
 }

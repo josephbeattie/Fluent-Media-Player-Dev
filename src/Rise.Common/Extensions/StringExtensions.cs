@@ -34,9 +34,7 @@
         /// <returns>The string that should be used.</returns>
         public static string ReplaceIfNullOrWhiteSpace(this string initial, string replacement)
         {
-            if (string.IsNullOrWhiteSpace(initial))
-                return replacement;
-            return initial;
+            return string.IsNullOrWhiteSpace(initial) ? replacement : initial;
         }
     }
 }

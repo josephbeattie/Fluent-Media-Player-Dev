@@ -12,7 +12,7 @@ namespace Rise.App.Views
     {
         public BrowsePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

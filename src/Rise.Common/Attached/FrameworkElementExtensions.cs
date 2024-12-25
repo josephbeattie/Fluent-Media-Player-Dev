@@ -18,22 +18,31 @@ public sealed class FrameworkElementExtensions : DependencyObject
             typeof(FrameworkElementExtensions), new(true, OnIsParentEnabledChanged));
 
     public static bool GetIsParentEnabled(FrameworkElement d)
-        => (bool)d.GetValue(IsParentEnabledProperty);
+    {
+        return (bool)d.GetValue(IsParentEnabledProperty);
+    }
+
     public static void SetIsParentEnabled(FrameworkElement d, bool value)
-        => d.SetValue(IsParentEnabledProperty, value);
+    {
+        d.SetValue(IsParentEnabledProperty, value);
+    }
 
     private static void OnIsParentEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        var elm = (FrameworkElement)d;
+        FrameworkElement elm = (FrameworkElement)d;
         if (!elm.IsLoaded)
+        {
             elm.Loaded += OnElementLoaded;
+        }
         else
+        {
             HandleParentEnabledChanged(elm, (bool)e.NewValue);
+        }
     }
 
     private static void OnElementLoaded(object sender, RoutedEventArgs e)
     {
-        var elm = (FrameworkElement)sender;
+        FrameworkElement elm = (FrameworkElement)sender;
         HandleParentEnabledChanged(elm, GetIsParentEnabled(elm));
 
         elm.Loaded -= OnElementLoaded;
@@ -41,8 +50,10 @@ public sealed class FrameworkElementExtensions : DependencyObject
 
     private static void HandleParentEnabledChanged(FrameworkElement elm, bool enabled)
     {
-        var parent = elm.FindAscendant<Control>();
+        Control parent = elm.FindAscendant<Control>();
         if (parent != null)
+        {
             parent.IsEnabled = enabled;
+        }
     }
 }

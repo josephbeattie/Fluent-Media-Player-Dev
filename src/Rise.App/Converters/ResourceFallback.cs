@@ -9,9 +9,7 @@ namespace Rise.App.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             string param = parameter.ToString();
-            if (value is string str && str != param)
-                return value;
-            return ResourceHelper.GetString(param);
+            return value is string str && str != param ? value : ResourceHelper.GetString(param);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

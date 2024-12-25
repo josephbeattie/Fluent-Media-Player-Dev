@@ -44,13 +44,17 @@ namespace Rise.App.Views
 
         private void MenuFlyout_Opening(object sender, object e)
         {
-            var fl = sender as MenuFlyout;
-            var cont = MainGrid.ItemFromContainer(fl.Target);
+            MenuFlyout fl = sender as MenuFlyout;
+            object cont = MainGrid.ItemFromContainer(fl.Target);
 
             if (cont == null)
+            {
                 fl.Hide();
+            }
             else
+            {
                 SelectedItem = (PlaylistViewModel)cont;
+            }
         }
 
         private void AskDiscy_Click(object sender, RoutedEventArgs e)
@@ -60,12 +64,12 @@ namespace Rise.App.Views
 
         private async void CreatePlaylistButton_Click(object sender, RoutedEventArgs e)
         {
-            await new CreatePlaylistDialog().ShowAsync();
+            _ = await new CreatePlaylistDialog().ShowAsync();
         }
 
         private async void DeletePlaylist_Click(object sender, RoutedEventArgs e)
         {
-            PBackend.Items.Remove(SelectedItem);
+            _ = PBackend.Items.Remove(SelectedItem);
             await PBackend.SaveAsync();
         }
 
@@ -73,15 +77,19 @@ namespace Rise.App.Views
         {
             FileOpenPicker picker = new();
 
-            foreach (var format in SupportedFileTypes.PlaylistFiles)
+            foreach (string format in SupportedFileTypes.PlaylistFiles)
+            {
                 picker.FileTypeFilter.Add(format);
+            }
 
             StorageFile file = await picker.PickSingleFileAsync();
 
             if (file == null)
+            {
                 return;
+            }
 
-            var playlist = await PlaylistViewModel.GetFromFileAsync(file);
+            PlaylistViewModel playlist = await PlaylistViewModel.GetFromFileAsync(file);
 
             PBackend.Items.Add(playlist);
             await PBackend.SaveAsync();
@@ -91,12 +99,14 @@ namespace Rise.App.Views
         {
             FolderPicker picker = new();
 
-            var folder = await picker.PickSingleFolderAsync();
+            StorageFolder folder = await picker.PickSingleFolderAsync();
 
             if (folder == null)
+            {
                 return;
+            }
 
-            var playlist = await PlaylistViewModel.GetFromFolderAsync(folder);
+            PlaylistViewModel playlist = await PlaylistViewModel.GetFromFolderAsync(folder);
 
             PBackend.Items.Add(playlist);
             await PBackend.SaveAsync();

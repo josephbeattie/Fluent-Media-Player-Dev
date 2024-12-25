@@ -11,7 +11,7 @@ namespace Rise.App.Views.Albums.Properties
     {
         public AlbumPropsSongsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

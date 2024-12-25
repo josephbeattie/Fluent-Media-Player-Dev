@@ -2,7 +2,6 @@
 using Rise.Common.Constants;
 using Rise.Common.Extensions;
 using System;
-using System.Collections.Generic;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
@@ -28,7 +27,7 @@ namespace Rise.App.Views
 
         private async void exportPlaylistArt_Click(object sender, RoutedEventArgs e)
         {
-            var picFile = await StorageFile.
+            StorageFile picFile = await StorageFile.
                 GetFileFromApplicationUriAsync(new Uri(Playlist.Icon));
 
             FileSavePicker filePicker = new()
@@ -36,16 +35,18 @@ namespace Rise.App.Views
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary,
             };
 
-            filePicker.FileTypeChoices.Add("Portable Network Graphics", new List<string>() { ".png" });
+            filePicker.FileTypeChoices.Add("Portable Network Graphics", [".png"]);
 
-            var file = await filePicker.PickSaveFileAsync();
+            StorageFile file = await filePicker.PickSaveFileAsync();
             if (file != null)
+            {
                 await picFile.CopyAndReplaceAsync(file);
+            }
         }
 
         private async void EditPlaylistIcon_Click(Microsoft.UI.Xaml.Controls.SplitButton sender, Microsoft.UI.Xaml.Controls.SplitButtonClickEventArgs args)
         {
-            var picker = new FileOpenPicker
+            FileOpenPicker picker = new()
             {
                 ViewMode = PickerViewMode.Thumbnail,
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary
@@ -55,15 +56,17 @@ namespace Rise.App.Views
             picker.FileTypeFilter.Add(".jpeg");
             picker.FileTypeFilter.Add(".png");
 
-            var file = await picker.PickSingleFileAsync();
+            StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {
                 // If this throws, there's no image to work with
                 try
                 {
-                    var img = await file.GetBitmapAsync();
+                    Windows.Graphics.Imaging.SoftwareBitmap img = await file.GetBitmapAsync();
                     if (img == null)
+                    {
                         return;
+                    }
 
                     img.Dispose();
                 }

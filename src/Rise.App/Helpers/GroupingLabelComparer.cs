@@ -13,21 +13,33 @@ public sealed class GroupingLabelComparer : IComparer, IComparer<string>
     private GroupingLabelComparer() { }
 
     public int Compare(object x, object y)
-        => Compare(x.ToString(), y.ToString());
+    {
+        return Compare(x.ToString(), y.ToString());
+    }
 
     public int Compare(string x, string y)
     {
         if (x == y)
+        {
             return 0;
+        }
 
         if (string.IsNullOrEmpty(x))
+        {
             return 1;
+        }
         else if (string.IsNullOrEmpty(y))
+        {
             return -1;
+        }
         else if (x == "&" && y == "#")
+        {
             return -1;
+        }
         else if (x == "#" && y == "&")
+        {
             return 1;
+        }
 
         return x.CompareTo(y);
     }

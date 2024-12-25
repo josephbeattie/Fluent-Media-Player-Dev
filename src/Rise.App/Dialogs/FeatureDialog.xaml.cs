@@ -10,7 +10,7 @@ namespace Rise.App.Dialogs
 {
     public sealed partial class FeatureDialog : ContentDialog
     {
-        private readonly ObservableCollection<Feature> _features = new();
+        private readonly ObservableCollection<Feature> _features = [];
 
         private int _index;
         private int Index
@@ -26,14 +26,7 @@ namespace Rise.App.Dialogs
                 else
                 {
                     Left.IsEnabled = true;
-                    if (_index == _features.Count - 1)
-                    {
-                        Right.IsEnabled = false;
-                    }
-                    else
-                    {
-                        Right.IsEnabled = true;
-                    }
+                    Right.IsEnabled = _index != _features.Count - 1;
                 }
 
                 RefreshData();
@@ -88,13 +81,19 @@ namespace Rise.App.Dialogs
         }
 
         private void Left_Click(object sender, RoutedEventArgs e)
-            => Index--;
+        {
+            Index--;
+        }
 
         private void Right_Click(object sender, RoutedEventArgs e)
-            => Index++;
+        {
+            Index++;
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-            => Hide();
+        {
+            Hide();
+        }
 
         private void ContentDialog_SizeChanged(object sender, SizeChangedEventArgs e)
         {

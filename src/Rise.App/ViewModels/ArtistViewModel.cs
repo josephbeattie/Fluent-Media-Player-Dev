@@ -1,7 +1,6 @@
 ﻿using Rise.Common.Extensions.Markup;
 using Rise.Data.ViewModels;
 using Rise.Models;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,12 +25,7 @@ namespace Rise.App.ViewModels
         /// </summary>
         public string Name
         {
-            get
-            {
-                if (Model.Name == "UnknownArtistResource")
-                    return ResourceHelper.GetString("UnknownArtistResource");
-                return Model.Name;
-            }
+            get => Model.Name == "UnknownArtistResource" ? ResourceHelper.GetString("UnknownArtistResource") : Model.Name;
             set
             {
                 if (value != Model.Name)
@@ -91,11 +85,11 @@ namespace Rise.App.ViewModels
 
             if (queue)
             {
-                NewRepository.Repository.QueueUpsert(Model);
+                _ = NewRepository.Repository.QueueUpsert(Model);
             }
             else
             {
-                await NewRepository.Repository.UpsertAsync(Model);
+                _ = await NewRepository.Repository.UpsertAsync(Model);
             }
         }
         #endregion

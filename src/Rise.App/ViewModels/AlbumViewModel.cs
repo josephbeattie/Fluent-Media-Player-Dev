@@ -1,7 +1,6 @@
 ﻿using Rise.Common.Extensions.Markup;
 using Rise.Data.ViewModels;
 using Rise.Models;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,12 +25,7 @@ namespace Rise.App.ViewModels
         /// </summary>
         public string Title
         {
-            get
-            {
-                if (Model.Title == "UnknownAlbumResource")
-                    return ResourceHelper.GetString("UnknownAlbumResource");
-                return Model.Title;
-            }
+            get => Model.Title == "UnknownAlbumResource" ? ResourceHelper.GetString("UnknownAlbumResource") : Model.Title;
             set
             {
                 if (value != Model.Title)
@@ -47,12 +41,7 @@ namespace Rise.App.ViewModels
         /// </summary>
         public string Artist
         {
-            get
-            {
-                if (Model.Artist == "UnknownArtistResource")
-                    return ResourceHelper.GetString("UnknownArtistResource");
-                return Model.Artist;
-            }
+            get => Model.Artist == "UnknownArtistResource" ? ResourceHelper.GetString("UnknownArtistResource") : Model.Artist;
             set
             {
                 if (value != Model.Artist)
@@ -73,12 +62,7 @@ namespace Rise.App.ViewModels
         /// </summary>
         public string Genres
         {
-            get
-            {
-                if (Model.Genres == "UnknownGenreResource")
-                    return ResourceHelper.GetString("UnknownGenreResource");
-                return Model.Genres;
-            }
+            get => Model.Genres == "UnknownGenreResource" ? ResourceHelper.GetString("UnknownGenreResource") : Model.Genres;
             set
             {
                 if (value != Model.Genres)
@@ -127,9 +111,7 @@ namespace Rise.App.ViewModels
             get
             {
                 string year = ResourceHelper.GetString("ReleaseYearN");
-                if (Year == 0)
-                    return string.Format(year, ResourceHelper.GetString("Unknown"));
-                return string.Format(year, Year);
+                return Year == 0 ? string.Format(year, ResourceHelper.GetString("Unknown")) : string.Format(year, Year);
             }
         }
 
@@ -152,11 +134,11 @@ namespace Rise.App.ViewModels
 
             if (queue)
             {
-                NewRepository.Repository.QueueUpsert(Model);
+                _ = NewRepository.Repository.QueueUpsert(Model);
             }
             else
             {
-                await NewRepository.Repository.UpsertAsync(Model);
+                _ = await NewRepository.Repository.UpsertAsync(Model);
             }
         }
         #endregion

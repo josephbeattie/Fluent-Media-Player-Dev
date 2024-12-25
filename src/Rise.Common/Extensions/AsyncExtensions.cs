@@ -17,11 +17,9 @@ namespace Rise.Common.Extensions
         {
             if (ac.Status == AsyncStatus.Started)
             {
-                using (var evt = new ManualResetEventSlim(false))
-                {
-                    ac.Completed = (s, e) => evt.Set();
-                    evt.Wait();
-                }
+                using ManualResetEventSlim evt = new(false);
+                ac.Completed = (s, e) => evt.Set();
+                evt.Wait();
             }
             ThrowIfCanceled(ac.Status);
             ac.GetResults();
@@ -36,12 +34,10 @@ namespace Rise.Common.Extensions
         {
             if (ac.Status == AsyncStatus.Started)
             {
-                using (var evt = new ManualResetEventSlim(false))
-                {
-                    ac.Completed = (s, e) => evt.Set();
-                    ac.Progress = progressHandler;
-                    evt.Wait();
-                }
+                using ManualResetEventSlim evt = new(false);
+                ac.Completed = (s, e) => evt.Set();
+                ac.Progress = progressHandler;
+                evt.Wait();
             }
             ThrowIfCanceled(ac.Status);
             ac.GetResults();
@@ -55,11 +51,9 @@ namespace Rise.Common.Extensions
         {
             if (op.Status == AsyncStatus.Started)
             {
-                using (var evt = new ManualResetEventSlim(false))
-                {
-                    op.Completed = (s, e) => evt.Set();
-                    evt.Wait();
-                }
+                using ManualResetEventSlim evt = new(false);
+                op.Completed = (s, e) => evt.Set();
+                evt.Wait();
             }
             ThrowIfCanceled(op.Status);
             return op.GetResults();
@@ -74,12 +68,10 @@ namespace Rise.Common.Extensions
         {
             if (op.Status == AsyncStatus.Started)
             {
-                using (var evt = new ManualResetEventSlim(false))
-                {
-                    op.Completed = (s, e) => evt.Set();
-                    op.Progress = progressHandler;
-                    evt.Wait();
-                }
+                using ManualResetEventSlim evt = new(false);
+                op.Completed = (s, e) => evt.Set();
+                op.Progress = progressHandler;
+                evt.Wait();
             }
             ThrowIfCanceled(op.Status);
             return op.GetResults();
@@ -88,7 +80,9 @@ namespace Rise.Common.Extensions
         private static void ThrowIfCanceled(AsyncStatus status)
         {
             if (status == AsyncStatus.Canceled)
+            {
                 throw new OperationCanceledException();
+            }
         }
     }
 }

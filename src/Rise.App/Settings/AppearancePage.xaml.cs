@@ -16,20 +16,20 @@ namespace Rise.App.Settings
     {
         private SettingsViewModel ViewModel => App.SViewModel;
 
-        private readonly List<string> Themes = new()
-        {
+        private readonly List<string> Themes =
+        [
             ResourceHelper.GetString("Light"),
             ResourceHelper.GetString("Dark"),
             ResourceHelper.GetString("UseSystemSetting")
-        };
+        ];
 
-        private readonly List<string> ColorThemes = new()
-        {
+        private readonly List<string> ColorThemes =
+        [
             ResourceHelper.GetString("/Settings/AppearanceNoGlaze"),
             ResourceHelper.GetString("/Settings/AppearanceSystemGlazeColor"),
             ResourceHelper.GetString("/Settings/AppearanceCustomGlazeColor"),
             ResourceHelper.GetString("/Settings/AppearanceGlazeAlbumArt")
-        };
+        ];
 
         private static List<NamedColor> _glazeColors;
         private List<NamedColor> GlazeColors => _glazeColors;
@@ -40,7 +40,7 @@ namespace Rise.App.Settings
 
             if (_glazeColors == null)
             {
-                _glazeColors = new();
+                _glazeColors = [];
                 PopulateColors();
             }
         }
@@ -106,7 +106,7 @@ namespace Rise.App.Settings
 
             static void AddColor(byte r, byte g, byte b)
             {
-                var color = Color.FromArgb(255, r, g, b);
+                Color color = Color.FromArgb(255, r, g, b);
                 string name = ColorHelper.ToDisplayName(color);
 
                 _glazeColors.Add(new(name, color));
@@ -124,9 +124,11 @@ namespace Rise.App.Settings
 
         private void ColorThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var glaze = (GlazeTypes)ColorThemeComboBox.SelectedIndex;
+            GlazeTypes glaze = (GlazeTypes)ColorThemeComboBox.SelectedIndex;
             if (ViewModel.SelectedGlaze == glaze)
+            {
                 return;
+            }
 
             ViewModel.SelectedGlaze = glaze;
             switch (glaze)
@@ -136,16 +138,16 @@ namespace Rise.App.Settings
                     break;
 
                 case GlazeTypes.AccentColor:
-                    var uiSettings = new UISettings();
-                    var accent = uiSettings.GetColorValue(UIColorType.Accent);
+                    UISettings uiSettings = new();
+                    Color accent = uiSettings.GetColorValue(UIColorType.Accent);
                     accent.A = 25;
 
                     ViewModel.GlazeColors = accent;
                     break;
 
                 case GlazeTypes.CustomColor:
-                    var color = (NamedColor)ColorGrid.SelectedItem;
-                    var col = color.Color;
+                    NamedColor color = (NamedColor)ColorGrid.SelectedItem;
+                    Color col = color.Color;
 
                     ViewModel.GlazeColors = Color.FromArgb(25, col.R, col.G, col.B);
                     break;
@@ -154,13 +156,15 @@ namespace Rise.App.Settings
 
         private void ColorGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var color = (NamedColor)e.AddedItems[0];
-            var col = color.Color;
+            NamedColor color = (NamedColor)e.AddedItems[0];
+            Color col = color.Color;
 
             ViewModel.GlazeColors = Color.FromArgb(25, col.R, col.G, col.B);
         }
 
         private async void ChangeThemeTip_ActionButtonClick(Microsoft.UI.Xaml.Controls.TeachingTip sender, object args)
-            => _ = await CoreApplication.RequestRestartAsync("ThemeChanged");
+        {
+            _ = await CoreApplication.RequestRestartAsync("ThemeChanged");
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace Rise.App.UserControls
         {
             if (d is LyricItem item)
             {
-                var selected = (bool)e.NewValue;
+                bool selected = (bool)e.NewValue;
                 _ = VisualStateManager.GoToState(item, selected ? "Selected" : "NotSelected", true);
             }
         }

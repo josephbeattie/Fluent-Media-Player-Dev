@@ -45,7 +45,7 @@ namespace Rise.App.ViewModels
 
         public async Task OpenAtStartupAsync()
         {
-            var task = await StartupTask.GetAsync(StartupTaskId);
+            StartupTask task = await StartupTask.GetAsync(StartupTaskId);
             bool isEnabled = task.State switch
             {
                 StartupTaskState.Enabled => true,
@@ -54,16 +54,20 @@ namespace Rise.App.ViewModels
             };
 
             if (!isEnabled)
+            {
                 _ = await task.RequestEnableAsync();
+            }
             else
+            {
                 task.Disable();
+            }
 
             SetOpenAtStartupInfo(task.State);
         }
 
         public void UpdateStartupTaskInfo()
         {
-            var task = StartupTask.GetAsync(StartupTaskId).Get();
+            StartupTask task = StartupTask.GetAsync(StartupTaskId).Get();
             SetOpenAtStartupInfo(task.State);
         }
 
@@ -123,7 +127,7 @@ namespace Rise.App.ViewModels
         {
             get
             {
-                var col = Get(new byte[4] { 0, 255, 255, 255 }, "Appearance");
+                byte[] col = Get(new byte[4] { 0, 255, 255, 255 }, "Appearance");
                 return Color.FromArgb(col[0], col[1], col[2], col[3]);
             }
             set => Set(new byte[4] { value.A, value.R, value.G, value.B }, "Appearance");
@@ -349,7 +353,7 @@ namespace Rise.App.ViewModels
             set => Set(value, "Local");
         }
 
-        private static float[] _defaultGain =
+        private static readonly float[] _defaultGain =
             new float[10] { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
 
         public float[] EqualizerGain
@@ -368,10 +372,12 @@ namespace Rise.App.ViewModels
         {
             get
             {
-                var value = Get(100, "Playback");
+                int value = Get(100, "Playback");
 
                 if (App.MPViewModel.Player.Volume != value)
+                {
                     App.MPViewModel.Player.Volume = value;
+                }
 
                 return value;
             }
@@ -415,7 +421,9 @@ namespace Rise.App.ViewModels
     {
         /// <inheritdoc cref="SettingsHelpers.GetLocal{T}(T, string, string)"/>
         private T Get<T>(T defaultValue, string container = "Local", [CallerMemberName] string setting = "")
-            => SettingsHelpers.GetLocal(defaultValue, container, setting);
+        {
+            return SettingsHelpers.GetLocal(defaultValue, container, setting);
+        }
 
         /// <inheritdoc cref="SettingsHelpers.SetLocal{T}(T, string, string)"/>
         private void Set<T>(T newValue, string container = "Local", [CallerMemberName] string setting = "")

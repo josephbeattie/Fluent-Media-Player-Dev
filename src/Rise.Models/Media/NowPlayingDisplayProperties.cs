@@ -19,20 +19,24 @@ namespace Rise.Models
     {
         public static NowPlayingDisplayProperties GetFromPlaybackItem(MediaPlaybackItem item)
         {
-            var customProps = item.Source.CustomProperties;
+            Windows.Foundation.Collections.ValueSet customProps = item.Source.CustomProperties;
 
             uint year = 0;
-            if (customProps.TryGetValue("Year", out var yearProp))
+            if (customProps.TryGetValue("Year", out object yearProp))
+            {
                 year = (uint)yearProp;
+            }
 
             string location = string.Empty;
-            if (customProps.TryGetValue("Location", out var locationProp))
+            if (customProps.TryGetValue("Location", out object locationProp))
+            {
                 location = (string)locationProp;
+            }
 
-            var displayProps = item.GetDisplayProperties();
+            MediaItemDisplayProperties displayProps = item.GetDisplayProperties();
             if (displayProps.Type == MediaPlaybackType.Music)
             {
-                var musicProps = displayProps.MusicProperties;
+                MusicDisplayProperties musicProps = displayProps.MusicProperties;
                 return new NowPlayingDisplayProperties(MediaPlaybackType.Music,
                     musicProps.Title,
                     musicProps.Artist,
@@ -43,7 +47,7 @@ namespace Rise.Models
                     displayProps.Thumbnail);
             }
 
-            var videoProps = displayProps.VideoProperties;
+            VideoDisplayProperties videoProps = displayProps.VideoProperties;
             return new NowPlayingDisplayProperties(MediaPlaybackType.Video,
                 videoProps.Title,
                 videoProps.Subtitle,

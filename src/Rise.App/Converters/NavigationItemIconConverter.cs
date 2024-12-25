@@ -15,24 +15,20 @@ namespace Rise.App.Converters
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var item = (NavigationItemDestination)value;
-            if (Uri.TryCreate(item.DefaultIcon, UriKind.Absolute, out var uri))
-            {
-                return new BitmapIcon
+            NavigationItemDestination item = (NavigationItemDestination)value;
+            return Uri.TryCreate(item.DefaultIcon, UriKind.Absolute, out Uri uri)
+                ? new BitmapIcon
                 {
                     ShowAsMonochrome = false,
                     UriSource = uri
+                }
+                : string.IsNullOrEmpty(IconPack)
+                ? new FontIcon { Glyph = item.DefaultIcon }
+                : new BitmapIcon
+                {
+                    ShowAsMonochrome = false,
+                    UriSource = new($"ms-appx:///Assets/NavigationView/{item.Id}/{IconPack}.png")
                 };
-            }
-
-            if (string.IsNullOrEmpty(IconPack))
-                return new FontIcon { Glyph = item.DefaultIcon };
-
-            return new BitmapIcon
-            {
-                ShowAsMonochrome = false,
-                UriSource = new($"ms-appx:///Assets/NavigationView/{item.Id}/{IconPack}.png")
-            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

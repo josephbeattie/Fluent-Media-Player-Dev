@@ -12,14 +12,14 @@ namespace Rise.App.Settings
     {
         public AppearanceBasePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             _ = AppearanceFrame.Navigate(typeof(AppearancePage));
         }
 
         private void AppearanceNav_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
-            var selectedItem = args.InvokedItemContainer;
+            Microsoft.UI.Xaml.Controls.NavigationViewItemBase selectedItem = args.InvokedItemContainer;
             string selectedItemTag = selectedItem.Tag as string;
 
             Type page = selectedItemTag switch
@@ -29,7 +29,9 @@ namespace Rise.App.Settings
             };
 
             if (AppearanceFrame.CurrentSourcePageType != page)
+            {
                 _ = AppearanceFrame.Navigate(page, null, args.RecommendedNavigationTransitionInfo);
+            }
         }
     }
 }

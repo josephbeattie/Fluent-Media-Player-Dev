@@ -23,7 +23,7 @@ namespace Rise.App.Views
         private void RemoveSong_Click(object sender, RoutedEventArgs e)
         {
             SongViewModel song = (sender as Button).Tag as SongViewModel;
-            Playlist.Songs.Remove(song);
+            _ = Playlist.Songs.Remove(song);
         }
 
         private void MoveBottom_Click(object sender, RoutedEventArgs e)
@@ -32,9 +32,9 @@ namespace Rise.App.Views
 
             if ((Playlist.Songs.IndexOf(song) + 1) < Playlist.Songs.Count)
             {
-                var index = Playlist.Songs.IndexOf(song);
+                int index = Playlist.Songs.IndexOf(song);
 
-                Playlist.Songs.Remove(song);
+                _ = Playlist.Songs.Remove(song);
                 Playlist.Songs.Insert(index + 1, song);
             }
         }
@@ -45,9 +45,9 @@ namespace Rise.App.Views
 
             if ((Playlist.Songs.IndexOf(song) - 1) >= 0)
             {
-                var index = Playlist.Songs.IndexOf(song);
+                int index = Playlist.Songs.IndexOf(song);
 
-                Playlist.Songs.Remove(song);
+                _ = Playlist.Songs.Remove(song);
                 Playlist.Songs.Insert(index - 1, song);
             }
         }
