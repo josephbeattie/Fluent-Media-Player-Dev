@@ -1,7 +1,4 @@
-﻿using Rise.Common.Extensions;
-using System;
-using System.Diagnostics;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Rise.App.UserControls

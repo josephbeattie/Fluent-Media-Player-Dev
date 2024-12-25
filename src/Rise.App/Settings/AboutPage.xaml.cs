@@ -1,5 +1,4 @@
-﻿using Rise.App.Dialogs;
-using Rise.Common.Constants;
+﻿using Rise.Common.Constants;
 using Rise.Common.Extensions;
 using Rise.Common.Extensions.Markup;
 using Windows.ApplicationModel.DataTransfer;

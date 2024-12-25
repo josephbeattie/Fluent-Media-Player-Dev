@@ -10,13 +10,12 @@ using Rise.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using WindowsPlaylist = Windows.Media.Playlists.Playlist;
-using System.Threading.Tasks;
-using Windows.Storage;
-using System.Xml;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Xml;
+using Windows.Storage;
 using Windows.Storage.Streams;
-using Windows.Storage.Search;
+using WindowsPlaylist = Windows.Media.Playlists.Playlist;
 
 namespace Rise.App.ViewModels
 {
@@ -417,7 +416,7 @@ namespace Rise.App.ViewModels
                 }
             }
 
-            done:
+        done:
             return playlist;
         }
     }

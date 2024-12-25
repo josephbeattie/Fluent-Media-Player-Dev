@@ -1,5 +1,4 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
-using Rise.Common.Constants;
+﻿using Rise.Common.Constants;
 using Rise.Common.Extensions;
 using Rise.Data.ViewModels;
 using Rise.Models;

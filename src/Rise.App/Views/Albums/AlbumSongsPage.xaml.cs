@@ -10,8 +10,6 @@ using System;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using Windows.Storage.FileProperties;
-using Windows.Storage.Streams;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

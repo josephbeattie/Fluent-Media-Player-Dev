@@ -1,9 +1,9 @@
-﻿using System;
+﻿using NAudio.Dsp;
+using Rise.Common.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices.WindowsRuntime;
-using NAudio.Dsp;
-using Rise.Common.Helpers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media;

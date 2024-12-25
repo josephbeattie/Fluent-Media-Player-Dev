@@ -182,7 +182,8 @@ namespace Rise.Common.Extensions
             try
             {
                 return await StorageFile.GetFileFromPathAsync(path) != null;
-            } catch
+            }
+            catch
             {
                 return false;
             }

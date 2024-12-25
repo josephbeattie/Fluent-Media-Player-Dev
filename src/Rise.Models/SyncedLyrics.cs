@@ -1,10 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Globalization;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace Rise.Models
 {
@@ -103,7 +102,7 @@ namespace Rise.Models
         }
 
         public override string ToString()
-            => $"{Text} - {TimeSpan}"; 
+            => $"{Text} - {TimeSpan}";
     }
 
     public sealed class SyncedLyricTime

@@ -19,7 +19,8 @@ namespace Rise.Common.Extensions
                     foreach (var item in items)
                         i += connection.Delete(item);
                 });
-            } else
+            }
+            else
             {
                 foreach (var item in items)
                     i += connection.Delete(item);

@@ -1,5 +1,4 @@
-﻿using Rise.Common;
-using Rise.Common.Extensions.Markup;
+﻿using Rise.Common.Extensions.Markup;
 using Rise.Data.ViewModels;
 using Rise.Models;
 using System;

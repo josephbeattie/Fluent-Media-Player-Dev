@@ -1,7 +1,5 @@
 ﻿using Rise.App.ViewModels;
 using System;
-using System.Diagnostics;
-using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
