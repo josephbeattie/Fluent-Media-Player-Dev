@@ -60,7 +60,7 @@ This is free software with no warranty of any kind. Sorry :(
 
 We use the GPL License V3 - View our License (aka Terms and Conditions) below.
 
-[![OurTerms](https://user-images.githubusercontent.com/74561130/137586737-d792a57b-b2b0-410b-bb2a-a06a4da2ab52.png)](https://github.com/Rise-Software/Rise-Media-Player/blob/main/LICENSE)
+[![OurTerms](https://user-images.githubusercontent.com/74561130/137586737-d792a57b-b2b0-410b-bb2a-a06a4da2ab52.png)](https://github.com/Rise-Software/Rise-Media-Player/blob/main/LICENSE.md)
 
 
 ## Downloads, Contribute and the Insider Program
