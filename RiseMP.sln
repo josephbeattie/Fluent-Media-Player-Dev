@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35424.110 d17.12
+VisualStudioVersion = 17.12.35424.110
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rise.App", "src\Rise.App\Rise.App.csproj", "{5DF9776E-7514-4365-A6FB-7718BA80945D}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rise.Models", "src\Rise.Models\Rise.Models.csproj", "{17D51104-B536-4D03-BD8B-74E0CCE49CFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rise.Repository", "src\Rise.NewRepository\Rise.Repository.csproj", "{1319CE6D-828F-4024-93C9-4052F3F053BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{45546A39-9C95-4318-A370-3B38A83E8D55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -134,5 +136,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5DF9776E-7514-4365-A6FB-7718BA80945D} = {45546A39-9C95-4318-A370-3B38A83E8D55}
+		{86322C85-900E-4BC8-959B-141CDFD68231} = {45546A39-9C95-4318-A370-3B38A83E8D55}
+		{5185BB21-8B6A-4C08-8C50-4E1B8F57B2D5} = {45546A39-9C95-4318-A370-3B38A83E8D55}
+		{5DE7E2F1-4095-45A1-914D-98047CD29736} = {45546A39-9C95-4318-A370-3B38A83E8D55}
+		{17D51104-B536-4D03-BD8B-74E0CCE49CFB} = {45546A39-9C95-4318-A370-3B38A83E8D55}
+		{1319CE6D-828F-4024-93C9-4052F3F053BA} = {45546A39-9C95-4318-A370-3B38A83E8D55}
 	EndGlobalSection
 EndGlobal
