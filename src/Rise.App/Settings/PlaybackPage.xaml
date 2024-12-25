@@ -12,13 +12,16 @@
     mc:Ignorable="d">
 
     <ScrollViewer Padding="48,4,48,0" VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="0,0,0,12" Orientation="Vertical" Spacing="4">
+        <StackPanel
+            Margin="0,0,0,12"
+            Orientation="Vertical"
+            Spacing="4">
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
                     <RepositionThemeTransition IsStaggeringEnabled="False" />
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
-            
+
             <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{markup:ResourceHelper Name=/Settings/PlaybackGeneralH}" />
 
             <labs:SettingsCard Header="{markup:ResourceHelper Name=/Settings/PlaybackVisualizerTitle}" HeaderIcon="{ui:FontIcon Glyph=&#xE8B9;}">

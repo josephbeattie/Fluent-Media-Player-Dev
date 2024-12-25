@@ -77,20 +77,20 @@
                                 Orientation="Horizontal"
                                 Spacing="4">
                                 <Button
-                                    ToolTipService.ToolTip="{markup:ResourceHelper Name=MoveUp}"
                                     Click="MoveUp_Click"
                                     Style="{StaticResource TransparentButtonStyle}"
-                                    Tag="{x:Bind}">
+                                    Tag="{x:Bind}"
+                                    ToolTipService.ToolTip="{markup:ResourceHelper Name=MoveUp}">
                                     <FontIcon
                                         Height="28"
                                         FontSize="16"
                                         Glyph="&#xE014;" />
                                 </Button>
                                 <Button
-                                    ToolTipService.ToolTip="{markup:ResourceHelper Name=MoveDown}"
                                     Click="MoveBottom_Click"
                                     Style="{StaticResource TransparentButtonStyle}"
-                                    Tag="{x:Bind}">
+                                    Tag="{x:Bind}"
+                                    ToolTipService.ToolTip="{markup:ResourceHelper Name=MoveDown}">
                                     <FontIcon
                                         Height="28"
                                         FontSize="16"
@@ -104,10 +104,10 @@
                                     Fill="{ThemeResource MenuFlyoutSeparatorThemeBrush}"
                                     Opacity="0.3" />
                                 <Button
-                                    ToolTipService.ToolTip="{markup:ResourceHelper Name=RemoveFromPlaylist}"
                                     Click="RemoveSong_Click"
                                     Style="{StaticResource TransparentButtonStyle}"
-                                    Tag="{x:Bind}">
+                                    Tag="{x:Bind}"
+                                    ToolTipService.ToolTip="{markup:ResourceHelper Name=RemoveFromPlaylist}">
                                     <FontIcon
                                         Height="28"
                                         FontSize="16"

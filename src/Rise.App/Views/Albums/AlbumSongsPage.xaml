@@ -233,16 +233,16 @@
                                     <FontIcon Glyph="&#xECC8;" />
                                 </AppBarButton.Icon>
 
-                                        <AppBarButton.Flyout>
-                                            <MenuFlyout x:Name="AddToBar">
-                                                <MenuFlyoutItem Command="{x:Bind AddMediaItemsToPlaylistCommand}" Text="{markup:ResourceHelper Name=NewPlaylist}">
-                                                    <MenuFlyoutItem.Icon>
-                                                        <FontIcon FontFamily="{StaticResource PlayerIconsFontFamily}" Glyph="&#xE93F;" />
-                                                    </MenuFlyoutItem.Icon>
-                                                </MenuFlyoutItem>
-                                            </MenuFlyout>
-                                        </AppBarButton.Flyout>
-                                    </AppBarButton>
+                                <AppBarButton.Flyout>
+                                    <MenuFlyout x:Name="AddToBar">
+                                        <MenuFlyoutItem Command="{x:Bind AddMediaItemsToPlaylistCommand}" Text="{markup:ResourceHelper Name=NewPlaylist}">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon FontFamily="{StaticResource PlayerIconsFontFamily}" Glyph="&#xE93F;" />
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                    </MenuFlyout>
+                                </AppBarButton.Flyout>
+                            </AppBarButton>
 
                             <AppBarSeparator />
 

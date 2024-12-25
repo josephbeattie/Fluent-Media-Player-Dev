@@ -28,7 +28,7 @@
                 <RepositionThemeTransition IsStaggeringEnabled="False" />
             </TransitionCollection>
         </StackPanel.ChildrenTransitions>
-        
+
         <muxc:TeachingTip
             x:Name="ChangeThemeTip"
             Title="{markup:ResourceHelper Name=/Settings/AppThemeChanged}"
@@ -94,7 +94,10 @@
                                 Text="{markup:ResourceHelper Name=/Settings/AppearanceNothing}"
                                 TextWrapping="WrapWholeWords" />
 
-                            <StackPanel Margin="0,4,0,0" x:Name="CustomColorPanel" Visibility="Collapsed">
+                            <StackPanel
+                                x:Name="CustomColorPanel"
+                                Margin="0,4,0,0"
+                                Visibility="Collapsed">
                                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{markup:ResourceHelper Name=/Settings/RecentColors}" />
                                 <TextBlock
                                     FontSize="14"

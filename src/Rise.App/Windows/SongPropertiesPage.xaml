@@ -84,8 +84,8 @@
                         </muxc:NavigationViewItem.Icon>
                     </muxc:NavigationViewItem>
                     <muxc:NavigationViewItem
-                        IsEnabled="{x:Bind Props.Model.Model.IsLocal}"
                         Content="{markup:ResourceHelper Name=File}"
+                        IsEnabled="{x:Bind Props.Model.Model.IsLocal}"
                         Tag="FileItem">
                         <muxc:NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE130;" />
@@ -122,15 +122,15 @@
 
             <Rectangle />
             <Button
-                Content="{markup:ResourceHelper Name=PropsSave}"
                 HorizontalAlignment="Stretch"
                 Click="SaveButton_Click"
+                Content="{markup:ResourceHelper Name=PropsSave}"
                 Style="{StaticResource AccentButtonStyle}" />
             <Button
-                Content="{markup:ResourceHelper Name=Cancel}"
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
-                Click="CancelButton_Click" />
+                Click="CancelButton_Click"
+                Content="{markup:ResourceHelper Name=Cancel}" />
         </Grid>
 
         <muxc:TeachingTip

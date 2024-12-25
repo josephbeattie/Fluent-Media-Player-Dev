@@ -115,15 +115,15 @@
             </Grid.ColumnDefinitions>
 
             <Button
-                Content="{markup:ResourceHelper Name=PropsSave}"
                 HorizontalAlignment="Stretch"
                 Click="Button_Click"
+                Content="{markup:ResourceHelper Name=PropsSave}"
                 Style="{StaticResource AccentButtonStyle}" />
             <Button
-                Content="{markup:ResourceHelper Name=Cancel}"
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
-                Click="CancelButton_Click" />
+                Click="CancelButton_Click"
+                Content="{markup:ResourceHelper Name=Cancel}" />
         </Grid>
 
         <muxc:TeachingTip
