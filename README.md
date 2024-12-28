@@ -13,7 +13,7 @@
       <img src='https://github.com/Rise-Software/Rise-Media-Player/assets/74561130/60deb402-0c8e-4579-80e6-69cb7b19cd43'alt='Get it from GitHub' />
     </a>
 </p>
-    
+
 > [!NOTE]
 > The app can only be installed from the store if you are an Insider. To become an insider, [click here](http://bit.ly/rise-insider).
 
