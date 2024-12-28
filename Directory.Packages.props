@@ -1,0 +1,35 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <NoWarn>$(NoWarn);NU1507</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="CommunityToolkit.Labs.Uwp.SettingsControls" Version="0.0.18" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageVersion Include="ksemenenko.ColorThief" Version="1.1.1.4" />
+    <PackageVersion Include="LottieGen.MsBuild" Version="7.1.1" />
+    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
+    <PackageVersion Include="Microsoft.Toolkit.Uwp" Version="7.1.3" />
+    <PackageVersion Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
+    <PackageVersion Include="Microsoft.Toolkit.Uwp.UI" Version="7.1.3" />
+    <PackageVersion Include="Microsoft.Toolkit.Uwp.UI.Behaviors" Version="7.1.3" />
+    <PackageVersion Include="Microsoft.Toolkit.Uwp.UI.Controls" Version="7.1.3" />
+    <PackageVersion Include="Microsoft.Toolkit.Uwp.UI.Media" Version="7.1.3" />
+    <PackageVersion Include="Microsoft.UI.Xaml" Version="2.8.4" />
+    <PackageVersion Include="Microsoft.Xaml.Behaviors.Uwp.Managed" Version="2.0.1" />
+    <PackageVersion Include="NAudio" Version="1.10.0" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageVersion Include="Opportunity.LrcParser" Version="1.0.4" />
+    <PackageVersion Include="PolySharp" Version="1.13.2" />
+    <PackageVersion Include="QueryString.NET" Version="1.0.0" />
+    <PackageVersion Include="SimpleKit.WindowsRuntime.UI.Controls" Version="1.6.0" />
+    <PackageVersion Include="sqlite-net-pcl" Version="1.9.141-beta" />
+    <PackageVersion Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+    <PackageVersion Include="System.Text.Json" Version="8.0.0-preview.3.23174.8" />
+    <PackageVersion Include="TagLibSharp" Version="2.3.0" />
+    <PackageVersion Include="Win2D.uwp" Version="1.26.0" />
+    <PackageVersion Include="YoutubeExplode" Version="6.2.15" />
+  </ItemGroup>
+</Project>

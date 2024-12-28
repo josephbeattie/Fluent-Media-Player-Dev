@@ -126,12 +126,8 @@
     <EmbeddedResource Include="Properties\Rise.NewRepository.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.14</Version>
-    </PackageReference>
-    <PackageReference Include="sqlite-net-pcl">
-      <Version>1.9.141-beta</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
+    <PackageReference Include="sqlite-net-pcl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rise.Common\Rise.Common.csproj">

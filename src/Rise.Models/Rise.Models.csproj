@@ -142,20 +142,13 @@
     <EmbeddedResource Include="Properties\Rise.Models.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.14</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.3</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
+    <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="PolySharp">
-      <Version>1.13.2</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="sqlite-net-pcl">
-      <Version>1.9.141-beta</Version>
-    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rise.Common\Rise.Common.csproj">
