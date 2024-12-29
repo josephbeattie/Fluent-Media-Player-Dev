@@ -37,7 +37,7 @@ env:
   # AUTOMATED_TESTS_ASSEMBLY_DIR: '${{ github.workspace }}\artifacts\TestsAssembly'
   ARTIFACTS_STAGING_DIR:  '${{ github.workspace }}\artifacts'
   APPX_PACKAGE_DIR: '${{ github.workspace }}\artifacts\AppxPackages'
-  APPX_SELFSIGNED_CERT_PATH: '${{ github.workspace }}\Rise Media Player Dev\Rise.App_SelfSigned.pfx'
+  APPX_SELFSIGNED_CERT_PATH: '${{ github.workspace }}\Rise Media Player Dev\Rise.App_TemporaryKey.pfx'
   WINAPPDRIVER_EXE86_PATH: 'C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe'
   WINAPPDRIVER_EXE64_PATH: 'C:\Program Files\Windows Application Driver\WinAppDriver.exe'
   LASTFM: 'bmFtZXNwYWNlIFJpc2UuQ29tbW9uLkNvbnN0YW50cwp7CiAgICAvLy8gPHN1bW1hcnk+CiAgICAvLy8gQ29udGFpbnMgbGFzdC5mbSByZWxhdGVkIGNvbnN0YW50cy4KICAgIC8vLyA8L3N1bW1hcnk+CiAgICBwdWJsaWMgY2xhc3MgTGFzdEZNCiAgICB7CiAgICAgICAgcHVibGljIGNvbnN0IHN0cmluZyBLZXkgPSAiWW91ckFQSUtleSI7CiAgICAgICAgcHVibGljIGNvbnN0IHN0cmluZyBTZWNyZXQgPSAiWW91clNlY3JldCI7CgogICAgICAgIHB1YmxpYyBjb25zdCBzdHJpbmcgVmF1bHRSZXNvdXJjZSA9ICJSaXNlTVAgLSBMYXN0Rk0gYWNjb3VudCI7CiAgICB9Cn0='
