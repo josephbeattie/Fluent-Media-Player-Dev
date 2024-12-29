@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> After a long period of no development, RiseMP is back!
+> After a long period, we're excited to say that Rise Media Player is back!
 > The app is currently undergoing major changes and while contributions are welcome please be aware of merge conflicts.
 
 <p align="center">
@@ -95,14 +95,16 @@ To build Rise Media Player for development, open the `RiseMP.sln` item in Visual
 ## Contributing
 
 Want to contribute to this project? Let us know with an [issue](https://github.com/Rise-Software/Rise-Media-Player/issues) that communicates your intent to create a [pull request](https://github.com/Rise-Software/Rise-Media-Player/pulls).
-<!-- Add when actual project added to repo
-Looking for a place to start? Check out the [task board](https://github.com/orgs/RiversideValley/projects/8/views/2), where you can sort tasks by size and priority.
--->
+> [!NOTE]
+> **Looking for a place to start?** Check out [our plan for Beta 1](https://github.com/orgs/Rise-Software/projects/3/views/1), which details planned features and changes..
+
+
+
 ## Credits
 
-* [**Joseph Beattie (@josephbeattie)**](https://github.com/josephbeattie): **Founder of Rise and lead developer**
-* [**Omar Salas (@YourOrdinaryCat)**](https://github.com/yourordinarycat): **Former member**
-* [**SimpleBear (@itsWindows11)**](https://github.com/itswindows11): **Former member**
+* [**Joseph Beattie (@josephbeattie)**](https://github.com/josephbeattie): **Started work on Rise Media Player**
+* [**Omar Salas (@YourOrdinaryCat)**](https://github.com/yourordinarycat):
+* [**SimpleBear (@itsWindows11)**](https://github.com/itswindows11): 
 
 ---
 
