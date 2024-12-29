@@ -1,0 +1,161 @@
+# Copyright (c) 2024 Files Community
+# Licensed under the MIT License.
+# https://github.com/files-community/Files/blob/973a3f8/.github/workflows/ci.yml
+
+# Abstract:
+#   This CI is executed when a new commit is created on the main branch or
+#   on a PR whose head branch is the main branch.
+#   However, the CI will not be executed if files not directly related to
+#   source code maintenance are updated.
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - bloom
+      - insider
+      - main-(insider_bloom)
+    paths-ignore:
+      - '*.md'
+  pull_request:
+    paths-ignore:
+      - '*.md'
+
+run-name: ${{ github.event_name == 'pull_request' && 'RiseMP PR Validation' || 'RiseMP CI' }}
+
+env:
+  WORKING_DIR: ${{ github.workspace }}
+  SOLUTION_PATH: '${{ github.workspace }}\Rise Media Player Dev.sln'
+  PACKAGE_PROJECT_DIR: '${{ github.workspace }}\Rise Media Player Dev'
+  PACKAGE_PROJECT_PATH: '${{ github.workspace }}\Rise Media Player Dev\Rise.App.csproj'
+  AUTOMATED_TESTS_ARCHITECTURE: 'x64'
+  AUTOMATED_TESTS_CONFIGURATION: 'Release'
+  # AUTOMATED_TESTS_PROJECT_DIR: '${{ github.workspace }}\tests\Files.InteractionTests'
+  # AUTOMATED_TESTS_PROJECT_PATH: '${{ github.workspace }}\tests\Files.InteractionTests\Files.InteractionTests.csproj'
+  # AUTOMATED_TESTS_ASSEMBLY_DIR: '${{ github.workspace }}\artifacts\TestsAssembly'
+  ARTIFACTS_STAGING_DIR:  '${{ github.workspace }}\artifacts'
+  APPX_PACKAGE_DIR: '${{ github.workspace }}\artifacts\AppxPackages'
+  APPX_SELFSIGNED_CERT_PATH: '${{ github.workspace }}\.github\workflows\Rise.App_SelfSigned.pfx'
+  WINAPPDRIVER_EXE86_PATH: 'C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe'
+  WINAPPDRIVER_EXE64_PATH: 'C:\Program Files\Windows Application Driver\WinAppDriver.exe'
+
+jobs:
+
+  check-formatting:
+    name: Check Formatting
+
+    if: github.repository_owner == 'Rise-Software'
+
+    runs-on: windows-latest
+
+    steps:
+
+    - name: Checkout the repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v4
+
+    - name: Install XamlStyler.Console
+      run: 'dotnet tool install --global XamlStyler.Console'
+
+    - name: Check XAML formatting
+      id: check-step
+      run: |
+        $changedFiles = (git diff --diff-filter=d --name-only HEAD~1) -split "\n" | Where-Object {$_ -like "*.xaml"}
+        foreach ($file in $changedFiles)
+        {
+          xstyler -p -l None -f $file
+          if ($LASTEXITCODE -ne 0)
+          {
+            echo "::error file=$file::Format check failed"
+          }
+        }
+      continue-on-error: true
+    
+    - name: Fail if necessary
+      if: steps.check-step.outcome == 'failure'
+      run: exit 1
+
+  build:
+    name: Build
+
+    if: github.repository_owner == 'Rise-Software'
+
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [Debug, Release]
+        platform: [x64, arm64]
+    env:
+      CONFIGURATION: ${{ matrix.configuration }}
+      ARCHITECTURE: ${{ matrix.platform }}
+
+    steps:
+
+    - name: Checkout the repository
+      uses: actions/checkout@v4
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.x # It has been too long since I last wrote a CI workflow for a UWP app, so I'm just guessing any version works :P
+
+    - name: Restore NuGet
+      shell: pwsh
+      run: 'nuget restore $env:SOLUTION_PATH'
+
+    - name: Restore RiseMP
+      shell: pwsh
+      run: |
+        msbuild $env:SOLUTION_PATH `
+          -t:Restore `
+          -p:Platform=$env:ARCHITECTURE `
+          -p:Configuration=$env:CONFIGURATION `
+          -p:PublishReadyToRun=true
+
+    - if: env.CONFIGURATION != env.AUTOMATED_TESTS_CONFIGURATION || env.ARCHITECTURE != env.AUTOMATED_TESTS_ARCHITECTURE 
+      name: Build RiseMP
+      run: |
+        msbuild `
+          $env:PACKAGE_PROJECT_PATH `
+          -t:Build `
+          -clp:ErrorsOnly `
+          -p:Configuration=$env:CONFIGURATION `
+          -p:Platform=$env:ARCHITECTURE `
+          -p:AppxBundle=Never
+
+    - if: env.CONFIGURATION == env.AUTOMATED_TESTS_CONFIGURATION && env.ARCHITECTURE == env.AUTOMATED_TESTS_ARCHITECTURE
+      name: Create self signed cert as a pfx file
+      run: ./.github/scripts/Generate-SelfCertPfx.ps1 -Destination "$env:APPX_SELFSIGNED_CERT_PATH"
+
+    - if: env.CONFIGURATION == env.AUTOMATED_TESTS_CONFIGURATION && env.ARCHITECTURE == env.AUTOMATED_TESTS_ARCHITECTURE
+      name: Build & package RiseMP
+      run: |
+        msbuild `
+          $env:PACKAGE_PROJECT_PATH `
+          -t:Build `
+          -t:_GenerateAppxPackage `
+          -clp:ErrorsOnly `
+          -p:Configuration=$env:CONFIGURATION `
+          -p:Platform=$env:ARCHITECTURE `
+          -p:AppxBundlePlatforms=$env:AUTOMATED_TESTS_ARCHITECTURE `
+          -p:AppxBundle=Always `
+          -p:UapAppxPackageBuildMode=SideloadOnly `
+          -p:AppxPackageDir=$env:APPX_PACKAGE_DIR `
+          -p:AppxPackageSigningEnabled=true `
+          -p:PackageCertificateKeyFile=$env:APPX_SELFSIGNED_CERT_PATH `
+          -p:PackageCertificatePassword="" `
+          -p:PackageCertificateThumbprint=""
+
+# I have removed parts of the CI related to testing the app.
+# When tests are introduced, please copy that part of the CI
+# back into this file. The fragment is available on GH Gist:
+# https://gist.github.com/Lamparter/b5b52eee990f30b0df691e97adca140e
