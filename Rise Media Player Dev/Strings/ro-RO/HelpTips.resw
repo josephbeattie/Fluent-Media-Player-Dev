@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddPersonalMusicAndVideosTitle" xml:space="preserve">
-    <value>Adding your personal music and videos</value>
+    <value>Se adaugă videoclipurile și piesele personale</value>
   </data>
   <data name="Alpha.Text" xml:space="preserve">
     <value>• Aceste versiuni vor fi inițiate prin Microsoft Store
@@ -223,7 +223,7 @@ Insideri Early Access (în trecut Insideri Seeding) beneficiază de acces la apl
     <value>Cum intru în Programul Insider?</value>
   </data>
   <data name="PlayingMediaNowPlayingTitle" xml:space="preserve">
-    <value>Playing media and now playing</value>
+    <value>Redare media și acum se redă</value>
   </data>
   <data name="PreAlpha.Text" xml:space="preserve">
     <value>• Indexarea pieselor, albumului, artistului și genului
@@ -256,7 +256,7 @@ Insideri Early Access (în trecut Insideri Seeding) beneficiază de acces la apl
 • Beta - aprilie-TBD (Pre-Alpha 4 va fi disponibil pentru instalare pe Microsoft Store, iar nu vei avea nevoie de Programul Insider, deși vei pierde niscaiva funcții)</value>
   </data>
   <data name="SortingManagingLibraryTitle" xml:space="preserve">
-    <value>Sorting and managing your library</value>
+    <value>Sortarea și gestionarea bibliotecii tale</value>
   </data>
   <data name="WhatDiscy.Description" xml:space="preserve">
     <value>Va trebui să descoperi ;)</value>

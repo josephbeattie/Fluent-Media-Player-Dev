@@ -121,58 +121,58 @@
     <value>Insider Extras</value>
   </data>
   <data name="AboutMoreCopyVersion" xml:space="preserve">
-    <value>Copy version</value>
+    <value>Копировать версию</value>
   </data>
   <data name="AboutMoreH" xml:space="preserve">
-    <value>More</value>
+    <value>Ещё</value>
   </data>
   <data name="AboutMoreReleases" xml:space="preserve">
-    <value>Releases</value>
+    <value>Версии</value>
   </data>
   <data name="AboutMoreTitle" xml:space="preserve">
-    <value>More version info</value>
+    <value>Больше информации о версии</value>
   </data>
   <data name="AboutSave" xml:space="preserve">
-    <value>Save to my device</value>
+    <value>Сохранить на моём устройстве</value>
   </data>
   <data name="AboutSocialDesc" xml:space="preserve">
-    <value>Keep up with the latest updates.</value>
+    <value>Следите за последними обновлениями.</value>
   </data>
   <data name="AboutSocialTitle" xml:space="preserve">
-    <value>Social media</value>
+    <value>Социальные сети</value>
   </data>
   <data name="AboutWallsDesc" xml:space="preserve">
-    <value>Access some exclusive RiseMP branded wallpapers.</value>
+    <value>Получите доступ к эксклюзивным фирменным обоям RiseMP.</value>
   </data>
   <data name="AboutWallsTitle" xml:space="preserve">
-    <value>Desktop wallpapers &amp; themes</value>
+    <value>Обои и темы для рабочего стола</value>
   </data>
   <data name="AddAccount" xml:space="preserve">
-    <value>Add an account</value>
+    <value>Добавить аккаунт</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
-    <value>Add folder</value>
+    <value>Добавить папку</value>
   </data>
   <data name="AddFolders" xml:space="preserve">
-    <value>Add folders</value>
+    <value>Добавить папки</value>
   </data>
   <data name="AppearanceGlazeAlbumArt" xml:space="preserve">
-    <value>Use album art</value>
+    <value>Использовать обложку альбома</value>
   </data>
   <data name="AppearanceAppLayout" xml:space="preserve">
-    <value>App layout</value>
+    <value>Макет приложения</value>
   </data>
   <data name="AppearanceAppWindow" xml:space="preserve">
-    <value>App window</value>
+    <value>Окно</value>
   </data>
   <data name="AppearanceChooseColor" xml:space="preserve">
     <value>Choose your window glaze</value>
   </data>
   <data name="AppearanceChooseTheme" xml:space="preserve">
-    <value>Choose your colour</value>
+    <value>Выберите свой цвет</value>
   </data>
   <data name="AppearanceCustomGlazeColor" xml:space="preserve">
-    <value>Use custom colour</value>
+    <value>Использовать свой цвет</value>
   </data>
   <data name="AppearanceIconsAndFonts" xml:space="preserve">
     <value>Icons &amp; fonts</value>

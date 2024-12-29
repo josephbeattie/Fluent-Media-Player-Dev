@@ -210,18 +210,18 @@ Early Access Insiders (previously Seeding Insiders) get access to the app earlie
     <value>When you've submitted your form. There's nothing else you need to do, just wait. When the next build is released, you will receive an email to our Insider Portal, where you can download the MSIX package for the new build. Note: Alpha builds and up will use the Microsoft Store for distribution, but we have chosen to use MSIX for Pre-Alpha as there will be many builds. Some weeks, Insiders from both channels may receive the same builds. This is normal, don't worry!</value>
   </data>
   <data name="InsiderH.Text" xml:space="preserve">
-    <value>Hey, I'm an Insider. How do I get builds?</value>
+    <value>Hei, olen sisäpiiriläinen. Miten saan koontiversioita?</value>
   </data>
   <data name="InsiderProgram.Title" xml:space="preserve">
-    <value>Insider Program, Translations &amp; Contribution</value>
+    <value>Sisäpiiriohjelma, käännökset ja osallistumiset</value>
   </data>
   <data name="Join.Text" xml:space="preserve">
-    <value>Simply go to the form below and answer the questions. Choose your channel, enter your email and a few other things. https://bit.ly/rise-insider
+    <value>Mene vain alla olevaan lomakkeeseen ja vastaa kysymyksiin. Valitse kanava ja kirjoita sähköpostiosoitteesi ja muutama muu asia. https://bit.ly/rise-insider
 
-Good luck testing!</value>
+Onnea testaukseen!</value>
   </data>
   <data name="JoinH.Text" xml:space="preserve">
-    <value>How do I join the Insider Program?</value>
+    <value>Miten voin liittyä sisäpiiriohjelmaan (Insider)?</value>
   </data>
   <data name="PlayingMediaNowPlayingTitle" xml:space="preserve">
     <value>Median toisto ja nyt soiva kappale</value>
@@ -240,10 +240,10 @@ Good luck testing!</value>
 • Discy in small areas</value>
   </data>
   <data name="PreAlphaH.Text" xml:space="preserve">
-    <value>Pre Alpha (there will be many pre-alpha versions)</value>
+    <value>Esialfa (esialfaversioita tulee olemaan useampia)</value>
   </data>
   <data name="ReleaseDate.Title" xml:space="preserve">
-    <value>When will Rise Media Player be released?</value>
+    <value>Milloin Rise Media Player julkaistaan?</value>
   </data>
   <data name="ReleaseInfo.Text" xml:space="preserve">
     <value>There is no official release date. Pre-Alpha 1 is being released October 21 (alongside Rise Notes) and we're so happy to finally have users testing! :)
@@ -257,12 +257,12 @@ In terms of other versions, we have no exact dates to give you all, but this is 
 • Beta - April -TBD (This version will be available for all public users from the Microsoft Store. You will not need to be a part of the Insider program, although you will miss out on features)</value>
   </data>
   <data name="SortingManagingLibraryTitle" xml:space="preserve">
-    <value>Sorting and managing your library</value>
+    <value>Kirjaston lajittelu ja hallinta</value>
   </data>
   <data name="WhatDiscy.Description" xml:space="preserve">
-    <value>You'll have to see ;)</value>
+    <value>Sinun täytyy nähdä ;)</value>
   </data>
   <data name="WhatDiscy.Title" xml:space="preserve">
-    <value>What's Discy?</value>
+    <value>Mikä on Discy?</value>
   </data>
 </root>

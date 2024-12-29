@@ -118,151 +118,151 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddPersonalMusicAndVideosTitle" xml:space="preserve">
-    <value>Adding your personal music and videos</value>
+    <value>Személyes zenék és videók hozzáadása</value>
   </data>
   <data name="Alpha.Text" xml:space="preserve">
-    <value>• These versions will be pushed from the Microsoft Store
-• Playlists
-• Devices support
-• Disc Burning
-• Multi-language support for 12 languages at start (not complete)
-• Some online services in background - Discord Rich Presence &amp; Last.fm Scrobbling
-• Views and sorting for music added
-• Video indexing and playback
-• Improved Now Playing experience and queue
-• Overhauled Settings UI brought to all builds
-• Local recommendations and recently played
-• Discy in the majority of the app</value>
+    <value>• Ezek a verziók a Microsoft Store-ból kerülnek majd kiadásra.
+• Lejátszási listák
+• Eszközök támogatása
+• Lemezégetés
+• Többnyelvű támogatás 12 nyelven induláskor (nem teljes)
+• Néhány online szolgáltatás a háttérben - Discord Rich Presence &amp; Last.fm Scrobbling
+• Nézet és rendezés a zenékhez hozzáadva
+• Videók indexelése és lejátszása
+• Javított Now Playing élmény és sorban állás
+• Átalakított beállítási felhasználói felület minden buildben
+• Helyi ajánlások és legutóbb lejátszott zenék
+• Discy az alkalmazás nagy részében</value>
   </data>
   <data name="AlphaH.Text" xml:space="preserve">
-    <value>Late Pre-Alpha - Alpha</value>
+    <value>Késői Pre-Alfa - Alfa</value>
   </data>
   <data name="Benefits.Text" xml:space="preserve">
-    <value>First, the app early.
+    <value>Először is, a korai alkalmazás.
 
-Insiders in the Bloom Channel get access to the earliest builds possible. This really gives you a chance to see what we are working on, and to give feedback as we actively work on parts of the app, meaning your feedback means a whole lot! Of course, it isn't without it's disadvantages. Bloom Channel insiders also face more bugs and issues than other users. Bloom Insiders also get access to features tagged 'Experimental', meaning we have put very little work into them at that point, or they are very unstable, but interesting to try out nonetheless. These features are never enabled by default.
+A Bloom-csatorna Insiderei a lehető legkorábbi buildekhez jutnak hozzá. Ez tényleg lehetőséget ad arra, hogy lássátok, min dolgozunk, és hogy visszajelzést adjatok, miközben aktívan dolgozunk az alkalmazás egyes részein, vagyis a visszajelzésetek nagyon sokat jelent! Természetesen ez nem mentes a hátrányaitól sem. A Bloom Channel Insiderei több hibával és problémával szembesülnek, mint más felhasználók. A Bloom Insiderek a "Kísérleti" címkével ellátott funkciókhoz is hozzáférnek, ami azt jelenti, hogy nagyon kevés munkát fektettünk bele, vagy nagyon instabilak, de ettől függetlenül érdekes kipróbálni őket. Ezek a funkciók alapértelmezés szerint sosem lesznek engedélyezve.
 
-Early Access Insiders (previously Seeding Insiders) get access to the app earlier, although with much more stability. Experimental features will not be available to Insiders in this channel.*
+Az Early Access Insiderek (korábban Seeding Insiderek) hamarabb hozzáférnek az alkalmazáshoz, bár sokkal stabilabban. A kísérleti funkciók nem lesznek elérhetőek az Insiderek számára ebben a csatornában.*
 
-*Features tagged as Experimental in the Settings interface</value>
+*A Beállítások felületen Kísérleti funkcióként megjelölt funkciók</value>
   </data>
   <data name="BenefitsH.Text" xml:space="preserve">
-    <value>What benefits do I get from joining the Insider Program?</value>
+    <value>Milyen előnyökkel jár az Insider Programhoz való csatlakozás?</value>
   </data>
   <data name="Beta.Text" xml:space="preserve">
-    <value>• Streaming services and reccommendations in some form
-• Equaliser
-• Visualiser
-• Find album info
-• Disc ripping
-• Networks support
-• More stuff</value>
+    <value>- Streaming szolgáltatások és ajánlások valamilyen formában
+- Hangszínszabályzó
+- Vizualizáló
+- Album információk keresése
+- Lemezre rippelés
+- Hálózatok támogatása
+- További dolgok</value>
   </data>
   <data name="BetaH.Text" xml:space="preserve">
-    <value>Beta</value>
+    <value>Béta</value>
   </data>
   <data name="DiscyAboutTipDesc" xml:space="preserve">
-    <value>You can find me by right clicking on different things. For example, an album. I'll tell you what you can do :). I'm still pretty new, so I won't be everywhere, but I'm growing every day!</value>
+    <value>Megtalálhatsz engem, ha jobbra kattintasz a különböző dolgokra. Például egy albumra. Elmondom, hogy mit tudsz csinálni :). Még elég új vagyok, szóval nem leszek mindenhol, de napról napra bővülök!</value>
   </data>
   <data name="DiscyAboutTipTitle" xml:space="preserve">
-    <value>Hey! I'm Discy.</value>
+    <value>Hé! Discy vagyok.</value>
   </data>
   <data name="DiscyOnAlbumDesc" xml:space="preserve">
-    <value>Use the command bar to sort your albums into different types. Click on an album to see what's in store. You can add a whole album to a playlist, shuffle or share with friends.</value>
+    <value>Az albumok különböző típusokba való rendezéséhez használd a parancssort. Kattints egy albumra, hogy megnézd, mi van benne. Az egész albumot hozzáadhatod egy lejátszási listához, keverheted vagy megoszthatod barátaiddal.</value>
   </data>
   <data name="DiscyOnAlbumH" xml:space="preserve">
-    <value>Managing and organising your albums</value>
+    <value>Albumok kezelése és rendszerezése</value>
   </data>
   <data name="DiscyOnArtistDesc" xml:space="preserve">
-    <value>Play an entire artist's discography at once. View information about an artist, their albums (stored on your device) and songs by clicking on the artist you want. Share your favourite artists with your friends or add an entire artist's music to a playlist.</value>
+    <value>Egy előadó teljes diszkográfiájának egyszerre történő lejátszása. A kívánt előadóra kattintva megtekintheted az előadóval kapcsolatos információkat, a (készülékén tárolt) albumait és dalait. Megoszthatod kedvenc előadóid barátaiddal, vagy egy teljes előadó zenéjét hozzáadhatja egy lejátszási listához.</value>
   </data>
   <data name="DiscyOnPlaylistDesc" xml:space="preserve">
-    <value>Put your favourite songs, special songs, your songs, together in a playlist. Give it a description and a title. Then add extra music and remove tracks you're not too sure about. Happy listening!</value>
+    <value>Tedd össze kedvenc dalaidat, különleges dalaidat, a te dalaidat egy lejátszási listába. Adj neki leírást és címet. Ezután adj hozzá plusz zenéket, és távolítsd el azokat a számokat, amelyekkel kapcsolatban nem vagy túl biztos benne. Boldog zenehallgatást!</value>
   </data>
   <data name="DiscyOnPlaylistH" xml:space="preserve">
-    <value>Group with playlists</value>
+    <value>Csoportosítás lejátszási listákkal</value>
   </data>
   <data name="DiscyOnSongDesc" xml:space="preserve">
-    <value>Hover over a song and click the play button to play a song, or double click. Skip, go back and view song info from the now playing bar (at the bottom of your app window). Click 'Info and Properties' to edit song metadata and file information. You can always share to others or add to a playlist too!</value>
+    <value>A dal lejátszásához vidd a gépet egy dal fölé, és kattints a lejátszás gombra, vagy kattints duplán. Ugrás, visszalépés és a dalinformációk megtekintése a most lejátszott sávban (az alkalmazás ablakának alján). Kattints az "Információ és tulajdonságok" menüpontra a dal metaadatainak és a fájlinformációk szerkesztéséhez. Bármikor megoszthatod másokkal vagy hozzáadhatod egy lejátszási listához is!</value>
   </data>
   <data name="DiscyOnSongH" xml:space="preserve">
-    <value>Taking action on songs</value>
+    <value>Cselekvés a dalokkal kapcsolatban</value>
   </data>
   <data name="DiscyOnVideoDesc" xml:space="preserve">
-    <value>Click on a video to play it. Rename and sort them. Videos will take up the whole app window and you can scrub, pause, skip and more.</value>
+    <value>Kattints a videóra a lejátszáshoz. Átnevezheted és rendezheted őket. A videók az alkalmazás teljes ablakát elfoglalják, és a videókat lejátszhatod, szüneteltetheted, átugorhatod és így tovább.</value>
   </data>
   <data name="DiscyOnVideoH" xml:space="preserve">
-    <value>Playing videos</value>
+    <value>Videók lejátszása</value>
   </data>
   <data name="FAQH.Text" xml:space="preserve">
-    <value>The basics</value>
+    <value>Az alapok</value>
   </data>
   <data name="Features.Title" xml:space="preserve">
-    <value>What features are you prioritising?</value>
+    <value>Milyen funkciókat helyeztel előtérbe?</value>
   </data>
   <data name="HowTrans.Text" xml:space="preserve">
-    <value>If you'd like to contribute or translate, join our Discord server! Here: https://disboard.org/server/872910570003791922</value>
+    <value>Ha szeretnél hozzájárulni vagy fordítani, csatlakozz a Discord szerverünkhöz! Itt: https://disboard.org/server/872910570003791922</value>
   </data>
   <data name="HowTransH.Text" xml:space="preserve">
-    <value>How can I become a contributor or a translator?</value>
+    <value>Hogyan lehetek közreműködő vagy fordító?</value>
   </data>
   <data name="Insider.Text" xml:space="preserve">
-    <value>When you've submitted your form. There's nothing else you need to do, just wait. When the next build is released, you will receive an email to our Insider Portal, where you can download the MSIX package for the new build. Note: Alpha builds and up will use the Microsoft Store for distribution, but we have chosen to use MSIX for Pre-Alpha as there will be many builds. Some weeks, Insiders from both channels may receive the same builds. This is normal, don't worry!</value>
+    <value>Amikor elküldted az űrlapot. Semmi mást nem kell tenned, csak várnod. Amikor a következő build megjelenik, kapni fogsz egy e-mailt az Insider Portálunkhoz, ahonnan letöltheted az új buildhez tartozó MSIX csomagot. Megjegyzés: Az Alpha buildektől kezdve a Microsoft Store-t használjuk a terjesztéshez, de a Pre-Alpha esetében az MSIX használatát választottuk, mivel sok build lesz. Néhány héten előfordulhat, hogy az Insiderek mindkét csatornáról ugyanazokat a buildeket kapják. Ez normális, ne aggódjon!</value>
   </data>
   <data name="InsiderH.Text" xml:space="preserve">
-    <value>Hey, I'm an Insider. How do I get builds?</value>
+    <value>Hé, Insider vagyok. Hogyan kapok buildeket?</value>
   </data>
   <data name="InsiderProgram.Title" xml:space="preserve">
-    <value>Insider Program, Translations &amp; Contribution</value>
+    <value>Insider Program, Fordítások és hozzájárulás</value>
   </data>
   <data name="Join.Text" xml:space="preserve">
-    <value>Simply go to the form below and answer the questions. Choose your channel, enter your email and a few other things. https://bit.ly/rise-insider
+    <value>Egyszerűen menj az alábbi űrlapra, és válaszolj a kérdésekre. Válaszd ki a csatornádat, add meg az e-mail címedet és még néhány dolgot. https://bit.ly/rise-insider.
 
-Good luck testing!</value>
+Sok sikert a teszteléshez!</value>
   </data>
   <data name="JoinH.Text" xml:space="preserve">
-    <value>How do I join the Insider Program?</value>
+    <value>Hogyan csatlakozhatok az Insider Programhoz?</value>
   </data>
   <data name="PlayingMediaNowPlayingTitle" xml:space="preserve">
-    <value>Playing media and now playing</value>
+    <value>Média lejátszása és most lejátszás</value>
   </data>
   <data name="PreAlpha.Text" xml:space="preserve">
-    <value>• Song, Album, Artist and Genre Indexing
-• Album, Artist, Genre and Songs Views (static for now)
-• Media Playback
-• Command Bar (BASIC)
-• User Controlled Media Locations
-• UI Manipulation through Settings
-• Basic Metadata control for Music
-• Basic Now Playing UI
-• Basic Properties Window
-• FAQ Help Section
-• Discy in small areas</value>
+    <value>• Dal, album, előadó és műfaj indexelése
+• Album, előadó, műfaj és dalok megtekintése (egyelőre statikus)
+• Média lejátszás
+• Parancssor (BASIC)
+• Felhasználó által vezérelt médiahelyszínek
+• UI-manipuláció a beállításokon keresztül
+• Alapvető metaadatok vezérlése a zenéhez
+• Alapvető Most lejátszás felhasználói felület
+• Alapvető Tulajdonságok ablak
+• GYIK Súgó rész
+• Discy kis területeken</value>
   </data>
   <data name="PreAlphaH.Text" xml:space="preserve">
-    <value>Pre Alpha (there will be many pre-alpha versions)</value>
+    <value>Pre Alpha (sok pre-alfa verzió lesz)</value>
   </data>
   <data name="ReleaseDate.Title" xml:space="preserve">
-    <value>When will Rise Media Player be released?</value>
+    <value>Mikor jelenik meg a Rise Media Player?</value>
   </data>
   <data name="ReleaseInfo.Text" xml:space="preserve">
-    <value>There is no official release date. Pre-Alpha 1 is being released October 21 (alongside Rise Notes) and we're so happy to finally have users testing! :)
+    <value>Nincs hivatalos megjelenési dátum. A Pre-Alpha 1 október 21-én jelenik meg (a Rise Notes mellett), és nagyon örülünk, hogy végre a felhasználók is tesztelhetik! :)
 
-In terms of other versions, we have no exact dates to give you all, but this is what we are aiming for (versions may be released earlier or later depending on features:
+Ami a többi verziót illeti, nincs pontos dátum, amit mindenkinek megadhatnánk, de ez a célunk (a verziók a funkciók függvényében korábban vagy később is megjelenhetnek:
 
-• Pre Alpha Process - October to December 2021 (Pre-Alpha 1 is the first version)
+- Pre Alpha Process - 2021 októbere és decembere között (Pre-Alpha 1 az első verzió).
 
-• Alpha Builds - New Year (2022) up to March 2022. Note: During the Alpha process, demo versions of the app will be publicly available to test for UI purposes.
+- Alpha Builds - Újév (2022) 2022 márciusáig. Megjegyzés: Az Alpha folyamat során az alkalmazás demóverziói nyilvánosan elérhetőek lesznek, hogy tesztelhessük a felhasználói felületet.
 
-• Beta - April -TBD (This version will be available for all public users from the Microsoft Store. You will not need to be a part of the Insider program, although you will miss out on features)</value>
+- Béta - április -TBD (Ez a verzió minden nyilvános felhasználó számára elérhető lesz a Microsoft Store-ból. Nem lesz szükség az Insider programban való részvételre, bár a funkciókról lemarad)</value>
   </data>
   <data name="SortingManagingLibraryTitle" xml:space="preserve">
-    <value>Sorting and managing your library</value>
+    <value>A könyvtár rendezése és kezelése</value>
   </data>
   <data name="WhatDiscy.Description" xml:space="preserve">
-    <value>You'll have to see ;)</value>
+    <value>Majd meglátod ;)</value>
   </data>
   <data name="WhatDiscy.Title" xml:space="preserve">
-    <value>What's Discy?</value>
+    <value>Mi az a Discy?</value>
   </data>
 </root>

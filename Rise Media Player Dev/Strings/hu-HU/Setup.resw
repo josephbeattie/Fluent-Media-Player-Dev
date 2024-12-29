@@ -118,49 +118,49 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppearanceH" xml:space="preserve">
-    <value>Make it yours</value>
+    <value>Tedd magadévá</value>
   </data>
   <data name="ConnectH" xml:space="preserve">
-    <value>Connect an internet account</value>
+    <value>Internetes fiók csatlakoztatása</value>
   </data>
   <data name="DoneH" xml:space="preserve">
-    <value>You're done!</value>
+    <value>Készen vagy!</value>
   </data>
   <data name="Intro" xml:space="preserve">
-    <value>We're glad you're here. You just need to go through a few simple steps and you'll be all up and running!</value>
+    <value>Örülünk, hogy itt vagy. Csak néhány egyszerű lépést kell tenned, és máris működni fog!</value>
   </data>
   <data name="LocalH" xml:space="preserve">
-    <value>Add your personal media</value>
+    <value>Személyes média hozzáadása</value>
   </data>
   <data name="PrivacyH" xml:space="preserve">
-    <value>Privacy &amp; recommendations</value>
+    <value>Adatvédelem és ajánlások</value>
   </data>
   <data name="SetupPre" xml:space="preserve">
-    <value>Pre-setup</value>
+    <value>Előzetes beállítás</value>
   </data>
   <data name="Start" xml:space="preserve">
-    <value>Start setup</value>
+    <value>Beállítás megkezdése</value>
   </data>
   <data name="TermsH" xml:space="preserve">
-    <value>License Agreement &amp; Terms</value>
+    <value>Licencszerződés és feltételek</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome to</value>
+    <value>Üdvözölünk a</value>
   </data>
   <data name="TermsLastUpdated" xml:space="preserve">
-    <value>Last Updated December 2021 - GPL License 3.0</value>
+    <value>Utolsó frissítés december 2021 - GPL License 3.0</value>
   </data>
   <data name="TermsLocalH" xml:space="preserve">
-    <value>Local Media Handling</value>
+    <value>Helyi média kezelés</value>
   </data>
   <data name="TermsStreamingH" xml:space="preserve">
-    <value>Streaming &amp; Online Services</value>
+    <value>Streaming és online szolgáltatások</value>
   </data>
   <data name="TermsStart" xml:space="preserve">
-    <value>Rise Media Player - Licence Agreement &amp; Terms for Use</value>
+    <value>Rise Media Player - Licencszerződés és felhasználási feltételek</value>
   </data>
   <data name="TermsBaseH" xml:space="preserve">
-    <value>Base Software &amp; Copyright</value>
+    <value>Alapszoftver és szerzői jog</value>
   </data>
   <data name="TermsBodyPart1" xml:space="preserve">
     <value>GNU GENERAL PUBLIC LICENSE
@@ -275,57 +275,57 @@ IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY C
 If the disclaimer of warranty and limitation of liability provided above cannot be given local legal effect according to their terms, reviewing courts shall apply local law that most closely approximates an absolute waiver of all civil liability in connection with the Program, unless a warranty or assumption of liability accompanies a copy of the Program in return for a fee.</value>
   </data>
   <data name="TermsBodyPart2" xml:space="preserve">
-    <value>By using this software and adding your folders, you give Rise Media Player full access to edit the media's metadata, view the files, delete etc. You also give access to your default library locations for media (Music &amp; Videos) by default.
+    <value>A szoftver használatával és a mappák hozzáadásával a Rise Media Player teljes hozzáférést biztosítasz a média metaadatainak szerkesztéséhez, a fájlok megtekintéséhez, törléséhez stb. Alapértelmezés szerint hozzáférést adsz a média alapértelmezett könyvtári helyeihez is (Zene és Videók).
 
-By default, you give the software access to track your listening history and habits to serve you personalised recommendations. This can be turned off.</value>
+Alapértelmezés szerint hozzáférést biztosít a szoftver számára az zenehallgatási előzményeid és szokásaid nyomon követéséhez, hogy személyre szabott ajánlásokkal szolgálhasson neked. Ez kikapcsolható.</value>
   </data>
   <data name="TermsBodyPart3" xml:space="preserve">
-    <value>Logging in and using your online accounts allows this software to manage your online library, view purchases and listening history from your chosen service(s).
+    <value>Az online fiókok bejelentkezése és használata lehetővé teszi, hogy ez a szoftver kezelje online könyvtárát, megtekinthesse a vásárlásokat és a kiválasztott szolgáltatás(ok)ból származó zenehallgatási előzményeket.
 
-By using any one of the streaming services available in the app, you accept their own terms and conditions for service. These will be available at their respective websites.
+Az alkalmazásban elérhető streamingszolgáltatások bármelyikének használatával elfogadja azok saját szolgáltatási feltételeit. Ezek a megfelelő webhelyeken érhetők el.
 
-Congrats if you read this! Have a cookie :) Please follow all of these terms for the best experience and least issues.</value>
+Gratulálunk, ha ezt elolvastad! Egyél egy sütit :) Kérjük, a legjobb élmény és a legkevesebb probléma érdekében tartsa be ezeket a feltételeket.</value>
   </data>
   <data name="AppearanceAtAGlanceDesc" xml:space="preserve">
-    <value>Add widgets to make your experience more personal.</value>
+    <value>Adj hozzá widgeteket, hogy még személyesebbé tedd a felhasználói élményt.</value>
   </data>
   <data name="AppearanceAtAGlanceTitle" xml:space="preserve">
-    <value>Customise your at a glance page</value>
+    <value>Az áttekintő oldal testreszabása</value>
   </data>
   <data name="AppearanceCuratedPlaylistsDesc" xml:space="preserve">
-    <value>Playlists are made for you based on your habits and favourites, including songs you like.</value>
+    <value>A lejátszási listák az általad kedvelt dalokat tartalmazó, a szokásaid és kedvenceid alapján készülnek számodra.</value>
   </data>
   <data name="AppearanceCuratedPlaylistsTitle" xml:space="preserve">
-    <value>Make curated playlists</value>
+    <value>Készíts egyedi lejátszási listákat</value>
   </data>
   <data name="AppearanceDesc" xml:space="preserve">
-    <value>Personalize with icon styles, colors, modes and more that can not only make your experience more personal, but more user friendly.</value>
+    <value>Személyre szabhatod ikonstílusokkal, színekkel, üzemmódokkal és egyebekkel, amelyek nemcsak személyesebbé, de felhasználóbarátabbá is tehetik a felhasználói élményt.</value>
   </data>
   <data name="AppearanceHistoryTitle" xml:space="preserve">
-    <value>Track media history and habits</value>
+    <value>A médiatörténet és a szokások nyomon követése</value>
   </data>
   <data name="ConnectDesc" xml:space="preserve">
-    <value>Streaming services are here! Connect all the accounts you use for streaming media*. We use these for recommendations and playing your stuff.</value>
+    <value>A streaming szolgáltatások itt vannak! Csatlakoztassa a streaming médiához használt összes fiókját*. Ezeket használjuk az ajánlásokhoz és a lejátszáshoz.</value>
   </data>
   <data name="ConnectSoonText" xml:space="preserve">
-    <value>More internet accounts &amp; services are coming soon.</value>
+    <value>Hamarosan további internetes szolgáltatásokat és szolgáltatásokat is kínálunk.</value>
   </data>
   <data name="ConnectTip" xml:space="preserve">
-    <value>*Music streaming requires a premium level account to function. Only one music streaming service can be enabled at a time.</value>
+    <value>*A zenei streaminghez prémium szintű fiók szükséges. Egyszerre csak egy zenei streaming szolgáltatás engedélyezhető.</value>
   </data>
   <data name="FinishBodyPart1" xml:space="preserve">
-    <value>Depending on how much you have added and changed, this process can take several minutes. If you want to continue this process later, just click not now. This will exit the app.</value>
+    <value>Attól függően, hogy mennyi mindent adtál hozzá és változtattál meg, ez a folyamat több percet is igénybe vehet. Ha ezt a folyamatot később szeretnéd folytatni, csak kattints a Nem most gombra. Ezzel kilépsz az alkalmazásból.</value>
   </data>
   <data name="FinishBodyPart2" xml:space="preserve">
-    <value>If you want to start this process now, select continue. The whole process is automatic and doesn't require any user input.</value>
+    <value>Ha most szeretnéd elindítani a folyamatot, válaszd a folytatás lehetőséget. Az egész folyamat automatikus, és nem igényel felhasználói beavatkozást.</value>
   </data>
   <data name="FinishDesc" xml:space="preserve">
-    <value>Your part is finished. We just need to add your local media files and make sure all of your settings have been applied.</value>
+    <value>A te részed befejeződött. Már csak a helyi médiafájlokat kell hozzáadnunk, és meg kell győződnünk arról, hogy az összes beállítást alkalmaztuk.</value>
   </data>
   <data name="LocalDesc" xml:space="preserve">
-    <value>Whether that's media you've ripped from CD's and DVD's, bought or downloaded from the internet, customise what we do with it.</value>
+    <value>Legyen szó akár CD-ről vagy DVD-ről másolt, vásárolt vagy az internetről letöltött adathordozókról, testre szabhatod, hogy mit csináljunk velük.</value>
   </data>
   <data name="LocalTip" xml:space="preserve">
-    <value>Your video library is already split into 'Local and Purchased' and sections for your streaming services.</value>
+    <value>A videótárad már fel van osztva "Helyi és megvásárolt", valamint a streaming-szolgáltatásokat tartalmazó részekre.</value>
   </data>
 </root>

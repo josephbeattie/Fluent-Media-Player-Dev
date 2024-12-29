@@ -118,37 +118,37 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>About</value>
+    <value>Rólunk</value>
   </data>
   <data name="Accept" xml:space="preserve">
-    <value>Accept</value>
+    <value>Elfogad</value>
   </data>
   <data name="AddAccount" xml:space="preserve">
-    <value>Add an account</value>
+    <value>Fiók hozzáadása</value>
   </data>
   <data name="Albums" xml:space="preserve">
-    <value>Albums</value>
+    <value>Albumok</value>
   </data>
   <data name="Artists" xml:space="preserve">
-    <value>Artists</value>
+    <value>Előadók</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Tovább</value>
   </data>
   <data name="Dark" xml:space="preserve">
-    <value>Dark</value>
+    <value>Sötét</value>
   </data>
   <data name="DecideForMe" xml:space="preserve">
-    <value>Decide for me</value>
+    <value>Döntsd el helyettem</value>
   </data>
   <data name="Decline" xml:space="preserve">
-    <value>Decline</value>
+    <value>Elutasít</value>
   </data>
   <data name="Discy" xml:space="preserve">
-    <value>Help Centre</value>
+    <value>Súgóközpont</value>
   </data>
   <data name="Genres" xml:space="preserve">
-    <value>Genres</value>
+    <value>Műfajok</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>At a glance</value>
@@ -157,768 +157,768 @@
     <value>Insider Hub</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Nyelv</value>
   </data>
   <data name="Library" xml:space="preserve">
-    <value>Library</value>
+    <value>Könyvtár</value>
   </data>
   <data name="Light" xml:space="preserve">
-    <value>Light</value>
+    <value>Világos</value>
   </data>
   <data name="LocalVideos" xml:space="preserve">
     <value>All Videos</value>
   </data>
   <data name="MatchResolution" xml:space="preserve">
-    <value>Always match resolution</value>
+    <value>Mindig egyezzen a felbontással</value>
   </data>
   <data name="Music" xml:space="preserve">
-    <value>Music</value>
+    <value>Zene</value>
   </data>
   <data name="NDays" xml:space="preserve">
-    <value>{0} days</value>
+    <value>{0} nap</value>
   </data>
   <data name="NHours" xml:space="preserve">
-    <value>{0} hours</value>
+    <value>{0} óra</value>
   </data>
   <data name="NMinutes" xml:space="preserve">
-    <value>{0} minutes</value>
+    <value>{0} perc</value>
   </data>
   <data name="NoCrossfade" xml:space="preserve">
-    <value>No crossfade</value>
+    <value>Nincs átmenet</value>
   </data>
   <data name="NotNow" xml:space="preserve">
-    <value>Not now (Exit app)</value>
+    <value>Nem most (Kilépés)</value>
   </data>
   <data name="NSeconds" xml:space="preserve">
-    <value>{0} seconds</value>
+    <value>{0} másodperc</value>
   </data>
   <data name="OneDay" xml:space="preserve">
-    <value>1 day</value>
+    <value>1 nap</value>
   </data>
   <data name="OneHour" xml:space="preserve">
-    <value>1 hour</value>
+    <value>1 óra</value>
   </data>
   <data name="OneMinute" xml:space="preserve">
-    <value>1 minute</value>
+    <value>1 perc</value>
   </data>
   <data name="OneSecond" xml:space="preserve">
-    <value>1 second</value>
+    <value>1 másodperc</value>
   </data>
   <data name="OnlyLocal" xml:space="preserve">
-    <value>Use local media files only</value>
+    <value>Csak helyi médiafájlok használata</value>
   </data>
   <data name="OnlyStreaming" xml:space="preserve">
-    <value>Use streaming services only</value>
+    <value>Csak streaming szolgáltatások használata</value>
   </data>
   <data name="Personalise" xml:space="preserve">
-    <value>Personalise</value>
+    <value>Személyre szabás</value>
   </data>
   <data name="Playback" xml:space="preserve">
-    <value>Playback</value>
+    <value>Visszajátszás</value>
   </data>
   <data name="Playlists" xml:space="preserve">
-    <value>Playlists</value>
+    <value>Lejátszási listák</value>
   </data>
   <data name="PropertiesInfo" xml:space="preserve">
-    <value>Properties &amp; Info</value>
+    <value>Tulajdonságok és információk</value>
   </data>
   <data name="Queue" xml:space="preserve">
-    <value>Queue</value>
+    <value>Várólista</value>
   </data>
   <data name="ScaleToWindow" xml:space="preserve">
-    <value>Scale to window size</value>
+    <value>Méretezés az ablak méretére</value>
   </data>
   <data name="PinToSidebar" xml:space="preserve">
-    <value>Pin to sidebar</value>
+    <value>Kitűzés az oldalsávra</value>
   </data>
   <data name="RemoveFromSidebar" xml:space="preserve">
-    <value>Remove from sidebar</value>
+    <value>Eltávolítás az oldalsávról</value>
   </data>
   <data name="SearchMediaPlaceholder" xml:space="preserve">
-    <value>Search all media on this device</value>
+    <value>Keresés az összes médián ezen az eszközön</value>
   </data>
   <data name="SearchPlaceholder" xml:space="preserve">
-    <value>Search</value>
+    <value>Keresés</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Beállítások</value>
   </data>
   <data name="Songs" xml:space="preserve">
-    <value>Songs</value>
+    <value>Dalok</value>
   </data>
   <data name="StepOf" xml:space="preserve">
-    <value>Step {0} of {1}</value>
+    <value>{0} / {1}. lépés</value>
   </data>
   <data name="UnknownAlbumResource" xml:space="preserve">
-    <value>Unknown Album</value>
+    <value>Ismeretlen album</value>
   </data>
   <data name="UnknownArtistResource" xml:space="preserve">
-    <value>Unknown Artist</value>
+    <value>Ismeretlen előadó</value>
   </data>
   <data name="UnknownGenreResource" xml:space="preserve">
-    <value>Unknown Genre</value>
+    <value>Ismeretlen műfaj</value>
   </data>
   <data name="UseSystemSetting" xml:space="preserve">
-    <value>Use system setting</value>
+    <value>Rendszerbeállítások használata</value>
   </data>
   <data name="Videos" xml:space="preserve">
-    <value>Videos</value>
+    <value>Videók</value>
   </data>
   <data name="Wallpapers" xml:space="preserve">
-    <value>Wallpapers</value>
+    <value>Háttérképek</value>
   </data>
   <data name="NAlbums" xml:space="preserve">
-    <value>{0} albums</value>
+    <value>{0} albumok</value>
   </data>
   <data name="NSongs" xml:space="preserve">
-    <value>{0} songs</value>
+    <value>{0} dalok</value>
   </data>
   <data name="NVideos" xml:space="preserve">
-    <value>{0} videos</value>
+    <value>{0} videók</value>
   </data>
   <data name="OneAlbum" xml:space="preserve">
     <value>1 album</value>
   </data>
   <data name="OneSong" xml:space="preserve">
-    <value>1 song</value>
+    <value>1 dal</value>
   </data>
   <data name="OneVideo" xml:space="preserve">
-    <value>1 video</value>
+    <value>1 videó</value>
   </data>
   <data name="ComingSoon" xml:space="preserve">
-    <value>Coming soon</value>
+    <value>Hamarosan</value>
   </data>
   <data name="AlbumInfo" xml:space="preserve">
-    <value>Album info</value>
+    <value>Album információ</value>
   </data>
   <data name="Play" xml:space="preserve">
-    <value>Play</value>
+    <value>Lejátszás</value>
   </data>
   <data name="EditPlaylist" xml:space="preserve">
-    <value>Edit playlist</value>
+    <value>Lejátszási lista szerkesztése</value>
   </data>
   <data name="SongInfo" xml:space="preserve">
-    <value>Song info</value>
+    <value>Dal info</value>
   </data>
   <data name="Colorful" xml:space="preserve">
-    <value>Colourful</value>
+    <value>Sokszínű</value>
   </data>
   <data name="Default" xml:space="preserve">
-    <value>Default</value>
+    <value>Alapértelmezett</value>
   </data>
   <data name="DontShowSidebar" xml:space="preserve">
-    <value>Don't show the sidebar</value>
+    <value>Ne jelenítse meg az oldalsávot</value>
   </data>
   <data name="OnlyShowIcons" xml:space="preserve">
-    <value>Only show icons</value>
+    <value>Csak ikonok megjelenítése</value>
   </data>
   <data name="ShowEverything" xml:space="preserve">
-    <value>Show everything</value>
+    <value>Minden mutatása</value>
   </data>
   <data name="RemoveFromApp" xml:space="preserve">
-    <value>Only remove from app</value>
+    <value>Eltávolítás csak az alkalmazásból</value>
   </data>
   <data name="RemoveFromDevice" xml:space="preserve">
-    <value>Delete from device</value>
+    <value>Törlés az eszközről</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Back</value>
+    <value>Vissza</value>
   </data>
   <data name="OpenRiseOnStartup" xml:space="preserve">
-    <value>Open Rise Media Player when you login to your device.</value>
+    <value>Nyisd meg a Rise Media Playert, amikor bejelentkezel a készülékedre.</value>
   </data>
   <data name="OpenRiseOnStartupH" xml:space="preserve">
-    <value>Start with Windows</value>
+    <value>Indítás a Windows-al</value>
   </data>
   <data name="FileCreated" xml:space="preserve">
-    <value>Created</value>
+    <value>Létrehozva</value>
   </data>
   <data name="FileOpensWith" xml:space="preserve">
-    <value>Opens with</value>
+    <value>Társítás ezzel</value>
   </data>
   <data name="FileName" xml:space="preserve">
-    <value>File name</value>
+    <value>Fájl neve</value>
   </data>
   <data name="FileType" xml:space="preserve">
-    <value>File type</value>
+    <value>Fájl típusa</value>
   </data>
   <data name="FileLocation" xml:space="preserve">
-    <value>Location</value>
+    <value>Útvonal</value>
   </data>
   <data name="FileModified" xml:space="preserve">
-    <value>Modified</value>
+    <value>Módosítva</value>
   </data>
   <data name="FileSize" xml:space="preserve">
-    <value>File size</value>
+    <value>Fájl mérete</value>
   </data>
   <data name="FileOpenLocation" xml:space="preserve">
-    <value>Open file location</value>
+    <value>Fájl helyének megnyitása</value>
   </data>
   <data name="WidgetArtistNewsFeedTitle" xml:space="preserve">
-    <value>Artist news feed</value>
+    <value>Előadói hírfolyam</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Mégse</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Details</value>
+    <value>Részletek</value>
   </data>
   <data name="File" xml:space="preserve">
-    <value>File</value>
+    <value>Fájl</value>
   </data>
   <data name="Lyrics" xml:space="preserve">
-    <value>Lyrics</value>
+    <value>Dalszöveg</value>
   </data>
   <data name="PropsErrorContent" xml:space="preserve">
-    <value>We couldn't save the song properties. The file might have been moved, changed or deleted, or maybe this is just a Windows issue.</value>
+    <value>Nem tudtuk megmenteni a dal tulajdonságait. Lehet, hogy a fájlt áthelyezték, megváltoztatták vagy törölték, vagy ez csak egy Windows-probléma.</value>
   </data>
   <data name="PropsErrorTitle" xml:space="preserve">
-    <value>Something went wrong</value>
+    <value>Valami hiba történt</value>
   </data>
   <data name="PropsSave" xml:space="preserve">
-    <value>Save changes</value>
+    <value>Változtatások mentése</value>
   </data>
   <data name="ShufflePlaylist" xml:space="preserve">
-    <value>Shuffle playlist</value>
+    <value>Lejátszási lista keverése</value>
   </data>
   <data name="Contribute" xml:space="preserve">
-    <value>Contribute</value>
+    <value>Közreműködés</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version</value>
+    <value>Verzió</value>
   </data>
   <data name="VersionTemplate" xml:space="preserve">
     <value>{0}
-Internal Version: {1}
+Belső verzió: {1}
 
 Rise Software - Discy &amp; YourOrdinaryCat</value>
   </data>
   <data name="TermsAndConditions" xml:space="preserve">
-    <value>Terms &amp; Conditions</value>
+    <value>Felhasználási feltételek</value>
   </data>
   <data name="Of" xml:space="preserve">
-    <value>of</value>
+    <value>a</value>
   </data>
   <data name="Learn" xml:space="preserve">
-    <value>Learn more</value>
+    <value>További információ</value>
   </data>
   <data name="Album" xml:space="preserve">
     <value>Album</value>
   </data>
   <data name="AlbumArtist" xml:space="preserve">
-    <value>Album artist</value>
+    <value>Album előadója</value>
   </data>
   <data name="ArtistOrArtists" xml:space="preserve">
-    <value>Artist(s)</value>
+    <value>Előadók</value>
   </data>
   <data name="BecomeTranslator" xml:space="preserve">
-    <value>Become a translator </value>
+    <value>Legyél fordító</value>
   </data>
   <data name="Bitrate" xml:space="preserve">
-    <value>Bitrate</value>
+    <value>Bitráta</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Description</value>
+    <value>Leírás</value>
   </data>
   <data name="Disc" xml:space="preserve">
-    <value>Disc</value>
+    <value>Lemez</value>
   </data>
   <data name="EditAlbum" xml:space="preserve">
-    <value>Edit album art</value>
+    <value>Album exportálása</value>
   </data>
   <data name="ExportAlbumArt" xml:space="preserve">
-    <value>Export album art</value>
+    <value>Album exportálása</value>
   </data>
   <data name="ExportPlaylistIcon" xml:space="preserve">
-    <value>Export playlist icon</value>
+    <value>Lejátszási lista exportálása ikon</value>
   </data>
   <data name="Genre" xml:space="preserve">
-    <value>Genre</value>
+    <value>Műfaj</value>
   </data>
   <data name="MediaLocalDesc" xml:space="preserve">
-    <value>This song is local, meaning it is stored directly on to your device's storage, rather than the cloud or online. Changing properties here will change them for the file itself, meaning it will affect other media players.</value>
+    <value>Ez a dal helyi, azaz közvetlenül a készülék tárolóján van tárolva, nem pedig a felhőben vagy online. Ha itt módosítja a tulajdonságokat, az magára a fájlra is hatással lesz, ami azt jelenti, hogy más médialejátszókra is hatással lesz.</value>
   </data>
   <data name="MediaLocalTitle" xml:space="preserve">
-    <value>Local Music</value>
+    <value>Helyi zene</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Options</value>
+    <value>Opciók</value>
   </data>
   <data name="PlaylistSongsDetailsTipTitle" xml:space="preserve">
-    <value>Move songs by clicking the up and down buttons.</value>
+    <value>Mozgasd a dalokat a felfelé és lefelé gombokra kattintva.</value>
   </data>
   <data name="PlaylistTitle" xml:space="preserve">
-    <value>Playlist name</value>
+    <value>Lejátszási lista neve</value>
   </data>
   <data name="PlaylistVideosDetailsTipTitle" xml:space="preserve">
-    <value>Move videos by clicking the up and down buttons.</value>
+    <value>Mozgasd a videókat a felfelé és lefelé gombokra kattintva.</value>
   </data>
   <data name="Rating" xml:space="preserve">
-    <value>Rating</value>
+    <value>Értékelés</value>
   </data>
   <data name="ReleaseYear" xml:space="preserve">
-    <value>Release year</value>
+    <value>Kiadási éve</value>
   </data>
   <data name="ReportAnIssue" xml:space="preserve">
-    <value>Report an issue</value>
+    <value>Probléma jelentése</value>
   </data>
   <data name="SongTitle" xml:space="preserve">
-    <value>Song title</value>
+    <value>Dal címe</value>
   </data>
   <data name="StoredAsFile" xml:space="preserve">
-    <value>This song is stored as a file on your device.</value>
+    <value>Ez a dal fájlként van tárolva a készüléken.</value>
   </data>
   <data name="SystemLanguage" xml:space="preserve">
-    <value>System language</value>
+    <value>Rendszer nyelvének használata</value>
   </data>
   <data name="TrackNumber" xml:space="preserve">
-    <value>Track number</value>
+    <value>Szám száma</value>
   </data>
   <data name="Translations" xml:space="preserve">
-    <value>Translations</value>
+    <value>Fordítások</value>
   </data>
   <data name="AddRemoveDesc" xml:space="preserve">
-    <value>Let us find music and videos by adding folders and files on your device.</value>
+    <value>Keressük meg a zenéket és videókat az eszközön található mappák és fájlok hozzáadásával.</value>
   </data>
   <data name="AddRemoveTitle" xml:space="preserve">
-    <value>Add/remove media sources</value>
+    <value>Médiaforrások hozzáadása/eltávolítása</value>
   </data>
   <data name="AddTo" xml:space="preserve">
-    <value>Add to</value>
+    <value>Hozzáadás a</value>
   </data>
   <data name="AppSettings" xml:space="preserve">
-    <value>App settings</value>
+    <value>Alkalmazás beállítások</value>
   </data>
   <data name="Artist" xml:space="preserve">
-    <value>Artist</value>
+    <value>Előadó</value>
   </data>
   <data name="Ascending" xml:space="preserve">
-    <value>Ascending</value>
+    <value>Növekvő</value>
   </data>
   <data name="AskDiscy" xml:space="preserve">
-    <value>Ask Discy about this</value>
+    <value>Kérdezd meg Discy-t erről</value>
   </data>
   <data name="BrowseMediaDesc" xml:space="preserve">
-    <value>Use a file browser to look through all of your media in your folders.</value>
+    <value>Egy fájlböngészővel nézd át az összes médiát a mappáidban.</value>
   </data>
   <data name="BrowseMediaTitle" xml:space="preserve">
-    <value>Browse for media</value>
+    <value>Böngésszen a média között</value>
   </data>
   <data name="ChangeArtistImage" xml:space="preserve">
-    <value>Change artist image</value>
+    <value>Előadói kép módosítása</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Bezárás</value>
   </data>
   <data name="Descending" xml:space="preserve">
-    <value>Descending</value>
+    <value>Csökkenő</value>
   </data>
   <data name="Feedback" xml:space="preserve">
-    <value>Feedback</value>
+    <value>Visszajelzés</value>
   </data>
   <data name="Length" xml:space="preserve">
-    <value>Length</value>
+    <value>Hossz</value>
   </data>
   <data name="MessagesAndReports" xml:space="preserve">
-    <value>Messages &amp; reports</value>
+    <value>Üzenetek és jelentések</value>
   </data>
   <data name="MoreSettings" xml:space="preserve">
-    <value>More settings</value>
+    <value>További beállítások</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Move down</value>
+    <value>Mozgatás lefelé</value>
   </data>
   <data name="MoveToBottom" xml:space="preserve">
-    <value>Move to bottom</value>
+    <value>Mozgatás alulra</value>
   </data>
   <data name="MoveToTop" xml:space="preserve">
-    <value>Move to top</value>
+    <value>Mozgatás felülre</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Move up</value>
+    <value>Mozgatás felfelé</value>
   </data>
   <data name="NewPlaylist" xml:space="preserve">
-    <value>New playlist</value>
+    <value>Új lejátszási lista</value>
   </data>
   <data name="PlayAll" xml:space="preserve">
-    <value>Play all</value>
+    <value>Összes lejátszása</value>
   </data>
   <data name="PlayFromUrl" xml:space="preserve">
-    <value>Play from URL</value>
+    <value>Lejátszás URL-ről</value>
   </data>
   <data name="QuickH" xml:space="preserve">
-    <value>Quick links</value>
+    <value>Gyorslinkek</value>
   </data>
   <data name="RemoveFromPlaylist" xml:space="preserve">
-    <value>Remove from playlist</value>
+    <value>Eltávolítás a lejátszási listából</value>
   </data>
   <data name="RemovePlaylist" xml:space="preserve">
-    <value>Remove playlist</value>
+    <value>Lejátszási lista eltávolítása</value>
   </data>
   <data name="RemoveSection" xml:space="preserve">
-    <value>Remove whole section</value>
+    <value>Teljes szakasz eltávolítása</value>
   </data>
   <data name="RemoveThing" xml:space="preserve">
-    <value>Remove...</value>
+    <value>Eltávolítás...</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Scan for new media</value>
+    <value>Új média keresése</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Megosztás</value>
   </data>
   <data name="ShowAlbum" xml:space="preserve">
-    <value>Show album</value>
+    <value>Album megjelenítése</value>
   </data>
   <data name="ShowArtist" xml:space="preserve">
-    <value>Show artist</value>
+    <value>Előadó megjelenítése</value>
   </data>
   <data name="ShowInFileExplorer" xml:space="preserve">
-    <value>Show in File Explorer</value>
+    <value>Megjelenítés a Fájlkezelőben</value>
   </data>
   <data name="Shuffle" xml:space="preserve">
-    <value>Shuffle</value>
+    <value>Keverés</value>
   </data>
   <data name="ShuffleAlbum" xml:space="preserve">
-    <value>Shuffle album</value>
+    <value>Album keverése</value>
   </data>
   <data name="ShuffleArtist" xml:space="preserve">
-    <value>Shuffle artist</value>
+    <value>Előadó keverése</value>
   </data>
   <data name="Sort" xml:space="preserve">
-    <value>Sort</value>
+    <value>Rendezés</value>
   </data>
   <data name="SupportDevDesc" xml:space="preserve">
-    <value>Become a patron and enjoy exclusive benefits and merch, while helping this project move forward.</value>
+    <value>Legyél támogató, és élvezd az exkluzív előnyöket és termékeket, miközben segítesz a projekt előrehaladásában.</value>
   </data>
   <data name="SupportDevTitle" xml:space="preserve">
-    <value>Support development</value>
+    <value>A fejlesztés támogatása</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Cím</value>
   </data>
   <data name="Track" xml:space="preserve">
-    <value>Track</value>
+    <value>Szám</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>View</value>
+    <value>Nézet</value>
   </data>
   <data name="WhatsNewDesc" xml:space="preserve">
-    <value>Check out the new features in Rise Media Player.</value>
+    <value>Nézd meg a Rise Media Player új funkcióit.</value>
   </data>
   <data name="WhatsNewTitle" xml:space="preserve">
-    <value>What's New</value>
+    <value>Újdonságok</value>
   </data>
   <data name="ReleaseYearN" xml:space="preserve">
-    <value>Release year: {0}</value>
+    <value>Kiadási éve: {0}</value>
   </data>
   <data name="Unknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>Ismeretlen</value>
   </data>
   <data name="EnterMiniView" xml:space="preserve">
-    <value>Enter mini view</value>
+    <value>Belépés mini nézetbe</value>
   </data>
   <data name="MoreOptions" xml:space="preserve">
-    <value>More options</value>
+    <value>További lehetőségek</value>
   </data>
   <data name="NowPlaying" xml:space="preserve">
-    <value>Now playing</value>
+    <value>Most fut</value>
   </data>
   <data name="PlaybackSpeed" xml:space="preserve">
-    <value>Playback speed</value>
+    <value>Lejátszási sebesség</value>
   </data>
   <data name="AlbumArt" xml:space="preserve">
-    <value>Album art</value>
+    <value>Albumborító</value>
   </data>
   <data name="AlbumTitle" xml:space="preserve">
-    <value>Album title</value>
+    <value>Album címe</value>
   </data>
   <data name="CardBackground" xml:space="preserve">
-    <value>Card background</value>
+    <value>Kártya háttere</value>
   </data>
   <data name="Collapse" xml:space="preserve">
-    <value>Collapse</value>
+    <value>Összecsukás</value>
   </data>
   <data name="ConfirmRemovalSong" xml:space="preserve">
-    <value>Are you sure that you want to remove the song "{0}"?</value>
+    <value>Biztos, hogy el akarod távolítani a "{0}" dalt?</value>
   </data>
   <data name="CrashDetails" xml:space="preserve">
-    <value>RiseMP has crashed. Here's some details.</value>
+    <value>A RiseMP összeomlott. Itt van néhány részlet.</value>
   </data>
   <data name="CrashStackTrace" xml:space="preserve">
-    <value>Unfortunately, Rise Media Player crashed. Click to view stack trace.</value>
+    <value>Sajnos a Rise Media Player összeomlott. Kattints a stack trace megtekintéséhez.</value>
   </data>
   <data name="DeleteAnyway" xml:space="preserve">
-    <value>Delete anyway</value>
+    <value>Törlés mindenképpen</value>
   </data>
   <data name="DeleteSong" xml:space="preserve">
-    <value>Delete song</value>
+    <value>Dal törlése</value>
   </data>
   <data name="Discography" xml:space="preserve">
-    <value>Discography</value>
+    <value>Diszkográfia</value>
   </data>
   <data name="Duration" xml:space="preserve">
-    <value>Duration</value>
+    <value>Időtartam</value>
   </data>
   <data name="ErrorOcurred" xml:space="preserve">
-    <value>An error occurred!</value>
+    <value>Hiba történt!</value>
   </data>
   <data name="Expand" xml:space="preserve">
-    <value>Expand</value>
+    <value>Kibontás</value>
   </data>
   <data name="Export" xml:space="preserve">
-    <value>Export</value>
+    <value>Exportálás</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>Import</value>
+    <value>Importálás</value>
   </data>
   <data name="MusicVideos" xml:space="preserve">
-    <value>Music videos</value>
+    <value>Zenei videók</value>
   </data>
   <data name="NListeners" xml:space="preserve">
-    <value>{0} listeners</value>
+    <value>{0} hallgató</value>
   </data>
   <data name="NoArtistInfo" xml:space="preserve">
-    <value>No artist info.</value>
+    <value>Nincs előadói információ.</value>
   </data>
   <data name="NoLyricsFound" xml:space="preserve">
-    <value>No lyrics found</value>
+    <value>Nincs dalszöveg</value>
   </data>
   <data name="PlayMedia" xml:space="preserve">
-    <value>Play media</value>
+    <value>Média lejátszása</value>
   </data>
   <data name="PoweredBy" xml:space="preserve">
-    <value>Powered by {0}</value>
+    <value>Készítette {0}</value>
   </data>
   <data name="RanIntoProblem" xml:space="preserve">
-    <value>We've ran into a problem. Sorry about that.</value>
+    <value>Belefutottunk egy problémába. Elnézést kérek érte.</value>
   </data>
   <data name="ReadLess" xml:space="preserve">
-    <value>Read less</value>
+    <value>Kevesebb olvasása</value>
   </data>
   <data name="ReadMore" xml:space="preserve">
-    <value>Read more</value>
+    <value>Bővebben</value>
   </data>
   <data name="Rename" xml:space="preserve">
-    <value>Rename</value>
+    <value>Átnevezés</value>
   </data>
   <data name="RoundedAlbumArt" xml:space="preserve">
-    <value>Rounded album art</value>
+    <value>Lekerekített albumkép</value>
   </data>
   <data name="Show" xml:space="preserve">
-    <value>Show</value>
+    <value>Megjelenítés</value>
   </data>
   <data name="TilesHorizontal" xml:space="preserve">
-    <value>Tiles (horizontal)</value>
+    <value>Csempe (vízszintes)</value>
   </data>
   <data name="TilesVertical" xml:space="preserve">
-    <value>Tiles (vertical)</value>
+    <value>Csempe (függőleges)</value>
   </data>
   <data name="TopTracks" xml:space="preserve">
-    <value>Top tracks</value>
+    <value>Legjobb számok</value>
   </data>
   <data name="TopTracksDesc" xml:space="preserve">
-    <value>Show the trending and most popular tracks from your artist from across the world.</value>
+    <value>Mutasd meg az előadóid trendi és legnépszerűbb számait a világ minden tájáról.</value>
   </data>
   <data name="AddWidgets" xml:space="preserve">
-    <value>Add widgets</value>
+    <value>Widgetek hozzáadása</value>
   </data>
   <data name="ForX" xml:space="preserve">
-    <value>for {0}</value>
+    <value>a {0}</value>
   </data>
   <data name="HomeAddSomeWidgets" xml:space="preserve">
-    <value>That's pretty sad, so add some widgets!</value>
+    <value>Ez elég szomorú, szóval adj hozzá néhány widgetet!</value>
   </data>
   <data name="HomeNothingToShow" xml:space="preserve">
-    <value>We have nothing to show here.</value>
+    <value>Itt nincs mit mutatnunk.</value>
   </data>
   <data name="HomeThingsYouLove" xml:space="preserve">
-    <value>Personalise your at a glance page with the things you love.</value>
+    <value>Személyre szabhatja az áttekintő oldalát azokkal a dolgokkal, amelyeket szeret.</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>Kép</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
-    <value>Search results</value>
+    <value>Keresési találatok</value>
   </data>
   <data name="XofY" xml:space="preserve">
-    <value>{0} of {1}</value>
+    <value>{0} a {1}-ből</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Létrehozás</value>
   </data>
   <data name="CreatePlaylist" xml:space="preserve">
-    <value>Create playlist</value>
+    <value>Lejátszási lista létrehozása</value>
   </data>
   <data name="PlaylistAlreadyExists" xml:space="preserve">
-    <value>The playlist with the specified name already exists.</value>
+    <value>A megadott nevű lejátszási lista már létezik.</value>
   </data>
   <data name="TitleNotEmpty" xml:space="preserve">
-    <value>Title must not be empty.</value>
+    <value>A cím nem lehet üres.</value>
   </data>
   <data name="UseCustomImage" xml:space="preserve">
-    <value>Use custom image</value>
+    <value>Egyéni kép használata</value>
   </data>
   <data name="MediaOnlineDesc" xml:space="preserve">
-    <value>This song is on the internet, meaning it is stored on the cloud or online. Properties changed here will get applied to the file if it's stored on a cloud service like OneDrive.</value>
+    <value>Ez a dal az interneten van, ami azt jelenti, hogy a felhőben vagy online tárolják. Az itt megváltoztatott tulajdonságok a fájlra is érvényesek lesznek, ha az olyan felhőszolgáltatásban van tárolva, mint a OneDrive.</value>
   </data>
   <data name="MediaOnlineTitle" xml:space="preserve">
-    <value>This song is stored on the internet.</value>
+    <value>Ez a dal az interneten van tárolva.</value>
   </data>
   <data name="EditThumbnail" xml:space="preserve">
-    <value>Edit thumbnail</value>
+    <value>Indexkép szerkesztése</value>
   </data>
   <data name="ExportThumbnail" xml:space="preserve">
-    <value>Export thumbnail</value>
+    <value>Indexkép exportálása</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+    <value>Felfedezés</value>
   </data>
   <data name="Dismiss" xml:space="preserve">
-    <value>Dismiss</value>
+    <value>Elvetés</value>
   </data>
   <data name="FetchingArtistInfo" xml:space="preserve">
-    <value>Fetching artist info...</value>
+    <value>Előadói információk lekérése...</value>
   </data>
   <data name="GoToAlbum" xml:space="preserve">
-    <value>Go to album</value>
+    <value>Tovább az albumhoz</value>
   </data>
   <data name="GoToArtist" xml:space="preserve">
-    <value>Go to artist</value>
+    <value>Tovább a művészhez</value>
   </data>
   <data name="IndexingComplete" xml:space="preserve">
-    <value>Indexing complete!</value>
+    <value>Az indexelés befejeződött!</value>
   </data>
   <data name="NotEnoughQ" xml:space="preserve">
-    <value>Not enough?</value>
+    <value>Nem elég?</value>
   </data>
   <data name="OpenInBrowser" xml:space="preserve">
-    <value>Open in browser</value>
+    <value>Megnyitás böngészőben</value>
   </data>
   <data name="ScanningSettings" xml:space="preserve">
-    <value>Scanning settings</value>
+    <value>Beolvasási beállítások</value>
   </data>
   <data name="SupportProject" xml:space="preserve">
-    <value>Support this project</value>
+    <value>Támogasd a Projektet</value>
   </data>
   <data name="SyncAll" xml:space="preserve">
-    <value>Sync all</value>
+    <value>Minden szinkronizálása</value>
   </data>
   <data name="SyncCenter" xml:space="preserve">
-    <value>Sync centre</value>
+    <value>Szinkronizáló központ</value>
   </data>
   <data name="MoreAlbumsByArtist" xml:space="preserve">
-    <value>More albums by this artist</value>
+    <value>További albumok ettől a művésztől</value>
   </data>
   <data name="Bloom" xml:space="preserve">
-    <value>Bloom</value>
+    <value>Reflexfény</value>
   </data>
   <data name="MaybeLater" xml:space="preserve">
-    <value>Maybe later</value>
+    <value>Talán később</value>
   </data>
   <data name="None" xml:space="preserve">
-    <value>None</value>
+    <value>Nincs</value>
   </data>
   <data name="PageComingSoon" xml:space="preserve">
-    <value>This page is coming soon.</value>
+    <value>Ez az oldal hamarosan megjelenik.</value>
   </data>
   <data name="RestartChangesEffect" xml:space="preserve">
-    <value>You'll need to restart the app for your changes to take effect.</value>
+    <value>A módosítások érvénybe lépéséhez újra kell indítanod az alkalmazást.</value>
   </data>
   <data name="RestartNow" xml:space="preserve">
-    <value>Restart now</value>
+    <value>Újraindítás most</value>
   </data>
   <data name="Appearance" xml:space="preserve">
-    <value>Appearance</value>
+    <value>Megjelenés</value>
   </data>
   <data name="Center" xml:space="preserve">
-    <value>Centre</value>
+    <value>Középre</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Header</value>
+    <value>Fejléc</value>
   </data>
   <data name="Icons" xml:space="preserve">
-    <value>Icons</value>
+    <value>Ikonok</value>
   </data>
   <data name="ManageComponents" xml:space="preserve">
-    <value>Manage components</value>
+    <value>Komponensek kezelése</value>
   </data>
   <data name="MediaLibrary" xml:space="preserve">
-    <value>Media library</value>
+    <value>Médiatár</value>
   </data>
   <data name="Navigation" xml:space="preserve">
-    <value>Navigation</value>
+    <value>Navigáció</value>
   </data>
   <data name="NoPageSelected" xml:space="preserve">
-    <value>No page selected</value>
+    <value>Nincs kiválasztott oldal</value>
   </data>
   <data name="PlaybackAndSound" xml:space="preserve">
-    <value>Playback &amp; sound</value>
+    <value>Lejátszás és hang</value>
   </data>
   <data name="Right" xml:space="preserve">
-    <value>Right</value>
+    <value>Jobb</value>
   </data>
   <data name="ShowAll" xml:space="preserve">
-    <value>Show all</value>
+    <value>Összes</value>
   </data>
   <data name="Syncing" xml:space="preserve">
-    <value>Syncing</value>
+    <value>Szinkronizálás</value>
   </data>
   <data name="SystemBehaviors" xml:space="preserve">
-    <value>System behaviours</value>
+    <value>Rendszer viselkedése</value>
   </data>
   <data name="WallpapersAndExtras" xml:space="preserve">
-    <value>Wallpapers &amp; extras</value>
+    <value>Háttérképek és extrák</value>
   </data>
   <data name="OnlineServices" xml:space="preserve">
-    <value>Online services</value>
+    <value>Online szolgáltatások</value>
   </data>
   <data name="Scanning" xml:space="preserve">
-    <value>Scanning</value>
+    <value>Szkennelés</value>
   </data>
   <data name="MediaLocalExpanderTitle" xml:space="preserve">
-    <value>This song is stored as a file on your device.</value>
+    <value>Ez a dal fájlként van tárolva a készüléken.</value>
   </data>
   <data name="MediaOnlineExpanderTitle" xml:space="preserve">
-    <value>This song is stored on the internet.</value>
+    <value>Ez a dal az interneten van tárolva.</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>OK</value>
+    <value>Oké</value>
   </data>
   <data name="DirectLinkExamplesM" xml:space="preserve">
-    <value>Examples of direct links include:
+    <value>Példák a közvetlen linkekre:
 
-https://www.example.com/song.mp3
-https://www.example.com/song_playlist.m3u
+https://www.example.com/dal.mp3
+https://www.example.com/dal_lejatszasilista.m3u
 https://www.youtube.com/watch?v=dQw4w9Wg</value>
   </data>
   <data name="DirectLinkExamplesV" xml:space="preserve">
-    <value>Examples of direct links include:
+    <value>Példák a közvetlen linkekre:
 
 https://www.example.com/video.mp4
 https://youtu.be/JEGjlELJxC8
 https://www.youtube.com/watch?v=p7YXXieghto</value>
   </data>
   <data name="InvalidUrl" xml:space="preserve">
-    <value>Invalid URL</value>
+    <value>Érvénytelen URL</value>
   </data>
   <data name="Url" xml:space="preserve">
     <value>URL</value>
   </data>
   <data name="UntitledPlaylist" xml:space="preserve">
-    <value>Untitled Playlist</value>
+    <value>Cím nélküli lejátszási lista</value>
   </data>
   <data name="EQPAir" xml:space="preserve">
     <value>Air</value>
   </data>
   <data name="EQPBass" xml:space="preserve">
-    <value>Bass</value>
+    <value>Basszus</value>
   </data>
   <data name="EQPCustom" xml:space="preserve">
-    <value>Custom</value>
+    <value>Saját</value>
   </data>
   <data name="EQPFlat" xml:space="preserve">
-    <value>Flat</value>
+    <value>Lapos</value>
   </data>
   <data name="EQPPop" xml:space="preserve">
     <value>Pop</value>
@@ -927,27 +927,37 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
     <value>Rock</value>
   </data>
   <data name="EQPVocal" xml:space="preserve">
-    <value>Vocal</value>
+    <value>Ének</value>
   </data>
   <data name="GotIt" xml:space="preserve">
-    <value>Got it</value>
+    <value>Értettem</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
-    <value>Learn more</value>
+    <value>További információ</value>
   </data>
   <data name="FromFile" xml:space="preserve">
-    <value>From file</value>
+    <value>Fájlból</value>
   </data>
   <data name="FromFolder" xml:space="preserve">
-    <value>From folder</value>
+    <value>Mappából</value>
+  </data>
+  <data name="CastToDevice" xml:space="preserve">
+    <value>Küldés a készülékre</value>
+  </data>
+  <data name="FullScreen" xml:space="preserve">
+    <value>Teljes képernyő</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>Warning</value>
+    <value>Figyelmeztetés</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Mentés</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
-    <value>Save changes</value>
+    <value>Változtatások mentése</value>
+  </data>
+  <data name="AspectRatio" xml:space="preserve">
+    <value>Képarány</value>
+    <comment>Aspect Ratio option in the now playing bar.</comment>
   </data>
 </root>

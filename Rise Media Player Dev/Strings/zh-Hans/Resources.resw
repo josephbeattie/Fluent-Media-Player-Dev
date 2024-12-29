@@ -941,6 +941,12 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
   <data name="FromFolder" xml:space="preserve">
     <value>来自文件夹</value>
   </data>
+  <data name="CastToDevice" xml:space="preserve">
+    <value>投射到设备</value>
+  </data>
+  <data name="FullScreen" xml:space="preserve">
+    <value>全屏</value>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>警告</value>
   </data>
@@ -949,5 +955,9 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>保存更改</value>
+  </data>
+  <data name="AspectRatio" xml:space="preserve">
+    <value>纵横比</value>
+    <comment>Aspect Ratio option in the now playing bar.</comment>
   </data>
 </root>
