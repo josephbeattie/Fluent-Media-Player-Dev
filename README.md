@@ -30,7 +30,7 @@ Our own controls and icons give users a truly personalised experience, being abl
 * **Sorting for songs, albums and videos**: Sort and find any track
 * **Now Playing bar**: Stunningly designed "now playing" experience
 * **Fullscreen music experience**: Comes complete with a beautiful fullscreen listening interface
-* **`last.fm` integration**: Find your favourite tracks from `last.fm` in Rise
+* **`last.fm` integration**: Find your favourite tracks from last.fm in Rise
 * **Internet based artist images**: Carefully curated artist images
 * **Playlists**: Sort all your music into playlists
 * **Modern Settings UI**: Customise your experience in RiseMP with themes, change the layout and modify your connected services
