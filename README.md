@@ -104,8 +104,6 @@ Looking for a place to start? Check out the [task board](https://github.com/orgs
 * [**Omar Salas (@YourOrdinaryCat)**](https://github.com/yourordinarycat): **Former member**
 * [**SimpleBear (@itsWindows11)**](https://github.com/itswindows11): **Former member**
 
-Without this great development team we wouldn't be able to ship new releases so go help them out however you can!
-
 ---
 
 <p align="center">
