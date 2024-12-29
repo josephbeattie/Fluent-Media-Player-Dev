@@ -104,22 +104,7 @@
                         Padding="8"
                         Content="Discord"
                         NavigateUri="{x:Bind constants:URLs.Discord}" />
-                    <TextBlock
-                        VerticalAlignment="Center"
-                        Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"
-                        Text="•" />
-                    <HyperlinkButton
-                        Padding="8"
-                        Content="Reddit"
-                        NavigateUri="{x:Bind constants:URLs.Reddit}" />
-                    <TextBlock
-                        VerticalAlignment="Center"
-                        Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"
-                        Text="•" />
-                    <HyperlinkButton
-                        Padding="8"
-                        Content="Twitter"
-                        NavigateUri="{x:Bind constants:URLs.Twitter}" />
+
                 </StackPanel>
             </labs:SettingsCard>
 

@@ -57,6 +57,45 @@
             </muxc:AnimatedIcon>
         </Button>
 
+        <!--  Header  -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,172,0">
+
+            <Button
+                x:Name="MoreButton"
+                Height="36"
+                Margin="40,0,0,0"
+                Content="{ui:FontIcon Glyph=&#xE712;}"
+                Style="{StaticResource TransparentButtonStyle}"
+                ToolTipService.ToolTip="{markup:ResourceHelper Name=MoreSettings}"
+                Visibility="Visible">
+                <Button.Flyout>
+                    <MenuFlyout x:Name="MoreFlyout">
+                        <MenuFlyoutItem
+                            x:Name="LanguageItem"
+                            Click="Language_Click"
+                            Icon="{ui:FontIcon Glyph=&#xE774;}"
+                            Text="{markup:ResourceHelper Name=Language}" />
+
+                        <MenuFlyoutItem
+                            x:Name="Insider"
+                            Click="Insider_Click"
+                            Icon="{ui:FontIcon Glyph=&#xF1AD;}"
+                            Text="{markup:ResourceHelper Name=/Settings/InsiderHub}" />
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+
+            <Button
+                x:Name="FeedbackButton"
+                Height="36"
+                HorizontalAlignment="Right"
+                Click="FeedbackSettings_Click"
+                Content="{ui:FontIcon Glyph=&#xED15;}"
+                Style="{StaticResource TransparentButtonStyle}"
+                ToolTipService.ToolTip="{markup:ResourceHelper Name=Feedback}"
+                Visibility="Visible" />
+        </StackPanel>
+
         <Grid Padding="0,32,0,12" Canvas.ZIndex="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -66,12 +105,10 @@
             <!--  Sidebar container  -->
             <Border
                 x:Name="SidebarBorder"
-                Width="114"
                 Margin="12,0,0,0"
-                Padding="32"
+                Padding="0"
                 VerticalAlignment="Stretch"
                 CornerRadius="8"
-                Style="{StaticResource BorderCardStyle}"
                 Visibility="Collapsed">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -79,61 +116,7 @@
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
 
-                    <!--  Header  -->
-                    <StackPanel Orientation="Horizontal">
-                        <Button
-                            x:Name="SmallSettingsButton"
-                            Margin="6,0,0,0"
-                            Padding="6"
-                            Content="{ui:FontIcon FontSize=24,
-                                                  Glyph=&#xE713;}"
-                            Flyout="{x:Bind MoreFlyout}"
-                            Style="{StaticResource TransparentButtonStyle}"
-                            ToolTipService.ToolTip="{markup:ResourceHelper Name=MoreSettings}"
-                            Visibility="Collapsed" />
 
-                        <TextBlock
-                            x:Name="SettingsTitle"
-                            Margin="6,0"
-                            Style="{StaticResource TitleTextBlockStyle}"
-                            Text="{markup:ResourceHelper Name=Settings}"
-                            Visibility="Collapsed" />
-
-                        <Button
-                            x:Name="MoreButton"
-                            Height="36"
-                            Margin="40,0,0,0"
-                            Content="{ui:FontIcon Glyph=&#xE712;}"
-                            Style="{StaticResource TransparentButtonStyle}"
-                            ToolTipService.ToolTip="{markup:ResourceHelper Name=MoreSettings}"
-                            Visibility="Collapsed">
-                            <Button.Flyout>
-                                <MenuFlyout x:Name="MoreFlyout">
-                                    <MenuFlyoutItem
-                                        x:Name="LanguageItem"
-                                        Click="Language_Click"
-                                        Icon="{ui:FontIcon Glyph=&#xE774;}"
-                                        Text="{markup:ResourceHelper Name=Language}" />
-
-                                    <MenuFlyoutItem
-                                        x:Name="Insider"
-                                        Click="Insider_Click"
-                                        Icon="{ui:FontIcon Glyph=&#xF1AD;}"
-                                        Text="{markup:ResourceHelper Name=/Settings/InsiderHub}" />
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-
-                        <Button
-                            x:Name="FeedbackButton"
-                            Height="36"
-                            HorizontalAlignment="Right"
-                            Click="FeedbackSettings_Click"
-                            Content="{ui:FontIcon Glyph=&#xED15;}"
-                            Style="{StaticResource TransparentButtonStyle}"
-                            ToolTipService.ToolTip="{markup:ResourceHelper Name=Feedback}"
-                            Visibility="Collapsed" />
-                    </StackPanel>
 
                     <!--  Sidebar  -->
                     <muxc:NavigationView
@@ -196,7 +179,7 @@
             <Border
                 Grid.Column="1"
                 Margin="12,0"
-                Padding="0,32,0,0"
+                Padding="36,36,36,0"
                 VerticalAlignment="Stretch"
                 CornerRadius="8"
                 Style="{StaticResource BorderCardStyle}">
@@ -208,8 +191,7 @@
 
                     <StackPanel
                         x:Name="HeaderArea"
-                        MaxWidth="1300"
-                        Padding="48,0"
+                        Padding="0,0"
                         Orientation="Horizontal">
                         <Button
                             x:Name="GoBackPage"
@@ -250,9 +232,9 @@
                     </StackPanel>
 
                     <Frame
+                        Margin="-48,0"
                         x:Name="SettingsMainFrame"
                         Grid.Row="1"
-                        MaxWidth="1300"
                         x:FieldModifier="public" />
                 </Grid>
             </Border>
@@ -267,7 +249,7 @@
 
                     <VisualState.Setters>
                         <Setter Target="SidebarBorder.Visibility" Value="Visible" />
-                        <Setter Target="SmallSettingsButton.Visibility" Value="Visible" />
+                        <Setter Target="SidebarBorder.Width" Value="48" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -278,11 +260,7 @@
 
                     <VisualState.Setters>
                         <Setter Target="SidebarBorder.Visibility" Value="Visible" />
-                        <Setter Target="SidebarBorder.Width" Value="300" />
-
-                        <Setter Target="SettingsTitle.Visibility" Value="Visible" />
-                        <Setter Target="MoreButton.Visibility" Value="Visible" />
-                        <Setter Target="FeedbackButton.Visibility" Value="Visible" />
+                        <Setter Target="SidebarBorder.Width" Value="235" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

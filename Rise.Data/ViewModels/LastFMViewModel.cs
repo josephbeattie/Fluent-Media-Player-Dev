@@ -2,6 +2,7 @@
 using Rise.Common.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -64,7 +65,6 @@ namespace Rise.Data.ViewModels
         public async Task<bool> TryAuthenticateAsync()
         {
             var token = await GetTokenAsync();
-
             var uriBuilder = new StringBuilder();
             _ = uriBuilder.Append("https://www.last.fm/api/auth?api_key=");
             _ = uriBuilder.Append(_key);

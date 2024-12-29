@@ -17,15 +17,6 @@
         public const string GitHub =
             "https://github.com/Rise-Software/Rise-Media-Player";
 
-        public const string Support =
-            "https://www.patreon.com/risesoftware";
-
-        public const string Insider =
-            "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAc11dY1UQ0UxNjFVS0pCUkpKVkpVTUpUSktBRjVKUS4u";
-
-        public const string InsiderWalls =
-            "https://drive.google.com/drive/u/2/folders/19L-EvHxPRBsR4RhmArseEUxf1nc-nYgj";
-
         public const string License =
             "https://github.com/Rise-Software/Rise-Media-Player/blob/main/LICENSE";
 
@@ -46,9 +37,5 @@
         public const string Deezer = "https://api.deezer.com/";
 
         public const string Discord = "https://discord.gg/GNEwaDbCef";
-
-        public const string Reddit = "https://www.reddit.com/r/risesoftware/";
-
-        public const string Twitter = "http://www.twitter.com/appsbyrise/";
     }
 }
