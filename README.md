@@ -100,8 +100,16 @@ Looking for a place to start? Check out the [task board](https://github.com/orgs
 -->
 ## Credits
 
-* [**Joseph Beattie (@josephbeattie)**](https://github.com/josephbeattie): **Founder of Rise and lead developer**.
+* [**Joseph Beattie (@josephbeattie)**](https://github.com/josephbeattie): **Founder of Rise and lead developer**
 * [**Omar Salas (@YourOrdinaryCat)**](https://github.com/yourordinarycat): **Former member**
 * [**SimpleBear (@itsWindows11)**](https://github.com/itswindows11): **Former member**
 
 Without this great development team we wouldn't be able to ship new releases so go help them out however you can!
+
+---
+
+<p align="center">
+    <a href='https://github.com/Rise-Software/Rise-Media-Player'>
+      <img src="https://github.com/Rise-Software/Rise-Media-Player/assets/74561130/67a1ea8f-1d0f-4c1d-9688-1912ec20f779" alt="RiseMP" />
+    </a>
+</p>
