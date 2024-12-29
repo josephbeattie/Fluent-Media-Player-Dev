@@ -95,16 +95,15 @@ To build Rise Media Player for development, open the `RiseMP.sln` item in Visual
 ## Contributing
 
 Want to contribute to this project? Let us know with an [issue](https://github.com/Rise-Software/Rise-Media-Player/issues) that communicates your intent to create a [pull request](https://github.com/Rise-Software/Rise-Media-Player/pulls).
+
 > [!NOTE]
 > **Looking for a place to start?** Check out [our plan for Beta 1](https://github.com/orgs/Rise-Software/projects/3/views/1), which details planned features and changes..
-
-
 
 ## Credits
 
 * [**Joseph Beattie (@josephbeattie)**](https://github.com/josephbeattie): **Started work on Rise Media Player**
-* [**Omar Salas (@YourOrdinaryCat)**](https://github.com/yourordinarycat):
-* [**SimpleBear (@itsWindows11)**](https://github.com/itswindows11): 
+* [**Omar Salas (@YourOrdinaryCat)**](https://github.com/yourordinarycat)
+* [**SimpleBear (@itsWindows11)**](https://github.com/itswindows11)
 
 ---
 
