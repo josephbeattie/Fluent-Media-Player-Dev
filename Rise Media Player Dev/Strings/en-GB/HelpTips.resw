@@ -147,7 +147,7 @@ Early Access Insiders (previously Seeding Insiders) get access to the app earlie
 *Features tagged as Experimental in the Settings interface</value>
   </data>
   <data name="BenefitsH.Text" xml:space="preserve">
-    <value>What benefits do I get from joining the Insider Program?</value>
+    <value>What benefits do I get from joining the Insider Programme?</value>
   </data>
   <data name="Beta.Text" xml:space="preserve">
     <value>• Streaming services and reccommendations in some form
@@ -162,7 +162,7 @@ Early Access Insiders (previously Seeding Insiders) get access to the app earlie
     <value>Beta</value>
   </data>
   <data name="DiscyAboutTipDesc" xml:space="preserve">
-    <value>You can find me by right clicking on different things. For example, an album. I'll tell you what you can do :). I'm still pretty new, so I won't be everywhere, but I'm growing every day!</value>
+    <value>You can find me by right-clicking on different things. For example, an album. I'll tell you what you can do :). I'm still pretty new, so I won't be everywhere, but I'm growing every day!</value>
   </data>
   <data name="DiscyAboutTipTitle" xml:space="preserve">
     <value>Hey! I'm Discy.</value>
@@ -221,7 +221,7 @@ Early Access Insiders (previously Seeding Insiders) get access to the app earlie
 Good luck testing!</value>
   </data>
   <data name="JoinH.Text" xml:space="preserve">
-    <value>How do I join the Insider Program?</value>
+    <value>How do I join the Insider Programme?</value>
   </data>
   <data name="PlayingMediaNowPlayingTitle" xml:space="preserve">
     <value>Playing media and now playing</value>
@@ -254,7 +254,7 @@ In terms of other versions, we have no exact dates to give you all, but this is 
 
 • Alpha Builds - New Year (2022) up to March 2022. Note: During the Alpha process, demo versions of the app will be publicly available to test for UI purposes.
 
-• Beta - April -TBD (This version will be available for all public users from the Microsoft Store. You will not need to be a part of the Insider program, although you will miss out on features)</value>
+• Beta - April -TBD (This version will be available for all public users from the Microsoft Store. You will not need to be a part of the Insider programme, although you will miss out on features)</value>
   </data>
   <data name="SortingManagingLibraryTitle" xml:space="preserve">
     <value>Sorting and managing your library</value>

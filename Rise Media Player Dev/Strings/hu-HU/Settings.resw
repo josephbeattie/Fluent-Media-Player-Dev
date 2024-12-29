@@ -118,333 +118,333 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutExtrasH" xml:space="preserve">
-    <value>Insider Extras</value>
+    <value>Insider extrák</value>
   </data>
   <data name="AboutMoreCopyVersion" xml:space="preserve">
-    <value>Copy version</value>
+    <value>Másolt verzió</value>
   </data>
   <data name="AboutMoreH" xml:space="preserve">
-    <value>More</value>
+    <value>Bővebben</value>
   </data>
   <data name="AboutMoreReleases" xml:space="preserve">
-    <value>Releases</value>
+    <value>Kiadások</value>
   </data>
   <data name="AboutMoreTitle" xml:space="preserve">
-    <value>More version info</value>
+    <value>További verzió információk</value>
   </data>
   <data name="AboutSave" xml:space="preserve">
-    <value>Save to my device</value>
+    <value>Mentés az eszközre</value>
   </data>
   <data name="AboutSocialDesc" xml:space="preserve">
-    <value>Keep up with the latest updates.</value>
+    <value>Tartsa lépést a legújabb frissítésekkel.</value>
   </data>
   <data name="AboutSocialTitle" xml:space="preserve">
-    <value>Social media</value>
+    <value>Közösségi média</value>
   </data>
   <data name="AboutWallsDesc" xml:space="preserve">
-    <value>Access some exclusive RiseMP branded wallpapers.</value>
+    <value>Hozzáférés néhány exkluzív RiseMP márkájú háttérképhez.</value>
   </data>
   <data name="AboutWallsTitle" xml:space="preserve">
-    <value>Desktop wallpapers &amp; themes</value>
+    <value>Háttérképek és témák</value>
   </data>
   <data name="AddAccount" xml:space="preserve">
-    <value>Add an account</value>
+    <value>Fiók hozzáadása</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
-    <value>Add folder</value>
+    <value>Mappa hozzáadása</value>
   </data>
   <data name="AddFolders" xml:space="preserve">
-    <value>Add folders</value>
+    <value>Mappák hozzáadása</value>
   </data>
   <data name="AppearanceGlazeAlbumArt" xml:space="preserve">
-    <value>Use album art</value>
+    <value>Album használata</value>
   </data>
   <data name="AppearanceAppLayout" xml:space="preserve">
-    <value>App layout</value>
+    <value>Alkalmazás elrendezése</value>
   </data>
   <data name="AppearanceAppWindow" xml:space="preserve">
-    <value>App window</value>
+    <value>Alkalmazás ablak</value>
   </data>
   <data name="AppearanceChooseColor" xml:space="preserve">
-    <value>Choose your window glaze</value>
+    <value>Válaszd ki az ablakfényt</value>
   </data>
   <data name="AppearanceChooseTheme" xml:space="preserve">
-    <value>Choose your colour</value>
+    <value>Válaszd ki a színed</value>
   </data>
   <data name="AppearanceCustomGlazeColor" xml:space="preserve">
-    <value>Use custom colour</value>
+    <value>Egyéni szín használata</value>
   </data>
   <data name="AppearanceIconsAndFonts" xml:space="preserve">
-    <value>Icons &amp; fonts</value>
+    <value>Ikonok és betűtípusok</value>
   </data>
   <data name="AppearanceItemDesc" xml:space="preserve">
-    <value>Customise app colours, themes, icons, layouts and motion.</value>
+    <value>Az alkalmazás színeinek, témáinak, ikonjainak, elrendezésének és mozgásának testreszabása.</value>
   </data>
   <data name="AppearanceNoGlaze" xml:space="preserve">
-    <value>No glaze</value>
+    <value>Nincs fényezés</value>
   </data>
   <data name="AppearanceNothing" xml:space="preserve">
-    <value>There's nothing to show here. To show available colours, select 'Use custom colour' from the dropdown.</value>
+    <value>Itt nincs mit mutogatni. A rendelkezésre álló színek megjelenítéséhez válassza a legördülő listából az "Egyéni szín használata" lehetőséget.</value>
   </data>
   <data name="AppearanceOverview" xml:space="preserve">
-    <value>Overview</value>
+    <value>Áttekités</value>
   </data>
   <data name="AppearancePickUp" xml:space="preserve">
-    <value>Pick up where you left off</value>
+    <value>Folytasd ott, ahol abbahagytad</value>
   </data>
   <data name="AppearanceStartupTitle" xml:space="preserve">
-    <value>On startup</value>
+    <value>Indításkor</value>
   </data>
   <data name="AppearanceSystemGlazeColor" xml:space="preserve">
-    <value>Use system accent colour</value>
+    <value>Használja a rendszer kiemelt színét</value>
   </data>
   <data name="AppearanceTip" xml:space="preserve">
-    <value>*Compact mode changes won't take effect until after setup has completed.</value>
+    <value>*A kompakt üzemmód módosításai csak a beállítás befejezése után lépnek hatályba.</value>
   </data>
   <data name="AppThemeChanged" xml:space="preserve">
-    <value>App theme changed</value>
+    <value>Alkalmazás téma megváltoztatva</value>
   </data>
   <data name="ColorfulIcons" xml:space="preserve">
-    <value>Colourful Icons</value>
+    <value>Színes ikonok</value>
   </data>
   <data name="ConnectToLastFmDesc" xml:space="preserve">
-    <value>Discover your recently played, listening history and scrobble to the internet.</value>
+    <value>Fedezd fel a nemrég lejátszott, hallgatott előzményeidet, és lapozgass az interneten.</value>
   </data>
   <data name="ConnectToLastFmH" xml:space="preserve">
-    <value>Connect to last.fm</value>
+    <value>Csatlakozás a last.fm-hez</value>
   </data>
   <data name="CustomizedColors" xml:space="preserve">
-    <value>Customised colours</value>
+    <value>Testreszabott színek</value>
   </data>
   <data name="HighContrastIcons" xml:space="preserve">
-    <value>High Contrast Icons</value>
+    <value>Nagy kontrasztú ikonok</value>
   </data>
   <data name="InsiderHub" xml:space="preserve">
     <value>Insider Hub</value>
   </data>
   <data name="MatchSystemAppLang" xml:space="preserve">
-    <value>Match system &amp; app languages</value>
+    <value>Egyezzen a rendszer &amp; alkalmazás nyelvek</value>
   </data>
   <data name="MediaLibraryAutoScanDesc" xml:space="preserve">
-    <value>Scan per a specified period of time when the app is open.</value>
+    <value>Szkennelés meghatározott időnként, amikor az alkalmazás meg van nyitva.</value>
   </data>
   <data name="MediaLibraryAutoScanTitle" xml:space="preserve">
-    <value>Periodic scanning</value>
+    <value>Időszakos szkennelés</value>
   </data>
   <data name="MediaLibraryDeletionTitle" xml:space="preserve">
-    <value>When removing local media</value>
+    <value>A helyi adathordozók eltávolításakor</value>
   </data>
   <data name="MediaLibraryDone" xml:space="preserve">
-    <value>Clear all</value>
+    <value>Összes törlése</value>
   </data>
   <data name="MediaLibraryEventsScanDesc" xml:space="preserve">
-    <value>Scan for new media after an event or events take place.</value>
+    <value>Keressen új médiát egy esemény vagy események bekövetkezte után.</value>
   </data>
   <data name="MediaLibraryEventsScanDeviceConnect" xml:space="preserve">
-    <value>Scan when a removable device or drive is connected</value>
+    <value>Ellenőrzés cserélhető eszköz vagy meghajtó csatlakoztatásakor</value>
   </data>
   <data name="MediaLibraryEventsScanFilesAdd" xml:space="preserve">
-    <value>Scan when adding files to your media sources</value>
+    <value>Szkennelés fájlok hozzáadásakor a médiaforrásokhoz</value>
   </data>
   <data name="MediaLibraryEventsScanLocation" xml:space="preserve">
-    <value>Scan when you add a new media location</value>
+    <value>Szkennelés új médiahely hozzáadásakor</value>
   </data>
   <data name="MediaLibraryEventsScanOpen" xml:space="preserve">
-    <value>Scan when the app is opened</value>
+    <value>Szkennelés az alkalmazás megnyitásakor</value>
   </data>
   <data name="MediaLibraryEventsScanTitle" xml:space="preserve">
-    <value>Smart event scan</value>
+    <value>Intelligens eseményszkennelés</value>
   </data>
   <data name="MediaLibraryFetchOnlineData" xml:space="preserve">
-    <value>Fetch data from the Internet when needed</value>
+    <value>Szükség esetén adatok lekérése az internetről</value>
   </data>
   <data name="MediaLibraryFilesAndFolders" xml:space="preserve">
-    <value>Files &amp; folders</value>
+    <value>Fájlok és mappák</value>
   </data>
   <data name="MediaLibraryItemDesc" xml:space="preserve">
-    <value>Manage media sources, your online services and scanning settings.</value>
+    <value>Kezelje a médiaforrásokat, az online szolgáltatásokat és a beolvasási beállításokat.</value>
   </data>
   <data name="MediaLibraryLocalMediaH" xml:space="preserve">
-    <value>Local media &amp; devices</value>
+    <value>Helyi média és eszközök</value>
   </data>
   <data name="MediaLibraryManageFoldersDesc" xml:space="preserve">
-    <value>Videos, music and more</value>
+    <value>Videók, zene és még több</value>
   </data>
   <data name="MediaLibraryManageFoldersTitle" xml:space="preserve">
-    <value>Manage local media folders</value>
+    <value>Helyi médiamappák kezelése</value>
   </data>
   <data name="MediaLibraryManualScanDesc" xml:space="preserve">
-    <value>Scans the folders you've already added for music and videos to add to your library.</value>
+    <value>Átvizsgálja a már hozzáadott mappákat a könyvtárba felvehető zenék és videók után.</value>
   </data>
   <data name="MediaLibraryManualScanTitle" xml:space="preserve">
-    <value>Manual scan</value>
+    <value>Manuális szkennelés</value>
   </data>
   <data name="MediaLibraryMetadata" xml:space="preserve">
-    <value>Metadata</value>
+    <value>Metaadat</value>
   </data>
   <data name="MediaLibraryOnlineDataH" xml:space="preserve">
-    <value>Online data</value>
+    <value>Online adat</value>
   </data>
   <data name="MediaLibraryRemoveFolder" xml:space="preserve">
-    <value>Remove folder</value>
+    <value>Mappa eltávolítása</value>
   </data>
   <data name="MediaLibraryRippingDesc" xml:space="preserve">
-    <value>Choose what you want to happen when you rip a disc.</value>
+    <value>Válaszd ki, hogy mi történjen a lemez másolásakor.</value>
   </data>
   <data name="MediaLibraryRippingTitle" xml:space="preserve">
-    <value>Disc ripping options</value>
+    <value>Lemez másolási lehetőségek</value>
   </data>
   <data name="MediaSourcesContainsMusic" xml:space="preserve">
-    <value>Contains music</value>
+    <value>Zenét tartalmaz</value>
   </data>
   <data name="MediaSourcesContainsVideos" xml:space="preserve">
-    <value>Contains videos</value>
+    <value>Videókat tartalmaz</value>
   </data>
   <data name="MediaSourcesInfo" xml:space="preserve">
-    <value>We already look for your media in the default media locations (Music &amp; Videos). If you only store your media here, there is no need to add a folder. If not, select 'Add folder' to add all of your media folders.</value>
+    <value>A médiát már az alapértelmezett médiahelyeken (Zene és videók) keressük. Ha csak itt tárolja a médiát, nincs szükség mappa hozzáadására. Ha nem, válassza a "Mappa hozzáadása" lehetőséget az összes médiamappa hozzáadásához.</value>
   </data>
   <data name="NavigationAddRemoveH" xml:space="preserve">
-    <value>Add/remove sidebar items</value>
+    <value>Oldalsáv elemek hozzáadása/eltávolítása</value>
   </data>
   <data name="NavigationAppearanceH" xml:space="preserve">
-    <value>Appearance</value>
+    <value>Megjelenítés</value>
   </data>
   <data name="NavigationGeneralItems" xml:space="preserve">
-    <value>General items</value>
+    <value>Általános elemek</value>
   </data>
   <data name="NavigationHamburgerTitle" xml:space="preserve">
-    <value>Show the hamburger button</value>
+    <value>A hamburger gomb megjelenítése</value>
   </data>
   <data name="NavigationIconStyle" xml:space="preserve">
-    <value>Icon style</value>
+    <value>Ikon stílus</value>
   </data>
   <data name="NavigationItemDesc" xml:space="preserve">
-    <value>Change click actions, startup options.</value>
+    <value>Kattintási műveletek, indítási lehetőségek módosítása.</value>
   </data>
   <data name="NavigationResize" xml:space="preserve">
-    <value>Window resize changes</value>
+    <value>Ablak méretének módosítása</value>
   </data>
   <data name="NavigationShowHeader" xml:space="preserve">
-    <value>Show header</value>
+    <value>Fejléc megjelenítése</value>
   </data>
   <data name="OpenClassicDialog" xml:space="preserve">
-    <value>Open classic dialog</value>
+    <value>Klasszikus párbeszédablak megnyitása</value>
   </data>
   <data name="PlaybackCrossfadeDesc" xml:space="preserve">
-    <value>Blend the end &amp; beginning of your music tracks.</value>
+    <value>Keverd össze a zeneszámok végét és elejét.</value>
   </data>
   <data name="PlaybackCrossfadeTitle" xml:space="preserve">
-    <value>Crossfade</value>
+    <value>Átkeverés</value>
   </data>
   <data name="PlaybackEQDesc" xml:space="preserve">
-    <value>Choose different sound profiles depending on your media type.</value>
+    <value>Válasszon különböző hangprofilokat a média típusától függően.</value>
   </data>
   <data name="PlaybackEQTitle" xml:space="preserve">
-    <value>Equaliser</value>
+    <value>Hangszínszabályzó</value>
   </data>
   <data name="PlaybackGaplessDesc" xml:space="preserve">
-    <value>We will instantly move to your next track without waiting.</value>
+    <value>Várakozás nélkül azonnal a következő számra lépünk.</value>
   </data>
   <data name="PlaybackGaplessTitle" xml:space="preserve">
-    <value>Gapless playback</value>
+    <value>Résmentes lejátszás</value>
   </data>
   <data name="PlaybackGeneralH" xml:space="preserve">
-    <value>General</value>
+    <value>Általános</value>
   </data>
   <data name="PlaybackMusicH" xml:space="preserve">
-    <value>Music</value>
+    <value>Zene</value>
   </data>
   <data name="PlaybackScalingDesc" xml:space="preserve">
-    <value>Adjust how your video scales depending on window size.</value>
+    <value>Állítsa be a videó méretezését az ablakméret függvényében.</value>
   </data>
   <data name="PlaybackScalingTitle" xml:space="preserve">
-    <value>Scaling</value>
+    <value>Méretezés</value>
   </data>
   <data name="PlaybackStreamingQualityDesc" xml:space="preserve">
-    <value>Change video resolution and music bitrate.</value>
+    <value>Videófelbontás és zenei bitráta módosítása.</value>
   </data>
   <data name="PlaybackStreamingQualityTitle" xml:space="preserve">
-    <value>Manage streaming quality</value>
+    <value>Streaming minőség kezelése</value>
   </data>
   <data name="PlaybackVideoH" xml:space="preserve">
-    <value>Video</value>
+    <value>Videó</value>
   </data>
   <data name="PlaybackVisualizerTitle" xml:space="preserve">
-    <value>Visualiser</value>
+    <value>Vizualizáló</value>
   </data>
   <data name="RecentColors" xml:space="preserve">
-    <value>Recent colours</value>
+    <value>Legutóbbi színek</value>
   </data>
   <data name="RestoreDefaults" xml:space="preserve">
-    <value>Restore defaults</value>
+    <value>Alapértékek visszaállítása</value>
   </data>
   <data name="RunEvery" xml:space="preserve">
-    <value>Run every:</value>
+    <value>Futás minden:</value>
   </data>
   <data name="ScanNow" xml:space="preserve">
-    <value>Scan now</value>
+    <value>Szkennelés most</value>
   </data>
   <data name="SelectLanguage" xml:space="preserve">
-    <value>Select language</value>
+    <value>Nyelv kiválasztása</value>
   </data>
   <data name="SelectLanguageDesc" xml:space="preserve">
-    <value>Choose your language manually from a list.</value>
+    <value>Válaszd ki manuálisan a nyelvet egy listából.</value>
   </data>
   <data name="SettingsFluentColor" xml:space="preserve">
-    <value>Fluent Colour</value>
+    <value>Fluent szín</value>
   </data>
   <data name="SettingsHighContrast" xml:space="preserve">
-    <value>High Contrast</value>
+    <value>Kontrasztos megjelenítés</value>
   </data>
   <data name="SettingsMenuBar" xml:space="preserve">
-    <value>Menu bar</value>
+    <value>Menüsor</value>
   </data>
   <data name="SettingsMenus" xml:space="preserve">
-    <value>Settings menus</value>
+    <value>Beállítások menü</value>
   </data>
   <data name="SettingsSidebar" xml:space="preserve">
-    <value>Sidebar (Classic)</value>
+    <value>Oldalsáv (Klasszikus)</value>
   </data>
   <data name="SettingsStyle" xml:space="preserve">
-    <value>Settings style</value>
+    <value>Beállítások stílusa</value>
   </data>
   <data name="StartupSettings" xml:space="preserve">
-    <value>Startup settings</value>
+    <value>Indítási beállítások</value>
   </data>
   <data name="SystemBehaviorsDisabledByPolicy" xml:space="preserve">
-    <value>This feature is disabled due to your administrator's current policies. If this is necessary, please contact your system administrator.</value>
+    <value>Ez a funkció a rendszergazda aktuális irányelvei miatt le van tiltva. Ha erre szükség van, kérjük, forduljon a rendszergazdához.</value>
   </data>
   <data name="SystemBehaviorsDisabledByUser" xml:space="preserve">
-    <value>This feature is disabled due to your current startup settings. Click the link below to modify these settings, then restart the app.</value>
+    <value>Ez a funkció a jelenlegi indítási beállítások miatt le van tiltva. Kattintson az alábbi linkre a beállítások módosításához, majd indítsa újra az alkalmazást.</value>
   </data>
   <data name="SystemBehaviorsEnabledByPolicy" xml:space="preserve">
-    <value>This feature is enabled but cannot be modified due to your administrator's current policies. If this is necessary, please contact your system administrator.</value>
+    <value>Ez a funkció engedélyezve van, de a rendszergazda aktuális házirendjei miatt nem módosítható. Ha erre szükség van, kérjük, forduljon a rendszergazdához.</value>
   </data>
   <data name="SystemBehaviorsRunningLeakedDesc" xml:space="preserve">
-    <value>Some settings might be unavailable because you are running Rise Media Player on the leaked build.</value>
+    <value>Előfordulhat, hogy egyes beállítások nem érhetők el, mivel a Rise Media Player a kiszivárgott verzióval fut.</value>
   </data>
   <data name="SystemBehaviorsRunningWin10Desc" xml:space="preserve">
-    <value>Some settings might be unavailable. To use them, upgrade your PC to Windows 11.</value>
+    <value>Előfordulhat, hogy egyes beállítások nem állnak rendelkezésre. Ezek használatához frissítse a számítógépet Windows 11-re.</value>
   </data>
   <data name="SystemBehaviorsRunningWin10H" xml:space="preserve">
-    <value>You are running Windows 10</value>
+    <value>Windows 10 rendszert futtatsz</value>
   </data>
   <data name="SystemBehaviorsRunningWin11Desc" xml:space="preserve">
-    <value>All settings should be available.</value>
+    <value>Minden beállításnak elérhetőnek kell lennie.</value>
   </data>
   <data name="SystemBehaviorsRunningWin11H" xml:space="preserve">
-    <value>You are running Windows 11</value>
+    <value>Windows 11 rendszert futtatsz</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>App settings</value>
+    <value>Alkalmazás beállítások</value>
   </data>
   <data name="ViewColors" xml:space="preserve">
-    <value>View colours</value>
+    <value>Színek megtekintése</value>
   </data>
   <data name="ViewFiles" xml:space="preserve">
-    <value>View files</value>
+    <value>Fájlok megtekintése</value>
   </data>
   <data name="WindowsColors" xml:space="preserve">
-    <value>Windows colours</value>
+    <value>Windows színek</value>
   </data>
 </root>

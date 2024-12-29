@@ -940,13 +940,23 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
   <data name="FromFolder" xml:space="preserve">
     <value>फ़ोल्डर से</value>
   </data>
+  <data name="CastToDevice" xml:space="preserve">
+    <value>उपकरण पर कास्ट करें</value>
+  </data>
+  <data name="FullScreen" xml:space="preserve">
+    <value>पूर्ण स्क्रीन</value>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>चेतावनी</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>सेव करें</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
-    <value>Save changes</value>
+    <value>बदलाव सेव करें</value>
+  </data>
+  <data name="AspectRatio" xml:space="preserve">
+    <value>आकार अनुपात</value>
+    <comment>Aspect Ratio option in the now playing bar.</comment>
   </data>
 </root>

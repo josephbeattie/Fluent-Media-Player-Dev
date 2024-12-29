@@ -941,6 +941,12 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
   <data name="FromFolder" xml:space="preserve">
     <value>De uma pasta</value>
   </data>
+  <data name="CastToDevice" xml:space="preserve">
+    <value>Cast to device</value>
+  </data>
+  <data name="FullScreen" xml:space="preserve">
+    <value>Full screen</value>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>Atenção</value>
   </data>
@@ -949,5 +955,9 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save changes</value>
+  </data>
+  <data name="AspectRatio" xml:space="preserve">
+    <value>Aspect Ratio</value>
+    <comment>Aspect Ratio option in the now playing bar.</comment>
   </data>
 </root>

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddPersonalMusicAndVideosTitle" xml:space="preserve">
-    <value>Adding your personal music and videos</value>
+    <value>Добавляем вашу персональную музыку и видео</value>
   </data>
   <data name="Alpha.Text" xml:space="preserve">
     <value>• Эти версии будут распространяться из Microsoft Store
@@ -162,13 +162,13 @@
     <value>Бета</value>
   </data>
   <data name="DiscyAboutTipDesc" xml:space="preserve">
-    <value>You can find me by right clicking on different things. For example, an album. I'll tell you what you can do :). I'm still pretty new, so I won't be everywhere, but I'm growing every day!</value>
+    <value>Вы можете найти меня, кликнув правой кнопкой на различные вещи. Например, альбом. Я скажу вам, что вы можете сделать, :). Я все еще довольно новый, так что я не буду везде, но я расту каждый день!</value>
   </data>
   <data name="DiscyAboutTipTitle" xml:space="preserve">
-    <value>Hey! I'm Discy.</value>
+    <value>Привет! Я Диски.</value>
   </data>
   <data name="DiscyOnAlbumDesc" xml:space="preserve">
-    <value>Use the command bar to sort your albums into different types. Click on an album to see what's in store. You can add a whole album to a playlist, shuffle or share with friends.</value>
+    <value>Используй командную строку, чтобы рассортировать твои альбомы по типам. Нажми на альбом, чтобы увидеть что в нём. Ты можешь добавить целый альбом в плейлист, перемешать или поделится им с друзьями.</value>
   </data>
   <data name="DiscyOnAlbumH" xml:space="preserve">
     <value>Managing and organising your albums</value>
@@ -263,6 +263,6 @@
     <value>Вы должны это увидеть ;)</value>
   </data>
   <data name="WhatDiscy.Title" xml:space="preserve">
-    <value>Что такое Discy?</value>
+    <value>Что такое Дисси?</value>
   </data>
 </root>
