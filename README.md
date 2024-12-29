@@ -53,12 +53,51 @@ In order to learn how to build RiseMP from source, check out [the documentation]
 
 [![Download](https://user-images.githubusercontent.com/74561130/137598555-649c77c7-1719-4aa3-8017-8b41283de730.png)](https://github.com/Rise-Software/Rise-Media-Player/releases)    ![divide](https://user-images.githubusercontent.com/74561130/137599566-866fef7d-967e-4ad1-91da-8014d1752b93.png)    [![JoinInsider](https://user-images.githubusercontent.com/74561130/137585885-7f98b4de-5067-41ee-bdb4-2a04fea4b90a.png)](http://www.bit.ly/risesoftinsider)
 
+### Building from source
+
+#### Prerequisites
+
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) with the following individual components:
+  - Windows SDK
+  - Windows app development workload
+- Git for Windows
+
+```sh
+git clone https://github.com/Rise-Software/Rise-Media-Player.git
+```
+
+#### Prepare credentials
+
+Create a file called `LastFM.cs` in `Rise.Common.Constants`, and paste the following contents:
+
+```cs
+namespace Rise.Common.Constants
+{
+    /// <summary>
+    /// Contains last.fm related constants.
+    /// </summary>
+    public class LastFM
+    {
+        public const string Key = "YourAPIKey";
+        public const string Secret = "YourSecret";
+
+        public const string VaultResource = "RiseMP - LastFM account";
+    }
+}
+```
+
+This will be enough to build the app, but if you want last.fm support, you should [get a last.fm API key](https://www.last.fm/api#getting-started). After doing this, replace the value of the `Key` and `Secret` constants with your own API key and secret key respectively. After doing this, last.fm functionality should be enabled.
+
+#### Build the project
+
+To build Rise Media Player for development, open the `RiseMP.sln` item in Visual Studio. Right-click on the `Rise.App` packaging project in solution explorer and select ‘Set as Startup item’. Then press <kbd>F5</kbd> or your selected build & deploy keybind to build the app and launch it.
+
 ## Contributing
 
 Want to contribute to this project? Let us know with an [issue](https://github.com/Rise-Software/Rise-Media-Player/issues) that communicates your intent to create a [pull request](https://github.com/Rise-Software/Rise-Media-Player/pulls).
-
+<!-- Add when actual project added to repo
 Looking for a place to start? Check out the [task board](https://github.com/orgs/RiversideValley/projects/8/views/2), where you can sort tasks by size and priority.
-
+-->
 ## Credits
 
 * [**Joseph Beattie (@josephbeattie)**](https://github.com/josephbeattie): **Founder of Rise and lead developer**.
