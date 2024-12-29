@@ -26,10 +26,10 @@ Our own controls and icons give users a truly personalised experience, being abl
 
 ## Features
 
-* **Music and video playback**: play music and videos from any source across your device and the internet in high quality
+* **Music and video playback**: Play music and videos from any source across your device and the internet in high quality
 * **Sorting for songs, albums and videos**: Sort and find any track
 * **Now Playing bar**: Stunningly designed "now playing" experience
-* **Fullscreen music experience**: 
+* **Fullscreen music experience**: Comes complete with a beautiful fullscreen listening interface
 * **`last.fm` integration**: Find your favourite tracks from `last.fm` in Rise
 * **Internet based artist images**: Carefully curated artist images
 * **Playlists**: Sort all your music into playlists
