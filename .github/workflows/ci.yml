@@ -130,11 +130,11 @@ jobs:
           -p:PublishReadyToRun=true
 
     - name: Create self signed cert as a pfx file
-      run: ./.github/scripts/Generate-SelfCertPfx.ps1 -Destination "$env:APPX_SELFSIGNED_CERT_PATH"
+      run: ./.github/scripts/Generate-SelfCertPfx.ps1 -Destination $env:APPX_SELFSIGNED_CERT_PATH
 
     - name: Get thumbprint for signed certificate
       run: |
-        $certificateObject = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2("$env:APPX_SELFSIGNED_CERT_PATH", "")
+        $certificateObject = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($env:APPX_SELFSIGNED_CERT_PATH, "")
         $thumbprint = $certificateObject.Thumbprint
 
     - if: env.CONFIGURATION != env.AUTOMATED_TESTS_CONFIGURATION || env.ARCHITECTURE != env.AUTOMATED_TESTS_ARCHITECTURE 
