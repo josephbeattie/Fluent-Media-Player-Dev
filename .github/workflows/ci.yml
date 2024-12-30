@@ -92,10 +92,11 @@ jobs:
       fail-fast: false
       matrix:
         configuration: [Debug, Release]
-        platform: [x64, x86]
+        platform: [x64, x86, arm64]
     env:
       CONFIGURATION: ${{ matrix.configuration }}
       ARCHITECTURE: ${{ matrix.platform }}
+      SLN_CONFIG_VALUE: ${{ matrix.configuration }}|${{ matrix.platform }}
 
     steps:
 
@@ -149,7 +150,7 @@ jobs:
           -p:AppxBundle=Never `
           -p:PackageCertificateThumbprint=$thumbprint
 
-    - if: env.CONFIGURATION == env.AUTOMATED_TESTS_CONFIGURATION && env.ARCHITECTURE == env.AUTOMATED_TESTS_ARCHITECTURE
+    - if: env.CONFIGURATION == env.AUTOMATED_TESTS_CONFIGURATION && env.ARCHITECTURE == env.AUTOMATED_TESTS_ARCHITECTURE && env.SLN_CONFIG_VALUE != 'Release|x86' && env.SLN_CONFIG_VALUE != 'Release|arm64'
       name: Build & package RiseMP
       run: |
         msbuild `
