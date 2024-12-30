@@ -85,7 +85,7 @@ jobs:
   build:
     name: Build
 
-    if: github.repository_owner == 'Rise-Software' && env.SLN_CONFIG_VALUE != 'Release|x86' && env.SLN_CONFIG_VALUE != 'Release|arm64'
+    if: github.repository_owner == 'Rise-Software' && (matrix.configuration != 'Release' && matrix.platform != 'x86') && (matrix.configuration != 'Release' && matrix.platform != 'arm64')
 
     runs-on: windows-latest
     strategy:
