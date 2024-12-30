@@ -85,14 +85,14 @@ jobs:
   build:
     name: Build
 
-    if: github.repository_owner == 'Rise-Software' && (matrix.configuration != 'Release' && matrix.platform != 'x86') && (matrix.configuration != 'Release' && matrix.platform != 'arm64')
+    if: github.repository_owner == 'Rise-Software'
 
     runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
         configuration: [Debug, Release]
-        platform: [x64, x86, arm64]
+        platform: [x64]
     env:
       CONFIGURATION: ${{ matrix.configuration }}
       ARCHITECTURE: ${{ matrix.platform }}
