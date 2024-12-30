@@ -17,45 +17,6 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
-            <Border Margin="0,4,0,0" Style="{StaticResource BorderCardStyle}">
-                <RelativePanel Margin="0,4,0,0">
-                    <FontIcon
-                        x:Name="WindowsLogo"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        FontFamily="{StaticResource SettingsIconsFontFamily}"
-                        FontSize="56"
-                        Glyph="&#xE336;" />
-                    <StackPanel
-                        Margin="8,0,0,0"
-                        RelativePanel.AlignVerticalCenterWithPanel="True"
-                        RelativePanel.RightOf="WindowsLogo">
-                        <TextBlock
-                            x:Name="WinVer"
-                            Padding="8,0,0,0"
-                            RelativePanel.RightOf="WindowsLogo"
-                            Style="{StaticResource SubtitleTextBlockStyle}"
-                            Text="{markup:ResourceHelper Name=/Settings/SystemBehaviorsRunningWin11H}"
-                            TextWrapping="WrapWholeWords" />
-                        <TextBlock
-                            x:Name="InfoString"
-                            Margin="0,4,0,0"
-                            Padding="8,0,0,0"
-                            Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
-                            RelativePanel.Below="WinVer"
-                            RelativePanel.RightOf="WindowsLogo"
-                            Text="{markup:ResourceHelper Name=/Settings/SystemBehaviorsRunningWin11Desc}"
-                            TextWrapping="WrapWholeWords" />
-                        <HyperlinkButton
-                            x:Name="Update"
-                            Margin="-4,8,0,0"
-                            Click="Update_Click"
-                            Content="Windows Update"
-                            Visibility="Collapsed" />
-                    </StackPanel>
-                </RelativePanel>
-            </Border>
-
             <TextBlock
                 Margin="0,0,0,-4"
                 Style="{StaticResource SubheaderTextBlockStyle}"

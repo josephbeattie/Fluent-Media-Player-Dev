@@ -397,6 +397,7 @@
                         <MenuFlyout x:Name="ProfileMenu">
                             <MenuFlyoutItem
                                 x:Name="Acc"
+                                IsEnabled="{x:Bind LMViewModel.Authenticated.Equals(x:False), Mode=OneWay}"
                                 Height="44"
                                 Margin="3"
                                 Click="Account_Click"
@@ -414,29 +415,7 @@
 
                             <MenuFlyoutSeparator />
 
-                            <MenuFlyoutItem Click="Messages_Click" Text="{markup:ResourceHelper Name=MessagesAndReports}">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xF716;" />
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-
-                            <MenuFlyoutItem Click="Support_Click" Text="{markup:ResourceHelper Name=SupportProject}">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE125;" />
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-
-                            <MenuFlyoutSeparator />
-
-                            <MenuFlyoutItem Click="StartScan_Click" Text="{markup:ResourceHelper Name=Scan}">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon Glyph="&#xE721;" />
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-
-                            <MenuFlyoutSeparator />
-
-                            <MenuFlyoutItem Click="Button_Click" Text="{markup:ResourceHelper Name=Feedback}">
+                            <MenuFlyoutItem Click="Feedback_Click" Text="{markup:ResourceHelper Name=Feedback}">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xED15;" />
                                 </MenuFlyoutItem.Icon>
@@ -455,14 +434,6 @@
                         <FontIcon Glyph="&#xE713;" />
                     </Button.Content>
                 </Button>
-
-                <Grid
-                    x:Name="IndexingProgressArea"
-                    Grid.Column="2"
-                    VerticalAlignment="Stretch">
-                    <FontIcon x:Name="IndexingProgressIcon" Glyph="&#xEA69;" />
-                    <muxc:ProgressRing x:Name="IndexingProgressRing" IsActive="False" />
-                </Grid>
             </Grid>
         </Grid>
 
@@ -476,7 +447,6 @@
             FooterMenuItemsSource="{x:Bind NavDataSource.AllItems.FooterItems}"
             IsBackEnabled="{x:Bind ContentFrame.CanGoBack, Mode=OneWay}"
             IsPaneToggleButtonVisible="True"
-            IsSettingsVisible="False"
             IsTitleBarAutoPaddingEnabled="False"
             ItemInvoked="NavigationView_ItemInvoked"
             MenuItemTemplateSelector="{StaticResource NavViewItemTemplateSelector}"
@@ -1052,12 +1022,6 @@
             </VisualStateGroup>
 
             <VisualStateGroup x:Name="ScanningStates">
-                <VisualState x:Name="NotScanningState">
-                    <VisualState.Setters>
-                        <Setter Target="IndexingProgressArea.Visibility" Value="Collapsed" />
-                    </VisualState.Setters>
-                </VisualState>
-
                 <VisualState x:Name="ScanningState">
                     <VisualState.Setters>
                         <Setter Target="IndexingTip.Visibility" Value="Visible" />
@@ -1067,13 +1031,11 @@
                 <VisualState x:Name="FetchingMetadataState">
                     <VisualState.Setters>
                         <Setter Target="FetchingMetadataTip.Visibility" Value="Visible" />
-                        <Setter Target="IndexingProgressRing.IsActive" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ScanningDoneState">
                     <VisualState.Setters>
                         <Setter Target="SuccessTip.Visibility" Value="Visible" />
-                        <Setter Target="IndexingProgressIcon.Glyph" Value="&#xE73E;" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

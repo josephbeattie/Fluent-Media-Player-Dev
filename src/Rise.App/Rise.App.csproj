@@ -210,6 +210,9 @@
     <Compile Include="Views\BrowsePage.xaml.cs">
       <DependentUpon>BrowsePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NoMedia\NoMusicPage.xaml.cs">
+      <DependentUpon>NoMusicPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Playlists\Properties\PlaylistVideosPropertiesPage.xaml.cs">
       <DependentUpon>PlaylistVideosPropertiesPage.xaml</DependentUpon>
     </Compile>
@@ -297,9 +300,6 @@
     </Compile>
     <Compile Include="Views\SearchResultsPage.xaml.cs">
       <DependentUpon>SearchResultsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Web\FeedbackPage.xaml.cs">
-      <DependentUpon>FeedbackPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\CompactNowPlayingPage.xaml.cs">
       <DependentUpon>CompactNowPlayingPage.xaml</DependentUpon>
@@ -718,6 +718,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NoMedia\NoMusicPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Playlists\Properties\PlaylistVideosPropertiesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -831,10 +835,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchResultsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Web\FeedbackPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -979,6 +979,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\AtAGlance\WidgetService\" />
+    <Folder Include="Web\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\MediaPlayerIcons.ttf">

@@ -1,11 +1,10 @@
-﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Toolkit.Uwp.UI;
 using Rise.App.Dialogs;
 using Rise.App.Helpers;
 using Rise.App.Settings;
 using Rise.App.UserControls;
 using Rise.App.ViewModels;
-using Rise.App.Web;
 using Rise.Common.Constants;
 using Rise.Common.Enums;
 using Rise.Common.Extensions;
@@ -113,6 +112,7 @@ namespace Rise.App.Views
             }
 
             SetupNavigation();
+
         }
 
         private void SetupNavigation()
@@ -394,8 +394,6 @@ namespace Rise.App.Views
                 _ = VisualStateManager.GoToState(this, "ScanningDoneState", false);
 
                 await Task.Delay(2500);
-
-                _ = VisualStateManager.GoToState(this, "NotScanningState", false);
             });
         }
 
@@ -562,15 +560,9 @@ namespace Rise.App.Views
             }
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void Feedback_Click(object sender, RoutedEventArgs e)
         {
-            _ = await FeedbackPage.TryShowAsync();
-        }
-
-        private async void StartScan_Click(object sender, RoutedEventArgs e)
-        {
-            ProfileMenu.Hide();
-            await Task.Run(App.MViewModel.StartFullCrawlAsync);
+            await URLs.NewIssue.LaunchAsync();
         }
 
         private void OpenSettings_Click(object sender, RoutedEventArgs e)
@@ -611,25 +603,6 @@ namespace Rise.App.Views
 
             args.Handled = true;
         }
-
-        private async void Messages_Click(object sender, RoutedEventArgs e)
-        {
-            ContentDialog dialog = new()
-            {
-                Title = ResourceHelper.GetString("MessagesAndReports"),
-                CloseButtonText = ResourceHelper.GetString("Close"),
-                DefaultButton = ContentDialogButton.Primary,
-                Content = new MessagesDialog()
-            };
-
-            _ = await dialog.ShowAsync();
-        }
-
-        private async void Support_Click(object sender, RoutedEventArgs e)
-        {
-            _ = await URLs.Support.LaunchAsync();
-        }
-
         private async void Account_Click(object sender, RoutedEventArgs e)
         {
             if (LMViewModel.Authenticated)

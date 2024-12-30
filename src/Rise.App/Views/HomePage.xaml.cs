@@ -1,4 +1,4 @@
-﻿using Rise.App.Dialogs;
+using Rise.App.Dialogs;
 using Rise.Common.Constants;
 using Rise.Common.Extensions;
 using Rise.Common.Extensions.Markup;
@@ -23,34 +23,6 @@ namespace Rise.App.Views
 
             _navigationHelper = new NavigationHelper(this);
         }
-
-        private async void SupportButton_Click(object sender, RoutedEventArgs e)
-        {
-            _ = await URLs.Support.LaunchAsync();
-        }
-
-        private async void FoldersButton_Click(object sender, RoutedEventArgs e)
-        {
-            ContentDialog dialog = new()
-            {
-                Title = ResourceHelper.GetString("/Settings/MediaLibraryManageFoldersTitle"),
-                CloseButtonText = ResourceHelper.GetString("Close"),
-                Content = new Settings.MediaSourcesPage()
-            };
-            _ = await dialog.ShowAsync();
-        }
-
-        private async void GlanceManage_Click(object sender, RoutedEventArgs e)
-        {
-            ContentDialog dialog = new()
-            {
-                CloseButtonText = ResourceHelper.GetString("Close"),
-                DefaultButton = ContentDialogButton.Primary,
-                Content = new WidgetsDialogContent()
-            };
-            _ = await dialog.ShowAsync();
-        }
-
         #region NavigationHelper registration
         /// <summary>
         /// The methods provided in this section are simply used to allow
@@ -71,10 +43,5 @@ namespace Rise.App.Views
             _navigationHelper.OnNavigatedFrom(e);
         }
         #endregion
-
-        private void BrowseMedia_Click(object sender, RoutedEventArgs e)
-        {
-            _ = Frame.Navigate(typeof(BrowsePage));
-        }
     }
 }
