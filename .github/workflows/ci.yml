@@ -85,7 +85,7 @@ jobs:
   build:
     name: Build
 
-    if: github.repository_owner == 'Rise-Software'
+    if: github.repository_owner == 'Rise-Software' && env.SLN_CONFIG_VALUE != 'Release|x86' && env.SLN_CONFIG_VALUE != 'Release|arm64'
 
     runs-on: windows-latest
     strategy:
@@ -138,7 +138,7 @@ jobs:
         $certificateObject = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($env:APPX_SELFSIGNED_CERT_PATH, "")
         $thumbprint = $certificateObject.Thumbprint
 
-    - if: env.CONFIGURATION != env.AUTOMATED_TESTS_CONFIGURATION || env.ARCHITECTURE != env.AUTOMATED_TESTS_ARCHITECTURE && env.SLN_CONFIG_VALUE != 'Release|x86' && env.SLN_CONFIG_VALUE != 'Release|arm64'
+    - if: env.CONFIGURATION != env.AUTOMATED_TESTS_CONFIGURATION || env.ARCHITECTURE != env.AUTOMATED_TESTS_ARCHITECTURE
       name: Build RiseMP
       run: |
         msbuild `
