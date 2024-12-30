@@ -146,7 +146,8 @@ jobs:
           -clp:ErrorsOnly `
           -p:Configuration=$env:CONFIGURATION `
           -p:Platform=$env:ARCHITECTURE `
-          -p:AppxBundle=Never
+          -p:AppxBundle=Never `
+          -p:PackageCertificateThumbprint="$thumbprint"
 
     - if: env.CONFIGURATION == env.AUTOMATED_TESTS_CONFIGURATION && env.ARCHITECTURE == env.AUTOMATED_TESTS_ARCHITECTURE
       name: Build & package RiseMP
