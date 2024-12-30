@@ -147,7 +147,7 @@ jobs:
           -p:Configuration=$env:CONFIGURATION `
           -p:Platform=$env:ARCHITECTURE `
           -p:AppxBundle=Never `
-          -p:PackageCertificateThumbprint="$thumbprint"
+          -p:PackageCertificateThumbprint=$thumbprint
 
     - if: env.CONFIGURATION == env.AUTOMATED_TESTS_CONFIGURATION && env.ARCHITECTURE == env.AUTOMATED_TESTS_ARCHITECTURE
       name: Build & package RiseMP
@@ -166,7 +166,7 @@ jobs:
           -p:AppxPackageSigningEnabled=true `
           -p:PackageCertificateKeyFile=$env:APPX_SELFSIGNED_CERT_PATH `
           -p:PackageCertificatePassword="" `
-          -p:PackageCertificateThumbprint="$thumbprint"
+          -p:PackageCertificateThumbprint=$thumbprint
 
 # I have removed parts of the CI related to testing the app.
 # When tests are introduced, please copy that part of the CI
