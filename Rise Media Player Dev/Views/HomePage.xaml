@@ -2,6 +2,7 @@
     x:Class="Rise.App.Views.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:markup="using:Rise.Common.Extensions.Markup"
@@ -17,94 +18,49 @@
         Padding="56,56,56,0"
         d:Padding="12"
         VerticalScrollBarVisibility="Auto">
-        <StackPanel
-            Padding="0,0,0,120"
-            d:Padding="0"
-            Orientation="Vertical"
-            Spacing="4">
-            <StackPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <RepositionThemeTransition IsStaggeringEnabled="False" />
-                </TransitionCollection>
-            </StackPanel.ChildrenTransitions>
-
-            <uc:AdaptiveItemPane>
-                <uc:AdaptiveItemPane.LeftPane>
-                    <Button
-                        Padding="4"
-                        HorizontalContentAlignment="Left"
-                        Style="{StaticResource TransparentButtonStyle}">
-                        <Image Height="42" Source="ms-appx:///Assets/Branding/alphabanner.png" />
-                    </Button>
-                </uc:AdaptiveItemPane.LeftPane>
-
-                <uc:AdaptiveItemPane.RightPane>
-                    <Button
-                        x:Name="GlanceManage"
-                        Width="125"
-                        Click="GlanceManage_Click"
-                        Content="{markup:ResourceHelper Name=AddWidgets}" />
-                </uc:AdaptiveItemPane.RightPane>
-            </uc:AdaptiveItemPane>
-
-            <Border
-                Margin="0,16,0,0"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                BorderThickness="1"
-                CornerRadius="6"
-                Opacity="1"
-                Style="{StaticResource BorderCardStyle}">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Padding="0,50,0,20">
-                        <Image
-                            Width="88"
-                            Height="80"
-                            Source="ms-appx:///Assets/AtAGlance/widgets.png" />
-                    </StackPanel>
-
+        <Grid>
+            <Grid
+                x:Name="Welcome"
+                Margin="0,-48,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                ColumnSpacing="24"
+                Opacity="1">
+                <animations:Implicit.ShowAnimations>
+                    <animations:TranslationAnimation
+                        From="0,100,0"
+                        To="0, 0, 0"
+                        Duration="0:0:0.25" />
+                    <animations:OpacityAnimation To="1.0" Duration="0:0:0.25" />
+                </animations:Implicit.ShowAnimations>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <FontIcon
+                    FontSize="90"
+                    Glyph="&#xE768;"
+                    Opacity="0.6" />
+                <RelativePanel
+                    Grid.Column="1"
+                    MaxWidth="600"
+                    VerticalAlignment="Center">
                     <TextBlock
-                        FontSize="24"
-                        FontWeight="SemiBold"
-                        Text="{markup:ResourceHelper Name=HomeNothingToShow}"
-                        TextAlignment="Center"
-                        TextWrapping="WrapWholeWords" />
+                        x:Name="HeaderVideos"
+                        Opacity="0.6"
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        Text="Welcome to Rise Media Player." />
                     <TextBlock
-                        FontSize="24"
-                        FontWeight="SemiBold"
-                        Text="{markup:ResourceHelper Name=HomeAddSomeWidgets}"
-                        TextAlignment="Center"
-                        TextWrapping="WrapWholeWords" />
-                    <TextBlock
-                        Padding="0,20,0,50"
-                        FontSize="15"
-                        FontWeight="SemiBold"
-                        Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"
-                        Text="{markup:ResourceHelper Name=HomeThingsYouLove}"
-                        TextAlignment="Center"
-                        TextWrapping="WrapWholeWords" />
-                </StackPanel>
-            </Border>
-
-            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{markup:ResourceHelper Name=QuickH}" />
-
-            <labs:SettingsCard
-                Click="FoldersButton_Click"
-                Description="{markup:ResourceHelper Name=AddRemoveDesc}"
-                Header="{markup:ResourceHelper Name=AddRemoveTitle}"
-                HeaderIcon="{ui:FontIcon Glyph=&#xE19C;}"
-                IsClickEnabled="True" />
-            <labs:SettingsCard
-                Click="BrowseMedia_Click"
-                Description="{markup:ResourceHelper Name=BrowseMediaDesc}"
-                Header="{markup:ResourceHelper Name=BrowseMediaTitle}"
-                HeaderIcon="{ui:FontIcon Glyph=&#xE838;}"
-                IsClickEnabled="True" />
-            <labs:SettingsCard
-                Click="SupportButton_Click"
-                Description="{markup:ResourceHelper Name=SupportDevDesc}"
-                Header="{markup:ResourceHelper Name=SupportDevTitle}"
-                HeaderIcon="{ui:FontIcon Glyph=&#xE822;}"
-                IsClickEnabled="True" />
-        </StackPanel>
+                        x:Name="MessageVideos"
+                        Margin="0,0,0,12"
+                        FontSize="16"
+                        Opacity="0.6"
+                        RelativePanel.Below="HeaderVideos"
+                        Style="{StaticResource BodyTextBlockStyle}"
+                        Text="We look forward to you sharing this development journey with us. Please share feedback when you can. Enjoy!" />
+                    
+                </RelativePanel>
+            </Grid>
+        </Grid>
     </ScrollViewer>
 </Page>

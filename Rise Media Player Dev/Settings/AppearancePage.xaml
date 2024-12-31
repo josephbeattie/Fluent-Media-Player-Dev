@@ -28,7 +28,7 @@
                 <RepositionThemeTransition IsStaggeringEnabled="False" />
             </TransitionCollection>
         </StackPanel.ChildrenTransitions>
-        
+
         <muxc:TeachingTip
             x:Name="ChangeThemeTip"
             Title="{markup:ResourceHelper Name=/Settings/AppThemeChanged}"
@@ -40,30 +40,8 @@
             Subtitle="{markup:ResourceHelper Name=RestartChangesEffect}"
             Target="{x:Bind ThemeChange}" />
 
-        <Border
-            x:Name="ThemeBorder"
-            Height="120"
-            Margin="0,-4,0,0"
-            Padding="0"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-            BorderThickness="1"
-            CornerRadius="3"
-            Style="{StaticResource BorderCardStyle}">
-            <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="18"
-                Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"
-                Text="Themes and presets are coming soon. Stay tuned."
-                TextAlignment="Center"
-                TextTrimming="CharacterEllipsis"
-                TextWrapping="WrapWholeWords" />
-        </Border>
-
         <labs:SettingsCard
-            Margin="0,8,0,0"
+            Margin="0,-4,0,0"
             Header="{markup:ResourceHelper Name=/Settings/AppearanceChooseTheme}"
             HeaderIcon="{ui:FontIcon Glyph=&#xE790;}">
             <ComboBox
