@@ -1,16 +1,28 @@
+<!-- 
+🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
+I ACKNOWLEDGE THE FOLLOWING BEFORE PROCEEDING:
+1. PR may be deleted if it is not following the template
+2. Try not to make duplicates. Do a quick search before posting
+3. Add a clear title starting with "Feature:" or "Fix:"
+-->
+
 **Resolved / Related Issues**
-Items resolved / related issues by this PR.
-- Closes #issue...
-- Related #issue...
 
-**Details of Changes**
-Add details of changes here.
-- Added...
-- Fixed...
+<!--
+To prevent extra work, all changes to the RiseMP codebase must link to an approved issue marked as `Ready to build`. Please insert the issue number following the hashtag with the issue number that this Pull Request resolves.
+-->
 
-**Validation**
-How did you test these changes?
-- [ ] Built and ran the app
+- Closes #
 
-**Screenshots / Videos (optional)**
-Add screenshots and/or videos here.
+**Steps used to test these changes**
+
+<!--
+Stability is a top priority for Rise and all changes are required to go through testing before being merged into the repo. Please include a list of steps that you used to test this PR.
+-->
+
+1. Opened RiseMP ...
+2. ...
+
+---
+
+<!-- Write a detailed description of your changes here -->
