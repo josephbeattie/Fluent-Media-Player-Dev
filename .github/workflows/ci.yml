@@ -37,9 +37,11 @@ env:
   # AUTOMATED_TESTS_ASSEMBLY_DIR: '${{ github.workspace }}\artifacts\TestsAssembly'
   ARTIFACTS_STAGING_DIR:  '${{ github.workspace }}\artifacts'
   APPX_PACKAGE_DIR: '${{ github.workspace }}\artifacts\AppxPackages'
-  APPX_SELFSIGNED_CERT_PATH: '${{ github.workspace }}\.github\workflows\Rise.App_SelfSigned.pfx'
+  APPX_SELFSIGNED_CERT_PATH: '${{ github.workspace }}\Rise Media Player Dev\Rise.App_TemporaryKey.pfx'
   WINAPPDRIVER_EXE86_PATH: 'C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe'
   WINAPPDRIVER_EXE64_PATH: 'C:\Program Files\Windows Application Driver\WinAppDriver.exe'
+  LASTFM: 'bmFtZXNwYWNlIFJpc2UuQ29tbW9uLkNvbnN0YW50cwp7CiAgICAvLy8gPHN1bW1hcnk+CiAgICAvLy8gQ29udGFpbnMgbGFzdC5mbSByZWxhdGVkIGNvbnN0YW50cy4KICAgIC8vLyA8L3N1bW1hcnk+CiAgICBwdWJsaWMgY2xhc3MgTGFzdEZNCiAgICB7CiAgICAgICAgcHVibGljIGNvbnN0IHN0cmluZyBLZXkgPSAiWW91ckFQSUtleSI7CiAgICAgICAgcHVibGljIGNvbnN0IHN0cmluZyBTZWNyZXQgPSAiWW91clNlY3JldCI7CgogICAgICAgIHB1YmxpYyBjb25zdCBzdHJpbmcgVmF1bHRSZXNvdXJjZSA9ICJSaXNlTVAgLSBMYXN0Rk0gYWNjb3VudCI7CiAgICB9Cn0='
+  APP_CREDENTIALS_PATH: '${{ github.workspace }}\Rise.Common\Constants\LastFM.cs'
 
 jobs:
 
@@ -90,10 +92,11 @@ jobs:
       fail-fast: false
       matrix:
         configuration: [Debug, Release]
-        platform: [x64, arm64]
+        platform: [x64]
     env:
       CONFIGURATION: ${{ matrix.configuration }}
       ARCHITECTURE: ${{ matrix.platform }}
+      SLN_CONFIG_VALUE: ${{ matrix.configuration }}|${{ matrix.platform }}
 
     steps:
 
@@ -108,6 +111,12 @@ jobs:
       with:
         dotnet-version: 8.x # It has been too long since I last wrote a CI workflow for a UWP app, so I'm just guessing any version works :P
 
+    - name: Save base64 credentials into a file
+      shell: pwsh
+      run: |
+        $bytes = [Convert]::FromBase64String($env:LASTFM)
+        [IO.File]::WriteAllBytes($env:APP_CREDENTIALS_PATH, $bytes)
+
     - name: Restore NuGet
       shell: pwsh
       run: 'nuget restore $env:SOLUTION_PATH'
@@ -121,7 +130,15 @@ jobs:
           -p:Configuration=$env:CONFIGURATION `
           -p:PublishReadyToRun=true
 
-    - if: env.CONFIGURATION != env.AUTOMATED_TESTS_CONFIGURATION || env.ARCHITECTURE != env.AUTOMATED_TESTS_ARCHITECTURE 
+    - name: Create self signed cert as a pfx file
+      run: ./.github/scripts/Generate-SelfCertPfx.ps1 -Destination $env:APPX_SELFSIGNED_CERT_PATH
+
+    - name: Get thumbprint for signed certificate
+      run: |
+        $certificateObject = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($env:APPX_SELFSIGNED_CERT_PATH, "")
+        $thumbprint = $certificateObject.Thumbprint
+
+    - if: env.CONFIGURATION != env.AUTOMATED_TESTS_CONFIGURATION || env.ARCHITECTURE != env.AUTOMATED_TESTS_ARCHITECTURE
       name: Build RiseMP
       run: |
         msbuild `
@@ -130,11 +147,8 @@ jobs:
           -clp:ErrorsOnly `
           -p:Configuration=$env:CONFIGURATION `
           -p:Platform=$env:ARCHITECTURE `
-          -p:AppxBundle=Never
-
-    - if: env.CONFIGURATION == env.AUTOMATED_TESTS_CONFIGURATION && env.ARCHITECTURE == env.AUTOMATED_TESTS_ARCHITECTURE
-      name: Create self signed cert as a pfx file
-      run: ./.github/scripts/Generate-SelfCertPfx.ps1 -Destination "$env:APPX_SELFSIGNED_CERT_PATH"
+          -p:AppxBundle=Never `
+          -p:PackageCertificateThumbprint=$thumbprint
 
     - if: env.CONFIGURATION == env.AUTOMATED_TESTS_CONFIGURATION && env.ARCHITECTURE == env.AUTOMATED_TESTS_ARCHITECTURE
       name: Build & package RiseMP
@@ -153,7 +167,7 @@ jobs:
           -p:AppxPackageSigningEnabled=true `
           -p:PackageCertificateKeyFile=$env:APPX_SELFSIGNED_CERT_PATH `
           -p:PackageCertificatePassword="" `
-          -p:PackageCertificateThumbprint=""
+          -p:PackageCertificateThumbprint=$thumbprint
 
 # I have removed parts of the CI related to testing the app.
 # When tests are introduced, please copy that part of the CI

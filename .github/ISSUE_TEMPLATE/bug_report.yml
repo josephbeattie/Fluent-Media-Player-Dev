@@ -1,50 +1,71 @@
 name: Bug Report
-description: Create a bug report to help improve Rise Media Player
-labels: [bug]
+description: Create a bug report to help improve RiseMP
+# type: 'Bug' # Add back when issue types are enabled in Rise org
+title: 'Bug: '
 body:
+
+  # Tip to warn of checking for existing issues
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > Have you checked for similar issues? There's a possibility the bug you are experiencing has already been reported. Please do a thorough search before creating a new issue.
+
+  # Description
   - type: textarea
     attributes:
       label: Description
-      description: A clear and concise description of what the bug is.
+      description: A clear and concise description of what the issue is.
     validations:
       required: true
+
+  # Step To Reproduce
   - type: textarea
     attributes:
       label: Steps To Reproduce
       description: Steps to reproduce the behavior.
       placeholder: |
-        1. Go to '....'
-        2. Click on '....'
-        3. See the error
-    validations:
-      required: false
-  - type: textarea
-    attributes:
-      label: Expected behavior
-      description: A clear description of what you expected to happen.
+        1.
+        2.
+        3.
     validations:
       required: true
+
+  # RiseMP Version
   - type: input
-    id: risemp-version
+    id: rise_version
     attributes:
-      label: Rise Media Player Version
-      description: Which version of Rise Media Player are you using? The version number can be found by going to Rise Media Player' Settings > About > Version
-      placeholder: "e.g. Pre-Alpha 4 - v0.0.14.0"
+      label: RiseMP Version
+      description: Which version of RiseMP are you using? To copy your app version, access it from Settings -> About -> Version.
+      placeholder: "e.g. 0.14.0-alpha3"
     validations:
       required: true
+
+  # Windows Version
   - type: input
+    id: windows_version
     attributes:
       label: Windows Version
       description: Which version of Windows are you using? Press <kbd>Win</kbd> + <kbd>Pause/Break</kbd> and copy.
-      placeholder: e.g. Windows 11 21H2 22000.194
+      placeholder: "e.g. 10.0.22621.1848"
     validations:
       required: true
+
+  # Note that the user should always upload the report rather than pasting it.
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > Please **upload** the log file by clicking "Attach files".
+        >
+        > Feel free to remove sensitive information such as your usernames or drive names.
+
+  # Log File
   - type: textarea
     attributes:
-      label: Relevant Assets/Logs
+      label: Log File
       description: |
-        A list of assets (logs, screenshots, etc) relevant to this bug.
-        Tip: You can attach image(s) or logs by clicking this area to highlight it and then dragging files in.
+        Please upload the log file as an attachment
       placeholder: |
         To upload the log, copy from crash window; Or
         - Drag and drop them into this text area.

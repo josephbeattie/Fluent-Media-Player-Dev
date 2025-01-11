@@ -1,35 +1,65 @@
 name: Feature Request
-description: This project thrives from differentiation from competing apps. Suggest an idea for Rise Media Player
-labels: [feature request]
+description: This project thrives from differentiation from competing apps. Suggest an idea for RiseMP.
+title: 'Feature: '
 body:
+
+  # Tip to warn of checking for existing issues
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        > Have you checked for similar feature requests? There's a possibility your suggestion is already being tracked. Please do a thorough search before creating a new issue.
+
+  # Description
   - type: textarea
     attributes:
-      label: What's the Problem?
-      description: If your feature request is related to a problem, describe it clearly.
-  - type: textarea
-    attributes:
-      label: Solution/Idea
-      description: Describe your solution/idea.
+      label: What feature or improvement do you think would benefit RiseMP?
+      description: Please include your use case
     validations:
       required: true
+
+  # Tooltip about Requirements
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        Please include a list changes required to make this improvement. A good rule of thumb is to start your proposal with no more than 7 high-level requirements.
+
+  # Requirements
   - type: textarea
     attributes:
-      label: Alternatives
-      description: Describe alternatives you've considered
+      label: Requirements
+      description: Describe all the requirements to make your idea happen.
+      value: |
+        - This proposal will accomplish X
+        - This proposal will accomplish Y
+        - This proposal will accomplish Z
     validations:
       required: true
+
+  # RiseMP Version
   - type: input
-    id: risemp-version
+    id: rise_version
     attributes:
-      label: Rise Media Player Version
-      description: Which version of Rise Media Player are you using? The version number can be found by going to Rise Media Player' Settings > About > Version
-      placeholder: e.g. Pre-Alpha 4 - v0.0.14.0
+      label: RiseMP Version
+      description: Which version of RiseMP are you using? To copy your app version, access it from Settings -> About -> Version.
+      placeholder: "e.g. 0.14.0-alpha3"
+    validations:
+      required: true
+
+  # Windows Version
   - type: input
+    id: windows_version
     attributes:
       label: Windows Version
       description: Which version of Windows are you using? Press <kbd>Win</kbd> + <kbd>Pause/Break</kbd> and copy.
-      placeholder: e.g. Windows 11 21H2 22000.194
+      placeholder: "e.g. 10.0.22621.1848"
+    validations:
+      required: true
+
+  # Additional Comments
   - type: textarea
     attributes:
       label: Comments
-      description: Additional information, comments, screenshots or videos about the feature request.
+      description: Additional information, comments or screenshots about the feature request.
