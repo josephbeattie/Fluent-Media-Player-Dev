@@ -522,405 +522,405 @@ Rise Software - Discy și YourOrdinaryCat</value>
     <value>Lungime</value>
   </data>
   <data name="MessagesAndReports" xml:space="preserve">
-    <value>Messages &amp; reports</value>
+    <value>Mesaje și rapoarte</value>
   </data>
   <data name="MoreSettings" xml:space="preserve">
-    <value>More settings</value>
+    <value>Mai multe setări</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Move down</value>
+    <value>Mută jos</value>
   </data>
   <data name="MoveToBottom" xml:space="preserve">
-    <value>Move to bottom</value>
+    <value>Mutare până jos</value>
   </data>
   <data name="MoveToTop" xml:space="preserve">
-    <value>Move to top</value>
+    <value>Mutare pâna sus</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Move up</value>
+    <value>Mută în sus</value>
   </data>
   <data name="NewPlaylist" xml:space="preserve">
-    <value>New playlist</value>
+    <value>Playlist nou</value>
   </data>
   <data name="PlayAll" xml:space="preserve">
-    <value>Play all</value>
+    <value>Redați tot</value>
   </data>
   <data name="PlayFromUrl" xml:space="preserve">
-    <value>Play from URL</value>
+    <value>Redă de la URL</value>
   </data>
   <data name="QuickH" xml:space="preserve">
-    <value>Quick links</value>
+    <value>Linkuri rapide</value>
   </data>
   <data name="RemoveFromPlaylist" xml:space="preserve">
-    <value>Remove from playlist</value>
+    <value>Elimină din playlist</value>
   </data>
   <data name="RemovePlaylist" xml:space="preserve">
-    <value>Remove playlist</value>
+    <value>Elimină playlist</value>
   </data>
   <data name="RemoveSection" xml:space="preserve">
-    <value>Remove whole section</value>
+    <value>Elimină întreaga secţiune</value>
   </data>
   <data name="RemoveThing" xml:space="preserve">
-    <value>Remove...</value>
+    <value>Elimină...</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Scan for new media</value>
+    <value>Scanează pentru media nou</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Partajează</value>
   </data>
   <data name="ShowAlbum" xml:space="preserve">
-    <value>Show album</value>
+    <value>Arată albumul</value>
   </data>
   <data name="ShowArtist" xml:space="preserve">
-    <value>Show artist</value>
+    <value>Arată artistul</value>
   </data>
   <data name="ShowInFileExplorer" xml:space="preserve">
-    <value>Show in File Explorer</value>
+    <value>Afișați în Explorer</value>
   </data>
   <data name="Shuffle" xml:space="preserve">
-    <value>Shuffle</value>
+    <value>Amestecă</value>
   </data>
   <data name="ShuffleAlbum" xml:space="preserve">
-    <value>Shuffle album</value>
+    <value>Amestecă album</value>
   </data>
   <data name="ShuffleArtist" xml:space="preserve">
-    <value>Shuffle artist</value>
+    <value>Amestecă artist</value>
   </data>
   <data name="Sort" xml:space="preserve">
-    <value>Sort</value>
+    <value>Sortare</value>
   </data>
   <data name="SupportDevDesc" xml:space="preserve">
-    <value>Become a patron and enjoy exclusive benefits and merch, while helping this project move forward.</value>
+    <value>Deveniți un patreon și bucurați-vă de beneficii și merch-uri exclusive, ajutând în același timp acest proiect să progreseze.</value>
   </data>
   <data name="SupportDevTitle" xml:space="preserve">
-    <value>Support development</value>
+    <value>Sprijină dezvoltarea</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Titlu</value>
   </data>
   <data name="Track" xml:space="preserve">
-    <value>Track</value>
+    <value>Piesa</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>View</value>
+    <value>Vizualizează</value>
   </data>
   <data name="WhatsNewDesc" xml:space="preserve">
-    <value>Check out the new features in Rise Media Player.</value>
+    <value>Vezi noile caracteristici din Rise Media Player.</value>
   </data>
   <data name="WhatsNewTitle" xml:space="preserve">
-    <value>What's New</value>
+    <value>Ce este nou</value>
   </data>
   <data name="ReleaseYearN" xml:space="preserve">
-    <value>Release year: {0}</value>
+    <value>Anul lansării: {0}</value>
   </data>
   <data name="Unknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>Necunoscut</value>
   </data>
   <data name="EnterMiniView" xml:space="preserve">
-    <value>Enter mini view</value>
+    <value>Intrați în vizualizarea mini</value>
   </data>
   <data name="MoreOptions" xml:space="preserve">
-    <value>More options</value>
+    <value>Mai multe opțiuni</value>
   </data>
   <data name="NowPlaying" xml:space="preserve">
-    <value>Now playing</value>
+    <value>Se redă</value>
   </data>
   <data name="PlaybackSpeed" xml:space="preserve">
-    <value>Playback speed</value>
+    <value>Viteza de redare</value>
   </data>
   <data name="AlbumArt" xml:space="preserve">
-    <value>Album art</value>
+    <value>Coperta de album</value>
   </data>
   <data name="AlbumTitle" xml:space="preserve">
-    <value>Album title</value>
+    <value>Titlu album</value>
   </data>
   <data name="CardBackground" xml:space="preserve">
-    <value>Card background</value>
+    <value>Fundal card</value>
   </data>
   <data name="Collapse" xml:space="preserve">
-    <value>Collapse</value>
+    <value>Restrânge</value>
   </data>
   <data name="ConfirmRemovalSong" xml:space="preserve">
-    <value>Are you sure that you want to remove the song "{0}"?</value>
+    <value>Sunteți sigur că doriți să înlăturați piesa "{0}"?</value>
   </data>
   <data name="CrashDetails" xml:space="preserve">
-    <value>RiseMP has crashed. Here's some details.</value>
+    <value>RiseMP a dat crash. Iată câteva detalii.</value>
   </data>
   <data name="CrashStackTrace" xml:space="preserve">
-    <value>Unfortunately, Rise Media Player crashed. Click to view stack trace.</value>
+    <value>Din păcate, Rise Media Player a dat crash. Faceți clic pentru a vedea șirul de stive.</value>
   </data>
   <data name="DeleteAnyway" xml:space="preserve">
-    <value>Delete anyway</value>
+    <value>Șterge oricum</value>
   </data>
   <data name="DeleteSong" xml:space="preserve">
-    <value>Delete song</value>
+    <value>Șterge Piesa</value>
   </data>
   <data name="Discography" xml:space="preserve">
-    <value>Discography</value>
+    <value>Discografie</value>
   </data>
   <data name="Duration" xml:space="preserve">
-    <value>Duration</value>
+    <value>Durată</value>
   </data>
   <data name="ErrorOcurred" xml:space="preserve">
-    <value>An error occurred!</value>
+    <value>A apărut o eroare!</value>
   </data>
   <data name="Expand" xml:space="preserve">
-    <value>Expand</value>
+    <value>Extinde</value>
   </data>
   <data name="Export" xml:space="preserve">
-    <value>Export</value>
+    <value>Exportă</value>
   </data>
   <data name="Import" xml:space="preserve">
-    <value>Import</value>
+    <value>Importă</value>
   </data>
   <data name="MusicVideos" xml:space="preserve">
-    <value>Music videos</value>
+    <value>Videoclipuri de muzică</value>
   </data>
   <data name="NListeners" xml:space="preserve">
-    <value>{0} listeners</value>
+    <value>{0} ascultători</value>
   </data>
   <data name="NoArtistInfo" xml:space="preserve">
-    <value>No artist info.</value>
+    <value>Nicio informație despre artist.</value>
   </data>
   <data name="NoLyricsFound" xml:space="preserve">
-    <value>No lyrics found</value>
+    <value>Nu s-au găsit versuri</value>
   </data>
   <data name="PlayMedia" xml:space="preserve">
-    <value>Play media</value>
+    <value>Redă media</value>
   </data>
   <data name="PoweredBy" xml:space="preserve">
-    <value>Powered by {0}</value>
+    <value>Oferit de {0}</value>
   </data>
   <data name="RanIntoProblem" xml:space="preserve">
-    <value>We've ran into a problem. Sorry about that.</value>
+    <value>Am întâmpinat o problemă. Ne pare rău pentru asta.</value>
   </data>
   <data name="ReadLess" xml:space="preserve">
-    <value>Read less</value>
+    <value>Citește mai puțin</value>
   </data>
   <data name="ReadMore" xml:space="preserve">
-    <value>Read more</value>
+    <value>Citește mai mult</value>
   </data>
   <data name="Rename" xml:space="preserve">
-    <value>Rename</value>
+    <value>Redenumiţi</value>
   </data>
   <data name="RoundedAlbumArt" xml:space="preserve">
-    <value>Rounded album art</value>
+    <value>Comută coperta albumului</value>
   </data>
   <data name="Show" xml:space="preserve">
-    <value>Show</value>
+    <value>Afişează</value>
   </data>
   <data name="TilesHorizontal" xml:space="preserve">
-    <value>Tiles (horizontal)</value>
+    <value>Dale (orizontale)</value>
   </data>
   <data name="TilesVertical" xml:space="preserve">
-    <value>Tiles (vertical)</value>
+    <value>Dale (verticale)</value>
   </data>
   <data name="TopTracks" xml:space="preserve">
-    <value>Top tracks</value>
+    <value>Piese de top</value>
   </data>
   <data name="TopTracksDesc" xml:space="preserve">
-    <value>Show the trending and most popular tracks from your artist from across the world.</value>
+    <value>Arătați cele mai populare și melodii de trend ale artistului vostru din întreaga lume.</value>
   </data>
   <data name="AddWidgets" xml:space="preserve">
-    <value>Add widgets</value>
+    <value>Adăugați widget-uri</value>
   </data>
   <data name="ForX" xml:space="preserve">
-    <value>for {0}</value>
+    <value>pentru {0}</value>
   </data>
   <data name="HomeAddSomeWidgets" xml:space="preserve">
-    <value>That's pretty sad, so add some widgets!</value>
+    <value>Este destul de trist, așa că adăugați câteva widget-uri!</value>
   </data>
   <data name="HomeNothingToShow" xml:space="preserve">
-    <value>We have nothing to show here.</value>
+    <value>Nu avem nimic de arătat aici.</value>
   </data>
   <data name="HomeThingsYouLove" xml:space="preserve">
-    <value>Personalise your at a glance page with the things you love.</value>
+    <value>Personalizează-ți pagina dintr-o privire cu lucrurile pe care le iubești.</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>Imagine</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
-    <value>Search results</value>
+    <value>Rezultatele căutării</value>
   </data>
   <data name="XofY" xml:space="preserve">
-    <value>{0} of {1}</value>
+    <value>{0} din {1}</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Creează</value>
   </data>
   <data name="CreatePlaylist" xml:space="preserve">
-    <value>Create playlist</value>
+    <value>Creează playlist</value>
   </data>
   <data name="PlaylistAlreadyExists" xml:space="preserve">
-    <value>The playlist with the specified name already exists.</value>
+    <value>Playlist-ul cu numele specificat există deja.</value>
   </data>
   <data name="TitleNotEmpty" xml:space="preserve">
-    <value>Title must not be empty.</value>
+    <value>Titlul nu poate fi gol.</value>
   </data>
   <data name="UseCustomImage" xml:space="preserve">
-    <value>Use custom image</value>
+    <value>Utilizează imagine personalizată</value>
   </data>
   <data name="MediaOnlineDesc" xml:space="preserve">
-    <value>This song is on the internet, meaning it is stored on the cloud or online. Properties changed here will get applied to the file if it's stored on a cloud service like OneDrive.</value>
+    <value>Această melodie este pe internet, ceea ce înseamnă că este stocată în cloud sau online. Proprietățile schimbate aici vor fi aplicate fișierului dacă este stocat pe un serviciu cloud ca OneDrive.</value>
   </data>
   <data name="MediaOnlineTitle" xml:space="preserve">
-    <value>This song is stored on the internet.</value>
+    <value>Această melodie este stocată pe internet.</value>
   </data>
   <data name="EditThumbnail" xml:space="preserve">
-    <value>Edit thumbnail</value>
+    <value>Editează miniatura</value>
   </data>
   <data name="ExportThumbnail" xml:space="preserve">
-    <value>Export thumbnail</value>
+    <value>Exportează miniatura</value>
   </data>
   <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+    <value>Răsfoiește</value>
   </data>
   <data name="Dismiss" xml:space="preserve">
-    <value>Dismiss</value>
+    <value>Renunță</value>
   </data>
   <data name="FetchingArtistInfo" xml:space="preserve">
-    <value>Fetching artist info...</value>
+    <value>Preluare informații artist...</value>
   </data>
   <data name="GoToAlbum" xml:space="preserve">
-    <value>Go to album</value>
+    <value>Mergi la album</value>
   </data>
   <data name="GoToArtist" xml:space="preserve">
-    <value>Go to artist</value>
+    <value>Mergi la Artist</value>
   </data>
   <data name="IndexingComplete" xml:space="preserve">
-    <value>Indexing complete!</value>
+    <value>Indexare completă!</value>
   </data>
   <data name="NotEnoughQ" xml:space="preserve">
-    <value>Not enough?</value>
+    <value>Nu este suficient?</value>
   </data>
   <data name="OpenInBrowser" xml:space="preserve">
-    <value>Open in browser</value>
+    <value>Deschide în browser</value>
   </data>
   <data name="ScanningSettings" xml:space="preserve">
-    <value>Scanning settings</value>
+    <value>Setări scanare</value>
   </data>
   <data name="SupportProject" xml:space="preserve">
-    <value>Support this project</value>
+    <value>Ajută acest proiect</value>
   </data>
   <data name="SyncAll" xml:space="preserve">
-    <value>Sync all</value>
+    <value>Sincronizează tot</value>
   </data>
   <data name="SyncCenter" xml:space="preserve">
-    <value>Sync centre</value>
+    <value>Centru de sincronizare</value>
   </data>
   <data name="MoreAlbumsByArtist" xml:space="preserve">
-    <value>More albums by this artist</value>
+    <value>Mai multe albume ale acestui artist</value>
   </data>
   <data name="Bloom" xml:space="preserve">
     <value>Bloom</value>
   </data>
   <data name="MaybeLater" xml:space="preserve">
-    <value>Maybe later</value>
+    <value>Poate mai târziu</value>
   </data>
   <data name="None" xml:space="preserve">
-    <value>None</value>
+    <value>Niciunul</value>
   </data>
   <data name="PageComingSoon" xml:space="preserve">
-    <value>This page is coming soon.</value>
+    <value>Această pagină va fi disponibilă în curând.</value>
   </data>
   <data name="RestartChangesEffect" xml:space="preserve">
-    <value>You'll need to restart the app for your changes to take effect.</value>
+    <value>Va trebui să reporniţi aplicaţia pentru ca acest lucru să aibă efect</value>
   </data>
   <data name="RestartNow" xml:space="preserve">
-    <value>Restart now</value>
+    <value>Reporniţi acum</value>
   </data>
   <data name="Appearance" xml:space="preserve">
-    <value>Appearance</value>
+    <value>Aspect</value>
   </data>
   <data name="Center" xml:space="preserve">
-    <value>Centre</value>
+    <value>Centru</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Header</value>
   </data>
   <data name="Icons" xml:space="preserve">
-    <value>Icons</value>
+    <value>Iconițe</value>
   </data>
   <data name="ManageComponents" xml:space="preserve">
-    <value>Manage components</value>
+    <value>Gestionează componente</value>
   </data>
   <data name="MediaLibrary" xml:space="preserve">
-    <value>Media library</value>
+    <value>Librărie media</value>
   </data>
   <data name="Navigation" xml:space="preserve">
-    <value>Navigation</value>
+    <value>Navigație</value>
   </data>
   <data name="NoPageSelected" xml:space="preserve">
-    <value>No page selected</value>
+    <value>Nicio pagină selectată</value>
   </data>
   <data name="PlaybackAndSound" xml:space="preserve">
-    <value>Playback &amp; sound</value>
+    <value>Redare și sunet</value>
   </data>
   <data name="Right" xml:space="preserve">
-    <value>Right</value>
+    <value>Dreapta</value>
   </data>
   <data name="ShowAll" xml:space="preserve">
-    <value>Show all</value>
+    <value>Arată tot</value>
   </data>
   <data name="Syncing" xml:space="preserve">
-    <value>Syncing</value>
+    <value>Se sincronizează</value>
   </data>
   <data name="SystemBehaviors" xml:space="preserve">
-    <value>System behaviours</value>
+    <value>Comportamentul sistemului</value>
   </data>
   <data name="WallpapersAndExtras" xml:space="preserve">
-    <value>Wallpapers &amp; extras</value>
+    <value>Fundale și extra</value>
   </data>
   <data name="OnlineServices" xml:space="preserve">
-    <value>Online services</value>
+    <value>Servicii online</value>
   </data>
   <data name="Scanning" xml:space="preserve">
-    <value>Scanning</value>
+    <value>Se scanează</value>
   </data>
   <data name="MediaLocalExpanderTitle" xml:space="preserve">
-    <value>This song is stored as a file on your device.</value>
+    <value>Această melodie este stocată ca un fișier pe dispozitivul tău.</value>
   </data>
   <data name="MediaOnlineExpanderTitle" xml:space="preserve">
-    <value>This song is stored on the internet.</value>
+    <value>Această melodie este stocată pe internet.</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="DirectLinkExamplesM" xml:space="preserve">
-    <value>Examples of direct links include:
+    <value>Exemple de link-uri directe includ:
 
 https://www.example.com/song.mp3
 https://www.example.com/song_playlist.m3u
-https://www.youtube.com/watch?v=dQw4w9Wg</value>
+https://www.youtube.com/watch?v=dQw4w9wg</value>
   </data>
   <data name="DirectLinkExamplesV" xml:space="preserve">
-    <value>Examples of direct links include:
+    <value>Exemple de link-uri directe includ:
 
 https://www.example.com/video.mp4
 https://youtu.be/JEGjlELJxC8
 https://www.youtube.com/watch?v=p7YXXieghto</value>
   </data>
   <data name="InvalidUrl" xml:space="preserve">
-    <value>Invalid URL</value>
+    <value>Link invalid</value>
   </data>
   <data name="Url" xml:space="preserve">
     <value>URL</value>
   </data>
   <data name="UntitledPlaylist" xml:space="preserve">
-    <value>Untitled Playlist</value>
+    <value>Playlist fără titlu</value>
   </data>
   <data name="EQPAir" xml:space="preserve">
-    <value>Air</value>
+    <value>Aer</value>
   </data>
   <data name="EQPBass" xml:space="preserve">
-    <value>Bass</value>
+    <value>Bas</value>
   </data>
   <data name="EQPCustom" xml:space="preserve">
-    <value>Custom</value>
+    <value>Personalizat</value>
   </data>
   <data name="EQPFlat" xml:space="preserve">
-    <value>Flat</value>
+    <value>Plat</value>
   </data>
   <data name="EQPPop" xml:space="preserve">
     <value>Pop</value>
@@ -932,24 +932,34 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
     <value>Vocal</value>
   </data>
   <data name="GotIt" xml:space="preserve">
-    <value>Got it</value>
+    <value>Am înțeles</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
-    <value>Learn more</value>
+    <value>Află mai multe</value>
   </data>
   <data name="FromFile" xml:space="preserve">
-    <value>From file</value>
+    <value>Din fișier</value>
   </data>
   <data name="FromFolder" xml:space="preserve">
-    <value>From folder</value>
+    <value>Din folder</value>
+  </data>
+  <data name="CastToDevice" xml:space="preserve">
+    <value>Distribuie pe dispozitiv</value>
+  </data>
+  <data name="FullScreen" xml:space="preserve">
+    <value>Ecran complet</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Avertizare</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Salvează</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
-    <value>Save changes</value>
+    <value>Salvare schimbări</value>
+  </data>
+  <data name="AspectRatio" xml:space="preserve">
+    <value>Format imagine</value>
+    <comment>Aspect Ratio option in the now playing bar.</comment>
   </data>
 </root>

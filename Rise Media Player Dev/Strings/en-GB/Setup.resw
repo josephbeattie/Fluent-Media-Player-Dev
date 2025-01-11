@@ -142,13 +142,13 @@
     <value>Start setup</value>
   </data>
   <data name="TermsH" xml:space="preserve">
-    <value>License Agreement &amp; Terms</value>
+    <value>Licence Agreement &amp; Terms</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome to</value>
   </data>
   <data name="TermsLastUpdated" xml:space="preserve">
-    <value>Last Updated December 2021 - GPL License 3.0</value>
+    <value>Last Updated December 2021 - GPL Licence 3.0</value>
   </data>
   <data name="TermsLocalH" xml:space="preserve">
     <value>Local Media Handling</value>

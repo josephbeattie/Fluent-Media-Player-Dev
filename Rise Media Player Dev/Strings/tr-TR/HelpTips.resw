@@ -162,10 +162,10 @@ Early Access Insider'lar (önceden Seeding Insider'lar) uygulamaya daha erken er
     <value>Beta</value>
   </data>
   <data name="DiscyAboutTipDesc" xml:space="preserve">
-    <value>You can find me by right clicking on different things. For example, an album. I'll tell you what you can do :). I'm still pretty new, so I won't be everywhere, but I'm growing every day!</value>
+    <value>Beni farklı şeylerin üzerine sağ tıklayarak bulabilirsiniz. Örneğin, bir albüm. Size ne yapabileceğinizi söyleyeceğim :). Hala çok yeniyim, bu yüzden her yerde olamayacağım, ama her gün büyüyorum!</value>
   </data>
   <data name="DiscyAboutTipTitle" xml:space="preserve">
-    <value>Hey! I'm Discy.</value>
+    <value>Merhaba! Ben Disky.</value>
   </data>
   <data name="DiscyOnAlbumDesc" xml:space="preserve">
     <value>Use the command bar to sort your albums into different types. Click on an album to see what's in store. You can add a whole album to a playlist, shuffle or share with friends.</value>
@@ -257,7 +257,7 @@ Diğer sürümler açısından, size hepsini vermek için kesin bir tarih veremi
 • Beta - Nisan -TBD (Bu sürüm Microsoft Store'dan tüm genel kullanıcılara sunulacaktır. Özellikleri kaçıracak olsanız da Insider programının bir parçası olmanız gerekmeyecek)</value>
   </data>
   <data name="SortingManagingLibraryTitle" xml:space="preserve">
-    <value>Sorting and managing your library</value>
+    <value>Kitaplığınızı sıralama ve yönetme</value>
   </data>
   <data name="WhatDiscy.Description" xml:space="preserve">
     <value>Görmek zorundasın ;)</value>

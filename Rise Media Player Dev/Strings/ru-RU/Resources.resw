@@ -175,13 +175,13 @@
     <value>Музыка</value>
   </data>
   <data name="NDays" xml:space="preserve">
-    <value>{0} days</value>
+    <value>{0} дней</value>
   </data>
   <data name="NHours" xml:space="preserve">
-    <value>{0} hours</value>
+    <value>{0} часов</value>
   </data>
   <data name="NMinutes" xml:space="preserve">
-    <value>{0} minutes</value>
+    <value>{0} минут</value>
   </data>
   <data name="NoCrossfade" xml:space="preserve">
     <value>Без плавного переключения</value>
@@ -193,16 +193,16 @@
     <value>{0} секунд</value>
   </data>
   <data name="OneDay" xml:space="preserve">
-    <value>1 day</value>
+    <value>1 день</value>
   </data>
   <data name="OneHour" xml:space="preserve">
-    <value>1 hour</value>
+    <value>1 час</value>
   </data>
   <data name="OneMinute" xml:space="preserve">
-    <value>1 minute</value>
+    <value>1 минута</value>
   </data>
   <data name="OneSecond" xml:space="preserve">
-    <value>1 second</value>
+    <value>1 сек.</value>
   </data>
   <data name="OnlyLocal" xml:space="preserve">
     <value>Использовать только локальные медиафайлы</value>
@@ -229,7 +229,7 @@
     <value>Масштабировать до размера окна</value>
   </data>
   <data name="PinToSidebar" xml:space="preserve">
-    <value>Pin to sidebar</value>
+    <value>Закрепить в боковой панели</value>
   </data>
   <data name="RemoveFromSidebar" xml:space="preserve">
     <value>Удалить из боковой панели</value>
@@ -268,28 +268,28 @@
     <value>Обои</value>
   </data>
   <data name="NAlbums" xml:space="preserve">
-    <value>{0} albums</value>
+    <value>{0} альбомов</value>
   </data>
   <data name="NSongs" xml:space="preserve">
-    <value>{0} songs</value>
+    <value>{0} песен</value>
   </data>
   <data name="NVideos" xml:space="preserve">
-    <value>{0} videos</value>
+    <value>{0} видео</value>
   </data>
   <data name="OneAlbum" xml:space="preserve">
-    <value>1 album</value>
+    <value>1 альбом</value>
   </data>
   <data name="OneSong" xml:space="preserve">
-    <value>1 song</value>
+    <value>1 песня</value>
   </data>
   <data name="OneVideo" xml:space="preserve">
-    <value>1 video</value>
+    <value>1 видео</value>
   </data>
   <data name="ComingSoon" xml:space="preserve">
     <value>Скоро</value>
   </data>
   <data name="AlbumInfo" xml:space="preserve">
-    <value>Album info</value>
+    <value>Информация об альбоме</value>
   </data>
   <data name="Play" xml:space="preserve">
     <value>Воспроизвести</value>
@@ -355,112 +355,112 @@
     <value>Местонахождение открытого файла</value>
   </data>
   <data name="WidgetArtistNewsFeedTitle" xml:space="preserve">
-    <value>Artist news feed</value>
+    <value>Новости исполнителя</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отмена</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Details</value>
+    <value>Подробно</value>
   </data>
   <data name="File" xml:space="preserve">
-    <value>File</value>
+    <value>Файл</value>
   </data>
   <data name="Lyrics" xml:space="preserve">
-    <value>Lyrics</value>
+    <value>Текст песни</value>
   </data>
   <data name="PropsErrorContent" xml:space="preserve">
-    <value>We couldn't save the song properties. The file might have been moved, changed or deleted, or maybe this is just a Windows issue.</value>
+    <value>Мы не смогли сохранить свойства песни. Возможно, файл был перемещен, изменен или удален, или возможно это проблема Windows.</value>
   </data>
   <data name="PropsErrorTitle" xml:space="preserve">
-    <value>Something went wrong</value>
+    <value>Что-то пошло не так</value>
   </data>
   <data name="PropsSave" xml:space="preserve">
-    <value>Save changes</value>
+    <value>Сохранить изменения</value>
   </data>
   <data name="ShufflePlaylist" xml:space="preserve">
-    <value>Shuffle playlist</value>
+    <value>Перемешать плейлист</value>
   </data>
   <data name="Contribute" xml:space="preserve">
-    <value>Contribute</value>
+    <value>Помочь проекту</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version</value>
+    <value>Версия</value>
   </data>
   <data name="VersionTemplate" xml:space="preserve">
     <value>{0}
-Internal Version: {1}
+Внутренняя версия: {1}
 
 Rise Software - Discy &amp; YourOrdinaryCat</value>
   </data>
   <data name="TermsAndConditions" xml:space="preserve">
-    <value>Terms &amp; Conditions</value>
+    <value>Условия и Соглашения</value>
   </data>
   <data name="Of" xml:space="preserve">
-    <value>of</value>
+    <value>из</value>
   </data>
   <data name="Learn" xml:space="preserve">
-    <value>Learn more</value>
+    <value>Подробнее</value>
   </data>
   <data name="Album" xml:space="preserve">
-    <value>Album</value>
+    <value>Альбом</value>
   </data>
   <data name="AlbumArtist" xml:space="preserve">
-    <value>Album artist</value>
+    <value>Исполнитель альбома</value>
   </data>
   <data name="ArtistOrArtists" xml:space="preserve">
-    <value>Artist(s)</value>
+    <value>Исполнители</value>
   </data>
   <data name="BecomeTranslator" xml:space="preserve">
-    <value>Become a translator </value>
+    <value>Стать переводчиком </value>
   </data>
   <data name="Bitrate" xml:space="preserve">
-    <value>Bitrate</value>
+    <value>Частота:</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Description</value>
+    <value>Описание</value>
   </data>
   <data name="Disc" xml:space="preserve">
-    <value>Disc</value>
+    <value>Диск</value>
   </data>
   <data name="EditAlbum" xml:space="preserve">
-    <value>Edit album art</value>
+    <value>Изменить обложку альбома</value>
   </data>
   <data name="ExportAlbumArt" xml:space="preserve">
-    <value>Export album art</value>
+    <value>Экспорт обложки альбома</value>
   </data>
   <data name="ExportPlaylistIcon" xml:space="preserve">
-    <value>Export playlist icon</value>
+    <value>Экспорт значка плейлиста</value>
   </data>
   <data name="Genre" xml:space="preserve">
-    <value>Genre</value>
+    <value>Жанр</value>
   </data>
   <data name="MediaLocalDesc" xml:space="preserve">
-    <value>This song is local, meaning it is stored directly on to your device's storage, rather than the cloud or online. Changing properties here will change them for the file itself, meaning it will affect other media players.</value>
+    <value>Эта песня является локальной, то есть она хранится непосредственно в хранилище вашего устройства, а не в облаке или в Интернете. Изменение свойств здесь изменит их для самого файла, то есть повлияет на другие медиаплееры.</value>
   </data>
   <data name="MediaLocalTitle" xml:space="preserve">
-    <value>Local Music</value>
+    <value>Локальная музыка</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Options</value>
+    <value>Параметры</value>
   </data>
   <data name="PlaylistSongsDetailsTipTitle" xml:space="preserve">
-    <value>Move songs by clicking the up and down buttons.</value>
+    <value>Перемещайте песни, нажимая кнопки вверх и вниз.</value>
   </data>
   <data name="PlaylistTitle" xml:space="preserve">
-    <value>Playlist name</value>
+    <value>Название плейлиста</value>
   </data>
   <data name="PlaylistVideosDetailsTipTitle" xml:space="preserve">
-    <value>Move videos by clicking the up and down buttons.</value>
+    <value>Перемещайте песни, нажимая кнопки вверх и вниз.</value>
   </data>
   <data name="Rating" xml:space="preserve">
-    <value>Rating</value>
+    <value>Рейтинг</value>
   </data>
   <data name="ReleaseYear" xml:space="preserve">
-    <value>Release year</value>
+    <value>Год релиза</value>
   </data>
   <data name="ReportAnIssue" xml:space="preserve">
-    <value>Report an issue</value>
+    <value>Сообщить о проблеме</value>
   </data>
   <data name="SongTitle" xml:space="preserve">
     <value>Song title</value>
@@ -613,7 +613,7 @@ Rise Software - Discy &amp; YourOrdinaryCat</value>
     <value>Release year: {0}</value>
   </data>
   <data name="Unknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>Неизвестно</value>
   </data>
   <data name="EnterMiniView" xml:space="preserve">
     <value>Enter mini view</value>
@@ -941,6 +941,12 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
   <data name="FromFolder" xml:space="preserve">
     <value>From folder</value>
   </data>
+  <data name="CastToDevice" xml:space="preserve">
+    <value>Cast to device</value>
+  </data>
+  <data name="FullScreen" xml:space="preserve">
+    <value>Full screen</value>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
@@ -949,5 +955,9 @@ https://www.youtube.com/watch?v=p7YXXieghto</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save changes</value>
+  </data>
+  <data name="AspectRatio" xml:space="preserve">
+    <value>Aspect Ratio</value>
+    <comment>Aspect Ratio option in the now playing bar.</comment>
   </data>
 </root>

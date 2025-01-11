@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddPersonalMusicAndVideosTitle" xml:space="preserve">
-    <value>Adding your personal music and videos</value>
+    <value>Hinzufügen Ihrer persönlichen Musik und Videos</value>
   </data>
   <data name="Alpha.Text" xml:space="preserve">
-    <value>• These versions will be pushed from the Microsoft Store
+    <value>• Diese Versionen werden im Microsoft Store veröffentlicht
 • Playlists
-• Devices support
-• Disc Burning
-• Multi-language support for 12 languages at start (not complete)
-• Some online services in background - Discord Rich Presence &amp; Last.fm Scrobbling
-• Views and sorting for music added
-• Video indexing and playback
-• Improved Now Playing experience and queue
-• Overhauled Settings UI brought to all builds
-• Local recommendations and recently played
-• Discy in the majority of the app</value>
+• Geräteunterstützung
+• Discs brennen
+• Mehrsprachige Unterstützung für 12 Sprachen beim Start (nicht vollständig)
+• Einige Online-Dienste im Hintergrund - Discord Rich Presence &amp; Last.fm Scrobbling
+• Anzeigen und Sortierung für Musik hinzugefügt
+• Video-Indizierung und Wiedergabe
+• Verbessertes Spielererlebnis und Warteschlange verbessert
+• Überarbeitetes Einstellungen-UI zu allen Builds gebracht
+• Lokale Empfehlungen und Zuletzt gespielt
+• Discy im Haupteil der App</value>
   </data>
   <data name="AlphaH.Text" xml:space="preserve">
-    <value>Late Pre-Alpha - Alpha</value>
+    <value>Späte Pre-Alpha - Alpha</value>
   </data>
   <data name="Benefits.Text" xml:space="preserve">
     <value>First, the app early.
