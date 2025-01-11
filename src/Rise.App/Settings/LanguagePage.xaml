@@ -1,0 +1,123 @@
+﻿<Page
+    x:Class="Rise.App.Settings.LanguagePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:markup="using:Rise.Common.Extensions.Markup"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:uc="using:Rise.App.UserControls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    mc:Ignorable="d">
+
+    <ScrollViewer Padding="48,4,48,0" VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" Spacing="4">
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+
+            <uc:AdaptiveItemPane Margin="0,10,0,0">
+                <uc:AdaptiveItemPane.LeftPane>
+                    <StackPanel Orientation="Horizontal" Spacing="20">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon VerticalAlignment="Center" Glyph="&#xE128;" />
+
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                <TextBlock FontWeight="SemiBold" Text="{markup:ResourceHelper Name=SystemLanguage}" />
+                                <TextBlock
+                                    x:Name="SysLang"
+                                    FontSize="12"
+                                    Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Rectangle
+                            Width="1"
+                            Height="36"
+                            Fill="{ThemeResource AppBarSeparatorForegroundThemeBrush}" />
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon VerticalAlignment="Center" Glyph="&#xF2B7;" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontWeight="SemiBold"
+                                Text="{markup:ResourceHelper Name=Translations}" />
+                        </StackPanel>
+                    </StackPanel>
+                </uc:AdaptiveItemPane.LeftPane>
+
+                <uc:AdaptiveItemPane.RightPane>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Button Click="ReportButton_Click" Style="{StaticResource TransparentButtonStyle}">
+                            <StackPanel
+                                IsHitTestVisible="False"
+                                Orientation="Horizontal"
+                                Spacing="8">
+                                <FontIcon
+                                    VerticalAlignment="Center"
+                                    Foreground="{ThemeResource SystemAccentColor}"
+                                    Glyph="&#xE7BA;" />
+                                <TextBlock Foreground="{ThemeResource SystemControlHyperlinkTextBrush}" Text="{markup:ResourceHelper Name=ReportAnIssue}" />
+                            </StackPanel>
+                        </Button>
+
+
+                        <Button Click="TranslateButton_Click" Style="{StaticResource TransparentButtonStyle}">
+                            <StackPanel
+                                IsHitTestVisible="False"
+                                Orientation="Horizontal"
+                                Spacing="8">
+                                <FontIcon Foreground="{ThemeResource SystemControlHyperlinkTextBrush}" Glyph="&#xE144;" />
+                                <TextBlock Foreground="{ThemeResource SystemControlHyperlinkTextBrush}" Text="{markup:ResourceHelper Name=BecomeTranslator}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </uc:AdaptiveItemPane.RightPane>
+            </uc:AdaptiveItemPane>
+
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{markup:ResourceHelper Name=Options}" />
+            <muxc:InfoBar
+                Title="English is currently the only available language"
+                IsClosable="False"
+                IsOpen="True"
+                Message="Other languages and regions will be available soon."
+                Severity="Informational" />
+            <labs:SettingsCard
+                Header="{markup:ResourceHelper Name=MatchSystemAppLang}"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE923;}"
+                IsEnabled="False" />
+
+            <labs:SettingsCard
+                Description="{markup:ResourceHelper Name=/Settings/SelectLanguageDesc}"
+                Header="{markup:ResourceHelper Name=/Settings/SelectLanguage}"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE12B;}"
+                IsEnabled="False">
+                <ComboBox
+                    VerticalAlignment="Center"
+                    PlaceholderText="Use system language"
+                    SelectedIndex="{x:Bind ViewModel.Language, Mode=TwoWay}">
+                    <x:String>Use system setting</x:String>
+                    <x:String>中国人</x:String>
+                    <x:String>हिंदी</x:String>
+                    <x:String>한국인</x:String>
+                    <x:String>Ελληνικά</x:String>
+                    <x:String>Deutsch</x:String>
+                    <x:String>English</x:String>
+                    <x:String>English (United Kingdom)</x:String>
+                    <x:String>English (United States)</x:String>
+                    <x:String>Español</x:String>
+                    <x:String>Français</x:String>
+                    <x:String>Italiano</x:String>
+                    <x:String>Melayu</x:String>
+                    <x:String>Polskie</x:String>
+                    <x:String>Português (Brasil)</x:String>
+                    <x:String>Português (Portugal)</x:String>
+                    <x:String>Română</x:String>
+                </ComboBox>
+            </labs:SettingsCard>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,136 @@
+﻿<Page
+    x:Class="Rise.App.Views.DiscyPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:markup="using:Rise.Common.Extensions.Markup"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:uc="using:Rise.App.UserControls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    d:Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    d:Height="320"
+    d:Width="500"
+    mc:Ignorable="d">
+
+    <ScrollViewer
+        Padding="56,56,56,0"
+        d:Padding="12"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel
+            Padding="0,0,0,120"
+            d:Padding="0"
+            Orientation="Vertical"
+            Spacing="4">
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+
+            <TextBlock
+                x:Uid="/HelpTips/FAQH"
+                Margin="0,-10,0,0"
+                Style="{StaticResource SubheaderTextBlockStyle}" />
+
+            <labs:SettingsExpander Header="{markup:ResourceHelper Name=/HelpTips/AddPersonalMusicAndVideosTitle}" HeaderIcon="{ui:FontIcon Glyph=&#xEA69;}">
+                <labs:SettingsExpander.Items>
+                    <labs:SettingsCard>
+                        <labs:SettingsCard.Header>
+                            <RichTextBlock
+                                HorizontalAlignment="Stretch"
+                                IsTextSelectionEnabled="False"
+                                TextWrapping="Wrap">
+                                <Paragraph>
+                                    To add your personal music and videos, go to<Hyperlink Click="AppSettingsHyperlink_Click" UnderlineStyle="None">app settings</Hyperlink>
+                                    and go to the library page. Click on the button that corresponds to the type of media you want to add (music or videos). Then click ‘Add folder’ to select from your files. If you add a root folder, we’ll look in all of the folders within, so there’s no need to add many folders. We’ll automatically rescan your music and videos to match your new locations. You’re done!</Paragraph>
+                            </RichTextBlock>
+                        </labs:SettingsCard.Header>
+                    </labs:SettingsCard>
+                </labs:SettingsExpander.Items>
+            </labs:SettingsExpander>
+
+            <labs:SettingsExpander Header="{markup:ResourceHelper Name=/HelpTips/SortingManagingLibraryTitle}" HeaderIcon="{ui:FontIcon Glyph=&#xE174;}">
+                <labs:SettingsExpander.Items>
+                    <labs:SettingsCard>
+                        <labs:SettingsCard.Header>
+                            <RichTextBlock
+                                HorizontalAlignment="Stretch"
+                                IsTextSelectionEnabled="False"
+                                TextWrapping="Wrap">
+                                <Paragraph>
+                                    From several pages, you can sort through your music and videos. Choose the sort option from the command bar and select what seems most appropriate to you. You can sort in ascending and descending order too, so there’s something for everybody!
+                                </Paragraph>
+                                <Paragraph Margin="0,12,0,0">
+                                    You can also manage your library by editing properties of albums, songs or videos. To do this, right click one and choose ‘Properties and Info’. There you can edit titles, ratings, file names and more to simplify your library and fix metadata’s issues. Soon you’ll be able to change album art too!
+                                </Paragraph>
+                            </RichTextBlock>
+                        </labs:SettingsCard.Header>
+                    </labs:SettingsCard>
+                </labs:SettingsExpander.Items>
+            </labs:SettingsExpander>
+
+            <labs:SettingsExpander Header="{markup:ResourceHelper Name=/HelpTips/PlayingMediaNowPlayingTitle}" HeaderIcon="{ui:FontIcon Glyph=&#xE102;}">
+                <labs:SettingsExpander.Items>
+                    <labs:SettingsCard>
+                        <labs:SettingsCard.Header>
+                            <RichTextBlock
+                                HorizontalAlignment="Stretch"
+                                IsTextSelectionEnabled="False"
+                                TextWrapping="Wrap">
+                                <Paragraph>
+                                    It’s easy to play any media you wish. Just hover over any song, album, artist, playlist, genre or video and click the play button! It will appear in the now playing bar.
+                                </Paragraph>
+
+                                <Paragraph Margin="0,12,0,0">
+                                    The now playing bar gives you quick information about what’s, playing as well as simple playback controls and links to full screen mode and the now playing compact mode.
+                                </Paragraph>
+
+                                <Paragraph Margin="0,12,0,0">
+                                    Click the shrink icon to enter compact mode. This will show your album artwork and media controls when you hover. To leave this view at any time, just click the shrink button.
+                                </Paragraph>
+                            </RichTextBlock>
+                        </labs:SettingsCard.Header>
+                    </labs:SettingsCard>
+                </labs:SettingsExpander.Items>
+            </labs:SettingsExpander>
+
+            <StackPanel Margin="0,100,0,0" Orientation="Vertical">
+                <muxc:TeachingTip
+                    x:Name="DiscyAboutTip"
+                    Title="{markup:ResourceHelper Name=/HelpTips/DiscyAboutTipTitle}"
+                    ActionButtonContent="Learn more"
+                    IsLightDismissEnabled="True"
+                    PlacementMargin="20"
+                    PreferredPlacement="Top"
+                    Subtitle="{markup:ResourceHelper Name=/HelpTips/DiscyAboutTipDesc}"
+                    Target="{x:Bind Discy}" />
+                <Image
+                    x:Name="Discy"
+                    Height="80"
+                    Margin="-5,0,0,0"
+                    PointerPressed="Discy_PointerPressed"
+                    Source="ms-appx:///Assets/Discy.png" />
+
+                <TextBlock
+                    FontSize="32"
+                    Style="{StaticResource NavigationViewItemHeaderTextStyle}"
+                    Text="{markup:ResourceHelper Name=NotEnoughQ}"
+                    TextAlignment="Center" />
+
+                <RichTextBlock
+                    Margin="0,12,0,0"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    IsTextSelectionEnabled="False"
+                    TextAlignment="Center">
+                    <Paragraph>
+                        We’re adding extra help all of the time! You can always<Hyperlink NavigateUri="https://rise-media.netlify.app/help" UnderlineStyle="None">get more help online</Hyperlink>
+                        if you need more support, or click on Discy!</Paragraph>
+                </RichTextBlock>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

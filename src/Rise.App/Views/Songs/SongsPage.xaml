@@ -1,0 +1,325 @@
+﻿<uc:MediaPageBase
+    x:Class="Rise.App.Views.SongsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:app="using:Rise.App"
+    xmlns:atch="using:Rise.Common.Attached"
+    xmlns:behaviors="using:Rise.Common.Behaviors"
+    xmlns:collections="using:Rise.Data.Collections"
+    xmlns:conv="using:Rise.App.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:markup="using:Rise.Common.Extensions.Markup"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:uc="using:Rise.App.UserControls"
+    xmlns:viewmodels="using:Rise.App.ViewModels"
+    x:Name="PageRoot"
+    d:Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    d:DesignHeight="320"
+    d:DesignWidth="500"
+    mc:Ignorable="d">
+
+    <uc:MediaPageBase.Resources>
+        <conv:BooleanToVisibility x:Key="BoolToVis" />
+        <conv:NullToBoolean x:Key="NullToBool" />
+        <conv:IntToBoolean x:Key="IntToBool" />
+        <conv:EmptyStringFallback x:Key="EmptyStrFallback" />
+    </uc:MediaPageBase.Resources>
+
+    <Grid Padding="56,56,56,0" d:Padding="20,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <muxc:TeachingTip
+            x:Name="DiscyOnSong"
+            Title="{markup:ResourceHelper Name=/HelpTips/DiscyOnSongH}"
+            ActionButtonContent="{markup:ResourceHelper Name=LearnMore}"
+            CloseButtonContent="{markup:ResourceHelper Name=GotIt}"
+            IsLightDismissEnabled="True"
+            PlacementMargin="20"
+            PreferredPlacement="Auto"
+            Subtitle="{markup:ResourceHelper Name=/HelpTips/DiscyOnSongDesc}">
+            <muxc:TeachingTip.HeroContent>
+                <Image Source="/Assets/Branding/DiscyBanner.png" />
+            </muxc:TeachingTip.HeroContent>
+        </muxc:TeachingTip>
+
+        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{markup:ResourceHelper Name=Songs}" />
+        <CommandBar
+            Grid.Row="1"
+            Margin="-12,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            DefaultLabelPosition="Right">
+            <AppBarButton
+                Command="{x:Bind MediaViewModel.PlayFromItemCommand}"
+                CommandParameter="{x:Bind SelectedItem, Mode=OneWay}"
+                Icon="Play"
+                Style="{StaticResource AppBarButtonCompactStyle}"
+                ToolTipService.ToolTip="{markup:ResourceHelper Name=Play}" />
+
+            <AppBarSeparator />
+
+            <AppBarButton
+                Command="{x:Bind MediaViewModel.ShuffleFromItemCommand}"
+                CommandParameter="{x:Bind SelectedItem, Mode=OneWay}"
+                Icon="Shuffle"
+                Label="{markup:ResourceHelper Name=Shuffle}" />
+            <AppBarButton IsEnabled="{x:Bind SelectedItem, Converter={StaticResource NullToBool}, Mode=OneWay}" Label="{markup:ResourceHelper Name=AddTo}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xECC8;" />
+                </AppBarButton.Icon>
+
+                <AppBarButton.Flyout>
+                    <MenuFlyout x:Name="AddToBar">
+                        <MenuFlyoutItem Command="{x:Bind AddSelectedItemToQueueCommand}" Text="{markup:ResourceHelper Name=Queue}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon FontFamily="{StaticResource PlayerIconsFontFamily}" Glyph="&#xE93F;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+
+                        <MenuFlyoutItem Command="{x:Bind AddSelectedItemToPlaylistCommand}" Text="{markup:ResourceHelper Name=NewPlaylist}">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon FontFamily="{StaticResource PlayerIconsFontFamily}" Glyph="&#xE93F;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+
+            <AppBarSeparator />
+
+            <AppBarButton
+                Click="Remove_Click"
+                Icon="Delete"
+                IsEnabled="{x:Bind SelectedItem, Converter={StaticResource NullToBool}, Mode=OneWay}"
+                Label="{markup:ResourceHelper Name=RemoveThing}"
+                Style="{StaticResource AppBarButtonCompactStyle}" />
+            <AppBarButton
+                Command="{x:Bind EditItemCommand}"
+                CommandParameter="{x:Bind SelectedItem, Mode=OneWay}"
+                Icon="Edit"
+                IsEnabled="{x:Bind SelectedItem, Converter={StaticResource NullToBool}, Mode=OneWay}"
+                Style="{StaticResource AppBarButtonCompactStyle}"
+                ToolTipService.ToolTip="{markup:ResourceHelper Name=PropertiesInfo}" />
+
+            <AppBarSeparator />
+
+            <AppBarButton Click="PlayFromUrl_Click" Label="{markup:ResourceHelper Name=PlayFromUrl}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE704;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <AppBarSeparator />
+
+            <AppBarButton Label="{markup:ResourceHelper Name=View}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xECAA;" />
+                </AppBarButton.Icon>
+
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <ToggleMenuFlyoutItem IsChecked="{x:Bind SViewModel.ShowTrackNumberInSongs, Mode=TwoWay}" Text="{markup:ResourceHelper Name=TrackNumber}" />
+                        <ToggleMenuFlyoutItem IsChecked="{x:Bind SViewModel.ShowDurationInSongs, Mode=TwoWay}" Text="{markup:ResourceHelper Name=Duration}" />
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+
+            <AppBarButton Icon="Sort" Label="{markup:ResourceHelper Name=Sort}">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <muxc:RadioMenuFlyoutItem
+                            Command="{x:Bind MediaViewModel.GroupAlphabeticallyCommand}"
+                            CommandParameter="GSongTitle|SongTitle"
+                            Text="{markup:ResourceHelper Name=Title}" />
+                        <muxc:RadioMenuFlyoutItem
+                            Command="{x:Bind MediaViewModel.SortByCommand}"
+                            CommandParameter="GSongAlbum|SongDisc|SongTrack"
+                            Text="{markup:ResourceHelper Name=Album}" />
+                        <muxc:RadioMenuFlyoutItem
+                            Command="{x:Bind MediaViewModel.SortByCommand}"
+                            CommandParameter="GSongArtist"
+                            Text="{markup:ResourceHelper Name=ArtistOrArtists}" />
+                        <muxc:RadioMenuFlyoutItem
+                            Command="{x:Bind MediaViewModel.SortByCommand}"
+                            CommandParameter="GSongGenres"
+                            Text="{markup:ResourceHelper Name=Genre}" />
+                        <muxc:RadioMenuFlyoutItem
+                            Command="{x:Bind MediaViewModel.SortByCommand}"
+                            CommandParameter="GSongYear"
+                            Text="{markup:ResourceHelper Name=ReleaseYear}" />
+
+                        <MenuFlyoutSeparator />
+
+                        <muxc:RadioMenuFlyoutItem
+                            Command="{x:Bind MediaViewModel.UpdateSortDirectionCommand}"
+                            CommandParameter="{x:Bind collections:SortDirection.Ascending}"
+                            GroupName="SortDirection"
+                            Text="{markup:ResourceHelper Name=Ascending}" />
+                        <muxc:RadioMenuFlyoutItem
+                            Command="{x:Bind MediaViewModel.UpdateSortDirectionCommand}"
+                            CommandParameter="{x:Bind collections:SortDirection.Descending}"
+                            GroupName="SortDirection"
+                            Text="{markup:ResourceHelper Name=Descending}" />
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+
+            <AppBarSeparator />
+
+            <AppBarButton
+                Click="AddFolders_Click"
+                Icon="NewFolder"
+                Label="{markup:ResourceHelper Name=/Settings/AddFolders}" />
+        </CommandBar>
+
+        <SemanticZoom Grid.Row="2" Margin="-56,0">
+            <SemanticZoom.ZoomedInView>
+                <ListView
+                    x:Name="MainList"
+                    Padding="48,0,48,120"
+                    DoubleTapped="MainList_DoubleTapped"
+                    IsDoubleTapEnabled="True"
+                    ItemContainerStyle="{StaticResource SongListViewItemStyle}"
+                    ItemsSource="{x:Bind MediaViewModel.Items}"
+                    SelectedItem="{x:Bind SelectedItem, Mode=TwoWay}"
+                    SelectionMode="Single">
+                    <ListView.ContextFlyout>
+                        <MenuFlyout Opening="MenuFlyout_Opening">
+                            <MenuFlyoutItem
+                                Command="{x:Bind MediaViewModel.PlayFromItemCommand}"
+                                CommandParameter="{x:Bind SelectedItem, Mode=OneWay}"
+                                Icon="Play"
+                                Text="{markup:ResourceHelper Name=Play}" />
+
+                            <MenuFlyoutItem
+                                Command="{x:Bind GoToAlbumCommand}"
+                                CommandParameter="{x:Bind SelectedItem.Album, Mode=OneWay}"
+                                Text="{markup:ResourceHelper Name=ShowAlbum}">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xE93C;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+
+                            <MenuFlyoutItem
+                                Command="{x:Bind GoToArtistCommand}"
+                                CommandParameter="{x:Bind SelectedItem.Artist, Mode=OneWay}"
+                                Icon="People"
+                                Text="{markup:ResourceHelper Name=ShowArtist}" />
+
+                            <MenuFlyoutSeparator />
+
+                            <MenuFlyoutSubItem x:Name="AddTo" Text="{markup:ResourceHelper Name=AddTo}">
+                                <MenuFlyoutSubItem.Icon>
+                                    <FontIcon Glyph="&#xECC8;" />
+                                </MenuFlyoutSubItem.Icon>
+
+                                <MenuFlyoutItem Command="{x:Bind AddSelectedItemToQueueCommand}" Text="{markup:ResourceHelper Name=Queue}">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource PlayerIconsFontFamily}" Glyph="&#xE93F;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+
+                                <MenuFlyoutItem Command="{x:Bind AddSelectedItemToPlaylistCommand}" Text="{markup:ResourceHelper Name=NewPlaylist}">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon FontFamily="{StaticResource PlayerIconsFontFamily}" Glyph="&#xE93F;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyoutSubItem>
+
+                            <MenuFlyoutItem
+                                Icon="Share"
+                                IsEnabled="False"
+                                Text="{markup:ResourceHelper Name=Share}" />
+
+                            <MenuFlyoutSeparator />
+
+                            <MenuFlyoutItem
+                                Click="AskDiscy_Click"
+                                Icon="Help"
+                                Text="{markup:ResourceHelper Name=AskDiscy}" />
+
+                            <MenuFlyoutItem
+                                Command="{x:Bind OpenInExplorerCommand}"
+                                CommandParameter="{x:Bind SelectedItem, Mode=OneWay}"
+                                Text="{markup:ResourceHelper Name=ShowInFileExplorer}">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEC50;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+
+                            <MenuFlyoutSeparator />
+
+                            <MenuFlyoutItem
+                                Click="Remove_Click"
+                                Icon="Delete"
+                                Text="{markup:ResourceHelper Name=RemoveThing}" />
+
+                            <MenuFlyoutItem
+                                Command="{x:Bind EditItemCommand}"
+                                CommandParameter="{x:Bind SelectedItem, Mode=OneWay}"
+                                Icon="Edit"
+                                Text="{markup:ResourceHelper Name=PropertiesInfo}" />
+                        </MenuFlyout>
+                    </ListView.ContextFlyout>
+
+                    <ListView.GroupStyle>
+                        <GroupStyle HeaderTemplate="{StaticResource DefaultGroupStyleHeaderTemplate}" HidesIfEmpty="True" />
+                    </ListView.GroupStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="viewmodels:SongViewModel">
+                            <uc:SongData
+                                EditCommand="{Binding EditItemCommand, ElementName=PageRoot}"
+                                GoToAlbumCommand="{Binding GoToAlbumCommand, ElementName=PageRoot}"
+                                GoToArtistCommand="{Binding GoToArtistCommand, ElementName=PageRoot}"
+                                GoToGenreCommand="{Binding GoToGenreCommand, ElementName=PageRoot}"
+                                PlayCommand="{Binding MediaViewModel.PlayFromItemCommand, ElementName=PageRoot}"
+                                ShowLength="{x:Bind app:App.SViewModel.ShowDurationInSongs, Mode=OneWay}"
+                                ShowTrackNumber="{x:Bind app:App.SViewModel.ShowTrackNumberInSongs, Mode=OneWay}"
+                                Song="{x:Bind}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:AlternatingListViewBehavior
+                            AlternateBackground="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            AlternateBorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            AlternateBorderThickness="1" />
+                    </interactivity:Interaction.Behaviors>
+                </ListView>
+            </SemanticZoom.ZoomedInView>
+
+            <SemanticZoom.ZoomedOutView>
+                <GridView
+                    x:Name="ZoomedOutGrid"
+                    Padding="56,0"
+                    VerticalAlignment="Center"
+                    ItemTemplate="{StaticResource GroupOverviewItemTemplate}"
+                    ItemsSource="{x:Bind MediaViewModel.Items.CollectionGroups}" />
+            </SemanticZoom.ZoomedOutView>
+        </SemanticZoom>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="SortingStates">
+                <VisualState x:Name="NonAlphabeticalSorting" />
+                <VisualState x:Name="AlphabeticalSorting">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{x:Bind MediaViewModel.GroupingAlphabetically, Mode=OneWay}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="ZoomedOutGrid.ItemTemplate" Value="{StaticResource GroupOverviewLetterItemTemplate}" />
+                        <Setter Target="ZoomedOutGrid.HorizontalAlignment" Value="Center" />
+                        <Setter Target="ZoomedOutGrid.MaxWidth" Value="512" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</uc:MediaPageBase>

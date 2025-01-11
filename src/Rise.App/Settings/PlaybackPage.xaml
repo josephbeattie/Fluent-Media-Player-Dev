@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="Rise.App.Settings.PlaybackPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:local="using:Rise.App"
+    xmlns:markup="using:Rise.Common.Extensions.Markup"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="using:Rise.App.UserControls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    mc:Ignorable="d">
+
+    <ScrollViewer Padding="48,4,48,0" VerticalScrollBarVisibility="Auto">
+        <StackPanel
+            Margin="0,0,0,12"
+            Orientation="Vertical"
+            Spacing="4">
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{markup:ResourceHelper Name=/Settings/PlaybackGeneralH}" />
+
+            <labs:SettingsCard Header="{markup:ResourceHelper Name=/Settings/PlaybackVisualizerTitle}" HeaderIcon="{ui:FontIcon Glyph=&#xE8B9;}">
+                <ComboBox SelectedIndex="{x:Bind local:App.SViewModel.VisualizerType, Mode=TwoWay}">
+                    <ComboBoxItem Content="{markup:ResourceHelper Name=None}" />
+                    <ComboBoxItem Content="{markup:ResourceHelper Name=Bloom}" />
+                </ComboBox>
+            </labs:SettingsCard>
+
+            <labs:SettingsCard
+                Click="OnEqualizerExpanderClick"
+                Description="{markup:ResourceHelper Name=/Settings/PlaybackEQDesc}"
+                Header="{markup:ResourceHelper Name=/Settings/PlaybackEQTitle}"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE9E9;}"
+                IsClickEnabled="True" />
+
+            <labs:SettingsCard
+                Description="{markup:ResourceHelper Name=/Settings/PlaybackStreamingQualityDesc}"
+                Header="{markup:ResourceHelper Name=/Settings/PlaybackStreamingQualityTitle}"
+                HeaderIcon="{ui:FontIcon Glyph=&#xEA69;}"
+                IsClickEnabled="True"
+                IsEnabled="False" />
+
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{markup:ResourceHelper Name=/Settings/PlaybackMusicH}" />
+
+            <labs:SettingsCard
+                Description="{markup:ResourceHelper Name=/Settings/PlaybackGaplessDesc}"
+                Header="{markup:ResourceHelper Name=/Settings/PlaybackGaplessTitle}"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE101;}"
+                IsEnabled="False">
+                <ToggleSwitch IsOn="{x:Bind ViewModel.Gapless, Mode=TwoWay}" />
+            </labs:SettingsCard>
+
+            <labs:SettingsCard
+                Description="{markup:ResourceHelper Name=/Settings/PlaybackCrossfadeDesc}"
+                Header="{markup:ResourceHelper Name=/Settings/PlaybackCrossfadeTitle}"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE13C;}"
+                IsEnabled="False">
+                <ComboBox
+                    ItemsSource="{x:Bind Crossfade}"
+                    PlaceholderText="No crossfade"
+                    SelectedIndex="{x:Bind ViewModel.CrossfadeDuration, Mode=TwoWay}" />
+            </labs:SettingsCard>
+
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{markup:ResourceHelper Name=/Settings/PlaybackVideoH}" />
+
+            <labs:SettingsCard
+                Description="{markup:ResourceHelper Name=/Settings/PlaybackScalingDesc}"
+                Header="{markup:ResourceHelper Name=/Settings/PlaybackScalingTitle}"
+                HeaderIcon="{ui:FontIcon Glyph=&#xE1D9;}"
+                IsEnabled="False">
+                <ComboBox
+                    ItemsSource="{x:Bind VideoScale}"
+                    PlaceholderText="Scale to window size"
+                    SelectedIndex="{x:Bind ViewModel.ScaleToWindow, Mode=TwoWay}" />
+            </labs:SettingsCard>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
